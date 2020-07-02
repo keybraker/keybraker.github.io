@@ -1,5 +1,17 @@
 /* Styles specific to home page */
 
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .home-header {
 	padding-top: calc(var(--feather-grid-mega) * 3);
 	padding-bottom: calc(var(--feather-grid-mega) * 1.75);
