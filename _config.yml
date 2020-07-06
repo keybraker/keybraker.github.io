@@ -23,7 +23,6 @@ blog:
   font                       : '"Rubik", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif'
   load_google_fonts          : 'Rubik:400,400italic,700,700italic'
 
-
 # Author info
 author:
   fullname                  : Ioannis Tsiakkas
@@ -32,8 +31,6 @@ author:
   github                    : keybraker
   photo                     : "uploads/me2.png"
   photo2x                   : "uploads/me.png"
-
-
 
 ## !!
 ## Advanced blog settings
