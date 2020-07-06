@@ -1,11 +1,9 @@
-_site
-.sass-cache
+# Generated site
+/_site
+
+# Local packages
+/.bundle/ruby/
+
+# Temporary files
+.sass-cache/
 .jekyll-metadata
-.bundle
-vendor
-assets/.DS_Store
-.DS_Store
-fonts/.DS_Store
-__pycache__
-node_modules
-.idea/

@@ -1,125 +1,23 @@
-<!-- index.html -->
+---
+layout: compress
+---
+
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="title" content="{{ page.title }}">
-    <meta name="description" content="{{ page.description }}">
-    <meta name="keywords" content="{{ page.keywords }}">
+<html lang="en">
+    <head>
+        {% include main/head.html %}
+    </head>
 
-    <meta name="og:title" content="{{ page.title }}">
-    <meta name="og:url" content="{{ page.url }}">
-    <!-- <meta name="og:image" content="{{ page.logo }}"> -->
-    <meta name="og:description" content="{{ page.description }}">
+    <body>
+        <div class="wrapper" id="blep">
+            {% include main/header.html %}
 
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="{{ page.url }}" />
-    <meta name="twitter:title" content="{{ page.title }}" />
-    <meta name="twitter:description" content="{{ page.description }}" />
-    <!-- <meta name="twitter:image" content="{{ page.logo }}" /> -->
+            {{ content }}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta http-equiv='Expires' content='0'>
-    <meta http-equiv='Pragma' content='no-cache'>
-    <meta http-equiv='Cache-Control' content='no-cache'>
-    <meta http-equiv='imagetoolbar' content='no'>
-
-    <title>{{ page.title }}</title>
-    <link rel="shortcut icon" type="image/png" href="{{ site.baseurl }}/assets/portal.ico"/>
-
-    <!-- Feather CSS -->
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/feather-core.css"/>
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/feather-component-grid.css"/>
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/feather-component-button.css"/>
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css"/>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ page.custom_css }}"/>
-
-  </head>
-
-  <body>
-
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-title">
-            <!-- <span class="Icon Icon--logo Icon--large"></span> -->
-
-            <!-- Link in web -->
-            <a class="home-link" href="{{ site.baseurl }}/">Portal™</a>
-
-            <!-- Text in mobile -->
-            <p class="home-text">Portal™</p>
-            <span id="caret" class="Icon Icon--caretDown"></span>
+            {% include main/footer.html %}
         </div>
-        <ul class="nav-menu">
-            <!-- This link only exists in mobile -->
-            <li id="extra-mobile-link" class="nav-list-item">
-                <a class="nav-link" href="{{ site.baseurl }}/">Portal™</a>
-            </li>
 
-            <li class="nav-list-item">
-                <a class="nav-link" href="{{ site.baseurl }}/projects">Projects</a>
-            </li>
-
-            <li class="nav-list-item">
-                <a class="nav-link" href="{{ site.baseurl }}/memberships">#Squad</a>
-            </li>
-
-            <li class="nav-list-item">
-                <a class="nav-link" href="{{ site.baseurl }}/year-in-review">Year in Review</a>
-            </li>
-
-            <li class="nav-list-item">
-                <a class="nav-link" href="https://blog.twitter.com/engineering/en_us/topics/open-source.html" target="_blank">Blog</a>
-            </li>
-
-            <li class="nav-list-item list-end">
-                <a class="nav-link" href="https://github.com/keybraker" target="_blank">GitHub</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Site wrapper -->
-    <div class="site">
-        {{ content }}
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <div class="Grid container">
-            <div class="Grid-cell footer-cell u-size1of4 footer-margin">
-                <button onclick="location.href='{{ site.baseurl }}/projects'" type="button" class="Button Button--large">Explore Features</button>
-            </div>
-            <div class="Grid-cell footer-cell u-size1of4 footer-margin">
-                <h3 class="xsmall-margin">
-                    <a class="foot-link" target="_blank">About</a>
-                </h3>
-                <a class="foot-link" target="_blank" href="https://github.com/keybraker">@Keybraker</a>
-            </div>
-
-            <div class="Grid-cell footer-cell u-size1of4 footer-margin">
-                <h3 class="xsmall-margin">
-                    <a class="foot-link" target="_blank">Developers</a>
-                </h3>
-                <a class="foot-link" target="_blank" href="https://github.com/keybraker">Documentation</a>
-                <a class="foot-link" target="_blank" href="https://github.com/keybraker">Discord Channel</a>
-            </div>
-
-            <div class="Grid-cell footer-cell u-size1of4">
-                <a class="foot-link" href="">© 2020 Portal™</a>
-            </div>
-
-        </div>
-    </div> <!-- End of Footer -->
-  </body>
-
+        {% include externals/scripting.html %}
+        {% include externals/google_analytics.html %}
+    </body>
 </html>
-
-<script src="{{ site.baseurl }}/js/main.js"></script>
-<script src="{{ site.baseurl }}/js/{{ page.custom_js }}"></script>
-
-{% include ga.html %}
