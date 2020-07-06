@@ -1,8 +1,8 @@
 # Base blog settings
 baseurl                      : "/" # the subpath of your site,                         # e.g. /blog/
                               # set to '' in case of hosting on GitHub
-url                          : "" # the base hostname & protocol for your site
-                                  # `http://<username>.github.io` - for GitHub
+url                          : "http://keybraker.github.io"
+                              # the base hostname & protocol for your site
 
 blog:
   title                      : portal
