@@ -33,4 +33,6 @@ There many things Portal™ can announce for you so that you can keep on playing
 Ranking System
 A true leveling system.
 Rather than only following a users activity on text chats, Portal™ also takes into consideration the amount of time the user spends in voice channels, and how active he is in order to avoid exploitation.
+
+Portal™ is a fast and robust discord bot that allows you to handle your community with ease. Removing all the hustle and adding all the fun for you and your firends!
 </div>
