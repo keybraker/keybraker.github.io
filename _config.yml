@@ -1,11 +1,11 @@
 # Base blog settings
-baseurl                      : "/portal/" # the subpath of your site,                         # e.g. /blog/
+baseurl                      : "/dactl/" # the subpath of your site,                         # e.g. /blog/
                               # set to '' in case of hosting on GitHub
 url                          : "" # the base hostname & protocol for your site
                                   # `http://<username>.github.io` - for GitHub
 
 blog:
-  title                      : Portal
+  title                      : portal
   description                  : >
                                the portal to a managed discord server
 
@@ -17,7 +17,7 @@ blog:
   hero_placeholder           : "assets/img/generic_hero.jpg" # placeholder for hero image
   excerpts                   : true # show excerpts instead of full post content on blog page
   inline_footnotes           : true # enable/disable barefoot inline footnotes
-  titles_only                : true # show post titles only on main blog page
+  titles_only                : false # show post titles only on main blog page
 
 # Fonts
   font                       : '"Rubik", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif'
@@ -26,15 +26,10 @@ blog:
 
 # Author info
 author:
-  fullname                  : Your Name
+  fullname                  : Ioannis Tsiakkas
   rss                       : true # generate RSS feed and show it's icon in header
   mail                      : iantsiakkas@gmail.com # change to your e-mail address
-  twitter                   : twitter-user-name
   github                    : keybraker
-  youtube                   : youtube-user-name
-  stackoverflow             : stackoverflow-user-name
-  disqus                    : dactl # your disqus site name
-  google_analytics          : # 'UA-XXXXXXXX-X'
   photo                     : "uploads/me2.png"
   photo2x                   : "uploads/me.png"
 
