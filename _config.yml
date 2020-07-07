@@ -29,6 +29,8 @@ author:
   rss                       : true # generate RSS feed and show it's icon in header
   mail                      : iantsiakkas@gmail.com # change to your e-mail address
   github                    : keybraker
+  disqus                    : dactl # your disqus site name
+  paypal                    : dactl # your disqus site name
   photo                     : "uploads/me2.png"
   photo2x                   : "uploads/me.png"
 

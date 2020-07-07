@@ -7,20 +7,21 @@ published: true
 
 <div class="page" markdown="1">
 
-{% capture page_subtitle %}
-<img
-    class="me"
-    alt="{{ author.name }}"
-    src="{{ site.author.photo | relative_url }}"
-    srcset="{{ site.author.photo2x | relative_url }} 2x"
-/>
-{% endcapture %}
+## Channel Manager
+Channel on demand. <br>
+No need for you to create multiple specific channels with names and limitations. Portal is here for you to handle all the hard work, so that you can spent time with your firends.
 
-{% include page/title.html title=page.title subtitle=page_subtitle %}
+## Announcements
+Always informed. <br>
+**Voice**, there are many things Portal can announce for you so that you can keep on playing while Portal informs you of what is going on by voice. <br>
+**Text**, all announcements are written by Portal on specific channels, so that everyone can keep up.
 
-## Features
-Channel on demand.
-No need for you to create multiple specific channels with names and limitations. Portal™ is here for you to handle all the hard work, so that you can spent time with your firends.
+## Ranking System
+A true leveling system. <br>
+Rather than only following a users activity on text chats, Portal also takes into consideration the amount of time the user spends in voice channels, and how active he is in order to avoid exploitation.
 
-Portal™ is a fast and robust discord bot that allows you to handle your community with ease. Removing all the hustle and adding all the fun for you and your firends!
+## Role Giver
+Automate your role giving process. <br>
+With role giver you can automate your role distribution with ease.
+
 </div>
