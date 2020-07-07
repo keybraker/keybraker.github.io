@@ -9,7 +9,7 @@ published: true
 
 ## Channel Manager
 Channel on demand. <br>
-No need for you to create multiple specific channels with names and limitations. Portal is here for you to handle all the hard work, so that you can spent time with your firends.
+No need for you to create multiple specific channels with names and limitations. Portal is here for you to handle all the hard work, so that you can spent time with your friends.
 
 ## Announcements
 Always informed. <br>
