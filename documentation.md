@@ -71,7 +71,7 @@ variable | description
 `creator_voice` | _creator of current voice_
 
 ### Pipes
-* _prefix:_ __|__
+* _prefix:_ __\|__
 * _(Pipes are applied to variables or strings in order to change their outcome)_
 
 pipe | type | description
@@ -112,12 +112,20 @@ attributes | type | default | description
 * default regex: _G$\#-P$member_count \| $status_list_
 
 ### Structures
-* _prefix:_ __{{__
-* _suffix:_ __}}__
+* _prefix:_ __\{\{__
+* _suffix:_ __\}\}__
 * _(Structures are grammatical attributes to control the structure of the output)_
 
-attributes | description | usage
---------- | --------- | ---------
-`if` | conditional statement  | `{{ "if": "John", "is": "===", "with": "John", "yes": "same name", "no": "not the same name"}}`
+attributes | description |
+--------- | --------- |
+`if` | conditional statement  |
+
+usage
+```json
+{
+"if": "John", "is": "===", "with": "John",
+"yes": "same name", "no": "not the same name"
+}
+```
 
 </div>

@@ -15,10 +15,8 @@ and <a href="{{ '/documentation' | prepend: site.baseurl }}" style="color:#008CB
 
 ### Introduction price of only 1.49 $ for your first month
 
-## Pricing
-
-| Duration           | Price $  | Price/Month $ |
-|:-------------:| :-----:| :-----:|
+| Duration | Price $  | Price/Month $ |
+| :-----: | :-----: | :-----: |
 | 1  month      | 3.99 $ | 3.99 $ |
 | 6  months      |   20.99 $ |   3.49 $ |
 | 12 months      |    29.99 $ |    2.49 $ |
