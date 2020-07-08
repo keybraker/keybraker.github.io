@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Buy
-permalink: /buy/
+title: Premium
+permalink: /premium/
 published: true
 ---
 

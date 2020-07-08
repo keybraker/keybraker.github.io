@@ -2,15 +2,17 @@
     <div class="menu">
       <div class="logo">
         <a href="{{ '/' | prepend: site.baseurl }}">{{ site.blog.title }}</a>
-        <object type="image/svg+xml" data="{{ site.blog.logo_path | relative_url }}" class="logosvg">Your browser does not support svg images</object>
+        <object 
+          type="image/svg+xml" data="{{ site.blog.logo_path | relative_url }}"
+          class="logosvg">Your browser does not support svg images</object>
       </div>
       <ul>
           <li><a href="{{ '/features' | prepend: site.baseurl }}">features</a></li>
           <li><a href="{{ '/documentation' | prepend: site.baseurl }}">documentation</a></li>
           <li><a href="{{ '/about' | prepend: site.baseurl }}">about</a></li>
-          <li><a href="{{ '/archive' | prepend: site.baseurl }}">archive</a></li>
-          <li><a href="{{ '/log' | prepend: site.baseurl }}" style="color:rgb(255, 136, 0)">log</a></li>
-          <li><a href="{{ '/buy' | prepend: site.baseurl }}" style="color:green">buy</a></li>
+          <li><a href="{{ '/log' | prepend: site.baseurl }}">log</a></li>
+          <li><a href="{{ '/premium' | prepend: site.baseurl }}" style="color:#4CAF50">premium</a></li>
+          <li><a href="" style="color:#008CBA">add to discord</a></li>
       </ul>
     </div>
     <div class="social">

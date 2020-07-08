@@ -7,7 +7,8 @@ published: true
 
 <div class="page" markdown="1">
 
-{% include page/add-to-discord.html title='Add to Discord' subtitle='dubtitle' %}
+<!-- {% include page/nice-button.html name='add to discord' color='blue' href='/features' %}
+{% include page/nice-button.html name='get premium' color='green' href='/buy' %} -->
 
 ## Why Portal
 It is a fast, 99% uptime bot that will help you with all your needs maintainng and expanding your discord community.
@@ -21,9 +22,11 @@ Written to be as simple as possible and more accessible to anyone in your commun
 [documentation]({{ '/documentation' | prepend: site.baseurl }}) that can help you get the most out of Portal.
 
 ## Features
-Portal has many unique [features]({{ '/features' | prepend: site.baseurl }}) you will find usefull and can not get anywhere else.
+Portal has many unique [features]({{ '/features' | prepend: site.baseurl }})
+you will find usefull and can not get anywhere else.
 
-<center>
+
+<!-- <center>
     <a href="{{ '/buy' | prepend: site.baseurl }}" style="color:green">buy</a>
-</center>
+</center> -->
 </div>

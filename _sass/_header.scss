@@ -73,12 +73,44 @@ header {
   }
 }
 
+// Social icons
+.social2 {
+    float: left;
+    margin-top: 1.75rem;
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      display: inline-block;
+    }
+    li a {
+      display: block;
+      color: var(--text-color-light);
+      text-align: center;
+      font-size: 1.5rem;
+      width: 2.5rem;
+
+      // ugly fix needed for theme switcher icon
+    	&:focus {
+    	  border: none;
+        &:focus:hover {
+          border-bottom: 0.15em solid;
+        }
+  	  }
+  }
+}
+
 @media (max-width: 48rem) {
     header {
         margin-bottom: 2rem;
     }
     .menu,
     .social {
+        @include centered-block();
+    }
+    .social2 {
         @include centered-block();
     }
     // fake it till you make it
