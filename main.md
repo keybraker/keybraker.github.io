@@ -11,7 +11,7 @@ published: true
 {% include page/nice-button.html name='get premium' color='green' href='/buy' %} -->
 
 ## Why Portal
-It is a fast, 99% uptime bot that will help you with all your needs maintainng and expanding your discord community.
+It is a fast, 99% uptime bot that will help you with all your needs maintaining and expanding your discord community.
 All the features you need to keep your members happy and automate all their needs.
 
 ## Talking Languages

@@ -7,8 +7,13 @@ published: true
 
 <div class="page" markdown="1">
 
-## Introduction price
-1.49 $ for your first month
+## What do you get with premium
+While Portal free only gives you a channel manager that spawns and destroys voice channels, with premium
+you get all the awesome <a href="{{ '/features' | prepend: site.baseurl }}" style="color:#00D5FF">features</a>
+and <a href="{{ '/documentation' | prepend: site.baseurl }}" style="color:#C70039">functionality</a>
+ that Portal provides!
+
+### Introduction price of only 1.49 $ for your first month
 
 ## Pricing
 
