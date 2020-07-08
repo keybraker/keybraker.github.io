@@ -7,9 +7,10 @@ published: true
 
 <div class="page" markdown="1">
 
-## Pricing
-special offer, introduction price: 1.49 $ for your first month
+## Introduction price
+1.49 $ for your first month
 
+## Pricing
 
 | Duration           | Price $  | Price/Month $ |
 |:-------------:| :-----:| :-----:|

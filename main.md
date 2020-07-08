@@ -7,6 +7,8 @@ published: true
 
 <div class="page" markdown="1">
 
+{% include page/add-to-discord.html title='Add to Discord' subtitle='dubtitle' %}
+
 ## Why Portal
 It is a fast, 99% uptime bot that will help you with all your needs maintainng and expanding your discord community.
 All the features you need to keep your members happy and automate all their needs.
