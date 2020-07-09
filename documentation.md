@@ -28,7 +28,6 @@ published: true
 <section id="commands" class="tab-panel">
 <div markdown="1">
 
-## Commands
 * _prefix:_ __./__
 * _(Pipes are applied to variables or strings in order to change their outcome)_
 
@@ -61,7 +60,6 @@ published: true
 <section id="variables" class="tab-panel">
 <div markdown="1">
 
-## Variables
 * _prefix:_ __$__
 * _(Variables are defacto data sources that can be accessed though calling them they are read-only)_
 
@@ -94,7 +92,6 @@ published: true
 <section id="pipes" class="tab-panel">
 <div markdown="1">
 
-### Pipes
 * _prefix:_ __\|__
 * _(Pipes are applied to variables or strings in order to change their outcome)_
 
@@ -119,7 +116,6 @@ published: true
 <section id="attributes" class="tab-panel">
 <div markdown="1">
 
-### Attributes
 * _prefix:_ __@__
 * _(Attributes are values that a channel has from its inception and are subject to change)_
 
@@ -145,7 +141,6 @@ published: true
 <section id="structures" class="tab-panel">
 <div markdown="1">
 
-### Structures
 * _prefix:_ __\{\{__
 * _suffix:_ __\}\}__
 * _(Structures are grammatical attributes to control the structure of the output)_
