@@ -5,7 +5,7 @@ url                          : "http://keybraker.github.io"
                               # the base hostname & protocol for your site
 
 blog:
-  title                      : portal
+  title                      : Portal
   description                  : >
                                the portal to a managed discord server
 
