@@ -1,0 +1,24 @@
+.button {
+    border-radius: 3px;
+    background-color: #7289DA; /* Green */
+    border: none;
+    color: white;
+    padding: 0px 5px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button_discord {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #7289DA;
+}
+
+.button_discord:hover {
+    background-color: #7289DA;
+    color: white;
+}
