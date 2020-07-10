@@ -15,10 +15,10 @@ published: true
 <input type="radio" name="tabset" id="tab2" aria-controls="variables">
 <label for="tab2">Variables $</label>
 <!-- Tab 3 -->
-<input type="radio" name="tabset" id="tab4" aria-controls="attributes">
+<input type="radio" name="tabset" id="tab3" aria-controls="attributes">
 <label for="tab3">Attributes &</label>
 <!-- Tab 3 -->
-<input type="radio" name="tabset" id="tab3" aria-controls="pipes">
+<input type="radio" name="tabset" id="tab4" aria-controls="pipes">
 <label for="tab4">Pipes |</label>
 <!-- Tab 3 -->
 <input type="radio" name="tabset" id="tab5" aria-controls="structures">
