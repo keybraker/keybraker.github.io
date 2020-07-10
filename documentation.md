@@ -32,7 +32,7 @@ published: true
 * _(Pipes are applied to variables or strings in order to change their outcome)_
 
 | name | description | arguments | eligible for use | cooldown (mins) |
-| :---------: | :---------: | :---------: | :---------: | :---------: |
+| :--------- | :--------- | :--------- | :--------- | :--------- |
 | `portal` | _creates a portal voice channel_ | _!channel\_name \| @category\_name_ | admin, admin-role/s | - |
 | `run` | _runs the given command string and returns its output_ | _!exec\_command_ | everyone | - |
 | `set` | _sets the value of an attribute_ | _!attribute !value_ | voice owner/ portal owner, admin, admin-role/s | - |
@@ -64,7 +64,7 @@ published: true
 * _(Variables are defacto data sources that can be accessed though calling them they are read-only)_
 
 | variable | description |
-| :---------: | :---------: |
+| :--------- | :--------- |
 | `#` | _number of channel in list_ |
 | `##` | _number of channel in list with \#_ |
 | `date` | _full date: dd/mm/yyyy_ |
@@ -96,7 +96,7 @@ published: true
 * _(Pipes are applied to variables or strings in order to change their outcome)_
 
 | pipe | type | description |
-| :---------: | :---------: | :---------: |
+| :--------- | :--------- | :--------- |
 | `upperCase` | string | _returns an upperCase of the input_ |
 | `lowerCase` | string | _returns an lowerCase of the input_ |
 | `capitalize` | string | _returns an capitalize of the input_ |
@@ -120,7 +120,7 @@ published: true
 * _(Attributes are values that a channel has from its inception and are subject to change)_
 
 | attributes | type | default | description |
-| :---------: | :---------: | :---------: | :---------: |
+| :--------- | :--------- | :--------- | :--------- |
 | `regex_portal` | string | _default regex_ | _regex-guidelines for how to display portal's title_ |
 | `regex_voice` | string | _default regex_ | _regex-guidelines for how to display new voice (current portal)_ |
 | `regex` | string | _default regex_ | _sets regex-guidelines for current voice_ |
@@ -146,7 +146,7 @@ published: true
 * _(Structures are grammatical attributes to control the structure of the output)_
 
 | attributes | description |
-| :---------: | :---------: |
+| :--------- | :--------- |
 | `if` | conditional statement  |
 
 ### Usage
