@@ -7,7 +7,7 @@ published: true
 
 <div class="page" markdown="1">
 
-<div class="tabset">
+<div class="tabset float_center">
 <!-- Tab 1 -->
 <input type="radio" name="tabset" id="tab1" aria-controls="commands" checked>
 <label for="tab1">Commands</label>

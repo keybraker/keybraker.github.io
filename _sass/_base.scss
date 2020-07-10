@@ -19,15 +19,16 @@ body {
 }
 
 .page {
-      margin-bottom: 8em;
+      margin-bottom: 6rem;
       }
 .wrapper {
-    max-width: 48rem;
+    width: 90%;
+    max-width: 70rem;
     margin: 4rem auto 4rem auto;
 }
 
 
-@media (max-width: 48rem) {
+@media (max-width: 70rem) {
     body {
       font-size: $mobile-font-size;
     }
