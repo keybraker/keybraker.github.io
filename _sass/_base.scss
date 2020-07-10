@@ -23,12 +23,12 @@ body {
       }
 .wrapper {
     width: 90%;
-    max-width: 70rem;
+    max-width: 50rem;
     margin: 4rem auto 4rem auto;
 }
 
 
-@media (max-width: 70rem) {
+@media (max-width: 50rem) {
     body {
       font-size: $mobile-font-size;
     }

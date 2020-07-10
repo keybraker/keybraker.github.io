@@ -10,26 +10,23 @@ published: true
 <div class="tabset float_center">
 <!-- Tab 1 -->
 <input type="radio" name="tabset" id="tab1" aria-controls="commands" checked>
-<label for="tab1">Commands</label>
+<label for="tab1">Commands ./</label>
 <!-- Tab 2 -->
 <input type="radio" name="tabset" id="tab2" aria-controls="variables">
-<label for="tab2">Variables</label>
-<!-- Tab 3 -->
-<input type="radio" name="tabset" id="tab3" aria-controls="pipes">
-<label for="tab3">Pipes</label>
+<label for="tab2">Variables $</label>
 <!-- Tab 3 -->
 <input type="radio" name="tabset" id="tab4" aria-controls="attributes">
-<label for="tab4">Attributes</label>
+<label for="tab3">Attributes &</label>
+<!-- Tab 3 -->
+<input type="radio" name="tabset" id="tab3" aria-controls="pipes">
+<label for="tab4">Pipes |</label>
 <!-- Tab 3 -->
 <input type="radio" name="tabset" id="tab5" aria-controls="structures">
-<label for="tab5">Structures</label>
+<label for="tab5">Structures { {</label>
 
 <div class="tab-panels">
 <section id="commands" class="tab-panel">
 <div markdown="1">
-
-* _prefix:_ __./__
-* _(Pipes are applied to variables or strings in order to change their outcome)_
 
 | name | description | arguments | eligible for use | cooldown (mins) |
 | :--------- | :--------- | :--------- | :--------- | :--------- |
@@ -51,6 +48,8 @@ published: true
 | `force` | _clones current channel in order to force-update name_ | _none_ | admin, admin-role/s | 2 user |
 | `focus` | _creates a focus channel for you and your requested member_ | _!member_name @time_ | everyone | none |
 
+* _(Pipes are applied to variables or strings in order to change their outcome)_
+
 * symbol: ! _indicates beginning of mandatory argument **(should not be included)**_
 * symbol: @ _indicates beginning of mandatory argument **(should not be included)**_
 
@@ -59,9 +58,6 @@ published: true
 </section>
 <section id="variables" class="tab-panel">
 <div markdown="1">
-
-* _prefix:_ __$__
-* _(Variables are defacto data sources that can be accessed though calling them they are read-only)_
 
 | variable | description |
 | :--------- | :--------- |
@@ -87,13 +83,12 @@ published: true
 | `creator_portal` | _creator of current voice\'s portal_ |
 | `creator_voice` | _creator of current voice_ |
 
+* _(Variables are defacto data sources that can be accessed though calling them they are read-only)_
+
 </div>
 </section>
 <section id="pipes" class="tab-panel">
 <div markdown="1">
-
-* _prefix:_ __\|__
-* _(Pipes are applied to variables or strings in order to change their outcome)_
 
 | pipe | type | description |
 | :--------- | :--------- | :--------- |
@@ -111,13 +106,12 @@ published: true
 | `populous` | list | _returns the name of the most common element in list_ |
 | `summary_count` | number | _returns the count of members having a status_ |
 
+* _(Pipes are applied to variables or strings in order to change their outcome)_
+
 </div>
 </section>
 <section id="attributes" class="tab-panel">
 <div markdown="1">
-
-* _prefix:_ __@__
-* _(Attributes are values that a channel has from its inception and are subject to change)_
 
 | attributes | type | default | description |
 | :--------- | :--------- | :--------- | :--------- |
@@ -134,16 +128,13 @@ published: true
 | `position` | number | beneath portal | _position of channel_ |
 | `last_update` | timestamp | timestamp | _returns the last update timestamp_ |
 
+* _(Attributes are values that a channel has from its inception and are subject to change)_
 * default regex: _G$\#-P$member_count \| $status_list_
 
 </div>
 </section>
 <section id="structures" class="tab-panel">
 <div markdown="1">
-
-* _prefix:_ __\{\{__
-* _suffix:_ __\}\}__
-* _(Structures are grammatical attributes to control the structure of the output)_
 
 | attributes | description |
 | :--------- | :--------- |
@@ -157,6 +148,9 @@ published: true
 "yes": "same name", "no": "not the same name"
 }
 ```
+
+* _(Structures are grammatical attributes to control the structure of the output)_
+
 
 </div>
 </section>
