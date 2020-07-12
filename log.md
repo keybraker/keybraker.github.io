@@ -11,16 +11,17 @@ published: true
 |:-------------:| :-----:|
 Channel manager | User profile channels |
 Voice Announcements | Admin timeout control |
-Run command line | Prefix manipulation |
+Text Announcements | Prefix manipulation |
 Set attribute | Subtle moderator |
-Text Announcements | Member analytics |
+Ranking System | Member analytics |
 Focus on member | Logs |
-Force update |    |
+Force update |  |
 Corona |    |
-Role assigner |    |
+Role Assigner |    |
+Run command line |    |
 
 <!-- <div id="disqus_thread">
-If you have any feature you want implemented, send me an 
+If you have any feature you want implemented, send me an email @ 
 {% if site.author.mail %}
     <a href="mailto:{{ site.author.mail }}" target="_blank"><span class="icon-mail_outline"></span></a>
 {% endif %}
