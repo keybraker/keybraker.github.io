@@ -15,7 +15,7 @@ Text Announcements | Prefix manipulation |
 Set attribute | Subtle moderator |
 Ranking System | Member analytics |
 Focus on member | Logs |
-Force update |  |
+Force update | Anti-spam control |
 Corona |    |
 Role Assigner |    |
 Run command line |    |
