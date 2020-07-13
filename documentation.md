@@ -158,7 +158,7 @@ published: true
 </div>
 </section>
 
-<section id="attributes" class="tab-panel">
+<section id="support" class="tab-panel">
 <div markdown="1">
 
 {% include page/join-portal-support.html %}
