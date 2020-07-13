@@ -3,11 +3,11 @@
 
 header {
     overflow: hidden;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
 }
 
 .logo {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: $base-font-weight-bold;
     color: var(--link-color);
 
@@ -102,7 +102,7 @@ header {
   }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 55rem) {
     header {
         margin-bottom: 2rem;
     }

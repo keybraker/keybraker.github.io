@@ -7,7 +7,7 @@ published: true
 
 <div class="page" markdown="1">
 
-| Version 1           | Version 2  |
+| Version 1 | Version 2  |
 |:-------------:| :-----:|
 Channel manager | User profile channels |
 Voice Announcements | Admin timeout control |

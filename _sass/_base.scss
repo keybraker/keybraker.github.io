@@ -12,23 +12,23 @@
 }
 
 body {
-    font-size: $base-font-size;
-    line-height: $base-line-height;
-    color: var(--text-color);
-    background-color: var(--bg-color);
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
 .page {
-      margin-bottom: 6rem;
-      }
+    margin-bottom: 6rem;
+}
 .wrapper {
     width: 90%;
-    max-width: 50rem;
+    max-width: 60rem;
     margin: 4rem auto 4rem auto;
 }
 
 
-@media (max-width: 50rem) {
+@media (max-width: 60rem) {
     body {
       font-size: $mobile-font-size;
     }

@@ -25,8 +25,4 @@ Written to be as simple as possible and more accessible to anyone in your commun
 Portal has many unique [features]({{ '/features' | prepend: site.baseurl }})
 you will find usefull and can not get anywhere else.
 
-
-<!-- <center>
-    <a href="{{ '/buy' | prepend: site.baseurl }}" style="color:green">buy</a>
-</center> -->
 </div>

@@ -17,12 +17,15 @@ published: true
 <!-- Tab 3 -->
 <input type="radio" name="tabset" id="tab3" aria-controls="attributes">
 <label for="tab3">Attributes &</label>
-<!-- Tab 3 -->
+<!-- Tab 4 -->
 <input type="radio" name="tabset" id="tab4" aria-controls="pipes">
 <label for="tab4">Pipes |</label>
-<!-- Tab 3 -->
+<!-- Tab 5 -->
 <input type="radio" name="tabset" id="tab5" aria-controls="structures">
 <label for="tab5">Structures { {</label>
+<!-- Tab 6 -->
+<input type="radio" name="tabset" id="tab6" aria-controls="support">
+<label for="tab6">Support Channel</label>
 
 <div class="tab-panels">
 <section id="commands" class="tab-panel">
@@ -151,6 +154,12 @@ published: true
 
 * _(Structures are grammatical attributes to control the structure of the output)_
 
+</div>
+</section>
+<section id="attributes" class="tab-panel">
+<div markdown="1">
+
+{% include page/join-portal-support.html %}
 
 </div>
 </section>
