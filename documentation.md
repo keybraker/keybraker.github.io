@@ -161,9 +161,7 @@ published: true
 <section id="support" class="tab-panel">
     <div>
         <h2>Join Portal’s Support Channel</h2>
-        <iframe src="https://discordapp.com/widget?id=731942147531735121&theme=dark" width="100%" height="300rem"
-            allowtransparency="true" frameborder="0">
-        </iframe>
+        
     </div>
 </section>
 
