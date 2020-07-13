@@ -136,6 +136,7 @@ published: true
 
 </div>
 </section>
+
 <section id="structures" class="tab-panel">
 <div markdown="1">
 
@@ -156,6 +157,7 @@ published: true
 
 </div>
 </section>
+
 <section id="attributes" class="tab-panel">
 <div markdown="1">
 
@@ -163,8 +165,7 @@ published: true
 
 </div>
 </section>
-</div>
 
 </div>
-
+</div>
 </div>
