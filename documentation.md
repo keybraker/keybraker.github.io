@@ -136,7 +136,6 @@ published: true
 
 </div>
 </section>
-
 <section id="structures" class="tab-panel">
 <div markdown="1">
 
@@ -157,14 +156,11 @@ published: true
 
 </div>
 </section>
-
 <section id="support" class="tab-panel">
-    <div>
-        <h2>Join Portal’s Support Channel</h2>
-        
-    </div>
+<div>
+<h2>Join Portal’s Support Channel</h2>
+</div>
 </section>
-
 </div>
 </div>
 </div>
