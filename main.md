@@ -9,6 +9,9 @@ published: true
 
 <!-- {% include page/nice-button.html name='add to discord' color='blue' href='/features' %}
 {% include page/nice-button.html name='get premium' color='green' href='/buy' %} -->
+<iframe src="https://discordapp.com/widget?id=731942147531735121&theme=dark" width="100%" height="300rem"
+allowtransparency="true" frameborder="0">
+</iframe>
 
 ## Why Portal
 It is a fast, 99% uptime bot that will help you with all your needs maintaining and expanding your discord community.
