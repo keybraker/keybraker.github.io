@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Log
-permalink: /log/
+title: Info
+permalink: /info/
 published: true
 ---
 
@@ -19,6 +19,13 @@ Force update | Anti-spam control |
 Corona |    |
 Role Assigner |    |
 Run command line |    |
+
+## Join Portal’s Support Channel
+<center>
+    <iframe src="https://discordapp.com/widget?id=731942147531735121&theme=dark" width="100%" height="300rem"
+    allowtransparency="true" frameborder="0">
+    </iframe>
+</center>
 
 <!-- <div id="disqus_thread">
 If you have any feature you want implemented, send me an email @ 
