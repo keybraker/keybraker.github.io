@@ -7,11 +7,15 @@
     >log in with discord</a>
     <script  type="text/javascript">
         window.onload = () => {
+            console.log('inside');
             const fragment = new URLSearchParams(window.location.hash.slice(1));
+            console.log('fragment: ', fragment);
 
             if (fragment.has("access_token")) {
                 const accessToken = fragment.get("access_token");
                 const tokenType = fragment.get("token_type");
+                console.log('accessToken: ', accessToken);
+                console.log('tokenType: ', tokenType);
 
                 fetch('https://discordapp.com/api/users/@me', {
                     headers: {
@@ -22,11 +26,13 @@
                     .then(response => {
                         const { username, discriminator } = response;
                         document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+                        console.log('username: ', username);
+                        console.log('discriminator: ', discriminator);
                     })
                     .catch(console.error);
-
             }
             else {
+                console.log('could not log in');
                 document.getElementById('login').style.display = 'block';
             }
         }

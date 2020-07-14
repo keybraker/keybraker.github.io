@@ -20,12 +20,7 @@ Corona |    |
 Role Assigner |    |
 Run command line |    |
 
-## Join Portal’s Support Channel
-<center>
-    <iframe src="https://discordapp.com/widget?id=731942147531735121&theme=dark" width="100%" height="300rem"
-    allowtransparency="true" frameborder="0">
-    </iframe>
-</center>
+{% include page/join-portal-support.html theme='dark' %}
 
 <!-- <div id="disqus_thread">
 If you have any feature you want implemented, send me an email @ 

@@ -7,11 +7,26 @@ published: true
 
 <div class="page" markdown="1">
 
+{% include externals/login_with_discord.html %}
+
 ## What do you get with premium
 While Portal free only gives you a channel manager that spawns and destroys voice channels, with premium
 you get all the awesome <a href="{{ '/features' | prepend: site.baseurl }}" style="color:#008CBA">features</a>
 and <a href="{{ '/documentation' | prepend: site.baseurl }}" style="color:#008CBA">functionality</a>
  that Portal provides!
+
+| feature | free  | premium |
+| :-----: | :-----: | :-----: |
+| channel manager | ✔ | ✔ |
+| corona | ✔ |   ✔ |
+| custom names |   ✖ |  ✔ |
+| text announcements | ✖ |   ✔ |
+| voice announcements | ✖ |   ✔ |
+| spotify channel | ✖ |   ✔ |
+| announcement channel | ✖ |   ✔ |
+| url channels | ✖ |   ✔ |
+| force | ✖ |   ✔ |
+| focus | ✖ |   ✔ |
 
 ### Introduction price of only 1.49 $ for your first month
 

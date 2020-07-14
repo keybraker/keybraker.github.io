@@ -21,7 +21,8 @@ const LightTheme = {
   '--table-header-color': '#fefefe',
   '--shadow-color': 'rgba(0, 0, 0, 0.1)',
   '--invert-logo-color': 'invert(0)',
-  themeName: 'LightTheme'
+  themeName: 'LightTheme',
+  color_shade: 'light'
 }
 
 const NightTheme = {
@@ -37,7 +38,8 @@ const NightTheme = {
   '--table-header-color': '#505050',
   '--shadow-color': 'rgba(255, 255, 255, 0.1)',
   '--invert-logo-color': 'invert(0)',
-  themeName: 'NightTheme'
+  themeName: 'NightTheme',
+  color_shade: 'dark'
 }
 
 const setCSSVariable = (key, value) => document.body.style.setProperty(key, value)
