@@ -23,6 +23,10 @@ blog:
   font                       : '"Rubik", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif'
   load_google_fonts          : 'Rubik:400,400italic,700,700italic'
 
+#discord
+username                    : null
+password                    : null
+
 # Author info
 author:
   fullname                  : Ioannis Tsiakkas
