@@ -7,6 +7,18 @@ published: true
 
 <div class="page" markdown="1">
 
+<div class="tabset float_center">
+<!-- Tab 1 -->
+<input type="radio" name="tabset" id="tab1" aria-controls="versions" checked>
+<label for="tab1">Versioning</label>
+<!-- Tab 2 -->
+<input type="radio" name="tabset" id="tab2" aria-controls="support">
+<label for="tab2">Discord Support</label>
+
+<div class="tab-panels">
+<section id="versions" class="tab-panel">
+<div markdown="1">
+
 | Version 1 | Version 2  |
 |:-------------:| :-----:|
 Channel manager | User profile channels |
@@ -20,13 +32,15 @@ Corona |    |
 Role Assigner |    |
 Run command line |    |
 
+</div>
+
+</section>
+<section id="support" class="tab-panel">
+<div markdown="1">
+
 {% include page/join-portal-support.html theme='dark' %}
 
-<!-- <div id="disqus_thread">
-If you have any feature you want implemented, send me an email @ 
-{% if site.author.mail %}
-    <a href="mailto:{{ site.author.mail }}" target="_blank"><span class="icon-mail_outline"></span></a>
-{% endif %}
-</div> -->
+</div>
+</section>
 
 </div>

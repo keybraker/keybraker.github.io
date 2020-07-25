@@ -3,44 +3,12 @@
         id="login"
         class="button button_discord"
         style="color:#ffff; display: none;"
-        href="https://discord.com/api/oauth2/authorize?client_id=704400876860735569&redirect_uri=https%3A%2F%2Fportal-bot.xyz%2Fpremium%2F&response_type=code&scope=identify%20guilds"
-    >Login with Discord and get Premium</a>
+        href="https://discord.com/api/oauth2/authorize?client_id=704400876860735569&redirect_uri=http%3A%2F%2Fwww.localhost%3A4000%2Fpremium%2F&response_type=code&scope=identify%20guilds"
+    >Login through Discord and get Premium</a>
     <div class="tooltip">ⓘ
         <span class="tooltiptext">
             In order to get premium, you have to login with Discord to select your server
         </span>
     </div>
-
-    <script  type="text/javascript">
-        window.onload = () => {
-            console.log('inside');
-            const fragment = new URLSearchParams(window.location.hash.slice(1));
-            console.log('fragment: ', fragment);
-
-            if (fragment.has("access_token")) {
-                const accessToken = fragment.get("access_token");
-                const tokenType = fragment.get("token_type");
-                console.log('accessToken: ', accessToken);
-                console.log('tokenType: ', tokenType);
-
-                fetch('https://discordapp.com/api/users/@me', {
-                    headers: {
-                        authorization: `${tokenType} ${accessToken}`
-                    }
-                })
-                    .then(res => res.json())
-                    .then(response => {
-                        const { username, discriminator } = response;
-                        document.getElementById('info').innerText += ` ${username}#${discriminator}`;
-                        console.log('username: ', username);
-                        console.log('discriminator: ', discriminator);
-                    })
-                    .catch(console.error);
-            }
-            else {
-                console.log('could not log in');
-                document.getElementById('login').style.display = 'block';
-            }
-        }
-    </script>
+    <script type="text/javascript" src="{{ "assets/js/discord_login.js" | relative_url }}"></script>
 </center>

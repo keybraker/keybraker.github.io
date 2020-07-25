@@ -76,7 +76,6 @@ header {
 // Social icons
 .social2 {
     float: left;
-    margin-top: 1.75rem;
     ul {
       list-style-type: none;
       margin: 0;
@@ -110,9 +109,7 @@ header {
     .social {
         @include centered-block();
     }
-    .social2 {
-        @include centered-block();
-    }
+   
     // fake it till you make it
     .logo {
       margin-top: 5rem;

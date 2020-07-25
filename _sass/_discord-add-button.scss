@@ -72,3 +72,42 @@
   border-style: solid;
   border-color: transparent transparent black transparent;
 }
+
+/* Tooltip container */
+.tooltipDEMO {
+  font-size: 16px;
+  position: relative;
+  display: inline-block;
+
+
+  /* border-bottom: 1px dotted rgb(255, 255, 255); /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltipDEMO .tooltiptextDEMO {
+  visibility: visible;
+  // min-width: 500px;
+  // max-width: 500px;
+
+  position: absolute;
+  
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+
+  margin-left: -500%;
+  margin-right: -500%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltipDEMO:hover .tooltiptextDEMO {
+  visibility: visible;
+}
+
+.tooltipDEMO .tooltiptextDEMO::after {
+  content: " ";
+  position: absolute;
+}

@@ -11,7 +11,8 @@ published: true
 | :-----: | :-----: | :-----: |
 | channel manager | ✔ | ✔ |
 | corona | ✔ | ✔ |
-| custom names | ✖ |  ✔ |
+| custom channel names | ✖ |  ✔ |
+| dynamic channel names | ✖ |  ✔ |
 | text announcements | ✖ | ✔ |
 | voice announcements | ✖ | ✔ |
 | spotify channel | ✖ | ✔ |
