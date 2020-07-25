@@ -24,8 +24,9 @@ blog:
   load_google_fonts          : 'Rubik:400,400italic,700,700italic'
 
 #discord
-username                    : null
-password                    : null
+discord:
+  username                  : null
+  password                  : null
 
 # Author info
 author:
