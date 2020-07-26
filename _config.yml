@@ -31,7 +31,7 @@ discord:
 # Author info
 author:
   fullname                  : Ioannis Tsiakkas
-  rss                       : true # generate RSS feed and show it's icon in header
+  rss                       : false # generate RSS feed and show it's icon in header
   mail                      : iantsiakkas@gmail.com # change to your e-mail address
   github                    : keybraker
   youtube                   : channel/UCUGOYc7lKyHp5nACPWmLenw
