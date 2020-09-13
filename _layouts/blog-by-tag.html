@@ -2,7 +2,6 @@
 layout: default
 ---
 
-
 {% capture page_subtitle %}
 {% if page.description %}
   {% capture desc %}{{ page.description }}{% endcapture %}
@@ -44,4 +43,4 @@ Articles tagged with <strong>‘#{{ page.name }}’</strong>
    <p>There are no posts in this tag.</p>
 {% endif %}
 
-  {% include utils/tag-box.html %}
+{% include utils/tag-box.html %}

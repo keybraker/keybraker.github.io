@@ -4,6 +4,8 @@ window.onload = () => {
   const access_token = localStorage.getItem('access_token');
   console.log('window.sessionStorage: ', window.sessionStorage);
   console.log('window.localStorage: ', window.localStorage);
+  console.log('access_token :>> ', access_token);
+  console.log('access_code :>> ', access_code);
   if (!access_token && !access_code) {
     console.log('passed 1');
     display_button();
@@ -40,13 +42,15 @@ const get_access_token = (access_code) => {
     .then(res => res.json())
     .then(response => {
       const { access_token, expires_in, refresh_token, scope, token_type  } = response;
-      localStorage.setItem('access_token', access_token);
-      localStorage.setItem('expires_in', expires_in);
-      localStorage.setItem('refresh_token', refresh_token);
-      localStorage.setItem('scope', scope);
-      localStorage.setItem('token_type', token_type);
-      fetch_user_data(token_type, access_token);
-      fetch_user_guilds(token_type, access_token);
+      if (access_token !== undefined) {
+        localStorage.setItem('access_token', access_token);
+        localStorage.setItem('expires_in', expires_in);
+        localStorage.setItem('refresh_token', refresh_token);
+        localStorage.setItem('scope', scope);
+        localStorage.setItem('token_type', token_type);
+        fetch_user_data(token_type, access_token);
+        fetch_user_guilds(token_type, access_token);
+      }
     })
     .error(console.log);
 }
@@ -61,15 +65,17 @@ const fetch_user_data = (token_type, access_token) => {
     .then(res => res.json())
     .then(response => {
       const { avatar, discriminator, flags, id, locale, mfa_enabled, public_flags, username } = response;
-      console.log('storing data for username username: ', username);
-      sessionStorage.setItem('avatar', avatar);
-      sessionStorage.setItem('discriminator', discriminator);
-      sessionStorage.setItem('flags', flags);
-      sessionStorage.setItem('id', id);
-      sessionStorage.setItem('locale', locale);
-      sessionStorage.setItem('mfa_enabled', mfa_enabled);
-      sessionStorage.setItem('public_flags', public_flags);
-      sessionStorage.setItem('username', username);
+      if(username !== undefined) {
+        console.log('storing data for username: ', username);
+        sessionStorage.setItem('avatar', avatar);
+        sessionStorage.setItem('discriminator', discriminator);
+        sessionStorage.setItem('flags', flags);
+        sessionStorage.setItem('id', id);
+        sessionStorage.setItem('locale', locale);
+        sessionStorage.setItem('mfa_enabled', mfa_enabled);
+        sessionStorage.setItem('public_flags', public_flags);
+        sessionStorage.setItem('username', username);
+      }
     })
     .catch(console.error);
 }
@@ -82,7 +88,10 @@ const fetch_user_guilds = (token_type, access_token) => {
   })
     .then(res => res.json())
     .then(response => {
-      sessionStorage.setItem('guilds', response);
+      if(response !== undefined) {
+        console.log('response :>> ', response);
+        sessionStorage.setItem('guilds', JSON.stringify(response));
+      }
     })
     .catch(console.error);
 }
