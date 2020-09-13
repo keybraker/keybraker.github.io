@@ -50,6 +50,7 @@ const get_access_token = (access_code) => {
         localStorage.setItem('token_type', token_type);
         fetch_user_data(token_type, access_token);
         fetch_user_guilds(token_type, access_token);
+        window.location.replace("http://www.localhost:4000/premium/");
       }
     })
     .error(console.log);

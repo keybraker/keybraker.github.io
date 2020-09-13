@@ -21,16 +21,18 @@ published: true
 
 | Version 1 | Version 2  |
 |:-------------:| :-----:|
-Channel manager | User profile channels |
-Voice Announcements | Admin timeout control |
-Text Announcements | Prefix manipulation |
-Set attribute | Subtle moderator |
-Ranking System | Member analytics |
-Focus on member | Logs |
-Force update | Anti-spam control |
-Corona |    |
-Role Assigner |    |
-Run command line |    |
+| Channel manager | User profile channels |
+| Voice Announcements | Admin timeout control |
+| Announcement Channel | Prefix manipulation |
+| Spotify Channel | Focus on member |
+| Url-only Channel | Subtle moderator |
+| Ranking System | Member analytics |
+| Music Player | Logs |
+| Force update | Anti-spam control |
+| Set attribute | |
+| Corona | |
+| Role Assigner | |
+| Run command line | |
 
 </div>
 

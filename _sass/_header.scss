@@ -7,10 +7,29 @@ header {
 }
 
 .avatar {
+  // display: inline-block;
   vertical-align: middle;
   width: 100%;
   height: 100%;
   border-radius: 50%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+}
+
+.dropdown-content button {
+  width: 100%;
+  height: 100%;
+}
+
+.dropdown-content button:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .logo {

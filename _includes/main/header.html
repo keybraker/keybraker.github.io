@@ -60,7 +60,13 @@
           </a>
         </li>
         <li>
-          <img id="avatar_img" src="" class="avatar" alt="avatar_img_alt">
+          <div class="dropdown">
+            <img id="avatar_img" src="" class="avatar" alt="avatar_img_alt">
+            <div class="dropdown-content">
+              <button onclick="localStorage.clear(); sessionStorage.clear(); location.reload();">log-out</button>
+            </div>
+          </div>
+          
         </li>
 
       </ul>
@@ -71,7 +77,8 @@
   const id = sessionStorage.getItem('id');
   const avatar = sessionStorage.getItem('avatar');
   const url = `https://cdn.discordapp.com/avatars/${id}/${avatar}.png`
-  if (id !== undefined) {
+
+  if (id !== undefined && id !==  null) {
     document.getElementById("avatar_img").src = url;
   } else {
     document.getElementById("avatar_img").src = "{{ site.baseurl }}/assets/img/no_photo.jpg";
