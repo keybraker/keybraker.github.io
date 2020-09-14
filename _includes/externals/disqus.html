@@ -1,39 +1,24 @@
-{% if site.author.disqus %}
-<!-- <div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = '{{ site.author.disqus }}';
+<script src="https://www.paypal.com/sdk/js?client-id=AUKQ6QHJ3TrdCjZldKW7BqYm0dSHEZdIaNG5sZat840_HmhjkZYP4teejk9b38wMtDXFv2cm_CkUfpYx"></script>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>
-    Please enable JavaScript to view the 
-    <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-</noscript> -->
-
-<script src="https://www.paypal.com/sdk/js?client-id=AUKQ6QHJ3TrdCjZldKW7BqYm0dSHEZdIaNG5sZat840_HmhjkZYP4teejk9b38wMtDXFv2cm_CkUfpYx">
-</script>
-
+<div class="float_center" id="server-to-boost"></div>
 <div class="float_center" id="paypal-button-container"></div>
 
 <script type="text/javascript">
+console.log('sessionStorage.getItem(\'boost_guild_id\') :>> ', sessionStorage.getItem('boost_guild_id'));
+  if (sessionStorage.getItem('boost_guild_id') !== undefined && sessionStorage.getItem('boost_guild_id') !== null) {
+    document.getElementById("server-to-boost").innerHTML = `Boost server <b>${sessionStorage.getItem('boost_guild_name')}</b>` +
+        `, for <b>${sessionStorage.getItem('boost_guild_period')} month(s)</b> and pay  <b>${sessionStorage.getItem('boost_guild_cost')}$</b>`
     paypal.Buttons({
-        style: {
-            size: 'responsive'
-        },
+        style: { size: 'responsive' },
         createOrder: function (data, actions) {
-            // This function sets up the details of the transaction, including the amount and line item details.
+            // This function sets up the details of the transaction,
+            // including the amount and line item details.
             return actions.order.create({
                 purchase_units: [{
-                    label: 'Portal 1 month subscription',
+                    label: 'guild_id: ' + sessionStorage.getItem('boost_guild_id'),
                     amount: {
                         currency_code: 'USD',
-                        value: '3.99'
+                        value: sessionStorage.getItem('boost_guild_cost') 
                     }
                 }]
             });
@@ -42,10 +27,12 @@
             // This function captures the funds from the transaction.
             return actions.order.capture().then(function (details) {
                 // This function shows a transaction success message to your buyer.
-                alert('Transaction completed by ' + details.payer.name.given_name);
+                alert(details.payer.name.given_name + ' has upgraded server ' +
+                sessionStorage.getItem('boost_guild_name') + ', for ' +
+                sessionStorage.getItem('boost_guild_period') + ' months.');
             });
         }
     }).render('#paypal-button-container');
     //This function displays Smart Payment Buttons on your web page.
+  }
 </script>
-{% endif %}
