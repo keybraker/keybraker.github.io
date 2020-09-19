@@ -25,7 +25,7 @@ const display_button = () => {
 const get_access_token = (access_code) => {
   const data = {
     client_id: '704400876860735569',
-    client_secret: '',
+    client_secret: process.env.DISCORD_CLIENT_SECRET,
     grant_type: 'authorization_code',
     redirect_uri: 'http://www.localhost:4000/premium/',
     code: access_code,
