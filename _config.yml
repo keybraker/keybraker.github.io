@@ -5,9 +5,8 @@ url                          : "http://keybraker.github.io"
                               # the base hostname & protocol for your site
 
 blog:
-  title                      : Portal
-  description                  : >
-                               the portal to a managed discord server
+  title                      : Ioannis Tsiakkas
+  description                : six-month do-or-die projecter 
 
 # Layout configuration
   logo_path                  : "assets/img/logo.svg" # path to logo file
@@ -34,8 +33,9 @@ author:
   rss                       : false # generate RSS feed and show it's icon in header
   mail                      : iantsiakkas@gmail.com # change to your e-mail address
   github                    : keybraker
+  linkedin                  : ioannis-t-3365151a2
   youtube                   : channel/UCUGOYc7lKyHp5nACPWmLenw
-  twitter                   : whatsLeftOfJohn
+  twitter                   : whats_leftof_me
   disqus                    : dactl # your disqus site name
   paypal                    : dactl # your disqus site name
   photo                     : "uploads/me2.png"
