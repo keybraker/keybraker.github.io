@@ -7,8 +7,10 @@ published: true
 
 <div class="page" markdown="1">
 
-I am always eager to learn and help create new and exciting things, my preferred way to communicate is via email.
-I do generaly reply fast but do keep in mind that I am located at UTC+3, so my response my vary considering the time you send.
+I am always eager to learn and help create new and exciting things. My preferred way to communicate is via email.
+I do generalLy reply fast but keep in mind that I am located on UTC+3, so my response may vary considering the time you email.
+
+## Contact Info
 
 * <a href="mailto:{{ site.author.mail }}" target="_blank" title="email me">
   <span class="icon-mail_outline"></span> email me
