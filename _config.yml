@@ -9,7 +9,7 @@ blog:
   description                : six-month do-or-die projecter 
 
 # Layout configuration
-  logo_path                  : "assets/img/logo.svg" # path to logo file
+  logo_path                  : "assets/img/key_logo.svg" # path to logo file
   search_path                : # "yourgitusername.github.io"
                                # needed for searchbox in archive page
   hero_layout                : true # turn on hero layout for blog and posts
@@ -115,5 +115,5 @@ compress_html:
   comments                : ["<!-- ", " -->"]
   blanklines              : true
   profile                 : false
-  ignore:
+  ignore                  :
   envs                    : [local]

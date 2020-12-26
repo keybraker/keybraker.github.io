@@ -17,7 +17,7 @@ I do generalLy reply fast but keep in mind that I am located on UTC+3, so my res
 </a> at {{ site.author.mail }}
 * <a href="https://github.com/{{ site.author.github }}" target="_blank" class="smaller">
   <span class="icon-github"></span> github
-</a> at https://github.com/{{ site.author.github }}
+</a> at github.com/{{ site.author.github }}
 * <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank" class="smaller">
   <span class="icon-language"></span> linkedIn
 </a>
