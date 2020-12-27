@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Info
-permalink: /info/
+permalink: /portfolio/portal/info/
 published: true
 ---
 

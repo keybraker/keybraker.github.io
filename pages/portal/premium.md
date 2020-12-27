@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Premium
-permalink: /premium/
+permalink: /portfolio/portal/premium/
 published: true
 ---
 

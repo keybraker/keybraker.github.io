@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Main
-permalink: /
+permalink: /portfolio/portal/
 published: true
 ---
 

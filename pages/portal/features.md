@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Features
-permalink: /features/
+permalink: /portfolio/portal/features/
 published: true
 ---
 

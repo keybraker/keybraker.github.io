@@ -1,12 +1,12 @@
 # Base blog settings
-baseurl                      : "" # the subpath of your site,                         # e.g. /blog/
+baseurl                      : '' # the subpath of your site,                         # e.g. /blog/
                               # set to '' in case of hosting on GitHub
 url                          : "http://keybraker.github.io"
                               # the base hostname & protocol for your site
 
 blog:
   title                      : Ioannis Tsiakkas
-  description                : six-month do-or-die projecter 
+  description                : do-or-die
 
 # Layout configuration
   logo_path                  : "assets/img/key_logo.svg" # path to logo file
