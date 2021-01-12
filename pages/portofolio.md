@@ -19,7 +19,7 @@ _A simple example on how to create electron GUIs for python programs_ <br>
 _A lexical and grammatical analyzer for the Greek language_ <br>
 * [BOND](https://github.com/keybraker/BOND):
 _A fast and secure password manager for your computer_ <br>
-* [Portal](https://discord.com/api/oauth2/authorize?client_id=704400876860735569&permissions=8&redirect_uri=http%3A%2F%2Fwww.localhost%3A4000%2Fpremium%2F&scope=bot):
+* [Portal](https://github.com/keybraker/portal):
 _the portal to a managed discord server_ <a
         href="https://discord.com/api/oauth2/authorize?client_id=704400876860735569&permissions=8&redirect_uri=http%3A%2F%2Fwww.localhost%3A4000%2Fpremium%2F&scope=bot"
         class="button button_discord" style="color:#ffff">add to discord
