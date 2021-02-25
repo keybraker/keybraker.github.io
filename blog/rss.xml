@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Portal Blog</title>
+        <link>https://portal-bot.xyz/blog</link>
+        <description>Portal Blog</description>
+        <lastBuildDate>Mon, 15 Feb 2021 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[0.6.0]]></title>
+            <link>https://portal-bot.xyz/blog/0.6.0</link>
+            <guid>0.6.0</guid>
+            <pubDate>Mon, 15 Feb 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Transition from JSON file database to mongo database.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[0.5.7]]></title>
+            <link>https://portal-bot.xyz/blog/0.5.7</link>
+            <guid>0.5.7</guid>
+            <pubDate>Mon, 18 Jan 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Updates and bug fixes through application.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[0.5.0]]></title>
+            <link>https://portal-bot.xyz/blog/0.5.0</link>
+            <guid>0.5.0</guid>
+            <pubDate>Fri, 08 Jan 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Upgraded from Javascript to Typescript.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[0.2.1]]></title>
+            <link>https://portal-bot.xyz/blog/0.2.1</link>
+            <guid>0.2.1</guid>
+            <pubDate>Tue, 16 Jun 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Improvements upon initial beta testing with more commands after command code rewrite.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[0.1.0]]></title>
+            <link>https://portal-bot.xyz/blog/0.1.0</link>
+            <guid>0.1.0</guid>
+            <pubDate>Mon, 18 May 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Initial launch on two servers as a beta test. Regulating the preformance of the Bot throughout servers.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[0.0.1]]></title>
+            <link>https://portal-bot.xyz/blog/0.0.1</link>
+            <guid>0.0.1</guid>
+            <pubDate>Tue, 05 May 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Initial release was more of a proof of concept and check of viability and scale.]]></description>
+        </item>
+    </channel>
+</rss>
