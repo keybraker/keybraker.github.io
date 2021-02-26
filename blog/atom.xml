@@ -6,7 +6,7 @@
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://portal-bot.xyz/blog"/>
     <subtitle>Portal Blog</subtitle>
-    <icon>https://portal-bot.xyz/img/favicon.ico</icon>
+    <icon>https://portal-bot.xyz/img/portal/portal_logo_legacy.ico</icon>
     <entry>
         <title type="html"><![CDATA[0.6.0]]></title>
         <id>0.6.0</id>
