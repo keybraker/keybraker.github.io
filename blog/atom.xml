@@ -2,11 +2,25 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://portal-bot.xyz/blog</id>
     <title>Portal Blog</title>
-    <updated>2021-02-15T00:00:00.000Z</updated>
+    <updated>2021-05-10T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://portal-bot.xyz/blog"/>
     <subtitle>Portal Blog</subtitle>
     <icon>https://portal-bot.xyz/img/portal/portal_logo.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[0.6.4]]></title>
+        <id>0.6.4</id>
+        <link href="https://portal-bot.xyz/blog/0.6.4"/>
+        <updated>2021-05-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Implemented bet and news commands, updated music player design and updated replys.]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[0.6.3]]></title>
+        <id>0.6.3</id>
+        <link href="https://portal-bot.xyz/blog/0.6.3"/>
+        <updated>2021-05-05T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Increased responsed time by 70% and updated music player.]]></summary>
+    </entry>
     <entry>
         <title type="html"><![CDATA[0.6.0]]></title>
         <id>0.6.0</id>
