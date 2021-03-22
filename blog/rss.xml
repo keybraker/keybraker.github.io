@@ -4,21 +4,35 @@
         <title>Portal Blog</title>
         <link>https://portal-bot.xyz/blog</link>
         <description>Portal Blog</description>
-        <lastBuildDate>Mon, 10 May 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 22 Mar 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[0.6.6]]></title>
+            <link>https://portal-bot.xyz/blog/0.6.6</link>
+            <guid>0.6.6</guid>
+            <pubDate>Mon, 22 Mar 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Pinned video in music player]]></description>
+        </item>
+        <item>
+            <title><![CDATA[0.6.5]]></title>
+            <link>https://portal-bot.xyz/blog/0.6.5</link>
+            <guid>0.6.5</guid>
+            <pubDate>Mon, 15 Mar 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Text interpreter refactoring, code restructure and minor fixes.]]></description>
+        </item>
         <item>
             <title><![CDATA[0.6.4]]></title>
             <link>https://portal-bot.xyz/blog/0.6.4</link>
             <guid>0.6.4</guid>
-            <pubDate>Mon, 10 May 2021 00:00:00 GMT</pubDate>
+            <pubDate>Wed, 10 Mar 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Implemented bet and news commands, updated music player design and updated replys.]]></description>
         </item>
         <item>
             <title><![CDATA[0.6.3]]></title>
             <link>https://portal-bot.xyz/blog/0.6.3</link>
             <guid>0.6.3</guid>
-            <pubDate>Wed, 05 May 2021 00:00:00 GMT</pubDate>
+            <pubDate>Fri, 05 Mar 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Increased responsed time by 70% and updated music player.]]></description>
         </item>
         <item>
