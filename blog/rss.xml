@@ -4,15 +4,22 @@
         <title>Portal Blog</title>
         <link>https://portal-bot.xyz/blog</link>
         <description>Portal Blog</description>
-        <lastBuildDate>Mon, 22 Mar 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 07 Apr 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[0.6.7]]></title>
+            <link>https://portal-bot.xyz/blog/0.6.7</link>
+            <guid>0.6.7</guid>
+            <pubDate>Wed, 07 Apr 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[NEW command ./invite, to create server invites]]></description>
+        </item>
         <item>
             <title><![CDATA[0.6.6]]></title>
             <link>https://portal-bot.xyz/blog/0.6.6</link>
             <guid>0.6.6</guid>
             <pubDate>Mon, 22 Mar 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Pinned video in music player]]></description>
+            <description><![CDATA[NEW feature pinned video in music player]]></description>
         </item>
         <item>
             <title><![CDATA[0.6.5]]></title>
