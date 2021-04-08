@@ -26,28 +26,28 @@
             <link>https://portal-bot.xyz/blog/0.6.5</link>
             <guid>0.6.5</guid>
             <pubDate>Mon, 15 Mar 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Text interpreter refactoring, code restructure and minor fixes.]]></description>
+            <description><![CDATA[NEW pipe added acronym]]></description>
         </item>
         <item>
             <title><![CDATA[0.6.4]]></title>
             <link>https://portal-bot.xyz/blog/0.6.4</link>
             <guid>0.6.4</guid>
             <pubDate>Wed, 10 Mar 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Implemented bet and news commands, updated music player design and updated replys.]]></description>
+            <description><![CDATA[Implemented bet and news commands]]></description>
         </item>
         <item>
             <title><![CDATA[0.6.3]]></title>
             <link>https://portal-bot.xyz/blog/0.6.3</link>
             <guid>0.6.3</guid>
             <pubDate>Fri, 05 Mar 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Increased responsed time by 70% and updated music player.]]></description>
+            <description><![CDATA[Increased responsed time by 70%]]></description>
         </item>
         <item>
             <title><![CDATA[0.6.0]]></title>
             <link>https://portal-bot.xyz/blog/0.6.0</link>
             <guid>0.6.0</guid>
             <pubDate>Mon, 15 Feb 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Transition from JSON file database to mongo database.]]></description>
+            <description><![CDATA[Transition from JSON file database to mongo database]]></description>
         </item>
         <item>
             <title><![CDATA[0.5.7]]></title>
@@ -68,21 +68,21 @@
             <link>https://portal-bot.xyz/blog/0.2.1</link>
             <guid>0.2.1</guid>
             <pubDate>Tue, 16 Jun 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Improvements upon initial beta testing with more commands after command code rewrite.]]></description>
+            <description><![CDATA[Improvements upon initial beta testing with more commands after command code rewrite]]></description>
         </item>
         <item>
             <title><![CDATA[0.1.0]]></title>
             <link>https://portal-bot.xyz/blog/0.1.0</link>
             <guid>0.1.0</guid>
             <pubDate>Mon, 18 May 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Initial launch on two servers as a beta test. Regulating the preformance of the Bot throughout servers.]]></description>
+            <description><![CDATA[Initial launch on two servers as a beta test]]></description>
         </item>
         <item>
             <title><![CDATA[0.0.1]]></title>
             <link>https://portal-bot.xyz/blog/0.0.1</link>
             <guid>0.0.1</guid>
             <pubDate>Tue, 05 May 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Initial release was more of a proof of concept and check of viability and scale.]]></description>
+            <description><![CDATA[Initial release was more of a proof of concept and check of viability and scale]]></description>
         </item>
     </channel>
 </rss>
