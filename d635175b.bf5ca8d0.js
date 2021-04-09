@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[129],{201:function(s){s.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"discordjs","name":"discordjs","count":11,"permalink":"/blog/tags/discordjs"}')}}]);
