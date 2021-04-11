@@ -57,9 +57,9 @@
             <description><![CDATA[Transition from JSON file database to mongo database]]></description>
         </item>
         <item>
-            <title><![CDATA[0.5.7]]></title>
-            <link>https://portal-bot.xyz/blog/0.5.7</link>
-            <guid>0.5.7</guid>
+            <title><![CDATA[0.5.1]]></title>
+            <link>https://portal-bot.xyz/blog/0.5.1</link>
+            <guid>0.5.1</guid>
             <pubDate>Mon, 18 Jan 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Updates and bug fixes through application.]]></description>
         </item>
@@ -71,16 +71,16 @@
             <description><![CDATA[Upgraded from Javascript to Typescript.]]></description>
         </item>
         <item>
-            <title><![CDATA[0.2.1]]></title>
-            <link>https://portal-bot.xyz/blog/0.2.1</link>
-            <guid>0.2.1</guid>
+            <title><![CDATA[0.4.0]]></title>
+            <link>https://portal-bot.xyz/blog/0.4.0</link>
+            <guid>0.4.0</guid>
             <pubDate>Tue, 16 Jun 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Improvements upon initial beta testing with more commands after command code rewrite]]></description>
         </item>
         <item>
-            <title><![CDATA[0.1.0]]></title>
-            <link>https://portal-bot.xyz/blog/0.1.0</link>
-            <guid>0.1.0</guid>
+            <title><![CDATA[0.3.0]]></title>
+            <link>https://portal-bot.xyz/blog/0.3.0</link>
+            <guid>0.3.0</guid>
             <pubDate>Mon, 18 May 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Initial launch on two servers as a beta test]]></description>
         </item>
