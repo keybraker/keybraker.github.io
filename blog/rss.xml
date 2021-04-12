@@ -4,9 +4,16 @@
         <title>Portal Blog</title>
         <link>https://portal-bot.xyz/blog</link>
         <description>Portal Blog</description>
-        <lastBuildDate>Thu, 08 Apr 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 12 Apr 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[0.6.9]]></title>
+            <link>https://portal-bot.xyz/blog/0.6.9</link>
+            <guid>0.6.9</guid>
+            <pubDate>Mon, 12 Apr 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[NEW attribute g.kickafter attribute]]></description>
+        </item>
         <item>
             <title><![CDATA[0.6.8]]></title>
             <link>https://portal-bot.xyz/blog/0.6.8</link>
