@@ -1,4 +1,6 @@
 {
   "main.js": "render-page.js",
-  "main.js.map": "render-page.js.map"
+  "main.js.map": "render-page.js.map",
+  "static/medwork-icon.png": "static/medwork-icon-09900148fa747effa96cf0f5bdfbbf15.png",
+  "static/medwork-logo.png": "static/medwork-logo-09900148fa747effa96cf0f5bdfbbf15.png"
 }
