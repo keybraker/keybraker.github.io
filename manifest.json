@@ -1,6 +1,15 @@
 {
   "main.js": "render-page.js",
   "main.js.map": "render-page.js.map",
+  "static/bayer-logo.png": "static/bayer-logo-d20b5f977d88ca873e7ab5221fa80f4f.png",
+  "static/gsk-logo.png": "static/gsk-logo-7f38e1fd3e3b81bf5a14526d64fea624.png",
+  "static/j&j-logo.png": "static/j&j-logo-49aaa24e9cd40c3f3fd757377776d2bb.png",
   "static/medwork-icon.png": "static/medwork-icon-09900148fa747effa96cf0f5bdfbbf15.png",
-  "static/medwork-logo.png": "static/medwork-logo-09900148fa747effa96cf0f5bdfbbf15.png"
+  "static/medwork-logo.png": "static/medwork-logo-09900148fa747effa96cf0f5bdfbbf15.png",
+  "static/merck-logo.png": "static/merck-logo-5b8c885d1fcf2f062856f5b1736644f7.png",
+  "static/moderna-logo.png": "static/moderna-logo-2bf8f46a583f752a81ca5719ff471b6d.png",
+  "static/novartis-logo.png": "static/novartis-logo-25eb512bb92b3806c61fcb807b81444a.png",
+  "static/pfizer-logo.png": "static/pfizer-logo-01edb28dcf28ba2ddb902a3afda3e2e2.png",
+  "static/roche-logo.png": "static/roche-logo-2a220022f652b2a4a79e6aabb4e56b2d.png",
+  "static/sanofi-logo.png": "static/sanofi-logo-616e97e99cd52522a6f6a4331d069654.png"
 }
