@@ -6,7 +6,7 @@ import resumePdf from '../../static/ioannis_tsiakkas_resume.pdf';
 
 const name = "Ioannis Tsiakkas";
 const date = "04 Dec 1995";
-const phne = "6971823409";
+// const phne = "6971823409";
 const code = "0030";
 const addr = "713 05 - Heraklion, Greece";
 const mail = "iantsiakkas@gmail.com";
@@ -28,9 +28,9 @@ const AboutPageInner = props => {
             <tr>
               <td><a href={`http://maps.google.com/?q=${addr}`} rel="noopener noreferrer" target="_blank">{addr}</a></td>
             </tr>
-            <tr>
+            {/* <tr>
               <td><a href={`tel:${code}${phne}`}>{`(${code}) ${phne}`}</a></td>
-            </tr>
+            </tr> */}
             <tr>
               <td><a href={`mailto:${mail}`}>{mail}</a></td>
             </tr>
