@@ -29,10 +29,16 @@ const StyledSectionHeading = styled.span`
 `;
 
 function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
+  if (typeof window !== 'undefined') {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+  }
+
   return {
-    width,
-    height
+    width: 1920,
+    height: 1080
   };
 }
 
@@ -50,7 +56,7 @@ const Index = () => (
     <StyledContainer>
       {/* <HeadScene /> */}
       <StyledSectionHeading>Hello. My name is Ioannis Tsiakkas. I'm a Software Engineer currently working as a backend developer
-      at <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">Fairlo</a>.</StyledSectionHeading>
+        at <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">Fairlo</a>.</StyledSectionHeading>
     </StyledContainer>
   </Layout>
 );
