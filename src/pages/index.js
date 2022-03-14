@@ -28,11 +28,21 @@ const StyledSectionHeading = styled.span`
   text-decoration: none;
 `;
 
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+const { height, width } = getWindowDimensions();
+
 const Index = () => (
   <Layout>
     <Confetti
-      width={window.innerWidth}
-      height={window.innerHeight}
+      width={width}
+      height={height}
       gravity={0.005}
       numberOfPieces={50}
       tweenDuration={500}
