@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import Layout from './../components/Layout';
 // const HeadScene = loadable(() => import('./../components/HeadScene'));
 
+import Confetti from 'react-confetti'
+
 const StyledContainer = styled.div`
   height: 350px;
 
@@ -28,6 +30,13 @@ const StyledSectionHeading = styled.span`
 
 const Index = () => (
   <Layout>
+    <Confetti
+      width={window.innerWidth}
+      height={window.innerHeight}
+      gravity={0.005}
+      numberOfPieces={50}
+      tweenDuration={500}
+    />
     <StyledContainer>
       {/* <HeadScene /> */}
       <StyledSectionHeading>Hello. My name is Ioannis Tsiakkas. I'm a Software Engineer currently working as a backend developer
