@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React from "react";
+import { Link } from "gatsby";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const activeClassName = 'active';
+const activeClassName = "active";
 
 const StyledNav = styled.nav`
   margin-bottom: 1em;
@@ -48,7 +48,7 @@ const ListElement = styled.li`
   }
 
   &:after {
-    content: ' ';
+    content: " ";
     display: none;
     white-space: pre;
 
@@ -59,26 +59,37 @@ const ListElement = styled.li`
 `;
 
 const NavItem = styled(Link).attrs({
-  activeClassName
+  activeClassName,
 })`
   color: black;
   border: none;
 
   &:hover {
     color: blue;
+    text-decoration: underline;
   }
 
   &:before {
-    content: '/';
+    content: "/";
     display: none;
+  }
 
+  &:before {
     @media (min-width: 520px) {
       display: inline;
     }
   }
 
   &.${activeClassName} {
-    font-weight: bold;
+    color: gray;
+
+    &:before {
+      content: "";
+    }
+
+    &:after {
+      content: "/";
+    }
   }
 `;
 

@@ -1,19 +1,19 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
+import React from "react";
+import { graphql } from "gatsby";
+import Layout from "../components/Layout";
 
-import resumePdf from '../../static/ioannis_tsiakkas_resume.pdf';
+import resumePdf from "../../static/ioannis_tsiakkas_resume.pdf";
 
 const name = "Ioannis Tsiakkas";
 const date = "04 Dec 1995";
 // const phne = "6971823409";
 const code = "0030";
-const addr = "713 05 - Heraklion, Greece";
+const addr = "71305, Heraklion, Greece";
 const mail = "iantsiakkas@gmail.com";
 const gthb = "Keybraker";
 const twtr = "RealTsiakkas";
 
-const AboutPageInner = props => {
+const AboutPageInner = (props) => {
   try {
     return (
       <div>
@@ -26,24 +26,53 @@ const AboutPageInner = props => {
               <td>{date}</td>
             </tr>
             <tr>
-              <td><a href={`http://maps.google.com/?q=${addr}`} rel="noopener noreferrer" target="_blank">{addr}</a></td>
+              <td>
+                <a
+                  href={`http://maps.google.com/?q=${addr}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {addr}
+                </a>
+              </td>
             </tr>
             {/* <tr>
               <td><a href={`tel:${code}${phne}`}>{`(${code}) ${phne}`}</a></td>
             </tr> */}
             <tr>
-              <td><a href={`mailto:${mail}`}>{mail}</a></td>
+              <td>
+                <a href={`mailto:${mail}`}>{mail}</a>
+              </td>
             </tr>
             <tr>
               <td>
-                <a href={`https://github.com/${gthb}`} rel="noopener noreferrer" target="_blank">Github</a>
-                {' / '}
-                <a href={`https://twitter.com/${twtr}`} rel="noopener noreferrer" target="_blank">Twitter</a></td>
+                <a
+                  href={`https://github.com/${gthb}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Github
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {" "}
+                <a
+                  href={`https://twitter.com/${twtr}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Twitter
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
         <br />
-        <a href={resumePdf} download="ioannis_tsiakkas_resume.pdf">My resume (pdf 77kb) &#9660;</a>
+        <a href={resumePdf} download="ioannis_tsiakkas_resume.pdf">
+          My resume (pdf 77kb) &#9660;
+        </a>
       </div>
     );
   } catch (e) {
@@ -52,7 +81,7 @@ const AboutPageInner = props => {
   }
 };
 
-const AboutPage = props => {
+const AboutPage = (props) => {
   return (
     <Layout>
       <AboutPageInner {...props} />
