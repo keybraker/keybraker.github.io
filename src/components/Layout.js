@@ -13,7 +13,7 @@ import Favicon from './../components/Favicon';
 import GlobalStyle from './GlobalStyle';
 
 const Main = styled.main`
-  max-width: 83rem;
+  max-width: 124rem;
   padding: 1em 1em 2em;
   margin: 0 auto;
 

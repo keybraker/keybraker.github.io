@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 // import { Link } from 'gatsby';
 
 // const DateSpan = styled.span`
@@ -13,7 +13,7 @@ const StyledShowcaseListing = styled.ul`
 `;
 
 const StyledShowcaseItem = styled.li`
-  font-family: 'Noto Serif Display', serif;
+  font-family: "Noto Serif Display", serif;
   font-size: 1.8rem;
   // text-decoration: none;
   margin-bottom: 2em;
@@ -48,18 +48,21 @@ const StyledSectionHeading = styled.span`
   margin-bottom: 0;
   color: #000;
   text-decoration: none;
-  letter-spacing: .07rem;
-  font-family: 'Archivo', sans-serif;
+  letter-spacing: 0.07rem;
+  font-family: "Archivo", sans-serif;
   font-weight: bold;
 `;
 
 const ShowcaseListing = ({ showcases }) => {
   const showcaseLinks = showcases.map((showcase, i) => {
     return (
-      <StyledShowcaseItem key={i} >
+      <StyledShowcaseItem key={i}>
         <StyledLinkWrap>
           <StyledSectionHeading>
-            <span className="content" dangerouslySetInnerHTML={{ __html: showcase.title }}></span>
+            <span
+              className="content"
+              dangerouslySetInnerHTML={{ __html: showcase.title }}
+            ></span>
           </StyledSectionHeading>
           <StyledLedeSpan>
             {showcase.start} - {showcase.end}
@@ -67,10 +70,16 @@ const ShowcaseListing = ({ showcases }) => {
         </StyledLinkWrap>
         <StyledLinkWrap>
           <StyledLedeSpan>
-            <span className="content" dangerouslySetInnerHTML={{ __html: showcase.info }}></span>
+            <span
+              className="content"
+              dangerouslySetInnerHTML={{ __html: showcase.info }}
+            ></span>
           </StyledLedeSpan>
           <StyledLedeSpan>
-            <span className="content" dangerouslySetInnerHTML={{ __html: showcase.position }}></span>
+            <span
+              className="content"
+              dangerouslySetInnerHTML={{ __html: showcase.position }}
+            ></span>
           </StyledLedeSpan>
         </StyledLinkWrap>
       </StyledShowcaseItem>
