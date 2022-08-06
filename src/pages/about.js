@@ -1,14 +1,14 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
-
+import styled from "styled-components";
 import resumePdf from "../../static/ioannis_tsiakkas_resume.pdf";
 
 const name = "Ioannis Tsiakkas";
-const date = "04 Dec 1995";
-// const phne = "6971823409";
+const date = "04 DEC 1995";
 // const code = "0030";
-const addr = "71305, Heraklion, Greece";
+// const phne = "6971823409";
+const addr = "Heraklion, Greece, 71305";
 const mail = "iantsiakkas@gmail.com";
 const gthb = "Keybraker";
 const twtr = "RealTsiakkas";
@@ -16,15 +16,15 @@ const twtr = "RealTsiakkas";
 const AboutPageInner = (props) => {
   try {
     return (
-      <div>
-        <table align="justify" width="100%">
+      <div align="justify" width="100%">
+        <table>
           <tbody>
-            <tr>
+            {/* <tr>
               <td>{name}</td>
             </tr>
             <tr>
               <td>{date}</td>
-            </tr>
+            </tr> */}
             <tr>
               <td>
                 <a
@@ -67,17 +67,23 @@ const AboutPageInner = (props) => {
                 </a>
               </td>
             </tr>
+            <tr>
+              <td>
+                {" "}
+                <b>
+                  <a href={resumePdf} download="ioannis_tsiakkas_resume.pdf">
+                    Resume (pdf ~77KB) &#9660;
+                  </a>
+                </b>
+              </td>
+            </tr>
           </tbody>
         </table>
-        <br />
-        <a href={resumePdf} download="ioannis_tsiakkas_resume.pdf">
-          My resume (pdf 77kb) &#9660;
-        </a>
       </div>
     );
   } catch (e) {
     console.log(e);
-    return <h2>Unable to find any projects.</h2>;
+    return <h2>Unable to find any data.</h2>;
   }
 };
 

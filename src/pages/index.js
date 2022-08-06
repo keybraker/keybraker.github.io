@@ -56,12 +56,15 @@ const Index = () => (
     <StyledContainer>
       {/* <HeadScene /> */}
       <StyledSectionHeading>
-        Hello,<br></br><br></br>
-        I'm a Software Engineer currently working as a backend developer at{" "}
+        Hello,<br></br>
+        <br></br>
+        I'm a Software Engineer with experience in both frontend and backend development.<br></br>
+        Currently working as a backend developer at{" "}
         <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">
           Fairlo
-        </a>.
-        <br></br><br></br>
+        </a>
+        .<br></br>
+        <br></br>
         Kindly,<br></br>
         Ioannis Tsiakkas
       </StyledSectionHeading>
