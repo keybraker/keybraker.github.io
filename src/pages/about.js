@@ -7,7 +7,7 @@ import resumePdf from "../../static/ioannis_tsiakkas_resume.pdf";
 const name = "Ioannis Tsiakkas";
 const date = "04 Dec 1995";
 // const phne = "6971823409";
-const code = "0030";
+// const code = "0030";
 const addr = "71305, Heraklion, Greece";
 const mail = "iantsiakkas@gmail.com";
 const gthb = "Keybraker";

@@ -39,13 +39,13 @@ const StyledProjectItem = styled.li`
   // justify-content: space-between;
 `;
 
-const StyledLinkWrap = styled.span`
-  display: block;
+// const StyledLinkWrap = styled.span`
+//   display: block;
 
-  @media (min-width: 550px) {
-    display: inline;
-  }
-`;
+//   @media (min-width: 550px) {
+//     display: inline;
+//   }
+// `;
 
 const StyledProjectLink = styled(Link)`
   // display: inline-block;

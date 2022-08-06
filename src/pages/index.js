@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 // import loadable from '@loadable/component';
 
-import Layout from './../components/Layout';
+import Layout from "./../components/Layout";
 // const HeadScene = loadable(() => import('./../components/HeadScene'));
 
-import Confetti from 'react-confetti'
+import Confetti from "react-confetti";
 
 const StyledContainer = styled.div`
   height: 350px;
@@ -20,7 +20,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledSectionHeading = styled.span`
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   font-style: italic;
   font-size: 24px;
   margin-bottom: 0;
@@ -29,16 +29,16 @@ const StyledSectionHeading = styled.span`
 `;
 
 function getWindowDimensions() {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     return {
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
     };
   }
 
   return {
     width: 1920,
-    height: 1080
+    height: 1080,
   };
 }
 
@@ -55,8 +55,16 @@ const Index = () => (
     />
     <StyledContainer>
       {/* <HeadScene /> */}
-      <StyledSectionHeading>Hello. My name is Ioannis Tsiakkas. I'm a Software Engineer currently working as a backend developer
-        at <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">Fairlo</a>.</StyledSectionHeading>
+      <StyledSectionHeading>
+        Hello,<br></br><br></br>
+        I'm a Software Engineer currently working as a backend developer at{" "}
+        <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">
+          Fairlo
+        </a>.
+        <br></br><br></br>
+        Kindly,<br></br>
+        Ioannis Tsiakkas
+      </StyledSectionHeading>
     </StyledContainer>
   </Layout>
 );

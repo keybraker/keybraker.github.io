@@ -19,7 +19,7 @@ const ExperiencePageInner = (props) => {
         end: "Jan 2022",
         title: '<a href="http://www.army.gov.cy/">Cypriot Military</a>',
         info: "Ordnance Corps",
-        position: "Soldier",
+        position: "Obligatory military service",
       },
       {
         start: "Mar 2020",
@@ -39,7 +39,7 @@ const ExperiencePageInner = (props) => {
         start: "Jun 2017",
         end: "Jan 2019",
         title: '<a href="https://www.ics.forth.gr">FORTH</a>',
-        info: "Research Lab",
+        info: "Telecommunications Research Lab",
         position:
           'Undergraduate Researcher (<a href="https://www.ics.forth.gr/discs">DISCS</a>, <a href="https://www.ics.forth.gr/tnl">TNL</a>)',
       },

@@ -6,10 +6,10 @@ import styled from "styled-components";
 const activeClassName = "active";
 
 const StyledNav = styled.nav`
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 
   @media (min-width: 520px) {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
 `;
 
