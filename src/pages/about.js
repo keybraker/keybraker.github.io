@@ -12,6 +12,8 @@ const addr = "Heraklion, Greece, 71305";
 const mail = "iantsiakkas@gmail.com";
 const gthb = "Keybraker";
 const twtr = "RealTsiakkas";
+const lnkd = "ioannis-t-3365151a2";
+
 
 const AboutPageInner = (props) => {
   try {
@@ -64,6 +66,18 @@ const AboutPageInner = (props) => {
                   target="_blank"
                 >
                   Twitter
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {" "}
+                <a
+                  href={`https://www.linkedin.com/in/${lnkd}/`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  LinkedIn
                 </a>
               </td>
             </tr>
