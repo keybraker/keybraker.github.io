@@ -28,6 +28,15 @@ const StyledSectionHeading = styled.span`
   text-decoration: none;
 `;
 
+const StyledSectionDate = styled.span`
+  font-family: "Archivo", sans-serif;
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 0;
+  color: #9a9797;
+  text-decoration: none;
+`;
+
 function getWindowDimensions() {
   if (typeof window !== "undefined") {
     return {
@@ -44,21 +53,31 @@ function getWindowDimensions() {
 
 const { height, width } = getWindowDimensions();
 
+var MyDate = new Date();
+var date;
+
+MyDate.setDate(MyDate.getDate());
+
+date = ('0' + MyDate.getDate()).slice(-2) + '/'
+             + ('0' + (MyDate.getMonth()+1)).slice(-2) + '/'
+             + MyDate.getFullYear();
+
 const Index = () => (
   <Layout>
-    <Confetti
+    {/* <Confetti
       width={width}
       height={height}
       gravity={0.005}
       numberOfPieces={50}
       tweenDuration={500}
-    />
+    /> */}
     <StyledContainer>
       {/* <HeadScene /> */}
       <StyledSectionHeading>
         Hello,<br></br>
         <br></br>
-        I'm a Software Engineer with experience in both frontend and backend development.<br></br>
+        I'm a Software Engineer with experience in both frontend and backend
+        development.<br></br>
         Currently working as a backend developer at{" "}
         <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">
           Fairlo
@@ -66,7 +85,8 @@ const Index = () => (
         .<br></br>
         <br></br>
         Kindly,<br></br>
-        Ioannis Tsiakkas
+        Ioannis Tsiakkas<br></br>
+        <StyledSectionDate>Sent {date}</StyledSectionDate>
       </StyledSectionHeading>
     </StyledContainer>
   </Layout>
