@@ -1,16 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'gatsby';
-import Helmet from 'react-helmet';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "gatsby";
+import Helmet from "react-helmet";
 // import Dimensions from 'react-dimensions';
-
 // import 'prismjs/themes/prism-solarizedlight.css';
-import 'prismjs/themes/prism.css';
-
-import Nav from './../components/Nav';
-import Favicon from './../components/Favicon';
-
-import GlobalStyle from './GlobalStyle';
+import "prismjs/themes/prism.css";
+import Nav from "./../components/Nav";
+import Favicon from "./../components/Favicon";
+import GlobalStyle from "./GlobalStyle";
 
 const Main = styled.main`
   max-width: 124rem;
@@ -63,12 +60,14 @@ const Layout = ({ children }) => {
           href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Rubik:700"
           rel="stylesheet"
         /> */}
-
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
-
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+          rel="stylesheet"
+        />
         <title>Ioannis Tsiakkas</title>
+
         <meta property="og:title" content="Ioannis Tsiakkas" />
         <meta property="og:description" content="Personal Website" />
         <meta property="og:type" content="website" />

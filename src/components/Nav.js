@@ -98,7 +98,7 @@ const Nav = () => {
     <StyledNav>
       <StyledList>
         <ListElement>
-          <NavItem to="/about/" activeClassName={activeClassName}>
+          <NavItem to="/about-me/" activeClassName={activeClassName}>
             about me
           </NavItem>
         </ListElement>
