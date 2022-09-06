@@ -58,9 +58,12 @@ var date;
 
 MyDate.setDate(MyDate.getDate());
 
-date = ('0' + MyDate.getDate()).slice(-2) + '/'
-             + ('0' + (MyDate.getMonth()+1)).slice(-2) + '/'
-             + MyDate.getFullYear();
+date =
+  ("0" + MyDate.getDate()).slice(-2) +
+  "/" +
+  ("0" + (MyDate.getMonth() + 1)).slice(-2) +
+  "/" +
+  MyDate.getFullYear();
 
 const Index = () => (
   <Layout>
