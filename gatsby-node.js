@@ -88,42 +88,42 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 };
 
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
+exports.createPages = async ({}) => {
+  // const { createPage } = actions;
   const promises = [];
 
-  const { data } = await graphql(`
-    {
-      allMdx(filter: { frontmatter: { publish: { eq: true } } }) {
-        edges {
-          node {
-            fields {
-              slug
-              type
-            }
-          }
-        }
-      }
-    }
-  `);
+  // const { data } = await graphql(`
+  //   {
+  //     allMdx(filter: { frontmatter: { publish: { eq: true } } }) {
+  //       edges {
+  //         node {
+  //           fields {
+  //             slug
+  //             type
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
-  data.allMdx.edges.forEach(({ node }) => {
-    const templatePath =
-      node.fields.type === 'project'
-        ? './src/templates/project.js'
-        : './src/templates/post.js';
+  // data.allMdx.edges.forEach(({ node }) => {
+  //   const templatePath =
+  //     node.fields.type === 'project'
+  //       ? './src/templates/project.js'
+  //       : './src/templates/post.js';
 
-    promises.push(
-      createPage({
-        path: node.fields.slug,
-        component: path.resolve(templatePath),
-        context: {
-          // Data passed to context is available in page queries as GraphQL variables.
-          slug: node.fields.slug
-        }
-      })
-    );
-  });
+  //   promises.push(
+  //     createPage({
+  //       path: node.fields.slug,
+  //       component: path.resolve(templatePath),
+  //       context: {
+  //         // Data passed to context is available in page queries as GraphQL variables.
+  //         slug: node.fields.slug
+  //       }
+  //     })
+  //   );
+  // });
 
   return Promise.all(promises);
 };
