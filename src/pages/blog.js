@@ -1,5 +1,4 @@
 import React from 'react';
-
 import BlogListing from './../components/BlogListing';
 import Layout from './../components/Layout';
 
