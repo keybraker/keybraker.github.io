@@ -1,5 +1,5 @@
 import React from "react";
-import { SocialMediaIconsReact } from "react-social-media-icons";
+import { ReactSocialMediaIcons } from "react-social-media-icons";
 import resumePdf from "../../static/ioannis_tsiakkas_resume.pdf";
 import Layout from "../components/Layout";
 
@@ -19,7 +19,7 @@ const AboutPageInner = (props) => {
   try {
     return (
       <div align="justify" width="100%">
-        <SocialMediaIconsReact
+        <ReactSocialMediaIcons
           borderColor="rgba(0,0,0,0)"
           roundness="10"
           icon="map"
@@ -28,7 +28,7 @@ const AboutPageInner = (props) => {
           url={addr}
           size={size}
         />{" "}
-        <SocialMediaIconsReact
+        <ReactSocialMediaIcons
           borderColor="rgba(0,0,0,0)"
           roundness="10"
           icon="mail"
@@ -37,7 +37,7 @@ const AboutPageInner = (props) => {
           url={mail}
           size={size}
         />{" "}
-        <SocialMediaIconsReact
+        <ReactSocialMediaIcons
           borderColor="rgba(0,0,0,0)"
           roundness="10"
           icon="github"
@@ -46,7 +46,7 @@ const AboutPageInner = (props) => {
           url={gthb}
           size={size}
         />{" "}
-        <SocialMediaIconsReact
+        <ReactSocialMediaIcons
           borderColor="rgba(0,0,0,0)"
           roundness="10"
           icon="twitter"
@@ -55,7 +55,7 @@ const AboutPageInner = (props) => {
           url={twtr}
           size={size}
         />{" "}
-        <SocialMediaIconsReact
+        <ReactSocialMediaIcons
           borderColor="rgba(0,0,0,0)"
           roundness="10"
           icon="linkedin"

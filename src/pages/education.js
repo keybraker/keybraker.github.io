@@ -10,7 +10,7 @@ const ShowcasesPageInner = (props) => {
         start: "Sep 2013",
         end: "Jan 2019",
         title: "Bachelor of Computer Science Degree",
-        info: "GPA: 3.0",
+        info: "GPA: 3.00 B",
         position:
           '<a href="https://www.csd.uoc.gr/CSD/index.jsp?lang=en" rel="noopener noreferrer" target="_blank">University of Crete</a>',
       },
