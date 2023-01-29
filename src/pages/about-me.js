@@ -1,5 +1,5 @@
 import React from "react";
-import { SocialMediaIconsReact } from "social-media-icons-react";
+import { SocialMediaIconsReact } from "react-social-media-icons";
 import resumePdf from "../../static/ioannis_tsiakkas_resume.pdf";
 import Layout from "../components/Layout";
 

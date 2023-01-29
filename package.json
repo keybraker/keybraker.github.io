@@ -43,7 +43,7 @@
     "react-helmet": "^6.1.0",
     "react-markdown": "^8.0.3",
     "react-medium-image-zoom": "^5.0.1",
-    "social-media-icons-react": "^1.1.10",
+    "react-social-media-icons": "^10.0.4",
     "styled-components": "^5.3.5",
     "styled-normalize": "^8.0.7",
     "three": "^0.143.0",
