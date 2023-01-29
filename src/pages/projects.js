@@ -1,5 +1,4 @@
 import React from 'react';
-import { graphql } from 'gatsby';
 
 import Layout from './../components/Layout';
 import ProjectListingSection from './../components/ProjectListingSection';
@@ -49,29 +48,3 @@ const ProjectsPage = props => {
 };
 
 export default ProjectsPage;
-
-export const query = graphql`
-  query {
-    allMdx(
-      filter: {
-        frontmatter: { publish: { eq: true } }
-        fields: { type: { eq: "project" } }
-      }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            title
-            date
-            lede
-          }
-          fields {
-            slug
-            projectType
-          }
-        }
-      }
-    }
-  }
-`;

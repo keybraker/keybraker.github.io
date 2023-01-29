@@ -1,8 +1,7 @@
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
-import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import Layout from './../components/Layout';
 // import TextPostBody from './../components/TextPostBody';
@@ -55,17 +54,3 @@ const PostTemplate = ({ data }) => {
 };
 
 export default PostTemplate;
-
-export const query = graphql`
-  query($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
-      slug
-      frontmatter {
-        title
-        date
-        excerpt
-      }
-      body
-    }
-  }
-`;

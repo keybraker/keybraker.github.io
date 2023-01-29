@@ -1,8 +1,7 @@
 import React from "react";
-import { graphql } from "gatsby";
-import Layout from "../components/Layout";
-import resumePdf from "../../static/ioannis_tsiakkas_resume.pdf";
 import { SocialMediaIconsReact } from "social-media-icons-react";
+import resumePdf from "../../static/ioannis_tsiakkas_resume.pdf";
+import Layout from "../components/Layout";
 
 const name = "Ioannis Tsiakkas";
 const date = "04 DEC 1995";
@@ -96,29 +95,3 @@ const AboutPage = (props) => {
 };
 
 export default AboutPage;
-
-export const query = graphql`
-  query {
-    allMdx(
-      filter: {
-        frontmatter: { publish: { eq: true } }
-        fields: { type: { eq: "project" } }
-      }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            title
-            date
-            lede
-          }
-          fields {
-            slug
-            projectType
-          }
-        }
-      }
-    }
-  }
-`;

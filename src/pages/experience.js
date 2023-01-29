@@ -1,5 +1,4 @@
 import React from "react";
-// import { graphql } from 'gatsby';
 
 import Layout from "../components/Layout";
 import ShowcaseListingSection from "../components/ShowcaseListingSection";
@@ -13,7 +12,7 @@ const ExperiencePageInner = (props) => {
         title:
           '<a href="https://fairlo.se/" rel="noopener noreferrer"target="_blank">Fairlo</a>',
         info: "Financial Services",
-        position: "Backend Developer (Typescipt, PostgreSQL)",
+        position: "Backend Developer (TypeScript, PostgreSQL)",
       },
       {
         start: "Jul 2021",
