@@ -45,7 +45,7 @@ const TitleLink = styled(Link)`
   border: none;
 
   &:hover {
-    color: #0000ff;
+    color: #525252;
   }
 `;
 
@@ -92,7 +92,7 @@ const Layout = ({ children }) => {
 
       <StyledHeader>
         <StyledTitle>
-          <TitleLink to="/">Ioannis Tsiakkas</TitleLink>
+          {/* <TitleLink to="/">Ioannis Tsiakkas</TitleLink> */}
         </StyledTitle>
 
         <Nav />

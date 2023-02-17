@@ -84,12 +84,12 @@ module.exports = {
         color: '#0000ff'
       }
     },
-    {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: {
-        trackingId: 'UA-70108869-1'
-      }
-    },
+    // {
+    //   resolve: 'gatsby-plugin-google-analytics',
+    //   options: {
+    //     trackingId: 'UA-70108869-1'
+    //   }
+    // },
     'gatsby-plugin-twitter',
     {
       resolve: `gatsby-plugin-mdx`,

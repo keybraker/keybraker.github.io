@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "gatsby";
-
 import styled from "styled-components";
 
 const activeClassName = "active";
 
 const StyledNav = styled.nav`
-  margin-bottom: 0.5em;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-direction: col;
+  font-size: 1.8rem;
 
-  @media (min-width: 520px) {
-    margin-bottom: 1em;
+  @media (min-width: 300px) {
+    flex-direction: row;
+    font-size: 2.2rem;
   }
 `;
 
@@ -27,24 +31,14 @@ const StyledList = styled.ul`
 
 const ListElement = styled.li`
   display: inline-block;
-  padding: 0.5em;
+  padding-left: 0.5em;
   text-align: center;
-  font-size: 1.8rem;
+  color: #000;
+  text-decoration: none;
+  border: none;
 
-  @media (min-width: 300px) {
-    font-size: 2.2rem;
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  @media (min-width: 350px) {
-    font-size: 2.2rem;
-  }
-
-  @media (min-width: 520px) {
-    padding: 0;
-    margin-right: 2rem;
-    font-size: 2.4rem;
+  &:hover {
+    color: #525252;
   }
 
   &:after {
@@ -93,9 +87,23 @@ const NavItem = styled(Link).attrs({
   }
 `;
 
+const TitleLink = styled(Link)`
+  // text-transform: lowercase;
+  color: #000;
+  text-decoration: none;
+  border: none;
+
+  &:hover {
+    color: #525252;
+  }
+`;
+
 const Nav = () => {
   return (
     <StyledNav>
+      <TitleLink to="/">
+        <b>Ioannis Tsiakkas</b>
+      </TitleLink>
       <StyledList>
         <ListElement>
           <NavItem to="/about-me/" activeClassName={activeClassName}>
@@ -112,16 +120,18 @@ const Nav = () => {
             experience
           </NavItem>
         </ListElement>
+        {/* 
         <ListElement>
           <NavItem to="/projects/" activeClassName={activeClassName}>
             projects
           </NavItem>
         </ListElement>
-        {/* <ListElement>
+        <ListElement>
           <NavItem to="/blog/" activeClassName={activeClassName}>
             blog
           </NavItem>
-        </ListElement> */}
+        </ListElement> 
+        */}
       </StyledList>
     </StyledNav>
   );

@@ -13,6 +13,7 @@ const StyledContainer = styled.div`
   border: 1px solid black;
   border-radius: 6px;
   padding: 10px;
+  color: black;
 
   @media (min-width: 520px) {
     // height: 400px;
@@ -41,7 +42,7 @@ const StyledReplyWrapper = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  margin-top: 18px;
+  margin-top: 28px;
 `;
 
 const StyledReplyButton = styled.a`
@@ -117,7 +118,7 @@ function getWindowDimensions() {
 const { height, width } = getWindowDimensions();
 
 const mail = "mailto:" + "iantsiakkas@gmail.com";
-const subject = "?subject=" + "Email%20Subject";
+const subject = "?subject=" + "Hey%20Ioannis";
 const body = "&body=" + "Email%20Body";
 
 const date = dayjs().format("MMM DD, YYYY, HH:mm A");
@@ -135,7 +136,9 @@ const Index = () => (
       {/* <HeadScene /> */}
       <StyleHeader>
         <StyleHeaderFlexCol>
-          <span>Ioannis Tsiakkas </span>
+          <span>
+            <b>Ioannis Tsiakkas</b>{" "}
+          </span>
           <span>to you</span>
         </StyleHeaderFlexCol>
         <StyleHeaderFlexRow>{date}</StyleHeaderFlexRow>
@@ -144,9 +147,8 @@ const Index = () => (
       <StyledSectionHeading>
         Hello,<br></br>
         <br></br>
-        I'm a Software Engineer with experience in building web application. I
+        I'm a Software Engineer with experience in building web applications. I
         have experience in both the backend infrustructure and the frontend.
-        <br></br>
         Currently working as a backend developer at{" "}
         <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">
           Fairlo
@@ -156,12 +158,12 @@ const Index = () => (
         Kindly,<br></br>
         Ioannis Tsiakkas<br></br>
       </StyledSectionHeading>
+      <StyledReplyWrapper>
+        <StyledReplyButton href={`${mail}${subject}`}>
+          <HiOutlineReply /> Reply
+        </StyledReplyButton>
+      </StyledReplyWrapper>
     </StyledContainer>
-    <StyledReplyWrapper>
-      <StyledReplyButton href={`${mail}${subject}${body}`}>
-        <HiOutlineReply /> Reply
-      </StyledReplyButton>
-    </StyledReplyWrapper>
   </Layout>
 );
 
