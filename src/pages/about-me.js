@@ -27,13 +27,6 @@ const StyleHeaderFlexRow = styled.div`
   text-decoration: none;
 `;
 
-const StyledHorizontalLine = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-color: black;
-  border: black;
-`;
-
 const AboutPageInner = (props) => {
   try {
     return (
@@ -85,12 +78,11 @@ const AboutPageInner = (props) => {
             size={size}
           />
         </div>
-        <StyledHorizontalLine></StyledHorizontalLine>
-        <b>
+        {/* <b>
           <a href={resumePdf} download="ioannis_tsiakkas_resume.pdf">
             Resume (pdf ~77KB) &#9660;
           </a>
-        </b>
+        </b> */}
       </StyleHeaderFlexRow>
     );
   } catch (e) {

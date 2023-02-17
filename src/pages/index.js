@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 // import loadable from '@loadable/component';
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
-
+import { GrDocumentPdf } from "@react-icons/all-files/gr/GrDocumentPdf";
+import resumePdf from "../../static/ioannis_tsiakkas_resume.pdf";
 import Layout from "./../components/Layout";
 import dayjs from "dayjs";
 // const HeadScene = loadable(() => import('./../components/HeadScene'));
+import { ReactSocialMediaIcons } from "react-social-media-icons";
 
 import Confetti from "react-confetti";
 
@@ -41,8 +43,30 @@ const StyledReplyWrapper = styled.div`
   font-size: 16px;
   display: flex;
   align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-top: 28px;
+  gap: 4px;
+`;
+
+const StyledAttachmentButton = styled.a`
+  font-family: "Archivo", sans-serif;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+  border: 1px solid #747775;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  margin-top: 4px;
+  color: black;
+
+  &:hover {
+    background-color: #e8e3e3;
+    color: black;
+  }
 `;
 
 const StyledReplyButton = styled.a`
@@ -50,8 +74,8 @@ const StyledReplyButton = styled.a`
   font-size: 18px;
   border: none;
   background: transparent;
-  border: 1px solid black;
-  border-radius: 6px;
+  border: 1px solid #747775;
+  border-radius: 18px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -94,8 +118,17 @@ const StyleHeaderFlexRow = styled.div`
   font-size: 16px;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
+  margin-bottom: 0;
+  color: #9a9797;
+  text-decoration: none;
+`;
+
+const StyleGreyText = styled.div`
+  font-family: "Archivo", sans-serif;
+  // font-style: italic;
+  font-size: 16px;
   margin-bottom: 0;
   color: #9a9797;
   text-decoration: none;
@@ -120,7 +153,6 @@ const { height, width } = getWindowDimensions();
 const mail = "mailto:" + "iantsiakkas@gmail.com";
 const subject = "?subject=" + "Hey%20Ioannis";
 const body = "&body=" + "Email%20Body";
-
 const date = dayjs().format("MMM DD, YYYY, HH:mm A");
 
 const Index = () => (
@@ -141,14 +173,17 @@ const Index = () => (
           </span>
           <span>to you</span>
         </StyleHeaderFlexCol>
-        <StyleHeaderFlexRow>{date}</StyleHeaderFlexRow>
+        <StyleHeaderFlexCol>
+          <StyleGreyText>{date}</StyleGreyText>
+          <span>one attachment</span>
+        </StyleHeaderFlexCol>
       </StyleHeader>
       <StyledHorizontalLine></StyledHorizontalLine>
       <StyledSectionHeading>
         Hello,<br></br>
         <br></br>
         I'm a Software Engineer with experience in building web applications. I
-        have experience in both the backend infrustructure and the frontend.
+        have experience in both the backend infrastructure and the frontend.
         Currently working as a backend developer at{" "}
         <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">
           Fairlo
@@ -162,6 +197,12 @@ const Index = () => (
         <StyledReplyButton href={`${mail}${subject}`}>
           <HiOutlineReply /> Reply
         </StyledReplyButton>
+        <StyledAttachmentButton
+          href={resumePdf}
+          download="ioannis_tsiakkas_resume.pdf"
+        >
+          <GrDocumentPdf /> Resume
+        </StyledAttachmentButton>
       </StyledReplyWrapper>
     </StyledContainer>
   </Layout>
