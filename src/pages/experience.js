@@ -12,7 +12,8 @@ const ExperiencePageInner = (props) => {
         title:
           '<a href="https://fairlo.se/" rel="noopener noreferrer"target="_blank">Fairlo</a>',
         info: "Financial Services",
-        position: "Backend Developer (TypeScript, PostgreSQL)",
+        position: "Backend",
+        technologies: ["TypeScript", "PostgreSQL"],
       },
       {
         start: "Jul 2021",
@@ -28,7 +29,8 @@ const ExperiencePageInner = (props) => {
         title:
           '<a href="https://www.cyberlogic.gr/en/home" rel="noopener noreferrer"target="_blank">Cyberlogic</a>',
         info: "Travel Technologies",
-        position: "Frontend Developer (Angular)",
+        position: "Frontend",
+        technologies: ["Angular"],
       },
       {
         start: "May 2019",
@@ -36,7 +38,8 @@ const ExperiencePageInner = (props) => {
         title:
           '<a href="https://www.medwork.gr/index.php" rel="noopener noreferrer"target="_blank">Medwork</a>',
         info: "Contract Research Organization",
-        position: "Full Stack Developer (React, Java, MySQL)",
+        position: "Full Stack",
+        technologies: ["React", "Java", "MySQL"],
       },
       {
         start: "Jun 2017",
@@ -44,9 +47,11 @@ const ExperiencePageInner = (props) => {
         title:
           '<a href="https://www.ics.forth.gr" rel="noopener noreferrer"target="_blank">FORTH</a>',
         info: "Telecommunications Research Lab",
-        position:
-          'Undergraduate Researcher (<a href="https://www.ics.forth.gr/discs" rel="noopener noreferrer"target="_blank">DISCS</a>' +
-          ', <a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer"target="_blank">TNL</a>)',
+        position: "Undergraduate Researcher",
+        technologies: [
+          '<a href="https://www.ics.forth.gr/discs" rel="noopener noreferrer"target="_blank">DISCS</a>',
+          '<a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer"target="_blank">TNL</a>',
+        ],
       },
     ];
 

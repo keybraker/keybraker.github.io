@@ -153,7 +153,7 @@ const { height, width } = getWindowDimensions();
 const mail = "mailto:" + "iantsiakkas@gmail.com";
 const subject = "?subject=" + "Hey%20Ioannis";
 const body = "&body=" + "Email%20Body";
-const date = dayjs().format("MMM DD, YYYY, HH:mm A");
+const date = dayjs().format("MMM DD, YYYY, HH:mm");
 
 const Index = () => (
   <Layout>
@@ -183,12 +183,21 @@ const Index = () => (
         Hello,<br></br>
         <br></br>
         I'm a Software Engineer with experience in building web applications. I
-        have experience in both the backend infrastructure and the frontend.
-        Currently working as a backend developer at{" "}
-        <a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">
+        mainly focus on the backend client and infrastructure but have also
+        worked in the frontend. Currently working as a backend developer at{" "}
+        <a href="https://fairlo.se/" target="_blank">
           Fairlo
         </a>
         .<br></br>
+        <br></br>
+        You can take a look at some of my work on my Github page by clicking{" "}
+        <a href="https://github.com/keybraker" target="_blank">
+          here
+        </a>
+        .<br></br>
+        <br></br>
+        If you have any ideas you wish to share, feel free to reply.
+        <br></br>
         <br></br>
         Kindly,<br></br>
         Ioannis Tsiakkas<br></br>

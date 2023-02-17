@@ -1,11 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import { Link } from 'gatsby';
-
-// const DateSpan = styled.span`
-//   color: #999;
-//   margin-left: 0.5em;
-// `;
 
 const StyledShowcaseListing = styled.ul`
   list-style: none;
@@ -26,9 +20,18 @@ const StyledShowcaseItem = styled.li`
   // justify-content: space-between;
 `;
 
-const StyledLinkWrap = styled.span`
+const StyledLinkNoWrap = styled.span`
   display: flex;
   flex-wrap: nowrap;
+  align-items: start;
+  justify-content: space-between;
+`;
+
+const StyledCol = styled.span`
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: end;
+  flex-direction: column;
   justify-content: space-between;
 `;
 
@@ -42,6 +45,24 @@ const StyledLedeSpan = styled.span`
   // flex-grow: 1;
   // display: block;
   font-style: italic;
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: end;
+  justify-content: space-between;
+`;
+
+const StyledLedeSpan2 = styled.span`
+  // display: inline-block;
+  // flex-grow: 1;
+  // display: block;
+  font-style: italic;
+  font-size: 1.4rem;
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: end;
+  justify-content: space-between;
 `;
 
 const StyledSectionHeading = styled.span`
@@ -57,31 +78,37 @@ const ShowcaseListing = ({ showcases }) => {
   const showcaseLinks = showcases.map((showcase, i) => {
     return (
       <StyledShowcaseItem key={i}>
-        <StyledLinkWrap>
-          <StyledSectionHeading>
-            <span
-              className="content"
-              dangerouslySetInnerHTML={{ __html: showcase.title }}
-            ></span>
-          </StyledSectionHeading>
+        <StyledLinkNoWrap>
+          <StyledSectionHeading
+            className="content"
+            dangerouslySetInnerHTML={{ __html: showcase.title }}
+          ></StyledSectionHeading>
           <StyledLedeSpan>
             {showcase.start} - {showcase.end}
           </StyledLedeSpan>
-        </StyledLinkWrap>
-        <StyledLinkWrap>
-          <StyledLedeSpan>
-            <span
-              className="content"
-              dangerouslySetInnerHTML={{ __html: showcase.info }}
-            ></span>
-          </StyledLedeSpan>
-          <StyledLedeSpan>
-            <span
+        </StyledLinkNoWrap>
+        <StyledLinkNoWrap>
+          <StyledLedeSpan
+            className="content"
+            dangerouslySetInnerHTML={{ __html: showcase.info }}
+          ></StyledLedeSpan>
+          <StyledCol>
+            <StyledLedeSpan
               className="content"
               dangerouslySetInnerHTML={{ __html: showcase.position }}
-            ></span>
-          </StyledLedeSpan>
-        </StyledLinkWrap>
+            ></StyledLedeSpan>
+            {showcase.technologies ? (
+              <StyledLedeSpan2
+                className="content"
+                dangerouslySetInnerHTML={{
+                  __html: `(${showcase.technologies.join(", ")})`,
+                }}
+              ></StyledLedeSpan2>
+            ) : (
+              ""
+            )}
+          </StyledCol>
+        </StyledLinkNoWrap>
       </StyledShowcaseItem>
     );
   });

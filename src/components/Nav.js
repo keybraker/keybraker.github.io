@@ -9,10 +9,11 @@ const StyledNav = styled.nav`
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  flex-direction: col;
+  flex-direction: column;
   font-size: 1.8rem;
 
-  @media (min-width: 300px) {
+  @media (min-width: 520px) {
+    align-items: center;
     flex-direction: row;
     font-size: 2.2rem;
   }
@@ -34,12 +35,12 @@ const ListElement = styled.li`
   display: inline-block;
   padding-left: 0.5em;
   text-align: center;
-  color: #000;
   text-decoration: none;
   border: none;
+  color: #000000;
 
   &:hover {
-    color: #525252;
+    color: #9a9797;
   }
 
   &:after {
@@ -73,8 +74,8 @@ const StyleHeaderFlexCol = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-direction: col;
-  margin-bottom: 0;
+  flex-direction: column;
+  margin-left: 0;
   color: #9a9797;
   text-decoration: none;
 `;
@@ -92,7 +93,6 @@ const NavItem = styled(Link).attrs({
 
   &:before {
     content: "/";
-    display: none;
   }
 
   &:before {
@@ -119,9 +119,14 @@ const TitleLink = styled(Link)`
   color: #000;
   text-decoration: none;
   border: none;
+  font-size: 1.8rem;
+
+  @media (min-width: 520px) {
+    font-size: 2.2rem;
+  }
 
   &:hover {
-    color: #525252;
+    color: #9a9797;
   }
 `;
 
@@ -139,7 +144,7 @@ const size = "22";
 
 function AboutPageInner() {
   return (
-    <StyleHeaderFlexRow align="justify" width="100%">
+    <StyleHeaderFlexRow>
       <div>
         <ReactSocialMediaIcons
           borderColor="rgba(0,0,0,0)"
