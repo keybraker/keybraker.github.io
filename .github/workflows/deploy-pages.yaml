@@ -15,10 +15,8 @@ jobs:
 
       - name: Install and Build
         run: |
-          npm ci --force
+          npm ci
           npm run build
-          ls
-          echo $PWD
           cp -r public ~/public
 
       - name: Deploy
