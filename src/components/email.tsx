@@ -31,37 +31,43 @@ export default function Email() {
       <div className="border border-dashed border-black my-4"></div>
 
       <div>
-        Hello,<br></br>
-        <br></br>
-        I'm a Software Engineer with experience in building web applications. I
-        mainly focus on the backend client and infrastructure but have also
-        worked in the frontend. Currently working as a backend developer at{" "}
-        <a
-          href="https://fairlo.se/"
-          target="_blank"
-          rel="noreferrer"
-          className="underline"
-        >
-          Fairlo
-        </a>
-        .<br></br>
-        <br></br>
-        You can take a look at some of my work on my Github page by clicking{" "}
-        <a
-          href="https://github.com/keybraker"
-          target="_blank"
-          rel="noreferrer"
-          className="underline"
-        >
-          here
-        </a>
-        .<br></br>
-        <br></br>
-        If you have any ideas you wish to share, feel free to reply.
-        <br></br>
-        <br></br>
-        Kindly,<br></br>
-        Ioannis Tsiakkas<br></br>
+        <p>Hello,</p>
+        <br />
+        <p>
+          I'm a Software Engineer with experience in building web applications.
+          I mainly focus on the backend client and infrastructure but have also
+          worked in the frontend. Currently working as a backend developer at{" "}
+          <a
+            href="https://fairlo.se/"
+            target="_blank"
+            rel="noreferrer"
+            className="underline"
+          >
+            Fairlo
+          </a>
+          .
+        </p>
+        <br />
+        <p>
+          You can take a look at some of my work on my Github page by clicking{" "}
+          <a
+            href="https://github.com/keybraker"
+            target="_blank"
+            rel="noreferrer"
+            className="underline"
+          >
+            here
+          </a>
+          .
+        </p>
+        <br />
+        <p>If you have any ideas you wish to share, feel free to reply.</p>
+        <br />
+        <p>
+          Kindly,
+          <br />
+          Ioannis Tsiakkas
+        </p>
       </div>
       <div className="flex flex-end align-start justify-between mt-7 gap-1">
         <a
