@@ -20,10 +20,10 @@ const educations: Showcase[] = [
   },
 ];
 
-export const EducationPage = (props: any) => {
+export default function EducationPage(props: any) {
   return (
     <div className="bg-white border-black border rounded-[10px] p-2.5">
       <ShowcaseListings showcases={educations} />
     </div>
   );
-};
+}

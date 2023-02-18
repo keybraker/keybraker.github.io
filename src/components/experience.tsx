@@ -57,10 +57,10 @@ const experiences: Showcase[] = [
   },
 ];
 
-export const ExperiencePage = (props: any) => {
+export default function ExperiencePage(props: any) {
   return (
     <div className="bg-white border-black border rounded-[10px] p-2.5">
       <ShowcaseListings showcases={experiences} />
     </div>
   );
-};
+}
