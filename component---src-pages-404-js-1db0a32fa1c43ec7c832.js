@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkitsiakkas_com=self.webpackChunkitsiakkas_com||[]).push([[883],{429:function(a,s,e){e.r(s);var k=e(7294),t=e(7896);s.default=()=>((0,k.useEffect)((()=>{(0,t.navigate)("/")})),null)}}]);
-//# sourceMappingURL=component---src-pages-404-js-1db0a32fa1c43ec7c832.js.map
