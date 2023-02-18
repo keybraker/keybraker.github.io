@@ -34,7 +34,7 @@ export default function Email() {
         <p>Hello,</p>
         <br />
         <p>
-          I'm a Software Engineer with experience in building web applications.
+          I&apos;m a Software Engineer with experience in building web applications.
           I mainly focus on the backend client and infrastructure but have also
           worked in the frontend. Currently working as a backend developer at{" "}
           <a
