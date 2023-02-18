@@ -97,7 +97,7 @@ const ShowcaseListing = ({ showcases }) => {
               className="content"
               dangerouslySetInnerHTML={{ __html: showcase.position }}
             ></StyledLedeSpan>
-            {showcase.technologies ? (
+            {showcase?.technologies ? (
               <StyledLedeSpan2
                 className="content"
                 dangerouslySetInnerHTML={{
@@ -105,7 +105,7 @@ const ShowcaseListing = ({ showcases }) => {
                 }}
               ></StyledLedeSpan2>
             ) : (
-              ""
+              <span></span>
             )}
           </StyledCol>
         </StyledLinkNoWrap>
