@@ -36,7 +36,12 @@ export default function Email() {
         I'm a Software Engineer with experience in building web applications. I
         mainly focus on the backend client and infrastructure but have also
         worked in the frontend. Currently working as a backend developer at{" "}
-        <a href="https://fairlo.se/" target="_blank" className="underline">
+        <a
+          href="https://fairlo.se/"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
           Fairlo
         </a>
         .<br></br>
@@ -45,6 +50,7 @@ export default function Email() {
         <a
           href="https://github.com/keybraker"
           target="_blank"
+          rel="noreferrer"
           className="underline"
         >
           here
