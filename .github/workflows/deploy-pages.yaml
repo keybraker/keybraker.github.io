@@ -13,16 +13,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+
       - name: Install and Build
         run: |
           npm ci
           npm run build
-          cp -r .next ~/.next
+          npm run export
+          touch out/.nojekyll
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@4.4.0
         with:
           branch: gh-pages
-          folder: ~/.next
+          folder: out
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
