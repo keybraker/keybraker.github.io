@@ -10,6 +10,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
 
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -27,7 +28,7 @@ jobs:
           touch out/.nojekyll
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: out
