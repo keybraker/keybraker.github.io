@@ -1,5 +1,6 @@
 import { GrDocumentPdf } from "@react-icons/all-files/gr/GrDocumentPdf";
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
+import { HiDocumentDownload } from "@react-icons/all-files/hi/HiDocumentDownload";
 import dayjs from "dayjs";
 
 const mail = "iantsiakkas@gmail.com";
@@ -80,12 +81,18 @@ export default function Email() {
           <span>Reply</span>
         </a>
         <a
-          className="black mt-1 flex items-center justify-between gap-2 rounded-md border border-black bg-white py-2 px-3 shadow-md hover:bg-gray-200"
+          className="black group mt-1 flex items-center justify-between gap-2 rounded-md border border-black bg-white p-1 py-2 px-3  shadow-md hover:bg-gray-200"
           href="/static/ioannis_tsiakkas_resume.pdf"
           download="ioannis_tsiakkas_resume.pdf"
         >
-          <GrDocumentPdf />
-          <span>Resume</span>
+          <span className="contents group-hover:hidden">
+            <GrDocumentPdf />
+            <span>Resume</span>
+          </span>
+          <span className="hidden group-hover:contents">
+            <HiDocumentDownload />
+            <span>72.11 Kb</span>
+          </span>
         </a>
       </div>
     </div>

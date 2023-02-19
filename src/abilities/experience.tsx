@@ -28,7 +28,7 @@ const experiences: ShowcaseType[] = [
     position: "Frontend",
     technologies: ["Angular"],
     description:
-      "I mainly worked on delivering Traveling interface solutions to customers.",
+      "I mainly worked on delivering Traveling interface solutions to customers and maintaining while also expanding the core product.",
   },
   {
     start: "May 2019",
@@ -53,7 +53,7 @@ const experiences: ShowcaseType[] = [
       '<a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer" target="_blank">TNL</a>',
     ],
     description:
-      "As an undergraduate researcher I mainly focused on creating new faster ways to train AI models with the use of GPGPUs.",
+      "As an undergraduate researcher I mainly focused on creating faster ways to train AI models using CUDA to leverage the power of GPGPUs.",
   },
 ];
 
