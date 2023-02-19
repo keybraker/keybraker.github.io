@@ -1,7 +1,7 @@
 import ShowcaseListings from "@/components/ShowcaseListings";
-import { Showcase } from "@/enums/Showcase";
+import { Showcase } from "../enums/Showcase";
 
-const educations: Showcase[] = [
+const education: Showcase[] = [
   {
     start: "Sep 2013",
     end: "Jan 2019",
@@ -23,7 +23,7 @@ const educations: Showcase[] = [
 export default function EducationPage(props: any) {
   return (
     <div className="bg-white border-black border rounded-[4px] p-2.5">
-      <ShowcaseListings showcases={educations} />
+      <ShowcaseListings showcases={education} />
     </div>
   );
 }

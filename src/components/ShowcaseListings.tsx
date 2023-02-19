@@ -1,5 +1,5 @@
 import ShowcaseListing from "@/components/ShowcaseListing";
-import { Showcase } from "@/enums/Showcase";
+import { Showcase } from "../enums/Showcase";
 
 const ShowcaseListings = ({ showcases }: { showcases: Showcase[] }) => {
   return (

@@ -1,4 +1,4 @@
-import { Showcase } from "@/enums/Showcase";
+import { Showcase } from "../enums/Showcase";
 
 const ShowcaseListing = ({
   showcase,
