@@ -35,7 +35,7 @@ const skills: SkillType[] = [
   },
   {
     category: "Operating Systems",
-    qualifications: ["Linux", "MacOS", "Windows"],
+    qualifications: ["MacOS", "Linux", "Windows"],
   },
 ];
 

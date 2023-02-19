@@ -83,7 +83,7 @@ export default function Email() {
         </a>
         <a
           className="shadow-md hover:bg-gray-200 bg-white border border-black rounded-md flex justify-between items-center gap-2 py-2 px-3 black mt-1"
-          href="/ioannis_tsiakkas_resume.pdf"
+          href="/static/ioannis_tsiakkas_resume.pdf"
           download="ioannis_tsiakkas_resume.pdf"
         >
           <GrDocumentPdf />
