@@ -12,9 +12,31 @@ export default function Home() {
     <div className="w-full h-full">
       <Head>
         <title>Ioannis Tsiakkas</title>
-        <meta name="description" content="By Ioannis with NextJS" />
+        <meta name="title" content="Ioannis Tsiakkas" />
+        <meta
+          name="description"
+          content="Personal webpage for Ioannis Tsiakkas"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://itsiakkas.com/" />
+        <meta property="og:title" content="Ioannis Tsiakkas" />
+        <meta
+          property="og:description"
+          content="Personal webpage for Ioannis Tsiakkas"
+        />
+        <meta property="og:image" content="/static/profile.png" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://itsiakkas.com/" />
+        <meta property="twitter:title" content="Ioannis Tsiakkas" />
+        <meta
+          property="twitter:description"
+          content="Personal webpage for Ioannis Tsiakkas"
+        />
+        <meta property="twitter:image" content="/static/profile.png" />
       </Head>
 
       <main className="bg-gray-100 flex flex-col place-self-center justify-center gap-4 py-4 px-4 xs:py-6 md:px-24 lg:px-48 xl:px-[440px] 2xl:px-[512px]">
