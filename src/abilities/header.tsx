@@ -12,7 +12,7 @@ const lnkd = "https://www.linkedin.com/in/" + "ioannis-t-3365151a2";
 
 function AboutPageInner() {
   return (
-    <div className="flex flex-row flex-start justify-around gap-4 align-baseline">
+    <div className="flex flex-row flex-start justify-around items-center gap-4 align-baseline">
       <a rel="noopener noreferrer" target="_blank" href={addr}>
         <MdLocationOn size={"1.3rem"} />
       </a>
@@ -35,8 +35,8 @@ function AboutPageInner() {
 export default function Header() {
   return (
     <>
-      <div className="flex flex-col xs:flex-row justify-between items-center xs:items-stretch">
-        <span className="flex flex-col tn:flex-row items-center text-2xl font-helvetica font-semibold antialiased">
+      <div className="flex flex-col xs:flex-row gap-2 justify-between items-center xs:items-stretch">
+        <span className="flex flex-col gap-0.5 xs:gap-2 tn:flex-row items-center text-2xl font-helvetica font-semibold antialiased">
           <span>Ioannis</span>
           <span>Tsiakkas</span>
         </span>
