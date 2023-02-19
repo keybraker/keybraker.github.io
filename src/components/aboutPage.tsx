@@ -32,7 +32,7 @@ function AboutPageInner() {
   );
 }
 
-export default function LandingName() {
+export default function AboutPage() {
   return (
     <>
       <div className="flex flex-col xs:flex-row justify-between items-center xs:items-stretch">

@@ -10,7 +10,7 @@ export default function ShowcaseListings({
     <>
       {showcases.map((showcase, i) => {
         return (
-          <div key={i} className="Noto Serif Display, serif;">
+          <div key={i}>
             <ShowcaseListing
               showcase={showcase}
               last={i + 1 === showcases.length}

@@ -3,7 +3,7 @@ import Email from "@/abilities/email";
 import ExperiencePage from "@/abilities/experience";
 import SkillPage from "@/abilities/skills";
 import CategoryTitle from "@/components/categoryTitle";
-import LandingName from "@/components/landingName";
+import AboutPage from "@/components/aboutPage";
 import Head from "next/head";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
 
       <main className="bg-gray-100 flex flex-col place-self-center justify-center gap-4 py-4 px-4 xs:py-6 md:px-24 lg:px-48 xl:px-[440px] 2xl:px-[512px]">
-        <LandingName></LandingName>
+        <AboutPage></AboutPage>
         <Email />
         <CategoryTitle title={"Professional Experience"}></CategoryTitle>
         <ExperiencePage />
