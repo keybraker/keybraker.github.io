@@ -1,6 +1,6 @@
 import { ShowcaseType } from "@/types/showcase";
 
-export default function ShowcaseListing({
+export function ShowcaseListing({
   showcase,
   last,
 }: {
@@ -12,7 +12,7 @@ export default function ShowcaseListing({
       <div className="grid grid-cols-2">
         <div className="flex flex-col no-wrap justify-start align-top text-start">
           <div
-            className="content"
+            className="content font-semibold"
             dangerouslySetInnerHTML={{ __html: showcase.title }}
           ></div>
           <div
@@ -54,6 +54,23 @@ export default function ShowcaseListing({
         ""
       )}
       {!last ? <div className="border-[0.1px] border-gray-200 my-4"></div> : ""}
+    </>
+  );
+}
+
+export function ShowcaseListings({ showcases }: { showcases: ShowcaseType[] }) {
+  return (
+    <>
+      {showcases.map((showcase, i) => {
+        return (
+          <div key={i}>
+            <ShowcaseListing
+              showcase={showcase}
+              last={i + 1 === showcases.length}
+            />
+          </div>
+        );
+      })}
     </>
   );
 }

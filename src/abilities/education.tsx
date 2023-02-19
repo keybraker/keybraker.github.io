@@ -1,4 +1,4 @@
-import ShowcaseListings from "@/components/showcaseListings";
+import { ShowcaseListings } from "@/components/showcaseListing";
 import { ShowcaseType } from "@/types/showcase";
 
 const education: ShowcaseType[] = [
