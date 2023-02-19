@@ -13,19 +13,19 @@ const lnkd = "https://www.linkedin.com/in/" + "ioannis-t-3365151a2";
 function AboutPageInner() {
   return (
     <div className="flex flex-row flex-start justify-around gap-4 align-baseline">
-      <a href={addr}>
+      <a rel="noopener noreferrer" target="_blank" href={addr}>
         <MdLocationOn size={"1.3rem"} />
       </a>
-      <a href={mail}>
+      <a rel="noopener noreferrer" target="_blank" href={mail}>
         <MdEmail size={"1.3rem"} />
       </a>
-      <a href={gthb}>
+      <a rel="noopener noreferrer" target="_blank" href={gthb}>
         <FaGithub size={"1.3rem"} />
       </a>
-      <a href={lnkd}>
+      <a rel="noopener noreferrer" target="_blank" href={lnkd}>
         <FaLinkedin size={"1.3rem"} />
       </a>
-      <a href={twtr}>
+      <a rel="noopener noreferrer" target="_blank" href={twtr}>
         <FaTwitter size={"1.3rem"} />
       </a>
     </div>

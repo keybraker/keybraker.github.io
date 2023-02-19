@@ -6,7 +6,7 @@ const experiences: ShowcaseType[] = [
     start: "Feb 2022",
     end: "Present",
     title:
-      '<a href="https://fairlo.se/" rel="noopener noreferrer"target="_blank">Fairlo</a>',
+      '<a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">Fairlo</a>',
     info: "Financial Services",
     position: "Backend",
     technologies: ["TypeScript", "PostgreSQL"],
@@ -15,7 +15,7 @@ const experiences: ShowcaseType[] = [
     start: "Jul 2021",
     end: "Jan 2022",
     title:
-      '<a href="http://www.army.gov.cy/" rel="noopener noreferrer"target="_blank">Cypriot Military</a>',
+      '<a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank">Cypriot Military</a>',
     info: "Ordnance Corps",
     position: "Obligatory military service",
   },
@@ -23,7 +23,7 @@ const experiences: ShowcaseType[] = [
     start: "Mar 2020",
     end: "Jun 2021",
     title:
-      '<a href="https://www.cyberlogic.gr/en/home" rel="noopener noreferrer"target="_blank">Cyberlogic</a>',
+      '<a href="https://www.cyberlogic.gr/en/home" rel="noopener noreferrer" target="_blank">Cyberlogic</a>',
     info: "Travel Technologies",
     position: "Frontend",
     technologies: ["Angular"],
@@ -34,7 +34,7 @@ const experiences: ShowcaseType[] = [
     start: "May 2019",
     end: "Mar 2020",
     title:
-      '<a href="https://www.medwork.gr/index.php" rel="noopener noreferrer"target="_blank">Medwork</a>',
+      '<a href="https://www.medwork.gr/index.php" rel="noopener noreferrer" target="_blank">Medwork</a>',
     info: "Contract Research Organization",
     position: "Full Stack",
     technologies: ["React", "Java", "MySQL"],
@@ -45,12 +45,12 @@ const experiences: ShowcaseType[] = [
     start: "Jun 2017",
     end: "Jan 2019",
     title:
-      '<a href="https://www.ics.forth.gr" rel="noopener noreferrer"target="_blank">FORTH</a>',
+      '<a href="https://www.ics.forth.gr" rel="noopener noreferrer" target="_blank">FORTH</a>',
     info: "Telecommunications Research Lab",
     position: "Undergraduate Researcher",
     technologies: [
-      '<a href="https://www.ics.forth.gr/discs" rel="noopener noreferrer"target="_blank">DISCS</a>',
-      '<a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer"target="_blank">TNL</a>',
+      '<a href="https://www.ics.forth.gr/discs" rel="noopener noreferrer" target="_blank">DISCS</a>',
+      '<a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer" target="_blank">TNL</a>',
     ],
     description:
       "As an undergraduate researcher I mainly focused on creating new faster ways to train AI models with the use of GPGPUs.",

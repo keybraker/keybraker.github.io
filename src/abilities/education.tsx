@@ -15,7 +15,7 @@ const education: ShowcaseType[] = [
     end: "Jan 2019",
     title: "<i>“A versatile machine learning API for GPGPUs”</i>",
     position:
-      '<a href="https://www.ics.forth.gr/discs/r" rel="noopener noreferrer"target="_blank">DSC</a> / <a href="https://www.ics.forth.gr" rel="noopener noreferrer"target="_blank">FORTH</a>',
+      '<a href="https://www.ics.forth.gr/discs/r" rel="noopener noreferrer" target="_blank">DSC</a> / <a href="https://www.ics.forth.gr" rel="noopener noreferrer" target="_blank">FORTH</a>',
     info: "Bachelor's Thesis",
   },
 ];

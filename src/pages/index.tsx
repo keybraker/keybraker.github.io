@@ -5,6 +5,7 @@ import SkillPage from "@/abilities/skills";
 import CategoryTitle from "@/components/categoryTitle";
 import Header from "@/abilities/header";
 import Head from "next/head";
+import Footer from "@/abilities/footer";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         <SkillPage />
         <CategoryTitle title={"Education"}></CategoryTitle>
         <EducationPage />
+        <Footer />
       </main>
     </div>
   );
