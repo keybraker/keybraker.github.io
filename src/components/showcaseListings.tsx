@@ -1,6 +1,6 @@
 import { ShowcaseType } from "@/types/showcase";
 
-export function ShowcaseListing({
+function ShowcaseListing({
   showcase,
   last,
 }: {

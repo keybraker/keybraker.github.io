@@ -1,6 +1,6 @@
 import { SkillType } from "@/types/skill";
 
-export function SkillListing({
+function SkillListing({
   skill,
   last,
 }: {
