@@ -1,8 +1,6 @@
 import { GrDocumentPdf } from "@react-icons/all-files/gr/GrDocumentPdf";
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
 import dayjs from "dayjs";
-import Image from "next/image";
-import signature from "@static/signature.png";
 
 const mail = "iantsiakkas@gmail.com";
 const mailto = "mailto:" + mail;
@@ -25,7 +23,7 @@ export default function Email() {
           <span>to: you</span>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-gray-400">{date}</span>
+          <time className="text-gray-400">{date}</time>
           <span className="italic">(1) one attachment</span>
         </div>
       </div>
