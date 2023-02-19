@@ -1,5 +1,5 @@
-import ShowcaseListing from "@/components/ShowcaseListing";
 import { ShowcaseType } from "@/types/showcase";
+import ShowcaseListing from "./showcaseListing";
 
 const ShowcaseListings = ({ showcases }: { showcases: ShowcaseType[] }) => {
   return (

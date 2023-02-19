@@ -1,4 +1,4 @@
-import SkillListing from "@/components/SkillListing";
+import SkillListing from "@/components/skillListing";
 import { SkillType } from "@/types/skill";
 
 const SkillListings = ({ skills }: { skills: SkillType[] }) => {

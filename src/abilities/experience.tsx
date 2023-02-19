@@ -1,4 +1,4 @@
-import ShowcaseListings from "@/components/ShowcaseListings";
+import ShowcaseListings from "@/components/showcaseListings";
 import { ShowcaseType } from "@/types/showcase";
 
 const experiences: ShowcaseType[] = [

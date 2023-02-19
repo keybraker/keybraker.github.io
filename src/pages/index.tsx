@@ -2,8 +2,8 @@ import EducationPage from "@/abilities/education";
 import Email from "@/abilities/email";
 import ExperiencePage from "@/abilities/experience";
 import SkillPage from "@/abilities/skills";
-import CategoryTitle from "@/components/CategoryTitle";
-import LandingName from "@/components/LandingName";
+import CategoryTitle from "@/components/categoryTitle";
+import LandingName from "@/components/landingName";
 import Head from "next/head";
 
 export default function Home() {
