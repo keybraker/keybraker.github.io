@@ -39,7 +39,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "public",
-    "./src/*",
+    "src",
     "**/*.ts",
     "**/*.tsx"
   ],
