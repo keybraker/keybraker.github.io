@@ -1,4 +1,4 @@
-import { SkillType } from "../types/skill";
+import { SkillType } from "@/types/skill";
 
 export function SkillListing({
   skill,

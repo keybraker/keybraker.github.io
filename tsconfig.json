@@ -38,12 +38,11 @@
     "next.config.js",
     "next-env.d.ts",
     "public",
-    "src",
+    "./src/*",
     "**/*.ts",
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
     ".vscode"
   ],
 }
