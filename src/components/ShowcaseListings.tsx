@@ -1,7 +1,11 @@
 import { ShowcaseType } from "@/types/showcase";
 import ShowcaseListing from "./showcaseListing";
 
-const ShowcaseListings = ({ showcases }: { showcases: ShowcaseType[] }) => {
+export default function ShowcaseListings({
+  showcases,
+}: {
+  showcases: ShowcaseType[];
+}) {
   return (
     <>
       {showcases.map((showcase, i) => {
@@ -16,6 +20,4 @@ const ShowcaseListings = ({ showcases }: { showcases: ShowcaseType[] }) => {
       })}
     </>
   );
-};
-
-export default ShowcaseListings;
+}

@@ -1,12 +1,12 @@
 import { ShowcaseType } from "@/types/showcase";
 
-const ShowcaseListing = ({
+export default function ShowcaseListing({
   showcase,
   last,
 }: {
   showcase: ShowcaseType;
   last: boolean;
-}) => {
+}) {
   return (
     <>
       <div className="grid grid-cols-2">
@@ -56,6 +56,4 @@ const ShowcaseListing = ({
       {!last ? <div className="border-[0.1px] border-gray-200 my-4"></div> : ""}
     </>
   );
-};
-
-export default ShowcaseListing;
+}

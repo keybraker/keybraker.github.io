@@ -1,6 +1,12 @@
 import { SkillType } from "@/types/skill";
 
-const SkillListing = ({ skill, last }: { skill: SkillType; last: boolean }) => {
+export default function SkillListing({
+  skill,
+  last,
+}: {
+  skill: SkillType;
+  last: boolean;
+}) {
   return (
     <>
       <div className="flex flex-row no-wrap justify-between align-top text-start">
@@ -22,6 +28,4 @@ const SkillListing = ({ skill, last }: { skill: SkillType; last: boolean }) => {
       {!last ? <div className="border-[0.1px] border-gray-200 my-4"></div> : ""}
     </>
   );
-};
-
-export default SkillListing;
+}

@@ -1,7 +1,7 @@
 import SkillListing from "@/components/skillListing";
 import { SkillType } from "@/types/skill";
 
-const SkillListings = ({ skills }: { skills: SkillType[] }) => {
+export default function SkillListings({ skills }: { skills: SkillType[] }) {
   return (
     <>
       {skills.map((skill, i) => {
@@ -13,6 +13,4 @@ const SkillListings = ({ skills }: { skills: SkillType[] }) => {
       })}
     </>
   );
-};
-
-export default SkillListings;
+}
