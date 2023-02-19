@@ -39,6 +39,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "public",
+    "public/static",
     "src",
     "**/*.ts",
     "**/*.tsx"

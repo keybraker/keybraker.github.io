@@ -1,6 +1,8 @@
 import { GrDocumentPdf } from "@react-icons/all-files/gr/GrDocumentPdf";
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
 import dayjs from "dayjs";
+import Image from "next/image";
+import signature from "@static/signature.png";
 
 const mail = "iantsiakkas@gmail.com";
 const mailto = "mailto:" + mail;
@@ -67,11 +69,9 @@ export default function Email() {
         <br />
         <p>If you have any ideas you wish to share, feel free to reply.</p>
         <br />
-        <p>
-          Kindly,
-          <br />
-          Ioannis Tsiakkas
-        </p>
+        Kindly,
+        <br />
+        Ioannis Tsiakkas
       </div>
       <div className="flex flex-end align-start justify-between mt-7 gap-1">
         <a

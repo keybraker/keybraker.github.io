@@ -1,11 +1,12 @@
 import EducationPage from "@/abilities/education";
 import Email from "@/abilities/email";
 import ExperiencePage from "@/abilities/experience";
+import Footer from "@/abilities/footer";
+import Header from "@/abilities/header";
+import ProjectsPage from "@/abilities/projects";
 import SkillPage from "@/abilities/skills";
 import CategoryTitle from "@/components/categoryTitle";
-import Header from "@/abilities/header";
 import Head from "next/head";
-import Footer from "@/abilities/footer";
 
 export default function Home() {
   return (
@@ -48,6 +49,8 @@ export default function Home() {
         <SkillPage />
         <CategoryTitle title={"Education"}></CategoryTitle>
         <EducationPage />
+        <CategoryTitle title={"Notable Projects"}></CategoryTitle>
+        <ProjectsPage />
         <Footer />
       </main>
     </div>
