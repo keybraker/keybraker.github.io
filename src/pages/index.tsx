@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="bg-gray-100 flex flex-col place-self-center justify-center gap-4 py-4 px-4 md:py-6 md:px-6 lg:py-12 lg:px-48 xl:px-96">
+      <main className="bg-gray-100 flex flex-col place-self-center justify-center gap-4 py-4 px-4 xs:py-6 md:px-24 lg:px-48 xl:px-[440px] 2xl:px-[512px]">
         <LandingName></LandingName>
         <Email />
         <CategoryTitle title={"Professional Experience"}></CategoryTitle>

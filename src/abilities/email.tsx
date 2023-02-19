@@ -10,7 +10,7 @@ const date = dayjs().format("MMM DD, YYYY, HH:mm");
 
 export default function Email() {
   return (
-    <div className="bg-blue-100 border-black border rounded-[10px] p-2.5 mb-12">
+    <div className="shadow-xl bg-blue-100 border-black border rounded-[10px] p-2.5 mb-12">
       {/* <HeadScene /> */}
       <div className="flex flex-start justify-between">
         <div className="flex flex-col">
@@ -23,7 +23,7 @@ export default function Email() {
           <span>to: you</span>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-gray-500">{date}</span>
+          <span className="text-gray-400">{date}</span>
           <span className="italic">(1) one attachment</span>
         </div>
       </div>
@@ -34,9 +34,13 @@ export default function Email() {
         <p>Hello,</p>
         <br />
         <p>
-          I&apos;m a Software Engineer with experience in building web applications.
+          I&apos;m a Software Engineer with experience in building web
+          applications.
+          <br />
           I mainly focus on the backend client and infrastructure but have also
-          worked in the frontend. Currently working as a backend developer at{" "}
+          worked in the frontend.
+          <br />
+          Currently working as a backend developer at{" "}
           <a
             href="https://fairlo.se/"
             target="_blank"
@@ -71,17 +75,19 @@ export default function Email() {
       </div>
       <div className="flex flex-end align-start justify-between mt-7 gap-1">
         <a
-          className="shadow-md hover:bg-gray-200 bg-white border border-black rounded-[18px] flex justify-between align-baseline gap-2 py-1.5 px-2.5 black mt-1"
+          className="shadow-md hover:bg-gray-200 bg-white border border-black rounded-[18px] flex justify-between items-center gap-2 py-1.5 px-2.5 black mt-1"
           href={`${mailto}${subject}`}
         >
-          <HiOutlineReply /> Reply
+          <HiOutlineReply />
+          <span>Reply</span>
         </a>
         <a
-          className="shadow-md hover:bg-gray-200 bg-white border border-black rounded-md flex justify-between align-baseline gap-2 py-2 px-3 black mt-1"
+          className="shadow-md hover:bg-gray-200 bg-white border border-black rounded-md flex justify-between items-center gap-2 py-2 px-3 black mt-1"
           href="/ioannis_tsiakkas_resume.pdf"
           download="ioannis_tsiakkas_resume.pdf"
         >
-          <GrDocumentPdf /> Resume
+          <GrDocumentPdf />
+          <span>Resume</span>
         </a>
       </div>
     </div>

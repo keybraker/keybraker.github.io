@@ -31,7 +31,7 @@ const skills: Skill[] = [
   },
   {
     category: "Basic Programs",
-    qualifications: ["Microsoft Office", "Google Office", "VSCode"],
+    qualifications: ["Office", "VSCode"],
   },
   {
     category: "Operating Systems",

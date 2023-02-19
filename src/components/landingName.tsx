@@ -12,21 +12,21 @@ const lnkd = "https://www.linkedin.com/in/" + "ioannis-t-3365151a2";
 
 function AboutPageInner() {
   return (
-    <div className="flex flex-row flex-start justify-around gap-4">
+    <div className="flex flex-row flex-start justify-around gap-4 align-baseline">
       <a href={addr}>
-        <MdLocationOn />
+        <MdLocationOn size={"1.3rem"} />
       </a>
       <a href={mail}>
-        <MdEmail />
+        <MdEmail size={"1.3rem"} />
       </a>
       <a href={gthb}>
-        <FaGithub />
+        <FaGithub size={"1.3rem"} />
       </a>
       <a href={lnkd}>
-        <FaLinkedin />
+        <FaLinkedin size={"1.3rem"} />
       </a>
       <a href={twtr}>
-        <FaTwitter />
+        <FaTwitter size={"1.3rem"} />
       </a>
     </div>
   );
@@ -35,9 +35,10 @@ function AboutPageInner() {
 export default function LandingName() {
   return (
     <>
-      <div className="flex flex-row justify-between">
-        <span className="text-xl font-helvetica font-semibold antialiased">
-          Ioannis Tsiakkas
+      <div className="flex flex-col xs:flex-row justify-between items-center xs:items-stretch">
+        <span className="flex flex-col tn:flex-row items-center text-2xl font-helvetica font-semibold antialiased">
+          <span>Ioannis</span>
+          <span>Tsiakkas</span>
         </span>
         <AboutPageInner></AboutPageInner>
       </div>
