@@ -16,7 +16,7 @@ export default function Home() {
         <meta name="title" content="Ioannis Tsiakkas" />
         <meta
           name="description"
-          content="Personal webpage for Ioannis Tsiakkas"
+          content="Ioannis Tsiakkas Website"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -26,7 +26,7 @@ export default function Home() {
         <meta property="og:title" content="Ioannis Tsiakkas" />
         <meta
           property="og:description"
-          content="Personal webpage for Ioannis Tsiakkas"
+          content="Ioannis Tsiakkas Website"
         />
         <meta property="og:image" content="https://avatars.githubusercontent.com/u/23459466?v=4" />
 
@@ -35,7 +35,7 @@ export default function Home() {
         <meta property="twitter:title" content="Ioannis Tsiakkas" />
         <meta
           property="twitter:description"
-          content="Personal webpage for Ioannis Tsiakkas"
+          content="Ioannis Tsiakkas Website"
         />
         <meta property="twitter:image" content="https://avatars.githubusercontent.com/u/23459466?v=4" />
       </Head>
