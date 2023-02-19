@@ -3,7 +3,7 @@ import { SkillType } from "@/types/skill";
 function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
   return (
     <>
-      <div className="no-wrap flex flex-row justify-between text-start align-top">
+      <div className="flex flex-col text-start align-top">
         <div
           className="content font-semibold"
           dangerouslySetInnerHTML={{ __html: skill.category }}
