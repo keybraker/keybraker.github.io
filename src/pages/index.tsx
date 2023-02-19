@@ -27,7 +27,7 @@ export default function Home() {
           property="og:description"
           content="Personal webpage for Ioannis Tsiakkas"
         />
-        <meta property="og:image" content="/static/profile.png" />
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/23459466?v=4" />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://itsiakkas.com/" />
@@ -36,7 +36,7 @@ export default function Home() {
           property="twitter:description"
           content="Personal webpage for Ioannis Tsiakkas"
         />
-        <meta property="twitter:image" content="/static/profile.png" />
+        <meta property="twitter:image" content="https://avatars.githubusercontent.com/u/23459466?v=4" />
       </Head>
 
       <main className="bg-gray-100 flex flex-col place-self-center justify-center gap-4 py-4 px-4 xs:py-6 md:px-24 lg:px-48 xl:px-[440px] 2xl:px-[512px]">
