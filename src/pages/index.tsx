@@ -1,13 +1,14 @@
-import CategoryTitle from "@/components/categoryTitle";
-import EducationPage from "@/components/education";
-import Email from "@/components/email";
-import ExperiencePage from "@/components/experience";
-import LandingName from "@/components/landingName";
+import EducationPage from "@/abilities/education";
+import Email from "@/abilities/email";
+import ExperiencePage from "@/abilities/experience";
+import SkillPage from "@/abilities/skills";
+import CategoryTitle from "@/components/CategoryTitle";
+import LandingName from "@/components/LandingName";
 import Head from "next/head";
 
 export default function Home() {
   return (
-    <>
+    <div className="w-full h-full">
       <Head>
         <title>Ioannis Tsiakkas</title>
         <meta name="description" content="By Ioannis with NextJS" />
@@ -15,14 +16,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col justify-between gap-4 py-4 px-4 md:py-12 md:px-32 xl:py-18 xl:px-36">
+      <main className="bg-gray-100 flex flex-col place-self-center justify-center gap-4 py-4 px-4 md:py-6 md:px-6 lg:py-12 lg:px-48 xl:px-96">
         <LandingName></LandingName>
-        <Email></Email>
-        <CategoryTitle title={"Experience"}></CategoryTitle>
-        <ExperiencePage></ExperiencePage>
+        <Email />
+        <CategoryTitle title={"Professional Experience"}></CategoryTitle>
+        <ExperiencePage />
+        <CategoryTitle title={"Technical and Personal Skills"}></CategoryTitle>
+        <SkillPage />
         <CategoryTitle title={"Education"}></CategoryTitle>
-        <EducationPage></EducationPage>
+        <EducationPage />
       </main>
-    </>
+    </div>
   );
 }
