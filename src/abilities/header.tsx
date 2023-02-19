@@ -13,19 +13,19 @@ const lnkd = "https://www.linkedin.com/in/" + "ioannis-t-3365151a2";
 function AboutPageInner() {
   return (
     <div className="flex flex-row flex-start justify-around items-center gap-4 align-baseline">
-      <a rel="noopener noreferrer" target="_blank" href={addr}>
+      <a aria-label="By clicking you will be taken to Maps" rel="noopener noreferrer" target="_blank" href={addr}>
         <MdLocationOn size={"1.3rem"} />
       </a>
-      <a rel="noopener noreferrer" target="_blank" href={mail}>
+      <a aria-label="By clicking you will be taken to Mail" rel="noopener noreferrer" target="_blank" href={mail}>
         <MdEmail size={"1.3rem"} />
       </a>
-      <a rel="noopener noreferrer" target="_blank" href={gthb}>
+      <a aria-label="By clicking you will be taken to Github" rel="noopener noreferrer" target="_blank" href={gthb}>
         <FaGithub size={"1.3rem"} />
       </a>
-      <a rel="noopener noreferrer" target="_blank" href={lnkd}>
+      <a aria-label="By clicking you will be taken to LinkedIn" rel="noopener noreferrer" target="_blank" href={lnkd}>
         <FaLinkedin size={"1.3rem"} />
       </a>
-      <a rel="noopener noreferrer" target="_blank" href={twtr}>
+      <a aria-label="By clicking you will be taken to Twitter" rel="noopener noreferrer" target="_blank" href={twtr}>
         <FaTwitter size={"1.3rem"} />
       </a>
     </div>
@@ -34,7 +34,7 @@ function AboutPageInner() {
 
 export default function Header() {
   return (
-    <>
+    <div className="sticky top-0">
       <div className="flex flex-col xs:flex-row gap-2 justify-between items-center xs:items-stretch">
         <span className="flex flex-col gap-0.5 xs:gap-2 tn:flex-row items-center text-2xl font-helvetica font-semibold antialiased">
           <span>Ioannis</span>
@@ -43,6 +43,6 @@ export default function Header() {
         <AboutPageInner></AboutPageInner>
       </div>
       <div className="border border-black mb-4"></div>
-    </>
+    </div>
   );
 }

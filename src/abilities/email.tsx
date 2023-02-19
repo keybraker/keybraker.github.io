@@ -23,7 +23,7 @@ export default function Email() {
           <span>to: you</span>
         </div>
         <div className="flex flex-col items-end">
-          <time className="text-gray-400">{date}</time>
+          <time className="text-gray-600">{date}</time>
           <span className="italic">(1) one attachment</span>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function Email() {
             rel="noreferrer"
             className="underline"
           >
-            here
+            github.com/keybraker
           </a>
           .
         </p>
