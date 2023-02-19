@@ -1,4 +1,4 @@
-import { ShowcaseType } from "@/types/showcase";
+import { ShowcaseType } from "../types/showcase";
 
 export function ShowcaseListing({
   showcase,
