@@ -1,5 +1,5 @@
 import SkillListings from "@/components/SkillListings";
-import { Skill } from "@/enums/Skill";
+import { Skill } from "@/enums/skill";
 
 const skills: Skill[] = [
   {

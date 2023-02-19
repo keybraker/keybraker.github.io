@@ -1,4 +1,4 @@
-import { Skill } from "@/enums/Skill";
+import { Skill } from "@/enums/skill";
 
 const SkillListing = ({ skill, last }: { skill: Skill; last: boolean }) => {
   return (

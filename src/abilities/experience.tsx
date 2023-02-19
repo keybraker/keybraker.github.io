@@ -1,5 +1,5 @@
 import ShowcaseListings from "@/components/ShowcaseListings";
-import { Showcase } from "../enums/Showcase";
+import { Showcase } from "@/enums/showcase";
 
 const experiences: Showcase[] = [
   {
