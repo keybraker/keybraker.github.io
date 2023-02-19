@@ -59,7 +59,7 @@ const experiences: ShowcaseType[] = [
 
 export default function ExperiencePage(props: any) {
   return (
-    <div className="bg-white border-black border rounded-[4px] p-2.5">
+    <div className="rounded-[4px] border border-black bg-white p-2.5">
       <ShowcaseListings showcases={experiences} />
     </div>
   );

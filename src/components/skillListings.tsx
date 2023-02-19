@@ -1,22 +1,16 @@
 import { SkillType } from "@/types/skill";
 
-function SkillListing({
-  skill,
-  last,
-}: {
-  skill: SkillType;
-  last: boolean;
-}) {
+function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
   return (
     <>
-      <div className="flex flex-row no-wrap justify-between align-top text-start">
+      <div className="no-wrap flex flex-row justify-between text-start align-top">
         <div
           className="content font-semibold"
           dangerouslySetInnerHTML={{ __html: skill.category }}
         ></div>
         {skill?.qualifications ? (
           <div
-            className="text-sm content"
+            className="content text-sm"
             dangerouslySetInnerHTML={{
               __html: skill.qualifications.join(", "),
             }}
@@ -25,7 +19,7 @@ function SkillListing({
           ""
         )}
       </div>
-      {!last ? <div className="border-[0.1px] border-gray-200 my-4"></div> : ""}
+      {!last ? <div className="my-4 border-[0.1px] border-gray-200"></div> : ""}
     </>
   );
 }
