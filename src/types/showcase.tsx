@@ -1,4 +1,4 @@
-export type Showcase = {
+export type ShowcaseType = {
   start: string;
   end: string;
   title: string;

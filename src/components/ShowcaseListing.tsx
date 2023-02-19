@@ -1,10 +1,10 @@
-import { Showcase } from "@/enums/showcase";
+import { ShowcaseType } from "@/types/showcase";
 
 const ShowcaseListing = ({
   showcase,
   last,
 }: {
-  showcase: Showcase;
+  showcase: ShowcaseType;
   last: boolean;
 }) => {
   return (

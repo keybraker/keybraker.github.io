@@ -1,4 +1,4 @@
-export type Skill = {
+export type SkillType = {
   category: string;
   qualifications: string[];
 };

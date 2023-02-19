@@ -1,7 +1,7 @@
 import ShowcaseListing from "@/components/ShowcaseListing";
-import { Showcase } from "@/enums/showcase";
+import { ShowcaseType } from "@/types/showcase";
 
-const ShowcaseListings = ({ showcases }: { showcases: Showcase[] }) => {
+const ShowcaseListings = ({ showcases }: { showcases: ShowcaseType[] }) => {
   return (
     <>
       {showcases.map((showcase, i) => {

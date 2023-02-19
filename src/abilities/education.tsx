@@ -1,7 +1,7 @@
 import ShowcaseListings from "@/components/ShowcaseListings";
-import { Showcase } from "@/enums/showcase";
+import { ShowcaseType } from "@/types/showcase";
 
-const education: Showcase[] = [
+const education: ShowcaseType[] = [
   {
     start: "Sep 2013",
     end: "Jan 2019",

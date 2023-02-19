@@ -1,7 +1,7 @@
 import SkillListing from "@/components/SkillListing";
-import { Skill } from "@/enums/skill";
+import { SkillType } from "@/types/skill";
 
-const SkillListings = ({ skills }: { skills: Skill[] }) => {
+const SkillListings = ({ skills }: { skills: SkillType[] }) => {
   return (
     <>
       {skills.map((skill, i) => {

@@ -1,7 +1,7 @@
 import ShowcaseListings from "@/components/ShowcaseListings";
-import { Showcase } from "@/enums/showcase";
+import { ShowcaseType } from "@/types/showcase";
 
-const experiences: Showcase[] = [
+const experiences: ShowcaseType[] = [
   {
     start: "Feb 2022",
     end: "Present",

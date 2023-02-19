@@ -1,7 +1,7 @@
 import SkillListings from "@/components/SkillListings";
-import { Skill } from "@/enums/skill";
+import { SkillType } from "@/types/skill";
 
-const skills: Skill[] = [
+const skills: SkillType[] = [
   {
     category: "Languages",
     qualifications: ["Raised bilingual Greek ~ German and fluent in English"],

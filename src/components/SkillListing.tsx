@@ -1,6 +1,6 @@
-import { Skill } from "@/enums/skill";
+import { SkillType } from "@/types/skill";
 
-const SkillListing = ({ skill, last }: { skill: Skill; last: boolean }) => {
+const SkillListing = ({ skill, last }: { skill: SkillType; last: boolean }) => {
   return (
     <>
       <div className="flex flex-row no-wrap justify-between align-top text-start">
