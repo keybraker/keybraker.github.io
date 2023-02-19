@@ -37,12 +37,14 @@
   "include": [
     "next.config.js",
     "next-env.d.ts",
+    ".next/types/**/*.ts",
     "public",
     "./src/*",
     "**/*.ts",
     "**/*.tsx"
   ],
   "exclude": [
+    "node_modules",
     ".vscode"
   ],
 }
