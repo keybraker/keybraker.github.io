@@ -1,13 +1,21 @@
 import { GrDocumentPdf } from "@react-icons/all-files/gr/GrDocumentPdf";
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
 import { HiDocumentDownload } from "@react-icons/all-files/hi/HiDocumentDownload";
-import dayjs from "dayjs";
 
 const mail = "iantsiakkas@gmail.com";
 const mailto = "mailto:" + mail;
 const subject = "?subject=" + "Hey%20Ioannis";
 const body = "&body=" + "Email%20Body";
-const date = dayjs().format("MMM DD, YYYY, HH:mm");
+
+const date = new Date(); // Replace with your date object
+const options = {
+  year: "numeric",
+  month: "short",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+};
+const formattedDate = date.toLocaleString("en-US", options);
 
 function useHasMounted() {
   const [hasMounted, setHasMounted] = React.useState(false);
@@ -19,15 +27,9 @@ function useHasMounted() {
   return hasMounted;
 }
 
-function getCurrentDate() {
-  if (!useHasMounted()) {
-    return null;
-  }
-
-  return <span className="text-gray-600">{date}</span>;
-}
-
 export default function Email() {
+  const hasMounted = useHasMounted();
+
   return (
     <div className="mb-12 rounded-[10px] border border-black bg-blue-100 p-2.5 shadow-xl">
       {/* <HeadScene /> */}
@@ -42,7 +44,9 @@ export default function Email() {
           <span>to: you</span>
         </div>
         <div className="flex flex-col items-end">
-          {getCurrentDate()}
+          {hasMounted ? (
+            <span className="text-gray-600">{formattedDate}</span>
+          ) : null}
           <span className="italic">(1) one attachment</span>
         </div>
       </div>
