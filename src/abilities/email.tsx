@@ -9,6 +9,24 @@ const subject = "?subject=" + "Hey%20Ioannis";
 const body = "&body=" + "Email%20Body";
 const date = dayjs().format("MMM DD, YYYY, HH:mm");
 
+function useHasMounted() {
+  const [hasMounted, setHasMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  return hasMounted;
+}
+
+function getCurrentDate() {
+  if (!useHasMounted()) {
+    return null;
+  }
+
+  return <span className="text-gray-600">{date}</span>;
+}
+
 export default function Email() {
   return (
     <div className="mb-12 rounded-[10px] border border-black bg-blue-100 p-2.5 shadow-xl">
@@ -24,7 +42,7 @@ export default function Email() {
           <span>to: you</span>
         </div>
         <div className="flex flex-col items-end">
-          <time className="text-gray-600">{date}</time>
+          {getCurrentDate()}
           <span className="italic">(1) one attachment</span>
         </div>
       </div>
@@ -56,12 +74,13 @@ export default function Email() {
         <p>
           You can take a look at some of my work on my Github page by clicking{" "}
           <a
+            aria-label="Clicking here will take you to my github page"
             href="https://github.com/keybraker"
             target="_blank"
             rel="noreferrer"
             className="underline"
           >
-            github.com/keybraker
+            here
           </a>
           .
         </p>
