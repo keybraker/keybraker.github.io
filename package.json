@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "postbuild": "next-sitemap",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "next-sitemap": "^3.1.52",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.3",
