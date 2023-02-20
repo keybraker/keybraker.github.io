@@ -14,7 +14,7 @@ const options = {
   day: "2-digit",
   hour: "2-digit",
   minute: "2-digit",
-};
+} as Intl.DateTimeFormatOptions;
 const formattedDate = date.toLocaleString("en-US", options);
 
 function useHasMounted() {
