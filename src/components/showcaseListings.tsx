@@ -22,8 +22,10 @@ function ShowcaseListing({
         </div>
 
         <div className="no-wrap flex flex-col items-end justify-start text-end align-top">
-          <div className="text-sm italic">
-            {showcase.start} - {showcase.end}
+          <div
+            className="content text-sm italic"
+            dangerouslySetInnerHTML={{ __html: `${showcase.start} - ${showcase.end}` }}
+          >
           </div>
           <div className="flex flex-col items-end">
             <div

@@ -88,11 +88,10 @@ export default function Email() {
           </a>
           .
         </p>
-        <p className="mt-2 whitespace-pre-line">
-          If you have any ideas you wish to share, feel free to reply.
-        </p>
+        <p>If you have any ideas you wish to share, feel free to reply.</p>
 
-        <p className="mt-2 whitespace-pre-line">Kindly, Ioannis Tsiakkas</p>
+        <p className="mt-4">Kindly,</p>
+        <p>Ioannis Tsiakkas</p>
       </div>
 
       <div className="flex-end align-start mt-7 flex justify-between gap-1">

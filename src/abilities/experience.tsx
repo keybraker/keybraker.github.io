@@ -15,9 +15,9 @@ const experiences: ShowcaseType[] = [
     start: "Jul 2021",
     end: "Jan 2022",
     title:
-      '<a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank">Cypriot Military</a>',
-    info: "Ordnance Corps",
-    position: "Obligatory military service",
+      '<span class="text-gray-500"><a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank">Cypriot Military</a></span>',
+    info: '<span class="text-gray-500">Ordnance Corps</span>',
+    position: '<span class="text-gray-500">Obligatory military service</span>',
   },
   {
     start: "Mar 2020",
