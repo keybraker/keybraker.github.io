@@ -1,7 +1,7 @@
 import { GrDocumentPdf } from "@react-icons/all-files/gr/GrDocumentPdf";
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
 import { HiDocumentDownload } from "@react-icons/all-files/hi/HiDocumentDownload";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
 const mail = "iantsiakkas@gmail.com";
 const mailto = "mailto:" + mail;
@@ -15,13 +15,14 @@ const options = {
   day: "2-digit",
   hour: "2-digit",
   minute: "2-digit",
+  hour12: false,
 } as Intl.DateTimeFormatOptions;
 const formattedDate = date.toLocaleString("en-US", options);
 
 function useHasMounted() {
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
 
@@ -102,20 +103,24 @@ export default function Email() {
           <HiOutlineReply />
           <span>Reply</span>
         </a>
-        <a
-          className="black group mt-1 flex items-center justify-between gap-2 rounded-md border border-black bg-white p-1 py-2 px-3  shadow-md hover:bg-gray-200"
-          href="/static/ioannis_tsiakkas_resume.pdf"
-          download="ioannis_tsiakkas_resume.pdf"
-        >
-          <span className="contents group-hover:hidden">
-            <GrDocumentPdf />
-            <span>Resume</span>
-          </span>
-          <span className="hidden group-hover:contents">
-            <HiDocumentDownload />
-            <span>72.11 Kb</span>
-          </span>
-        </a>
+
+        <div className="group relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
+          <a
+            className="black items-top relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-black bg-white  leading-none  shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
+            href="/static/ioannis_tsiakkas_resume.pdf"
+            download="ioannis_tsiakkas_resume.pdf"
+          >
+            <span className="contents group-hover:hidden">
+              <GrDocumentPdf />
+              <span>Resume</span>
+            </span>
+            <span className="hidden group-hover:contents">
+              <HiDocumentDownload />
+              <span>72.11 Kb</span>
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );
