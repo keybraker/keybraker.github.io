@@ -43,6 +43,7 @@ export default function Email() {
             </a>
           </span>
           <span>to: you</span>
+          <span>subject: Welcome to the website regarding me</span>
         </div>
         <div className="flex flex-col items-end">
           {hasMounted ? (
@@ -57,7 +58,7 @@ export default function Email() {
       <div>
         <p>Hello,</p>
 
-        <p class="mt-2 whitespace-pre-line">
+        <p className="mt-2 whitespace-pre-line">
           I&apos;m a Software Engineer with experience in building web
           applications. I mainly focus on the backend client and infrastructure
           but have also worked in the frontend. Currently working as a backend
@@ -72,7 +73,7 @@ export default function Email() {
           </a>
           .
         </p>
-        <p class="mt-2 whitespace-pre-line">
+        <p className="mt-2 whitespace-pre-line">
           You can take a look at some of my work on my Github page by clicking{" "}
           <a
             aria-label="Clicking here will take you to my github page"
@@ -86,11 +87,11 @@ export default function Email() {
           </a>
           .
         </p>
-        <p class="mt-2 whitespace-pre-line">
+        <p className="mt-2 whitespace-pre-line">
           If you have any ideas you wish to share, feel free to reply.
         </p>
 
-        <p class="mt-2 whitespace-pre-line">Kindly, Ioannis Tsiakkas</p>
+        <p className="mt-2 whitespace-pre-line">Kindly, Ioannis Tsiakkas</p>
       </div>
 
       <div className="flex-end align-start mt-7 flex justify-between gap-1">
