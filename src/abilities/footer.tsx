@@ -12,7 +12,7 @@ export default function Footer() {
           <Image src={signature} alt="The source of truth" width={84} />
           <a rel="noopener noreferrer" target="_blank" href={repo}>
             <span className="hover:underline">
-              Created by me with NextJS and Tailwind.
+              Made with NextJS and Tailwind, take a look
             </span>
           </a>
         </span>

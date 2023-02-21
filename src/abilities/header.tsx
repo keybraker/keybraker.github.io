@@ -59,15 +59,14 @@ function AboutPageInner() {
 
 export default function Header() {
   return (
-    <header>
-      <div className="flex flex-col items-center justify-between gap-2 xs:flex-row xs:items-stretch">
+    <header className="sticky top-0 z-50 border-b-2 border-black">
+      <div className="flex flex-col items-center justify-between gap-2 px-4 py-2 backdrop-blur-lg xs:flex-row xs:items-stretch">
         <span className="flex flex-col items-center gap-1 font-helvetica text-2xl font-semibold tn:flex-row xs:gap-2">
           <span>Ioannis</span>
           <span>Tsiakkas</span>
         </span>
         <AboutPageInner></AboutPageInner>
       </div>
-      <div className="my-4 border border-black"></div>
     </header>
   );
 }

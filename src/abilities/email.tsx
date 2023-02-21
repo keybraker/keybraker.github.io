@@ -83,8 +83,7 @@ export default function Email() {
             rel="noreferrer"
             className="underline"
           >
-            {" "}
-            github.com/keybraker{" "}
+            github.com/keybraker
           </a>
           .
         </p>
@@ -106,7 +105,7 @@ export default function Email() {
         <div className="group relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
-            className="black items-top relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-black bg-white  leading-none  shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
+            className="black items-top relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-black bg-white leading-none shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
             href="/static/ioannis_tsiakkas_resume.pdf"
             download="ioannis_tsiakkas_resume.pdf"
           >

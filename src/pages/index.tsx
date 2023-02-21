@@ -10,7 +10,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="container mx-auto w-full max-w-6xl p-2 xs:p-4 md:p-8">
+    <div className="container relative mx-auto w-full max-w-6xl px-2 xs:px-4 md:px-8 pb-2 xs:pb-4 md:pb-8">
       <Head>
         <title>Ioannis Tsiakkas</title>
         <meta name="title" content="Ioannis Tsiakkas" />
@@ -41,7 +41,7 @@ export default function Home() {
       </Head>
 
       <main className="flex flex-col justify-center gap-4 place-self-center">
-        <Header></Header>
+        <Header />
         <Email />
         <CategoryTitle title={"Professional Experience"}></CategoryTitle>
         <ExperiencePage />

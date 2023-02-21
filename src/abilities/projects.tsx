@@ -11,7 +11,7 @@ const skills: SkillType[] = [
     category:
       '<a href="https://github.com/keybraker/Mediarizer" rel="noopener noreferrer" target="_blank">Mediarizer</a>',
     qualifications: [
-      "A one-step solution to a chronologically organized media library",
+      "A one-step solution to a chronologically organized media library.",
     ],
   },
 ];
