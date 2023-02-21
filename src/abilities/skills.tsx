@@ -26,6 +26,7 @@ const skills: SkillType[] = [
       "Docker",
       "AWS",
       "ExpressJS",
+      "Jest"
     ],
   },
   {

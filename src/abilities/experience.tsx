@@ -10,6 +10,7 @@ const experiences: ShowcaseType[] = [
     info: "Financial Services",
     position: "Backend",
     technologies: ["TypeScript", "PostgreSQL"],
+    description: "My role as backend developer is to maintain the current code base and deliver new features for the core application."
   },
   {
     start: "Jul 2021",
