@@ -19,7 +19,7 @@ function AboutPageInner() {
         target="_blank"
         href={addr}
       >
-        <MdLocationOn size={"1.3rem"} />
+        <MdLocationOn className="antialiased" size={"20px"} />
       </a>
       <a
         aria-label="By clicking you will be taken to Mail"
@@ -27,7 +27,7 @@ function AboutPageInner() {
         target="_blank"
         href={mail}
       >
-        <MdEmail size={"1.3rem"} />
+        <MdEmail className="antialiased" size={"20px"} />
       </a>
       <a
         aria-label="By clicking you will be taken to Github"
@@ -35,7 +35,7 @@ function AboutPageInner() {
         target="_blank"
         href={gthb}
       >
-        <FaGithub size={"1.3rem"} />
+        <FaGithub className="antialiased" size={"20px"} />
       </a>
       <a
         aria-label="By clicking you will be taken to LinkedIn"
@@ -43,7 +43,7 @@ function AboutPageInner() {
         target="_blank"
         href={lnkd}
       >
-        <FaLinkedin size={"1.3rem"} />
+        <FaLinkedin className="antialiased" size={"20px"} />
       </a>
       <a
         aria-label="By clicking you will be taken to Twitter"
@@ -51,7 +51,7 @@ function AboutPageInner() {
         target="_blank"
         href={twtr}
       >
-        <FaTwitter size={"1.3rem"} />
+        <FaTwitter className="antialiased" size={"20px"} />
       </a>
     </div>
   );
@@ -59,15 +59,15 @@ function AboutPageInner() {
 
 export default function Header() {
   return (
-    <div>
-      <div className="flex-col flex items-center justify-between gap-2  xs:flex-row xs:items-stretch">
-        <span className="flex flex-col items-center gap-0.5 font-helvetica text-2xl font-semibold antialiased tn:flex-row xs:gap-2">
+    <header>
+      <div className="flex flex-col items-center justify-between gap-2 xs:flex-row xs:items-stretch">
+        <span className="flex flex-col items-center gap-1 font-helvetica text-2xl font-semibold tn:flex-row xs:gap-2">
           <span>Ioannis</span>
           <span>Tsiakkas</span>
         </span>
         <AboutPageInner></AboutPageInner>
       </div>
       <div className="my-4 border border-black"></div>
-    </div>
+    </header>
   );
 }
