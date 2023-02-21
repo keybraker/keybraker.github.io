@@ -9,8 +9,11 @@ const experiences: ShowcaseType[] = [
       '<a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">Fairlo</a>',
     info: "Financial Services",
     position: "Backend",
-    technologies: ["TypeScript", "PostgreSQL"],
-    description: "My role as backend developer is to maintain the current code base and deliver new features for the core application."
+    technologies: ["TypeScript", "PostgreSQL", "Sequelize", "AWS", "Gitlab"],
+    description:
+      "The product we offer, allows users to get a credit and have all the power over it. " +
+      "Users can change their amortisation plan, make deposits and withdraw. " +
+      "My role as backend developer is to maintain and expand the code base whilst also delivering new features for the core application.",
   },
   {
     start: "Jul 2021",
@@ -27,9 +30,10 @@ const experiences: ShowcaseType[] = [
       '<a href="https://www.cyberlogic.gr/en/home" rel="noopener noreferrer" target="_blank">Cyberlogic</a>',
     info: "Travel Technologies",
     position: "Frontend",
-    technologies: ["Angular"],
+    technologies: ["Angular", "Visual Basic"],
     description:
-      "I mainly worked on delivering Traveling interface solutions to customers and maintaining while also expanding the core product.",
+      "I mainly worked on delivering Traveling interface solutions to customers while also maintaining and expanding the core product. " +
+      "Applications for users were designed in Angular while the core product was written in Visual Basic.",
   },
   {
     start: "May 2019",

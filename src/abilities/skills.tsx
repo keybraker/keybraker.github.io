@@ -12,7 +12,14 @@ const skills: SkillType[] = [
   },
   {
     category: "Scripting Languages",
-    qualifications: ["TypeScript", "JavaScript", "NodeJS", "HTML", "CSS"],
+    qualifications: [
+      "TypeScript",
+      "JavaScript",
+      "Visual Basic",
+      "NodeJS",
+      "HTML",
+      "CSS",
+    ],
   },
   {
     category: "Frameworks & Libraries",
@@ -26,7 +33,7 @@ const skills: SkillType[] = [
       "Docker",
       "AWS",
       "ExpressJS",
-      "Jest"
+      "Jest",
     ],
   },
   {
