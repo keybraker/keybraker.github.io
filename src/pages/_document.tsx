@@ -7,15 +7,11 @@ import { Head, Html, Main, NextScript } from "next/document";
 //   return colorsArray[randomColorIndex];
 // }
 
-function getBackgroundColor() {
-  return `bg-sky-300`;
-}
-
 export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className={getBackgroundColor()}>
+      <body className={`bg-sky-300`}>
         <Main />
         <NextScript />
       </body>

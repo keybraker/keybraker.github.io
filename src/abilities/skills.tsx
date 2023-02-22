@@ -41,6 +41,10 @@ const skills: SkillType[] = [
     qualifications: ["PostgreSQL", "MySQL", "MongoDB", "Mongoose", "Sequelize"],
   },
   {
+    category: "Practices",
+    qualifications: ["Agile", "Scrum", "Kanban"],
+  },
+  {
     category: "Basic Programs & OSs",
     qualifications: ["Office", "VSCode", "MacOS", "Linux", "Windows"],
   },

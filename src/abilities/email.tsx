@@ -33,13 +33,16 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mt-8 mb-12 rounded-[10px] border border-black bg-blue-100 p-2.5 shadow-xl">
+    <section className="mt-8 mb-12 rounded-[10px] border border-black bg-sky-200 p-2.5 shadow-xl">
       {/* <HeadScene /> */}
       <div className="flex-start flex justify-between">
         <div className="flex flex-col">
           <span>
             from:{" "}
-            <a className="font-semibold hover:underline" href={`${mailto}${subject}`}>
+            <a
+              className="font-semibold hover:underline"
+              href={`${mailto}${subject}`}
+            >
               {mail}
             </a>
           </span>
@@ -60,19 +63,10 @@ export default function Email() {
         <p>Hello,</p>
 
         <p className="mt-2 whitespace-pre-line">
-          I&apos;m a Software Engineer with experience in building web
+          I&apos;m a Software Engineer with experience in building RESTful web
           applications. I mainly focus on the backend client and infrastructure
-          but have also worked in the frontend. Currently working as a backend
-          developer at{" "}
-          <a
-            href="https://fairlo.se/"
-            target="_blank"
-            rel="noreferrer"
-            className="underline"
-          >
-            Fairlo
-          </a>
-          .
+          but have also worked in the frontend. I have a passion for low level
+          programming and building things on my spare time.
         </p>
         <p className="mt-2 whitespace-pre-line">
           You can take a look at some of my work on my Github page by clicking{" "}

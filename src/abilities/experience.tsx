@@ -11,9 +11,7 @@ const experiences: ShowcaseType[] = [
     position: "Backend",
     technologies: ["TypeScript", "PostgreSQL", "Sequelize", "AWS", "Gitlab"],
     description:
-      "The product we offer, allows users to get a credit and have all the power over it. " +
-      "Users can change their amortisation plan, make deposits and withdraw. " +
-      "My role as backend developer is to maintain and expand the code base whilst also delivering new features for the core application.",
+      "My role as backend developer is to maintain and expand the code base whilst also delivering new features for the core application. ",
   },
   {
     start: "Jul 2021",

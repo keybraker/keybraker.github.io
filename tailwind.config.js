@@ -1,3 +1,5 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -11,10 +13,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      poppins: ["Poppins", "serif"],
-      archivo: ["Archivo", "serif"],
-      helvetica: ["Helvetica", "serif"],
-      noto: ["Noto Serif Display", "serif"],
+      sans: ["var(--font-inter)", ...fontFamily.sans],
     },
     screens: {
       tn: "216px",
