@@ -60,7 +60,7 @@ function AboutPageInner() {
 export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b-2 border-black">
-      <div className="flex flex-col items-center justify-between gap-2 px-2 pt-4 pb-6 backdrop-blur-lg xs:pb-4 xs:flex-row xs:items-stretch">
+      <div className="flex flex-col items-center justify-between gap-2 px-2 pt-2 pb-6 backdrop-blur-lg xs:py-4 xs:flex-row xs:items-stretch">
         <span className="flex flex-col items-center gap-1 font-helvetica text-2xl font-semibold tn:flex-row xs:gap-2">
           <span>Ioannis</span>
           <span>Tsiakkas</span>

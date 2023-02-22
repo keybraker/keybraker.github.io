@@ -50,7 +50,7 @@ export default function Email() {
           {hasMounted ? (
             <span className="text-gray-600">{formattedDate}</span>
           ) : null}
-          <span className="italic">(1) one attachment</span>
+          <span className="italic">one attachment (1)</span>
         </div>
       </div>
 
