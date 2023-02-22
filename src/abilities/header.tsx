@@ -5,10 +5,10 @@ import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 
 const mail = "mailto:" + "iantsiakkas@gmail.com";
-const addr = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
-const gthb = "https://github.com/" + "Keybraker";
-const twtr = "https://twitter.com/" + "RealTsiakkas";
-const lnkd = "https://www.linkedin.com/in/" + "ioannis-t-3365151a2";
+const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
+const github = "https://github.com/" + "Keybraker";
+const twitter = "https://twitter.com/" + "RealTsiakkas";
+const linkedin = "https://www.linkedin.com/in/" + "ioannis-t-3365151a2";
 
 function AboutPageInner() {
   return (
@@ -17,7 +17,7 @@ function AboutPageInner() {
         aria-label="By clicking you will be taken to Maps"
         rel="noopener noreferrer"
         target="_blank"
-        href={addr}
+        href={address}
       >
         <MdLocationOn className="antialiased" size={"20px"} />
       </a>
@@ -33,7 +33,7 @@ function AboutPageInner() {
         aria-label="By clicking you will be taken to Github"
         rel="noopener noreferrer"
         target="_blank"
-        href={gthb}
+        href={github}
       >
         <FaGithub className="antialiased" size={"20px"} />
       </a>
@@ -41,7 +41,7 @@ function AboutPageInner() {
         aria-label="By clicking you will be taken to LinkedIn"
         rel="noopener noreferrer"
         target="_blank"
-        href={lnkd}
+        href={linkedin}
       >
         <FaLinkedin className="antialiased" size={"20px"} />
       </a>
@@ -49,7 +49,7 @@ function AboutPageInner() {
         aria-label="By clicking you will be taken to Twitter"
         rel="noopener noreferrer"
         target="_blank"
-        href={twtr}
+        href={twitter}
       >
         <FaTwitter className="antialiased" size={"20px"} />
       </a>
@@ -59,8 +59,8 @@ function AboutPageInner() {
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-black">
-      <div className="flex flex-col items-center justify-between gap-2 px-4 py-2 backdrop-blur-lg xs:flex-row xs:items-stretch">
+    <header className="sticky top-0 z-40 border-b-2 border-black">
+      <div className="flex flex-col items-center justify-between gap-2 px-2 pt-2 pb-6 backdrop-blur-lg xs:py-4 xs:flex-row xs:items-stretch">
         <span className="flex flex-col items-center gap-1 font-helvetica text-2xl font-semibold tn:flex-row xs:gap-2">
           <span>Ioannis</span>
           <span>Tsiakkas</span>
