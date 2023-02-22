@@ -93,9 +93,9 @@ export default function Email() {
         <p>Ioannis Tsiakkas</p>
       </div>
 
-      <div className="flex-end align-start mt-7 flex justify-between gap-1">
+      <div className="flex-end align-start h-42 mt-7 flex justify-between gap-1">
         <a
-          className="black mt-1 flex items-center justify-between gap-2 rounded-[18px] border border-black bg-white py-1.5 px-2.5 shadow-md hover:bg-gray-200"
+          className="flex h-full w-24 items-center justify-around gap-0 rounded-full border border-black bg-white py-1.5 px-2.5 shadow-md hover:bg-gray-200"
           href={`${mailto}${subject}`}
         >
           <HiOutlineReply />
@@ -105,7 +105,7 @@ export default function Email() {
         <div className="group relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
-            className="black items-top relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-black bg-white leading-none shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
+            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-black bg-white shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
             href="/static/ioannis_tsiakkas_resume.pdf"
             download="ioannis_tsiakkas_resume.pdf"
           >

@@ -45,7 +45,7 @@ export default function Home() {
           <Header />
           <Email />
           <div>
-            <div className="sticky inset-y-0 left-0 top-9 z-50 mt-12 mb-2">
+            <div className="sticky inset-y-0 left-0 top-[4.8rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
               <CategoryTitle title={"Professional Experience"} />
             </div>
             <div>
@@ -53,7 +53,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <div className="sticky inset-y-0 left-0 top-9 z-50 mt-12 mb-2">
+            <div className="sticky inset-y-0 left-0 top-[4.8rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
               <CategoryTitle title={"Technical and Personal Skills"} />
             </div>
             <div>
@@ -61,7 +61,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <div className="sticky inset-y-0 left-0 top-9 z-50 mt-12 mb-2">
+            <div className="sticky inset-y-0 left-0 top-[4.8rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
               <CategoryTitle title={"Education"} />
             </div>
             <div>
@@ -69,7 +69,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <div className="sticky inset-y-0 left-0 top-9 z-50 mt-12 mb-2">
+            <div className="sticky inset-y-0 left-0 top-[4.8rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
               <CategoryTitle title={"Notable Projects"} />
             </div>
             <div>
@@ -85,7 +85,7 @@ export default function Home() {
         <CategoryTitle title={"Education"} />
         <EducationPage />
         <CategoryTitle title={"Notable Projects"} />
-        <ProjectsPage /> 
+        <ProjectsPage />
         <Footer /> */}
       </main>
     </div>
