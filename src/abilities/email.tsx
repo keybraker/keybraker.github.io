@@ -39,7 +39,7 @@ export default function Email() {
         <div className="flex flex-col">
           <span>
             from:{" "}
-            <a className="font-semibold" href={`${mailto}${subject}`}>
+            <a className="font-semibold hover:underline" href={`${mailto}${subject}`}>
               {mail}
             </a>
           </span>

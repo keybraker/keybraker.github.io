@@ -54,10 +54,10 @@ export default function Home() {
           </div>
           <div>
             <div className="sticky inset-y-0 left-0 top-[4.4rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
-              <CategoryTitle title={"Technical and Personal Skills"} />
+              <CategoryTitle title={"Notable Projects"} />
             </div>
             <div>
-              <SkillPage />
+              <ProjectsPage />
             </div>
           </div>
           <div>
@@ -65,15 +65,15 @@ export default function Home() {
               <CategoryTitle title={"Education"} />
             </div>
             <div>
-              <SkillPage />
+              <EducationPage />
             </div>
           </div>
           <div>
             <div className="sticky inset-y-0 left-0 top-[4.4rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
-              <CategoryTitle title={"Notable Projects"} />
+              <CategoryTitle title={"Technical and Personal Skills"} />
             </div>
             <div>
-              <ProjectsPage />
+              <SkillPage />
             </div>
           </div>
           <Footer />

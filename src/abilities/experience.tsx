@@ -6,7 +6,7 @@ const experiences: ShowcaseType[] = [
     start: "Feb 2022",
     end: "Present",
     title:
-      '<a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank">Fairlo</a>',
+      '<a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank" class="hover:underline">Fairlo</a>',
     info: "Financial Services",
     position: "Backend",
     technologies: ["TypeScript", "PostgreSQL", "Sequelize", "AWS", "Gitlab"],
@@ -19,7 +19,7 @@ const experiences: ShowcaseType[] = [
     start: "Jul 2021",
     end: "Jan 2022",
     title:
-      '<span class="text-gray-500"><a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank">Cypriot Military</a></span>',
+      '<span class="text-gray-500"><a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank" class="hover:underline">Cypriot Military</a></span>',
     info: '<span class="text-gray-500">Ordnance Corps</span>',
     position: '<span class="text-gray-500">Obligatory military service</span>',
   },
@@ -27,7 +27,7 @@ const experiences: ShowcaseType[] = [
     start: "Mar 2020",
     end: "Jun 2021",
     title:
-      '<a href="https://www.cyberlogic.gr/en/home" rel="noopener noreferrer" target="_blank">Cyberlogic</a>',
+      '<a href="https://www.cyberlogic.gr/en/home" rel="noopener noreferrer" target="_blank" class="hover:underline">Cyberlogic</a>',
     info: "Travel Technologies",
     position: "Frontend",
     technologies: ["Angular", "Visual Basic"],
@@ -39,7 +39,7 @@ const experiences: ShowcaseType[] = [
     start: "May 2019",
     end: "Mar 2020",
     title:
-      '<a href="https://www.medwork.gr/index.php" rel="noopener noreferrer" target="_blank">Medwork</a>',
+      '<a href="https://www.medwork.gr/index.php" rel="noopener noreferrer" target="_blank" class="hover:underline">Medwork</a>',
     info: "Contract Research Organization",
     position: "Full Stack",
     technologies: ["React", "Java", "MySQL"],
@@ -50,12 +50,12 @@ const experiences: ShowcaseType[] = [
     start: "Jun 2017",
     end: "Jan 2019",
     title:
-      '<a href="https://www.ics.forth.gr" rel="noopener noreferrer" target="_blank">FORTH</a>',
+      '<a href="https://www.ics.forth.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">FORTH</a>',
     info: "Telecommunications Research Lab",
     position: "Undergraduate Researcher",
     technologies: [
-      '<a href="https://www.ics.forth.gr/discs" rel="noopener noreferrer" target="_blank">DISCS</a>',
-      '<a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer" target="_blank">TNL</a>',
+      '<a href="https://www.ics.forth.gr/discs" rel="noopener noreferrer" target="_blank" class="hover:underline">DISCS</a>',
+      '<a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer" target="_blank" class="hover:underline">TNL</a>',
     ],
     description:
       "As an undergraduate researcher I mainly focused on creating faster ways to train AI models using CUDA to leverage the power of GPGPUs.",

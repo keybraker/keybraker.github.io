@@ -1,4 +1,3 @@
-import { TailwindColorEnum } from "@/enum/color";
 import { Head, Html, Main, NextScript } from "next/document";
 
 // function getRandomColor() {
@@ -9,7 +8,7 @@ import { Head, Html, Main, NextScript } from "next/document";
 // }
 
 function getBackgroundColor() {
-  return `bg-sky-200`;
+  return `bg-sky-300`;
 }
 
 export default function Document() {
