@@ -100,7 +100,9 @@ export default function Email() {
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
             className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-black bg-white shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
-            href="/static/ioannis_tsiakkas_resume.pdf"
+            href="/asssets/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             download="ioannis_tsiakkas_resume.pdf"
           >
             <span className="contents group-hover:hidden">

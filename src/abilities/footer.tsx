@@ -1,5 +1,5 @@
 import Image from "next/image";
-import signature from "@static/signature.png";
+import signature from "@asssets/signature.png";
 
 const repo = "https://github.com/keybraker/keybraker.github.io";
 
