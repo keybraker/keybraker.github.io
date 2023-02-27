@@ -10,8 +10,9 @@ export default function Footer() {
         <span className="mt-4 flex w-full flex-row justify-between text-sm">
           <Image src={signature} alt="The source of truth" width={84} />
           <a rel="noopener noreferrer" target="_blank" href={repo}>
-            <span className="hover:underline">
-              Made with NextJS and Tailwind, take a look
+            <span className="flex flex-col hover:underline">
+              <span>Made by me with NextJS and Tailwind.</span>
+              <span>Take a look at keybraker.github.io</span>
             </span>
           </a>
         </span>

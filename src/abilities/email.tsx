@@ -4,6 +4,7 @@ import { HiDocumentDownload } from "@react-icons/all-files/hi/HiDocumentDownload
 import { useEffect, useState } from "react";
 
 const mail = "iantsiakkas@gmail.com";
+const mailDisplay = "iantsiakkas AT gmail DOT com";
 const mailto = "mailto:" + mail;
 const subject = "?subject=" + "Hey%20Ioannis";
 const body = "&body=" + "Email%20Body";
@@ -43,11 +44,11 @@ export default function Email() {
               className="font-semibold hover:underline"
               href={`${mailto}${subject}`}
             >
-              {mail}
+              {mailDisplay}
             </a>
           </span>
           <span>to: you</span>
-          <span>subject: Welcome to the website regarding me</span>
+          <span>subject: Welcome to my website</span>
         </div>
         <div className="flex flex-col items-end">
           {hasMounted ? (
@@ -83,8 +84,7 @@ export default function Email() {
         </p>
         <p>If you have any ideas you wish to share, feel free to reply.</p>
 
-        <p className="mt-4">Kindly,</p>
-        <p>Ioannis Tsiakkas</p>
+        <p className="mt-4">Kindly, Ioannis</p>
       </div>
 
       <div className="flex-end align-start h-42 mt-7 flex justify-between gap-1">

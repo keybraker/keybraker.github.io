@@ -1,25 +1,37 @@
-import { SkillListings } from "@/components/skillListings";
-import { SkillType } from "@/types/skill";
+import { ShowcaseListings } from "@/components/showcaseListings";
+import { ShowcaseType } from "@/types/showcase";
 
-const skills: SkillType[] = [
+const projects: ShowcaseType[] = [
   {
-    category:
+    start: "2019",
+    end: "Present",
+    title:
       '<a href="https://github.com/The-Portal-Bot/Portal" rel="noopener noreferrer" target="_blank" class="hover:underline">Portal</a>',
-    qualifications: ["A fully functional Discord bot."],
+    info: "A fully functional Discord bot.",
+    position: "(Typescript, MongoDb, Mongoose)",
   },
   {
-    category:
-      '<a href="https://github.com/keybraker/Mediarizer" rel="noopener noreferrer" target="_blank" class="hover:underline">Mediarizer</a>',
-    qualifications: [
-      "A one-step solution to a chronologically organized media library.",
-    ],
+    start: "2017",
+    end: "Present",
+    title:
+      '<a href="https://github.com/keybraker/mediarizer" rel="noopener noreferrer" target="_blank" class="hover:underline">Mediarizer</a>',
+    info: "A one-step solution to a chronologically organized media library.",
+    position: "(C++)",
+  },
+  {
+    start: "2023",
+    end: "Present",
+    title:
+      '<a href="https://github.com/keybraker/mediarizer" rel="noopener noreferrer" target="_blank" class="hover:underline">Mediarizer 2</a>',
+    info: "A one-step solution to a chronologically organized media library.",
+    position: "(Go)",
   },
 ];
 
 export default function ProjectsPage(props: any) {
   return (
     <div className="rounded-[4px] border border-black bg-white p-2.5">
-      <SkillListings skills={skills} />
+      <ShowcaseListings showcases={projects} />
     </div>
   );
 }

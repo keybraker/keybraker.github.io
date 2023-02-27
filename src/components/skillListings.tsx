@@ -4,10 +4,22 @@ function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
   return (
     <>
       <div className="flex flex-col text-start align-top">
-        <div
-          className="content font-semibold"
-          dangerouslySetInnerHTML={{ __html: skill.category }}
-        ></div>
+        <div className="flex flex-row justify-between text-start align-top">
+          <div
+            className="content font-semibold"
+            dangerouslySetInnerHTML={{ __html: skill.category }}
+          ></div>
+          {skill?.technologies ? (
+            <div
+              className="content text-sm"
+              dangerouslySetInnerHTML={{
+                __html: `[${skill.technologies.join(", ")}]`,
+              }}
+            ></div>
+          ) : (
+            ""
+          )}
+        </div>
         {skill?.qualifications ? (
           <div
             className="content text-sm"
