@@ -64,10 +64,11 @@ export default function Email() {
         <p>Hello,</p>
 
         <p className="mt-2 whitespace-pre-line">
-          I&apos;m a Software Engineer with experience in building RESTful web
-          applications. I mainly focus on the backend client and infrastructure
-          but have also worked in the frontend. I have a passion for low level
-          programming and building things on my spare time.
+          I&apos;m a Software Engineer with professional experience in building
+          RESTful web applications. I mainly focus on the backend client and
+          infrastructure but have also worked in the frontend. I have a passion
+          for low level programming and building things that solve human
+          problems on my spare time.
         </p>
         <p className="mt-2 whitespace-pre-line">
           You can take a look at some of my work on my Github page by clicking{" "}
@@ -82,7 +83,10 @@ export default function Email() {
           </a>
           .
         </p>
-        <p>If you have any ideas you wish to share, feel free to reply.</p>
+        <p>
+          If you have any ideas you wish to share something with me, feel free
+          to reply.
+        </p>
 
         <p className="mt-4">Kindly, Ioannis</p>
       </div>

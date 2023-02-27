@@ -11,7 +11,7 @@ const experiences: ShowcaseType[] = [
     position: "Backend",
     technologies: ["TypeScript", "PostgreSQL", "Sequelize", "AWS", "Gitlab"],
     description:
-      "My role as backend developer is to maintain and expand the code base whilst also delivering new features for the core application. ",
+      "My role as backend developer, is to maintain and expand the code base whilst also delivering new features for the core application.",
   },
   {
     start: "Jul 2021",
@@ -30,7 +30,7 @@ const experiences: ShowcaseType[] = [
     position: "Frontend",
     technologies: ["Angular", "Visual Basic"],
     description:
-      "I mainly worked on delivering Traveling interface solutions to customers while also maintaining and expanding the core product. " +
+      "I mainly worked on delivering Traveling interface solutions to customers, while also maintaining and expanding the core product. " +
       "Applications for users were designed in Angular while the core product was written in Visual Basic.",
   },
   {

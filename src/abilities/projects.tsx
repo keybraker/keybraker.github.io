@@ -10,14 +10,14 @@ const projects: ShowcaseType[] = [
     info: "A fully functional Discord bot.",
     position: "(Typescript, MongoDb, Mongoose)",
   },
-  {
-    start: "2017",
-    end: "Present",
-    title:
-      '<a href="https://github.com/keybraker/mediarizer" rel="noopener noreferrer" target="_blank" class="hover:underline">Mediarizer</a>',
-    info: "A one-step solution to a chronologically organized media library.",
-    position: "(C++)",
-  },
+  // {
+  //   start: "2017",
+  //   end: "Present",
+  //   title:
+  //     '<a href="https://github.com/keybraker/mediarizer" rel="noopener noreferrer" target="_blank" class="hover:underline">Mediarizer</a>',
+  //   info: "A one-step solution to a chronologically organized media library.",
+  //   position: "(C++)",
+  // },
   {
     start: "2023",
     end: "Present",
