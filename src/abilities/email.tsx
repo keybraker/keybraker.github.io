@@ -34,7 +34,7 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mt-8 mb-12 rounded-[10px] border border-black bg-cyan-100 p-2.5 shadow-xl">
+    <section className="mt-8 mb-12 rounded-[10px] border border-black bg-blue-100 p-2.5 shadow-xl">
       {/* <HeadScene /> */}
       <div className="flex-start flex justify-between">
         <div className="flex flex-col">

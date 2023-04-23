@@ -8,7 +8,7 @@ const projects: ShowcaseType[] = [
     title:
       '<a href="https://github.com/The-Portal-Bot/Portal" rel="noopener noreferrer" target="_blank" class="hover:underline">Portal</a>',
     info: "A fully functional Discord bot.",
-    position: "(Typescript, MongoDb, Mongoose)",
+    position: "(TypeScript, MongoDB, Mongoose)",
   },
   // {
   //   start: "2017",
@@ -32,7 +32,7 @@ const projects: ShowcaseType[] = [
     title:
       '<a href="https://github.com/keybraker/skroutz-sponsored-flagger" rel="noopener noreferrer" target="_blank" class="hover:underline">Skroutz sponsored flagger</a>',
     info: 'An ad flagger for the price comparison site, <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
-    position: "(Javascript)",
+    position: "(JavaScript)",
   },
 ];
 
