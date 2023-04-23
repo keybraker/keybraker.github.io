@@ -10,8 +10,13 @@ const experiences: ShowcaseType[] = [
     info: "Financial Services",
     position: "Backend",
     technologies: ["TypeScript", "PostgreSQL", "Sequelize", "AWS", "Gitlab"],
-    description:
-      "My role as backend developer, is to maintain and expand the code base whilst also delivering new features for the core application.",
+    description: [
+      "Maintaining and improving the core product of the Fairlo platform, ensuring high code quality, reliability, and performance.",
+      "Implement and maintain robust testing practices, including unit testing, integration testing, and end-to-end testing, to ensure high code quality and minimize the risk of defects and regressions.",
+      "Collaborating with other team members, including front-end developers, product managers, and designers, to develop and implement new features and enhancements.",
+      "Conducting code reviews, writing and updating technical documentation, and providing support to other developers when needed.",
+      "Proactively identifying and addressing technical issues and potential areas of improvement to optimize the platform's functionality and user experience.",
+    ],
   },
   {
     start: "Jul 2021",
@@ -29,9 +34,10 @@ const experiences: ShowcaseType[] = [
     info: "Travel Technologies",
     position: "Frontend",
     technologies: ["Angular", "Visual Basic"],
-    description:
-      "I mainly worked on delivering Traveling interface solutions to customers, while also maintaining and expanding the core product. " +
-      "Applications for users were designed in Angular while the core product was written in Visual Basic.",
+    description: [
+      "Worked on the core product of the company's travel platform, developing and improving its user interface, user experience, and performance.",
+      "Developed and maintained custom websites for clients in the travel and hospitality industry, allowing them to offer online bookings and experiences to their customers.",
+    ],
   },
   {
     start: "May 2019",
@@ -41,8 +47,9 @@ const experiences: ShowcaseType[] = [
     info: "Contract Research Organization",
     position: "Full Stack",
     technologies: ["React", "Java", "MySQL"],
-    description:
+    description: [
       "Created a new system to handle pharmaceutical products achieving a big increase in productivity compared to the previous solution.",
+    ],
   },
   {
     start: "Jun 2017",
@@ -55,8 +62,9 @@ const experiences: ShowcaseType[] = [
       '<a href="https://www.ics.forth.gr/discs" rel="noopener noreferrer" target="_blank" class="hover:underline">DISCS</a>',
       '<a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer" target="_blank" class="hover:underline">TNL</a>',
     ],
-    description:
+    description: [
       "As an undergraduate researcher I mainly focused on creating faster ways to train AI models using CUDA to leverage the power of GPGPUs.",
+    ],
   },
 ];
 

@@ -47,9 +47,9 @@ function ShowcaseListing({
       </div>
       {showcase?.description ? (
         <div
-          className="content mt-2 pt-2 border-t border-dashed border-gray-200 text-sm text-gray-500"
+          className="content mt-2 pl-2 pt-2 border-t border-dashed border-gray-200 text-sm text-gray-500"
           dangerouslySetInnerHTML={{
-            __html: `${showcase.description}`,
+            __html: `<li>${showcase.description.join("</li><li>")}</li>`,
           }}
         ></div>
       ) : (

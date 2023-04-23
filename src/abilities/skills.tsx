@@ -3,10 +3,6 @@ import { SkillType } from "@/types/skill";
 
 const skills: SkillType[] = [
   {
-    category: "Languages",
-    qualifications: ["Raised bilingual Greek/German and fluent in English"],
-  },
-  {
     category: "Programming Languages",
     qualifications: ["C", "C++", "Go", "Java"],
   },
@@ -23,7 +19,7 @@ const skills: SkillType[] = [
   },
   {
     category: "Frameworks & Libraries",
-    qualifications: ["Angular", "React", "NextJS", "Gatsby"],
+    qualifications: ["Angular", "React", "NextJS", "Gatsby", "Tailwind"],
   },
   {
     category: "Tools",
@@ -37,7 +33,7 @@ const skills: SkillType[] = [
     ],
   },
   {
-    category: "Databases and Tools",
+    category: "Databases & ORMs",
     qualifications: ["PostgreSQL", "MySQL", "MongoDB", "Mongoose", "Sequelize"],
   },
   {
@@ -47,6 +43,12 @@ const skills: SkillType[] = [
   {
     category: "Basic Programs & OSs",
     qualifications: ["Office", "VSCode", "MacOS", "Linux", "Windows"],
+  },
+  {
+    category: "Languages",
+    qualifications: [
+      "Greek <i>Native</i>, German <i>Native</i>, English <i>Fluent</i>",
+    ],
   },
 ];
 
