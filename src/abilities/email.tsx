@@ -65,8 +65,8 @@ export default function Email() {
 
         <p className="mt-2 whitespace-pre-line">
           I&apos;m a Software Engineer with professional experience in building
-          RESTful web applications. I mainly focus on the backend client and
-          infrastructure but have also worked in the frontend. I have a passion
+          RESTful web applications. My main focus is on the backend client and
+          infrastructure but have also worked fullstack. I have a passion
           for low level programming and building things that solve human
           problems on my spare time.
         </p>
@@ -104,7 +104,7 @@ export default function Email() {
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
             className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-black bg-white shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
-            href="/asssets/resume.pdf"
+            href="/assets/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             download="ioannis_tsiakkas_resume.pdf"

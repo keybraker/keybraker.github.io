@@ -23,8 +23,8 @@
       "@abilities/*": [
         "./abilities/*"
       ],
-      "@asssets/*": [
-        "./public/asssets/*"
+      "@assets/*": [
+        "./public/assets/*"
       ],
       "@generated/*": [
         "./src/__generated__/*"
@@ -39,7 +39,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "public",
-    "public/asssets",
+    "public/assets",
     "src",
     "**/*.ts",
     "**/*.tsx"

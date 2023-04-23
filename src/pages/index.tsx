@@ -78,15 +78,6 @@ export default function Home() {
           </div>
           <Footer />
         </div>
-        {/* <CategoryTitle title={"Professional Experience"} />
-        <ExperiencePage />
-        <CategoryTitle title={"Technical and Personal Skills"} />
-        <SkillPage />
-        <CategoryTitle title={"Education"} />
-        <EducationPage />
-        <CategoryTitle title={"Notable Projects"} />
-        <ProjectsPage />
-        <Footer /> */}
       </main>
     </div>
   );
