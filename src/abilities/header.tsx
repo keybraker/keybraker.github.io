@@ -8,7 +8,7 @@ const mail = "mailto:" + "iantsiakkas@gmail.com";
 const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
 const github = "https://github.com/" + "Keybraker";
 const twitter = "https://twitter.com/" + "RealTsiakkas";
-const linkedin = "https://www.linkedin.com/in/" + "ioannis-t-3365151a2";
+const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
 
 function AboutPageInner() {
   return (
@@ -60,7 +60,7 @@ function AboutPageInner() {
 export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b-2 border-black">
-      <div className="flex flex-col items-center justify-between gap-2 px-0 pt-2 pb-6 bg-gray-100 xs:py-4 xs:flex-row sm:items-stretch">
+      <div className="flex flex-col items-center justify-between gap-2 px-0 py-2 bg-gray-100 xs:py-2 xs:flex-row sm:items-stretch">
         <span className="flex flex-col self-center text-center gap-1 font-helvetica text-2xl font-semibold tn:flex-row xs:gap-2">
           <span>Ioannis</span>
           <span>Tsiakkas</span>
