@@ -14,11 +14,11 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        'vws': '10vw',
+        'vws': '18vw',
         'md': '1rem',
       },
       lineHeight: {
-        'vws': '3vw',
+        'vws': '11vw',
       },
       zIndex: {
         "-1": "-1",

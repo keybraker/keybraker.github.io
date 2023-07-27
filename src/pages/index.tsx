@@ -116,6 +116,12 @@ export default function Home() {
 
           <div className="sticky bottom-0 -z-10 flex flex-col justify-center place-self-center w-full">
             <WaveSvg />
+
+            <div className="absolute bottom-0 left-0 right-0 flex items-end justify-center h-16 opacity-[0.03] dark:opacity-[0.03]">
+              <span className="select-none text-vws leading-vws text-medwork-dark dark:text-medwork-light font-bold overflow-hidden h-3/7 tracking-widest">
+                TSIAKKAS
+              </span>
+            </div>
           </div>
         </div>
       </main>
