@@ -8,7 +8,7 @@ const mail = "mailto:" + "iantsiakkas@gmail.com";
 const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
 const github = "https://github.com/" + "Keybraker";
 const twitter = "https://twitter.com/" + "RealTsiakkas";
-const linkedin = "https://www.linkedin.com/in/" + "ioannis-t-3365151a2";
+const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
 
 function AboutPageInner() {
   return (
