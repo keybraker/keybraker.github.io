@@ -6,7 +6,7 @@ const experiences: ShowcaseType[] = [
     start: "Feb 2022",
     end: "Present",
     title:
-      '<a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank" class="hover:underline">Fairlo</a>',
+      '<a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank" class="text-tsiakkas-dark dark:text-tsiakkas-light hover:underline">Fairlo</a>',
     info: "Financial Services",
     position: "Backend",
     technologies: ["TypeScript", "PostgreSQL", "Sequelize", "AWS", "Gitlab"],
@@ -22,9 +22,9 @@ const experiences: ShowcaseType[] = [
     start: "Jul 2021",
     end: "Jan 2022",
     title:
-      '<span class="text-gray-500"><a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank" class="hover:underline">Cypriot Military</a></span>',
-    info: '<span class="text-gray-500">Ordnance Corps</span>',
-    position: '<span class="text-gray-500">Obligatory military service</span>',
+      '<span class="text-tsiakkas-dark dark:text-tsiakkas-light"><a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank" class="hover:underline">Cypriot Military</a></span>',
+    info: '<span class="text-tsiakkas-dark dark:text-tsiakkas-light">Ordnance Corps</span>',
+    position: '<span class="text-tsiakkas-dark dark:text-tsiakkas-light">Obligatory military service</span>',
   },
   {
     start: "Mar 2020",
@@ -70,7 +70,7 @@ const experiences: ShowcaseType[] = [
 
 export default function ExperiencePage(props: any) {
   return (
-    <div className="rounded-[4px] border border-black bg-white p-2.5">
+    <div className="rounded-[4px] border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-innerLight dark:bg-tsiakkas-innerDark p-2.5">
       <ShowcaseListings showcases={experiences} />
     </div>
   );

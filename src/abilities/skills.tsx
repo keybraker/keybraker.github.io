@@ -54,7 +54,7 @@ const skills: SkillType[] = [
 
 export default function SkillPage(props: any) {
   return (
-    <div className="rounded-[4px] border border-black bg-white p-2.5">
+    <div className="rounded-[4px] border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-innerLight dark:bg-tsiakkas-innerDark p-2.5">
       <SkillListings skills={skills} />
     </div>
   );

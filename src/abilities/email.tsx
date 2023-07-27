@@ -34,7 +34,7 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mt-8 mb-12 rounded-[10px] border border-black bg-blue-100 p-2.5 shadow-xl">
+    <section className="mb-12 rounded-[10px] border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-blueLight dark:bg-tsiakkas-blueDark text-tsiakkas-dark dark:text-tsiakkas-light p-2.5 shadow-xl">
       {/* <HeadScene /> */}
       <div className="flex-start flex justify-between">
         <div className="flex flex-col">
@@ -52,13 +52,13 @@ export default function Email() {
         </div>
         <div className="flex flex-col items-end">
           {hasMounted ? (
-            <span className="text-gray-600">{formattedDate}</span>
+            <span>{formattedDate}</span>
           ) : null}
           <span className="italic">one attachment (1)</span>
         </div>
       </div>
 
-      <div className="my-4 border border-dashed border-black"></div>
+      <div className="my-4 border border-dashed border-tsiakkas-dark dark:border-tsiakkas-light"></div>
 
       <div>
         <p>Hello,</p>
@@ -91,9 +91,9 @@ export default function Email() {
         <p className="mt-4">Kindly, Ioannis</p>
       </div>
 
-      <div className="flex-end align-start h-42 mt-7 flex justify-between gap-1">
+      <div className="flex-end align-start h-42 mt-7 flex justify-between gap-1 text-tsiakkas-dark dark:text-tsiakkas-light ">
         <a
-          className="flex h-full w-24 items-center justify-around gap-0 rounded-full border border-black bg-white py-1.5 px-2.5 shadow-md hover:bg-gray-200"
+          className="flex h-full w-24 items-center justify-around gap-0 rounded-full border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-innerLight dark:bg-tsiakkas-innerDark py-1.5 px-2.5 shadow-md hover:bg-gray-200"
           href={`${mailto}${subject}`}
         >
           <HiOutlineReply />
@@ -103,7 +103,7 @@ export default function Email() {
         <div className="group relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
-            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-black bg-white shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
+            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-innerLight dark:bg-tsiakkas-innerDark shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
             href="/assets/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -113,7 +113,7 @@ export default function Email() {
               <GrDocumentPdf />
               <span>Resume</span>
             </span>
-            <span className="hidden group-hover:contents">
+            <span className="hidden group-hover:contents dark:text-tsiakkas-dark text-tsiakkas-dark">
               <HiDocumentDownload />
               <span>72.11 Kb</span>
             </span>

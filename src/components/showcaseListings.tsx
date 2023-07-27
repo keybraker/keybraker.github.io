@@ -9,7 +9,7 @@ function ShowcaseListing({
 }) {
   return (
     <>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 text-tsiakkas-dark dark:text-tsiakkas-light">
         <div className="no-wrap flex flex-col justify-start text-start align-top">
           <div
             className="content font-semibold"
@@ -47,7 +47,7 @@ function ShowcaseListing({
       </div>
       {showcase?.description ? (
         <div
-          className="content mt-2 pl-2 pt-2 border-t border-dashed border-gray-200 text-sm text-gray-500"
+          className="content mt-2 pl-2 pt-2 border-t border-dashed border-tsiakkas-dark dark:border-tsiakkas-light text-sm text-tsiakkas-dark dark:text-tsiakkas-light"
           dangerouslySetInnerHTML={{
             __html: `<li>${showcase.description.join("</li><li>")}</li>`,
           }}
@@ -55,7 +55,7 @@ function ShowcaseListing({
       ) : (
         ""
       )}
-      {!last ? <div className="my-4 border-[0.1px] border-gray-200"></div> : ""}
+      {!last ? <div className="my-4 border-t border-tsiakkas-dark dark:border-tsiakkas-light"></div> : ""}
     </>
   );
 }

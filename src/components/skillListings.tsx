@@ -3,7 +3,7 @@ import { SkillType } from "@/types/skill";
 function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
   return (
     <>
-      <div className="flex flex-col text-start align-top">
+      <div className="flex flex-col text-start align-top text-tsiakkas-dark dark:text-tsiakkas-light">
         <div className="flex flex-row justify-between text-start align-top">
           <div
             className="content font-semibold"
@@ -31,7 +31,7 @@ function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
           ""
         )}
       </div>
-      {!last ? <div className="my-4 border-[0.1px] border-gray-200"></div> : ""}
+      {!last ? <div className="my-4 border-t border-tsiakkas-dark dark:border-tsiakkas-light"></div> : ""}
     </>
   );
 }

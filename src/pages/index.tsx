@@ -10,7 +10,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="container relative mx-auto w-full max-w-6xl px-2 pb-2 xs:px-4 xs:pb-4 md:px-8 md:pb-8">
+    <div className="container">
       <Head>
         <title>Ioannis Tsiakkas</title>
         <meta name="title" content="Ioannis Tsiakkas" />
@@ -40,42 +40,46 @@ export default function Home() {
         />
       </Head>
 
-      <main className="flex flex-col justify-center gap-4 place-self-center backdrop-blur-3xl">
-        <div>
+      <main>
+        <div className="flex flex-col justify-center place-self-center h-full w-full">
           <Header />
-          <Email />
-          <div>
-            <div className="sticky inset-y-0 left-0 top-[4.4rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
-              <CategoryTitle title={"Professional Experience"} />
+
+          <div className="flex flex-col justify-center place-self-center max-w-[82rem] my-8">
+            <Email />
+            <div>
+              <div className="sticky inset-y-0 left-0 top-[4.4rem] mt-12 mb-2 text-center xs:top-10 xs:text-left">
+                <CategoryTitle title={"Professional Experience"} />
+              </div>
+              <div>
+                <ExperiencePage />
+              </div>
             </div>
             <div>
-              <ExperiencePage />
-            </div>
-          </div>
-          <div>
-            <div className="sticky inset-y-0 left-0 top-[4.4rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
-              <CategoryTitle title={"Notable Projects"} />
-            </div>
-            <div>
-              <ProjectsPage />
-            </div>
-          </div>
-          <div>
-            <div className="sticky inset-y-0 left-0 top-[4.4rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
-              <CategoryTitle title={"Education"} />
+              <div className="sticky inset-y-0 left-0 top-[4.4rem] mt-12 mb-2 text-center xs:top-10 xs:text-left">
+                <CategoryTitle title={"Notable Projects"} />
+              </div>
+              <div>
+                <ProjectsPage />
+              </div>
             </div>
             <div>
-              <EducationPage />
-            </div>
-          </div>
-          <div>
-            <div className="sticky inset-y-0 left-0 top-[4.4rem] z-50 mt-12 mb-2 text-center xs:top-10 xs:text-left">
-              <CategoryTitle title={"Technical and Personal Skills"} />
+              <div className="sticky inset-y-0 left-0 top-[4.4rem] mt-12 mb-2 text-center xs:top-10 xs:text-left">
+                <CategoryTitle title={"Education"} />
+              </div>
+              <div>
+                <EducationPage />
+              </div>
             </div>
             <div>
-              <SkillPage />
+              <div className="sticky inset-y-0 left-0 top-[4.4rem] mt-12 mb-2 text-center xs:top-10 xs:text-left">
+                <CategoryTitle title={"Technical and Personal Skills"} />
+              </div>
+              <div>
+                <SkillPage />
+              </div>
             </div>
           </div>
+
           <Footer />
         </div>
       </main>
