@@ -10,7 +10,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="container">
+    <div className="mx-auto px-4 w-full">
       <Head>
         <title>Ioannis Tsiakkas</title>
         <meta name="title" content="Ioannis Tsiakkas" />

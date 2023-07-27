@@ -16,6 +16,11 @@ export default function Footer() {
             </div>
           </a>
         </div>
+        <div className="absolute z-[3] bottom-0 left-0 right-0 flex items-end justify-center h-16 opacity-[0.05] dark:opacity-[0.05]">
+          <span className="select-none text-vws leading-vws text-medwork-dark dark:text-medwork-light font-bold overflow-hidden h-3/7 tracking-widest">
+            TSIAKKAS
+          </span>
+        </div>
       </div>
     </>
   );
