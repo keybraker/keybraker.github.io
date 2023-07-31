@@ -13,6 +13,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      width: {
+        'calc': 'calc((100vw - 83rem)/2)',
+      },
       fontSize: {
         'vws': '18vw',
         'md': '1rem',
@@ -31,7 +34,7 @@ module.exports = {
           innerDark: "#6e7173",
           blueLight: "#6fbade",
           blueDark: "#015682",
-          },
+        },
         primary: {
           50: "#eff6ff",
           100: "#dbeafe",
@@ -89,6 +92,7 @@ module.exports = {
       xs: "400px",
       sm: "576px",
       md: "960px",
+      equilibrium: "82rem",
       lg: "1440px",
       xl: "1840px",
       "2xl": "2160px",

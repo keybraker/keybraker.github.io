@@ -68,7 +68,7 @@ export default function Home() {
         />
         <meta
           property="twitter:image"
-          content="https://avatars.githubusercontent.com/u/23459466?v=4"
+          content="httpsT://avatars.githubusercontent.com/u/23459466?v=4"
         />
       </Head>
 
@@ -76,40 +76,28 @@ export default function Home() {
         <div className="flex flex-col justify-center place-self-center h-full w-full">
           <Header />
 
-          <div className="flex flex-col justify-center place-self-center max-w-[82rem] my-8 mx-4">
+          <div className="place-self-center w-full max-w-[82rem] my-8 px-4">
             <Email />
-            <div>
-              <div className="sticky inset-y-0 left-0 top-[4.4rem] mt-12 mb-2 text-center xs:top-10 xs:text-left">
-                <CategoryTitle title={"Professional Experience"} />
-              </div>
-              <div>
-                <ExperiencePage />
-              </div>
-            </div>
-            <div>
-              <div className="sticky inset-y-0 left-0 top-[4.4rem] mt-12 mb-2 text-center xs:top-10 xs:text-left">
-                <CategoryTitle title={"Notable Projects"} />
-              </div>
-              <div>
-                <ProjectsPage />
-              </div>
-            </div>
-            <div>
-              <div className="sticky inset-y-0 left-0 top-[4.4rem] mt-12 mb-2 text-center xs:top-10 xs:text-left">
-                <CategoryTitle title={"Education"} />
-              </div>
-              <div>
-                <EducationPage />
-              </div>
-            </div>
-            <div>
-              <div className="sticky inset-y-0 left-0 top-[4.4rem] mt-12 mb-2 text-center xs:top-10 xs:text-left">
-                <CategoryTitle title={"Technical and Personal Skills"} />
-              </div>
-              <div>
-                <SkillPage />
-              </div>
-            </div>
+          </div>
+
+          <CategoryTitle title={"Professional Experience"} />
+          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4">
+            <ExperiencePage />
+          </div>
+
+          <CategoryTitle title={"Notable Projects"} />
+          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4">
+            <ProjectsPage />
+          </div>
+
+          <CategoryTitle title={"Education"} />
+          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4">
+            <EducationPage />
+          </div>
+
+          <CategoryTitle title={"Technical and Personal Skills"} />
+          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4">
+            <SkillPage />
           </div>
 
           <Footer />
