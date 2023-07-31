@@ -30,9 +30,9 @@ module.exports = {
         tsiakkas: {
           light: "#f6f1eb",
           dark: "#2d333b",
-          innerLight: "#c6cccf",
+          innerLight: "#d9e3e8",
           innerDark: "#6e7173",
-          blueLight: "#6fbade",
+          blueLight: "#9BD4EF",
           blueDark: "#015682",
         },
         primary: {

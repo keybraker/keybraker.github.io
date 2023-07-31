@@ -1,6 +1,6 @@
 export default function CategoryTitle({ title }: { title: string }) {
   return (
-    <section className="sticky left-0 top-10 xs:top-[2.3rem] ml-4 pr-2 mb-2 equilibrium:mb-0 equilibrium:w-calc dark:bg-tsiakkas-dark bg-tsiakkas-light ">
+    <section className="left-0 xs:top-[2.3rem] ml-4 pr-2 mb-2 equilibrium:mb-0 equilibrium:w-calc">
       <span className="text-xl font-semibold text-tsiakkas-dark dark:text-tsiakkas-light text-center xs:text-left">
         {/* &#8226;  */}
         {title}
