@@ -14,7 +14,7 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        'calc': 'calc((100vw - 83rem)/2)',
+        'calc': 'calc((100vw - 82rem)/2)',
       },
       fontSize: {
         'vws': '18vw',
@@ -92,7 +92,8 @@ module.exports = {
       xs: "400px",
       sm: "576px",
       md: "960px",
-      equilibrium: "82rem",
+      eq: "82rem",
+      "2eq": "92rem",
       lg: "1440px",
       xl: "1840px",
       "2xl": "2160px",
@@ -123,4 +124,7 @@ module.exports = {
       animation: ["motion-safe"]
     }
   },
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };

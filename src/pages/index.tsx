@@ -76,27 +76,27 @@ export default function Home() {
         <div className="flex flex-col justify-center place-self-center h-full w-full">
           <Header />
 
-          <div className="place-self-center w-full max-w-[82rem] my-8 px-4">
+          <div className="place-self-center w-full max-w-[82rem] my-8 px-4 eq:px-0">
             <Email />
           </div>
 
           <CategoryTitle title={"Professional Experience"} />
-          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4">
+          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4 eq:px-0">
             <ExperiencePage />
           </div>
 
           <CategoryTitle title={"Notable Projects"} />
-          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4">
+          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4 eq:px-0">
             <ProjectsPage />
           </div>
 
           <CategoryTitle title={"Education"} />
-          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4">
+          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4 eq:px-0">
             <EducationPage />
           </div>
 
           <CategoryTitle title={"Technical and Personal Skills"} />
-          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4">
+          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4 eq:px-0">
             <SkillPage />
           </div>
 
