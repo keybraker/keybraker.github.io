@@ -93,7 +93,7 @@ export default function Email() {
 
       <div className="flex-end align-start h-42 mt-7 flex justify-between gap-1 text-tsiakkas-dark dark:text-tsiakkas-light ">
         <a
-          className="flex h-full w-24 items-center justify-around gap-0 hover:text-tsiakkas-dark rounded-full border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-innerLight dark:bg-tsiakkas-innerDark py-1.5 px-2.5 shadow-md hover:bg-gray-200"
+          className="flex h-full w-24 items-center justify-around gap-0 hover:text-tsiakkas-dark rounded-full bg-tsiakkas-light dark:bg-tsiakkas-dark py-1.5 px-2.5 shadow-md hover:bg-gray-300 dark:hover:bg-gray-400"
           href={`${mailto}${subject}`}
         >
           <HiOutlineReply />
@@ -103,7 +103,7 @@ export default function Email() {
         <div className="group relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
-            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-innerLight dark:bg-tsiakkas-innerDark shadow-md ring-1 ring-gray-900/5 hover:bg-gray-200"
+            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md bg-tsiakkas-light dark:bg-tsiakkas-dark shadow-md ring-1 ring-gray-900/5 hover:bg-gray-300 dark:hover:bg-gray-400"
             href="/assets/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
