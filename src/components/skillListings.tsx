@@ -11,7 +11,7 @@ function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
           ></div>
           {skill?.technologies ? (
             <div
-              className="content text-sm"
+              className="content  font-extrabold text-lg "
               dangerouslySetInnerHTML={{
                 __html: `[${skill.technologies.join(", ")}]`,
               }}
@@ -22,7 +22,7 @@ function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
         </div>
         {skill?.qualifications ? (
           <div
-            className="content text-sm"
+            className="content  font-extrabold text-lg "
             dangerouslySetInnerHTML={{
               __html: skill.qualifications.join(", "),
             }}

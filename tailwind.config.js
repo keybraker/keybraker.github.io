@@ -37,6 +37,10 @@ module.exports = {
           innerDark: "#6e7173",
           blueLight: "#9BD4EF",
           blueDark: "#015682",
+          electric: {
+            yellow: '#FFFF33',
+            orange: '#FF5F1F',
+          },
         },
         verge: {
           purple: "#5200FF",

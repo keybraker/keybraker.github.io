@@ -12,19 +12,19 @@ function ShowcaseListing({
       <div className="grid grid-cols-2 text-tsiakkas-dark dark:text-tsiakkas-light">
         <div className="no-wrap flex flex-col justify-start text-start align-top">
           <div
-            className="content font-semibold"
+            className="content font-extrabold text-lg "
             dangerouslySetInnerHTML={{ __html: showcase.title }}
           ></div>
           <div
-            className="content text-sm italic"
+            className="content text-md italic"
             dangerouslySetInnerHTML={{ __html: showcase.info }}
           ></div>
         </div>
 
         <div className="no-wrap flex flex-col items-end justify-start text-end align-top">
           <div
-            className="content text-sm italic"
-            dangerouslySetInnerHTML={{ __html: `${showcase.start} - ${showcase.end}` }}
+            className="content text-md italic"
+            dangerouslySetInnerHTML={{ __html: `${showcase.start} - ${showcase.end}${showcase.periodInMonths ? ` (${showcase.periodInMonths})` : ''}` }}
           >
           </div>
           <div className="flex flex-col items-end">
@@ -34,7 +34,7 @@ function ShowcaseListing({
             ></div>
             {showcase?.technologies ? (
               <div
-                className="content text-sm"
+                className="content text-md"
                 dangerouslySetInnerHTML={{
                   __html: `(${showcase.technologies.join(", ")})`,
                 }}
@@ -47,7 +47,7 @@ function ShowcaseListing({
       </div>
       {showcase?.description ? (
         <div
-          className="content mt-8 text-sm text-gray-500 dark:text-gray-400"
+          className="content mt-8 text-md text-gray-500 dark:text-gray-400 italic"
           dangerouslySetInnerHTML={{
             __html: `<li>${showcase.description.join("</li><li>")}</li>`,
           }}
