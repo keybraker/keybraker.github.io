@@ -15,7 +15,7 @@ const categories: CategoryProps[] = [
     colour: "bg-verge-lime",
   },
   {
-    title: "Technical and Personal Skills",
+    title: "Technical Skills",
     description: "I have a strong background in computer science, with a focus on software engineering.I have worked with a variety of programming languages, frameworks, and tools, and I am always eager to learn new technologies.I am a team player, and I enjoy working in a team environment.I am also a fast learner, and I am always looking for new challenges to overcome.",
     colour: "bg-verge-pink",
   },
