@@ -20,7 +20,7 @@ const education: ShowcaseType[] = [
 
 export default function EducationPage(props: any) {
   return (
-    <div className="rounded-[4px] border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-innerLight dark:bg-tsiakkas-innerDark p-2.5">
+    <div>
       <ShowcaseListings showcases={education} />
     </div>
   );

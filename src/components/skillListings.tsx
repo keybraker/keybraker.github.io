@@ -31,7 +31,7 @@ function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
           ""
         )}
       </div>
-      {!last ? <div className="my-4 border-t border-tsiakkas-dark dark:border-tsiakkas-light"></div> : ""}
+      {!last ? <div className="my-8 border-t border-gray-300 dark:border-gray-800"></div> : ""}
     </>
   );
 }

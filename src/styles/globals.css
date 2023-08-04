@@ -102,6 +102,11 @@ a {
   }
 }
 
+brief-title {
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

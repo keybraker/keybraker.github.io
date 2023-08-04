@@ -5,8 +5,31 @@ import Footer from "@/abilities/footer";
 import Header from "@/abilities/header";
 import ProjectsPage from "@/abilities/projects";
 import SkillPage from "@/abilities/skills";
-import CategoryTitle from "@/components/categoryTitle";
+import Category, { CategoryProps } from "@/components/category";
 import Head from "next/head";
+
+const categories: CategoryProps[] = [
+  {
+    title: "Professional Experience",
+    description: "In my professional career, I have worked in a variety of projects, ranging from web development to machine learning and from mobile development to cloud computing. I have worked in both small and large teams, in both agile and waterfall environments, and in both frontend and backend development.",
+    colour: "bg-verge-lime",
+  },
+  {
+    title: "Technical and Personal Skills",
+    description: "I have a strong background in computer science, with a focus on software engineering.I have worked with a variety of programming languages, frameworks, and tools, and I am always eager to learn new technologies.I am a team player, and I enjoy working in a team environment.I am also a fast learner, and I am always looking for new challenges to overcome.",
+    colour: "bg-verge-pink",
+  },
+  {
+    title: "Education",
+    description: "My education has provided me with a strong foundation in computer science, with a focus on software engineering. I have also taken courses in mathematics, physics, and electronics.",
+    colour: "bg-verge-red",
+  },
+  {
+    title: "Notable Projects",
+    description: "I am always working on side projects to improve my skills and learn new technologies. Some of my projects are available on GitHub.",
+    colour: "bg-verge-purple",
+  },
+];
 
 function WaveSvg() {
   return (
@@ -73,36 +96,54 @@ export default function Home() {
       </Head>
 
       <main>
+        {/* <div className="flex flex-col justify-center place-self-center h-full w-full"> */}
         <div className="flex flex-col justify-center place-self-center h-full w-full">
+
           <Header />
 
-          <div className="place-self-center w-full max-w-[82rem] my-8 px-4 eq:px-0">
+          <div className="flex flex-row flex-wrap gap-24 justify-center eq:mx-auto w-full max-w-[1320px] my-8 px-4 eq:px-0">
             <Email />
-          </div>
 
-          <CategoryTitle title={"Professional Experience"} />
-          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4 eq:px-0">
-            <ExperiencePage />
-          </div>
+            <div className="flex w-full flex-col items-center eq:flex-row eq:items-start gap-16 eq:gap-0">
+              <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+                <ExperiencePage />
+              </div>
+              <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <Category {...categories[0]} />
+              </div>
+            </div>
 
-          <CategoryTitle title={"Notable Projects"} />
-          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4 eq:px-0">
-            <ProjectsPage />
-          </div>
+            <div className="flex w-full flex-col items-center eq:flex-row eq:items-start gap-16 eq:gap-0">
+              <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+                <SkillPage />
+              </div>
+              <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <Category {...categories[1]} />
+              </div>
+            </div>
 
-          <CategoryTitle title={"Education"} />
-          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4 eq:px-0">
-            <EducationPage />
-          </div>
+            <div className="flex w-full flex-col items-center eq:flex-row eq:items-start gap-16 eq:gap-0">
+              <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+                <EducationPage />
+              </div>
+              <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <Category {...categories[2]} />
+              </div>
+            </div>
 
-          <CategoryTitle title={"Technical and Personal Skills"} />
-          <div className="place-self-center w-full max-w-[82rem] mb-8 px-4 eq:px-0">
-            <SkillPage />
+            <div className="flex w-full flex-col items-center eq:flex-row eq:items-start gap-16 eq:gap-0">
+              <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+                <ProjectsPage />
+              </div>
+              <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <Category {...categories[3]} />
+              </div>
+            </div>
           </div>
 
           <Footer />
 
-          <div className="sticky bottom-0 -z-10 flex flex-col justify-center place-self-center w-full">
+          {/* <div className="sticky bottom-0 -z-10 flex flex-col justify-center w-full">
             <WaveSvg />
 
             <div className="absolute bottom-0 left-0 right-0 flex items-end justify-center h-16 opacity-[0.03] dark:opacity-[0.03]">
@@ -110,7 +151,7 @@ export default function Home() {
                 TSIAKKAS
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
       </main>
     </div>

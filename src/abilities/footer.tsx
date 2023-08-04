@@ -5,7 +5,7 @@ const repo = "https://github.com/keybraker/keybraker.github.io";
 
 export default function Footer() {
   return (
-    <div className="z-10 px-4 py-4 border-t-2 border-tsiakkas-dark dark:border-tsiakkas-light place-self-center max-w-[82rem] w-full">
+    <div className="z-10 px-4 py-4 border-t-2 border-tsiakkas-dark dark:border-tsiakkas-light place-self-center max-w-[1320px] w-full">
       <div className="flex w-full flex-row justify-between">
         <Image src={signature} alt="signature" width={84} />
         <a rel="noopener noreferrer" target="_blank" href={repo}>

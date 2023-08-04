@@ -47,7 +47,7 @@ function ShowcaseListing({
       </div>
       {showcase?.description ? (
         <div
-          className="content mt-2 pl-2 pt-2 border-t border-dashed border-tsiakkas-dark dark:border-tsiakkas-light text-sm text-tsiakkas-dark dark:text-tsiakkas-light"
+          className="content mt-8 text-sm text-gray-500 dark:text-gray-400"
           dangerouslySetInnerHTML={{
             __html: `<li>${showcase.description.join("</li><li>")}</li>`,
           }}
@@ -55,7 +55,7 @@ function ShowcaseListing({
       ) : (
         ""
       )}
-      {!last ? <div className="my-4 border-t border-tsiakkas-dark dark:border-tsiakkas-light"></div> : ""}
+      {!last ? <div className="my-8 border-t border-gray-300 dark:border-gray-800"></div> : ""}
     </>
   );
 }

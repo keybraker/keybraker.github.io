@@ -34,7 +34,7 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mb-12 rounded-[10px] border border-tsiakkas-dark dark:border-tsiakkas-light bg-tsiakkas-blueLight dark:bg-tsiakkas-blueDark text-tsiakkas-dark dark:text-tsiakkas-light p-2.5 shadow-xl">
+    <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-4 shadow-xl">
       {/* <HeadScene /> */}
       <div className="flex-start flex justify-between">
         <div className="flex flex-col">
@@ -58,7 +58,7 @@ export default function Email() {
         </div>
       </div>
 
-      <div className="my-4 border border-dashed border-tsiakkas-dark dark:border-tsiakkas-light"></div>
+      <div className="my-4 border border-dashed border-tsiakkas-dark"></div>
 
       <div>
         <p>Hello,</p>

@@ -4,6 +4,7 @@ export type ShowcaseType = {
   title: string;
   info: string;
   position: string;
+  link?: string;
   description?: string[];
   technologies?: string[];
 };

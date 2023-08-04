@@ -13,6 +13,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      scale: {
+        '-100': '-1',
+      },
       width: {
         'calc': 'calc((100vw - 82rem)/2)',
       },
@@ -29,11 +32,18 @@ module.exports = {
       colors: {
         tsiakkas: {
           light: "#f6f1eb",
-          dark: "#2d333b",
+          dark: "#131313",
           innerLight: "#d9e3e8",
           innerDark: "#6e7173",
           blueLight: "#9BD4EF",
           blueDark: "#015682",
+        },
+        verge: {
+          purple: "#5200FF",
+          cyan: "#3CFFD0",
+          lime: "#D6F31F",
+          red: "#FF3D00",
+          pink: "#FFC2E7",
         },
         primary: {
           50: "#eff6ff",
@@ -92,9 +102,9 @@ module.exports = {
       xs: "400px",
       sm: "576px",
       md: "960px",
-      eq: "82rem",
-      "2eq": "92rem",
+      eq: "1320px",
       lg: "1440px",
+      "2eq": "1470px",
       xl: "1840px",
       "2xl": "2160px",
       "3xl": "2560px",
