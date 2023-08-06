@@ -101,11 +101,11 @@ export default function Home() {
 
           <Header />
 
-          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[1320px] my-8 px-4 eq:px-0">
+          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[1320px] my-8 px-3 eq:px-0">
             <Email />
 
-            <div className="flex flex-col gap-32">
-              <div className="flex w-full flex-col items-center eq:flex-row eq:items-start gap-16 eq:gap-0">
+            <div className="flex flex-col gap-16 eq:gap-32">
+              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <ExperiencePage />
                 </div>
@@ -114,7 +114,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex w-full flex-col items-center eq:flex-row eq:items-start gap-16 eq:gap-0">
+              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <SkillPage />
                 </div>
@@ -123,7 +123,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex w-full flex-col items-center eq:flex-row eq:items-start gap-16 eq:gap-0">
+              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <EducationPage />
                 </div>
@@ -132,7 +132,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex w-full flex-col items-center eq:flex-row eq:items-start gap-16 eq:gap-0">
+              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <ProjectsPage />
                 </div>

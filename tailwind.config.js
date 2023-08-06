@@ -43,7 +43,7 @@ module.exports = {
           },
         },
         verge: {
-          purple: "#5200FF",
+          purple: "#A57AFF",
           cyan: "#3CFFD0",
           lime: "#D6F31F",
           red: "#FF3D00",
