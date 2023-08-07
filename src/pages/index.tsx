@@ -26,7 +26,7 @@ const categories: CategoryProps[] = [
   },
   {
     title: "Notable Projects",
-    description: "I am always working on side projects to improve my skills and learn new technologies. Some of my projects are available on GitHub where I contribute to open source projects, while also creating my own.",
+    description: "I am always working on side projects to improve my skills and learn new technologies. Some of my projects are available on my <a href=\"https://github.com/keybraker\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"hover:underline\">Github</a> where I contribute to open source projects, while also creating my own.",
     colour: "bg-verge-purple",
   },
 ];

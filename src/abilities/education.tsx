@@ -7,7 +7,7 @@ const education: ShowcaseType[] = [
     start: "Sep 2013",
     end: "Jan 2019",
     periodInMonths: getPeriodBetween(new Date("2013-09-01"), new Date("2019-01-01")),
-    title: "Bachelor of Computer Science Degree",
+    title: "Bachelor of Computer Science",
     info: '<a href="https://www.csd.uoc.gr/CSD/index.jsp?lang=en" rel="noopener noreferrer" target="_blank" class="hover:underline">University of Crete</a>',
     position: "GPA: 3.00 B",
   },

@@ -4,7 +4,7 @@ import { SkillType } from "@/types/skill";
 const skills: SkillType[] = [
   {
     category: "Programming Languages",
-    qualifications: ["C", "C++", "Go", "Java"],
+    qualifications: ["C", "C++", "Go"],
   },
   {
     category: "Scripting Languages",

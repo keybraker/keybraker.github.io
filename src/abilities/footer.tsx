@@ -11,7 +11,7 @@ export default function Footer() {
           src={signature}
           alt="signature"
           width={84}
-          className="antialiased bg-tsiakkas-electric-orange dark:bg-tsiakkas-electric-yellow  transform rotate-3" // Add transform and rotate-3 classes
+          className="subpixel-antialiased bg-tsiakkas-electric-orange dark:bg-tsiakkas-electric-yellow transform rotate-3"
         />
         <a rel="noopener noreferrer" target="_blank" href={repo}>
           <div className="flex flex-wrap gap-2 hover:underline text-tsiakkas-dark dark:text-tsiakkas-light text-sm">
