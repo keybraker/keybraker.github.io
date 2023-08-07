@@ -5,6 +5,7 @@ import Footer from "@/abilities/footer";
 import Header from "@/abilities/header";
 import ProjectsPage from "@/abilities/projects";
 import SkillPage from "@/abilities/skills";
+import SoftwareEngineeringPage from "@/abilities/SoftwareEngineering";
 import Category, { CategoryProps } from "@/components/category";
 import Head from "next/head";
 
@@ -18,6 +19,11 @@ const categories: CategoryProps[] = [
     title: "Technical Skills",
     description: "I have a strong background in computer science, with a focus on software engineering. I have worked with a variety of programming languages, frameworks, and tools, and I am always eager to learn new technologies. I am a team player, and I enjoy working in a team environment. I am also a fast learner, and I am always looking for new challenges to overcome.",
     colour: "bg-verge-pink",
+  },
+  {
+    title: "Software Design",
+    description: "I am continuesly working on improving and bettering my software deisgn skills. In my jobs one of my main focuses it to design systems in the most appropriate way, in order for the systems to be performant, easy to work with and scalable.",
+    colour: "bg-verge-blue",
   },
   {
     title: "Education",
@@ -125,7 +131,7 @@ export default function Home() {
 
               <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
-                  <EducationPage />
+                  <SoftwareEngineeringPage />
                 </div>
                 <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
                   <Category {...categories[2]} />
@@ -134,10 +140,19 @@ export default function Home() {
 
               <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
-                  <ProjectsPage />
+                  <EducationPage />
                 </div>
                 <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
                   <Category {...categories[3]} />
+                </div>
+              </div>
+
+              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
+                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+                  <ProjectsPage />
+                </div>
+                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                  <Category {...categories[4]} />
                 </div>
               </div>
             </div>

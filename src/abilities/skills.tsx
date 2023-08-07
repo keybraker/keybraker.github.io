@@ -3,19 +3,8 @@ import { SkillType } from "@/types/skill";
 
 const skills: SkillType[] = [
   {
-    category: "Programming Languages",
-    qualifications: ["C", "C++", "Go"],
-  },
-  {
-    category: "Scripting Languages",
-    qualifications: [
-      "TypeScript",
-      "JavaScript",
-      "Visual Basic",
-      "NodeJS",
-      "HTML",
-      "CSS",
-    ],
+    category: "Programming/Scripting Languages",
+    qualifications: ["TypeScript", "Go", "HTML", "CSS"],
   },
   {
     category: "Frameworks & Libraries",
@@ -23,26 +12,11 @@ const skills: SkillType[] = [
   },
   {
     category: "Tools",
-    qualifications: [
-      "Git (Gitlab, Github)",
-      "Github Actions",
-      "Docker",
-      "AWS",
-      "ExpressJS",
-      "Jest",
-    ],
+    qualifications: ["Git (Gitlab, Github)", "Github Actions", "Docker", "AWS", "ExpressJS", "Jest"],
   },
   {
     category: "Databases & ORMs",
     qualifications: ["PostgreSQL", "MySQL", "MongoDB", "Mongoose", "Sequelize"],
-  },
-  {
-    category: "Practices",
-    qualifications: ["Agile", "Scrum", "Kanban"],
-  },
-  {
-    category: "Basic Programs & OSs",
-    qualifications: ["Office", "VSCode", "MacOS", "Linux", "Windows"],
   },
   {
     category: "Languages",
