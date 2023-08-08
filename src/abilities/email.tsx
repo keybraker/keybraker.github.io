@@ -83,7 +83,7 @@ export default function Email() {
           </a>
           .
         </p>
-        <p>
+        <p className="mt-2 whitespace-pre-line">
           If you have any ideas you wish to share something with me, feel free
           to reply.
         </p>

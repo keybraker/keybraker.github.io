@@ -5,7 +5,7 @@ import Footer from "@/abilities/footer";
 import Header from "@/abilities/header";
 import ProjectsPage from "@/abilities/projects";
 import SkillPage from "@/abilities/skills";
-import SoftwareEngineeringPage from "@/abilities/SoftwareEngineering";
+import SoftwareEngineeringPage from "@/abilities/softwareEngineering";
 import Category, { CategoryProps } from "@/components/category";
 import Head from "next/head";
 
@@ -22,7 +22,7 @@ const categories: CategoryProps[] = [
   },
   {
     title: "Software Design",
-    description: "I am continuesly working on improving and bettering my software deisgn skills. In my jobs one of my main focuses it to design systems in the most appropriate way, in order for the systems to be performant, easy to work with and scalable.",
+    description: "I am continuously working on improving and bettering my software design skills. In my jobs one of my main focuses it to design systems in the most appropriate way, in order for the systems to be performant, easy to work with and scalable.",
     colour: "bg-verge-blue",
   },
   {
@@ -107,10 +107,10 @@ export default function Home() {
 
           <Header />
 
-          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[1320px] my-8 px-3 eq:px-0">
+          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[1320px] my-8 px-3 eq:px-0 text-tsiakkas-dark dark:text-tsiakkas-light">
             <Email />
 
-            <div className="flex flex-col gap-16 eq:gap-32">
+            <div className="flex flex-col gap-16 eq:gap-48 mb-32">
               <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <ExperiencePage />
@@ -122,19 +122,22 @@ export default function Home() {
 
               <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
-                  <SkillPage />
+                  <ProjectsPage />
+                  <p className="text-md font-bold mt-12 italic">
+                    (Find all my work on my{" "}
+                    <a
+                      href="https://github.com/keybraker"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-medwork-dark hover:text-verge-blue hover:underline"
+                    >
+                      GitHub
+                    </a>
+                    {" "}page)
+                  </p>
                 </div>
                 <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
-                  <Category {...categories[1]} />
-                </div>
-              </div>
-
-              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
-                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
-                  <SoftwareEngineeringPage />
-                </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
-                  <Category {...categories[2]} />
+                  <Category {...categories[4]} />
                 </div>
               </div>
 
@@ -147,14 +150,24 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
+              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-16 w-full border-tsiakkas-dark dark:border-tsiakkas-light border  rounded-lg p-8">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
-                  <ProjectsPage />
+                  <SkillPage />
                 </div>
                 <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
-                  <Category {...categories[4]} />
+                  {/* <Category {...categories[1]} /> */}
+                  <SoftwareEngineeringPage />
                 </div>
               </div>
+
+              {/* <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
+                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+                  <SoftwareEngineeringPage />
+                </div>
+                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                  <Category {...categories[2]} />
+                </div>
+              </div> */}
             </div>
           </div>
 

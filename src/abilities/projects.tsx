@@ -32,7 +32,12 @@ const projects: ShowcaseType[] = [
     title:
       '<a href="https://github.com/keybraker/skroutz-sponsored-flagger" rel="noopener noreferrer" target="_blank" class="hover:underline">Skroutz sponsored flagger</a>',
     info: 'An ad flagger for the price comparison site, <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
-    position: "(TypeScript)",
+    position: "(TypeScript, Wepback)",
+    description: [
+      "Current user-base of 250+ users.",
+      "Created and deployed an extension to both Chrome's and Firefox's store.",
+      "Used the latest technologies to make deployments fast and of the highest quality.",
+    ],
   },
 ];
 

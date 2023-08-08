@@ -13,11 +13,14 @@ const experiences: ShowcaseType[] = [
     position: "Backend",
     technologies: ["TypeScript", "PostgreSQL", "Sequelize", "AWS", "Gitlab"],
     description: [
-      "Maintaining and improving the core product of the Fairlo platform, ensuring high code quality, reliability, and performance.",
-      "Implement and maintain robust testing practices, including unit testing, integration testing, and end-to-end testing, to ensure high code quality and minimize the risk of defects and regressions.",
+      "Handling the dunning process of the company, with close collaboration with a third party provider.",
+      "Revamped the email sending process, made emails more coherent, easier to maintain and high quality.",
+      "Updated the calculations on loan construction which decreased the amount of processing time needed and improved user experience.",
+      "Working on designing and implementing REST endpoints to be used by the company's frontend applications.",
+      "Implement and maintain robust testing practices, including unit testing, integration testing, and end-to-end testing, to ensure high code quality and minimise the risk of defects and regressions.",
       "Collaborating with other team members, including front-end developers, product managers, and designers, to develop and implement new features and enhancements.",
       "Conducting code reviews, writing and updating technical documentation, and providing support to other developers when needed.",
-      "Proactively identifying and addressing technical issues and potential areas of improvement to optimize the platform's functionality and user experience.",
+      "Proactively identifying and addressing technical issues and potential areas of improvement to optimise the platform's functionality and user experience.",
     ],
   },
   {
@@ -40,6 +43,7 @@ const experiences: ShowcaseType[] = [
     technologies: ["Angular", "Visual Basic"],
     description: [
       "Worked on the core product of the company's travel platform, developing and improving its user interface, user experience, and performance.",
+      "Worked on the transition to the new system design which decoupled the backend system and provided a more robust and scalable solution.",
       "Developed and maintained custom websites for clients in the travel and hospitality industry, allowing them to offer online bookings and experiences to their customers.",
     ],
   },
@@ -54,6 +58,8 @@ const experiences: ShowcaseType[] = [
     technologies: ["React", "Java", "MySQL"],
     description: [
       "Created a new system to handle pharmaceutical products achieving a big increase in productivity compared to the previous solution.",
+      "Digitalised the company's processes by creating a new system to handle the company's data.",
+      "Achieved a big increase in productivity compared to the previous solution, by bring tailored made solutions to employees.",
     ],
   },
   {
