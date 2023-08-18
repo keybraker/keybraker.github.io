@@ -115,7 +115,7 @@ export default function Home() {
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <ExperiencePage />
                 </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
                   <Category {...categories[0]} />
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function Home() {
                     {" "}page)
                   </p>
                 </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
                   <Category {...categories[4]} />
                 </div>
               </div>
@@ -145,16 +145,16 @@ export default function Home() {
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <EducationPage />
                 </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
                   <Category {...categories[3]} />
                 </div>
               </div>
 
-              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-16 w-full border-tsiakkas-dark dark:border-tsiakkas-light border  rounded-lg p-8">
+              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-16 w-full border-tsiakkas-dark dark:border-tsiakkas-light border rounded-lg p-8">
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <SkillPage />
                 </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
                   {/* <Category {...categories[1]} /> */}
                   <SoftwareEngineeringPage />
                 </div>
@@ -164,7 +164,7 @@ export default function Home() {
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <SoftwareEngineeringPage />
                 </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col">
+                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
                   <Category {...categories[2]} />
                 </div>
               </div> */}
