@@ -4,7 +4,7 @@ import { ShowcaseType } from "@/types/showcase";
 const projects: ShowcaseType[] = [
   {
     start: "2019",
-    end: "2021",
+    end: "Present",
     title:
       '<a href="https://github.com/The-Portal-Bot/Portal" rel="noopener noreferrer" target="_blank" class="hover:underline">Portal</a>',
     info: "A fully functional Discord bot.",
