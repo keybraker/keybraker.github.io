@@ -9,6 +9,13 @@ import SoftwareEngineeringPage from "@/abilities/softwareEngineering";
 import Category, { CategoryProps } from "@/components/category";
 import Head from "next/head";
 
+const title = "Ioannis Tsiakkas";
+export const description = "I'm a Software Engineer with professional experience in building \
+  RESTful web applications. My main focus is on the backend client and \
+  infrastructure but have also worked fullstack. I have a passion \
+  for low level programming and building things that solve human \
+  problems on my spare time.";
+
 const categories: CategoryProps[] = [
   {
     title: "Professional Experience",
@@ -73,16 +80,18 @@ export default function Home() {
   return (
     <div className="mx-auto w-full">
       <Head>
-        <title>Ioannis Tsiakkas</title>
-        <meta name="title" content="Ioannis Tsiakkas" />
-        <meta name="description" content="Ioannis Tsiakkas Website" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+
         <link rel="icon" href="/favicon.ico" />
+
+        <meta name="title" content={description} />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://itsiakkas.com/" />
-        <meta property="og:title" content="Ioannis Tsiakkas" />
-        <meta property="og:description" content="Ioannis Tsiakkas Website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
         <meta
           property="og:image"
           content="https://avatars.githubusercontent.com/u/23459466?v=4"
@@ -90,11 +99,8 @@ export default function Home() {
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://itsiakkas.com/" />
-        <meta property="twitter:title" content="Ioannis Tsiakkas" />
-        <meta
-          property="twitter:description"
-          content="Ioannis Tsiakkas Website"
-        />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
         <meta
           property="twitter:image"
           content="httpsT://avatars.githubusercontent.com/u/23459466?v=4"

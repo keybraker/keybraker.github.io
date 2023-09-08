@@ -2,6 +2,7 @@ import { ImFilePdf } from "@react-icons/all-files/im/ImFilePdf";
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
 import { HiOutlineDownload } from "@react-icons/all-files/hi/HiOutlineDownload";
 import { useEffect, useState } from "react";
+import { description } from "@/pages";
 
 const mail = "iantsiakkas@gmail.com";
 const mailDisplay = "iantsiakkas AT gmail DOT com";
@@ -63,13 +64,7 @@ export default function Email() {
       <div>
         <p>Hello,</p>
 
-        <p className="mt-2 whitespace-pre-line">
-          I&apos;m a Software Engineer with professional experience in building
-          RESTful web applications. My main focus is on the backend client and
-          infrastructure but have also worked fullstack. I have a passion
-          for low level programming and building things that solve human
-          problems on my spare time.
-        </p>
+        <p className="mt-2 whitespace-pre-line">{description}</p>
         <p className="mt-2 whitespace-pre-line">
           You can take a look at some of my work on my Github page by clicking{" "}
           <a
