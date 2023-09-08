@@ -3,6 +3,7 @@ import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
 import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
+import Link from "next/link";
 
 const mail = "mailto:" + "iantsiakkas@gmail.com";
 const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
@@ -61,10 +62,12 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-10 border-b-2 border-tsiakkas-dark dark:border-tsiakkas-light flex flex-col justify-center place-self-center max-w-[83rem] w-full">
       <div className="flex flex-col items-center justify-between gap-2 px-4 pt-2 pb-4 bg-tsiakkas-light dark:bg-tsiakkas-dark xs:py-4 xs:flex-row sm:items-stretch">
-        <h1 className="flex flex-col self-center text-center gap-1 font-helvetica text-2xl font-bold leading-100 text-tsiakkas-dark dark:text-tsiakkas-light tn:flex-row xs:gap-2">
-          <span>Ioannis</span>
-          <span>Tsiakkas</span>
-        </h1>
+        <Link href="/">
+          <h1 className="flex flex-col self-center text-center gap-1 font-helvetica text-2xl font-bold leading-100 text-tsiakkas-dark dark:text-tsiakkas-light tn:flex-row xs:gap-2">
+            <span>Ioannis</span>
+            <span>Tsiakkas</span>
+          </h1>
+        </Link>
         <AboutPageInner></AboutPageInner>
       </div>
     </header>
