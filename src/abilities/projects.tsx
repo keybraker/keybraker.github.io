@@ -22,7 +22,7 @@ const projects: ShowcaseType[] = [
     start: "2023",
     end: "Present",
     title:
-      '<a href="https://github.com/keybraker/mediarizer" rel="noopener noreferrer" target="_blank" class="hover:underline">Mediarizer 2</a>',
+      '<a href="https://github.com/keybraker/mediarizer-2" rel="noopener noreferrer" target="_blank" class="hover:underline">Mediarizer 2</a>',
     info: "A one-step solution to a chronologically organized media library.",
     position: "(Go)",
   },
