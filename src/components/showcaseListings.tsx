@@ -12,7 +12,7 @@ function ShowcaseListing({
       <div className="grid grid-cols-2 text-tsiakkas-dark dark:text-tsiakkas-light">
         <div className="no-wrap flex flex-col justify-start text-start align-top">
           <div
-            className="content font-extrabold text-lg "
+            className="content font-extrabold text-lg"
             dangerouslySetInnerHTML={{ __html: showcase.title }}
           ></div>
           <div
@@ -47,7 +47,7 @@ function ShowcaseListing({
       </div>
       {showcase?.description ? (
         <ul
-          className="content mt-8 text-md text-gray-800 dark:text-gray-400 italic list-disc"
+          className="content mt-8 ml-4 text-md text-gray-800 dark:text-gray-400 italic list-disc"
           dangerouslySetInnerHTML={{
             __html: `<li>${showcase.description.join("</li><li>")}</li>`,
           }}

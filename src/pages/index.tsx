@@ -108,12 +108,11 @@ export default function Home() {
       </Head>
 
       <main>
-        {/* <div className="flex flex-col justify-center place-self-center h-full w-full"> */}
-        <div className="flex flex-col justify-center place-self-center h-full w-full">
+        <div className="flex flex-col items-center justify-center place-self-center h-full w-full">
 
           <Header />
 
-          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[1320px] my-8 px-3 eq:px-0 text-tsiakkas-dark dark:text-tsiakkas-light">
+          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[560px] eq:max-w-[1320px] my-8 px-3 eq:px-0 text-tsiakkas-dark dark:text-tsiakkas-light">
             <Email />
 
             <div className="flex flex-col gap-16 eq:gap-48 mb-32">
@@ -178,16 +177,6 @@ export default function Home() {
           </div>
 
           <Footer />
-
-          {/* <div className="sticky bottom-0 -z-10 flex flex-col justify-center w-full">
-            <WaveSvg />
-
-            <div className="absolute bottom-0 left-0 right-0 flex items-end justify-center h-16 opacity-[0.03] dark:opacity-[0.03]">
-              <span className="select-none text-vws leading-vws text-medwork-dark dark:text-medwork-light font-bold overflow-hidden h-3/7 tracking-widest">
-                TSIAKKAS
-              </span>
-            </div>
-          </div> */}
         </div>
       </main>
     </div>
