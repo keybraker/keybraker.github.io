@@ -9,7 +9,7 @@ export function getPeriodBetween(date1: Date, date2: Date): string {
 
     let result = '';
     if (years > 0) {
-        result += years === 1 ? `${years} yr ` : `${years} yrs `;
+        result += years === 1 ? `${years} yr ` : `${years} yrs`;
     }
 
     if (months > 0) {

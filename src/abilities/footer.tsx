@@ -13,12 +13,13 @@ export default function Footer() {
         <Image
           src={signature}
           alt="signature"
-          width={84}
+          width={148}
+          height={84}
           className="subpixel-antialiased bg-tsiakkas-electric-orange dark:bg-tsiakkas-electric-yellow transform rotate-3"
         />
         <a rel="noopener noreferrer" target="_blank" href={repo}>
           <div className="flex flex-wrap gap-2 hover:underline text-tsiakkas-dark dark:text-tsiakkas-light text-sm">
-            Designed and created by me<br></br>using NextJS and Tailwind @keybraker.github.io
+            Designed and created by me<br></br>@keybraker.github.io
           </div>
         </a>
       </div>

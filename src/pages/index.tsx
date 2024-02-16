@@ -112,7 +112,7 @@ export default function Home() {
 
           <Header />
 
-          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[560px] eq:max-w-[1320px] my-8 px-3 eq:px-0 text-tsiakkas-dark dark:text-tsiakkas-light">
+          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[560px] eq:max-w-[1320px] my-8 px-4 sm:px-6 eq:px-0 text-tsiakkas-dark dark:text-tsiakkas-light">
             <Email />
 
             <div className="flex flex-col gap-16 eq:gap-48 mb-32">

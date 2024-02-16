@@ -34,7 +34,7 @@ function ShowcaseListing({
             ></div>
             {showcase?.technologies ? (
               <div
-                className="content text-md whitespace-nowrap"
+                className="content text-md eq:whitespace-nowrap"
                 dangerouslySetInnerHTML={{
                   __html: `(${showcase.technologies.join(", ")})`,
                 }}
@@ -65,7 +65,7 @@ export function ShowcaseListings({ showcases }: { showcases: ShowcaseType[] }) {
     <>
       {showcases.map((showcase, i) => {
         return (
-          <div key={i}>
+          <div key={i} className="ml-2">
             <ShowcaseListing
               showcase={showcase}
               last={i + 1 === showcases.length}

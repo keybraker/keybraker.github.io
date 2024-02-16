@@ -13,7 +13,7 @@ const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
 
 function AboutPageInner() {
   return (
-    <div className="flex-start flex flex-row items-center justify-around gap-4 align-baseline text-tsiakkas-dark dark:text-tsiakkas-light">
+    <div className="flex flex-row items-center justify-between xs:justify-around gap-4 align-baseline text-tsiakkas-dark dark:text-tsiakkas-light">
       <a
         aria-label="By clicking you will be taken to Maps"
         rel="noopener noreferrer"
@@ -60,8 +60,11 @@ function AboutPageInner() {
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-10 border-b-2 border-tsiakkas-dark dark:border-tsiakkas-light flex flex-col justify-center place-self-center max-w-[560px] eq:max-w-[1320px] w-full">
-      <div className="flex flex-col items-center justify-between gap-2 px-4 pt-2 pb-4 bg-tsiakkas-light dark:bg-tsiakkas-dark xs:py-4 xs:flex-row sm:items-stretch">
+    <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[560px] eq:max-w-[1320px] w-full px-4 eq:px-0">
+      <div className="
+        flex flex-col items-center justify-between gap-4 px-4 pt-2 pb-4 bg-tsiakkas-light dark:bg-tsiakkas-dark xs:py-4 xs:flex-row sm:items-stretch
+        border-b-2 border-tsiakkas-dark dark:border-tsiakkas-light
+      ">
         <Link href="/">
           <h1 className="flex flex-col self-center text-center gap-1 font-helvetica text-2xl font-bold leading-100 text-tsiakkas-dark dark:text-tsiakkas-light tn:flex-row xs:gap-2">
             <span>Ioannis</span>
