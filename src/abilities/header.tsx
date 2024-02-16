@@ -62,7 +62,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[560px] eq:max-w-[1320px] w-full px-4 eq:px-0">
       <div className="
-        flex flex-col items-center justify-between gap-4 px-4 pt-2 pb-4 bg-tsiakkas-light dark:bg-tsiakkas-dark xs:py-4 xs:flex-row sm:items-stretch
+        flex flex-col items-center justify-between px-4 pt-2 pb-4 tn:pt-2 tn:pb-4 gap-4 bg-tsiakkas-light dark:bg-tsiakkas-dark xs:py-4 xs:flex-row sm:items-stretch
         border-b-2 border-tsiakkas-dark dark:border-tsiakkas-light
       ">
         <Link href="/">
