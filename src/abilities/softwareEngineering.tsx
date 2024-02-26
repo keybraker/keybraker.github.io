@@ -4,11 +4,11 @@ import { SkillType } from "@/types/skill";
 const skills: SkillType[] = [
   {
     category: "Code Design",
-    qualifications: ["Clean code", "Testing", "Test driven development", "Refactoring", "Debugging"],
+    qualifications: ["Testing", "Test driven development", "Refactoring", "Clean code"],
   },
   {
     category: "Architecture",
-    qualifications: ["Lambdas", "CronJob", "Microservices"],
+    qualifications: ["Event Bridge", "Lambdas", "CronJob", "Microservices"],
   },
   {
     category: "Practices",
@@ -16,7 +16,7 @@ const skills: SkillType[] = [
   },
 ];
 
-export default function SoftwareEngineeringPage(props: any) {
+export default function SoftwareEngineeringPage() {
   return (
     <div>
       <SkillListings skills={skills} />

@@ -131,6 +131,8 @@ export default function Home() {
                   <p className="text-md font-bold mt-12 italic">
                     (Find all my work on my{" "}
                     <a
+                      role="link"
+                      aria-label="keybraker's GitHub page"
                       href="https://github.com/keybraker"
                       target="_blank"
                       rel="noopener noreferrer"

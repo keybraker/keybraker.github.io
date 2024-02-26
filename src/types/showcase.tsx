@@ -1,10 +1,9 @@
 export type ShowcaseType = {
-  start: string;
-  end: string;
+  start: Date;
+  end: Date | null;
   title: string;
   info: string;
   position: string;
-  periodInMonths?: string;
   link?: string;
   description?: string[];
   technologies?: string[];

@@ -1,4 +1,8 @@
+import { getDateFormatted } from "@/functions/getDateFormatted";
+import { getPeriodBetween } from "@/functions/getMonthsBetween";
 import { ShowcaseType } from "@/types/showcase";
+import { useEffect, useState } from "react";
+
 
 function ShowcaseListing({
   showcase,
@@ -7,10 +11,16 @@ function ShowcaseListing({
   showcase: ShowcaseType;
   last: boolean;
 }) {
+  const [period, setPeriod] = useState('');
+
+  useEffect(() => {
+    setPeriod(getPeriodBetween(showcase.start, showcase.end));
+  }, [showcase.start, showcase.end]);
+
   return (
     <>
-      <div className="grid grid-cols-2 text-tsiakkas-dark dark:text-tsiakkas-light">
-        <div className="no-wrap flex flex-col justify-start text-start align-top">
+      <div className="flex flex-row justify-between text-tsiakkas-dark dark:text-tsiakkas-light">
+        <div className=" w-4/12 no-wrap flex flex-col justify-start text-start align-top">
           <div
             className="content font-extrabold text-lg"
             dangerouslySetInnerHTML={{ __html: showcase.title }}
@@ -21,11 +31,12 @@ function ShowcaseListing({
           ></div>
         </div>
 
-        <div className="no-wrap flex flex-col items-end justify-start text-end align-top">
+        <div className="w-6/12 no-wrap flex flex-col items-end justify-start text-end align-top">
           <div
-            className="content text-md italic"
-            dangerouslySetInnerHTML={{ __html: `${showcase.start} - ${showcase.end}${showcase.periodInMonths ? ` (${showcase.periodInMonths})` : ''}` }}
+            className="flex flex-col sm:flex-row content text-md italic sm:gap-2"
           >
+            <span>{getDateFormatted(showcase.start)} - {getDateFormatted(showcase.end)}</span>
+            <span className="text-sm text-tsiakkas-bark2 dark:text-tsiakkas-light2">({period})</span>
           </div>
           <div className="flex flex-col items-end">
             <div
@@ -34,7 +45,7 @@ function ShowcaseListing({
             ></div>
             {showcase?.technologies ? (
               <div
-                className="content text-md eq:whitespace-nowrap"
+                className="content text-sm text-tsiakkas-bark2 dark:text-tsiakkas-light2 eq:whitespace-nowrap"
                 dangerouslySetInnerHTML={{
                   __html: `(${showcase.technologies.join(", ")})`,
                 }}
@@ -65,7 +76,7 @@ export function ShowcaseListings({ showcases }: { showcases: ShowcaseType[] }) {
     <>
       {showcases.map((showcase, i) => {
         return (
-          <div key={i} className="ml-2">
+          <div key={i} className="sm:ml-2">
             <ShowcaseListing
               showcase={showcase}
               last={i + 1 === showcases.length}

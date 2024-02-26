@@ -1,12 +1,10 @@
 import { ShowcaseListings } from "@/components/showcaseListings";
-import { getPeriodBetween } from "@/functions/getMonthsBetween";
 import { ShowcaseType } from "@/types/showcase";
 
 const experiences: ShowcaseType[] = [
   {
-    start: "Feb 2022",
-    end: "Present",
-    periodInMonths: getPeriodBetween(new Date("2022-02-01"), new Date()),
+    start: new Date("2022-02-01"),
+    end: null,
     title:
       '<a href="https://fairlo.se/" rel="noopener noreferrer" target="_blank" class="text-tsiakkas-dark dark:text-tsiakkas-light hover:underline">Fairlo</a>',
     info: "Financial Services",
@@ -24,18 +22,16 @@ const experiences: ShowcaseType[] = [
     ],
   },
   {
-    start: "Jul 2021",
-    end: "Jan 2022",
-    periodInMonths: getPeriodBetween(new Date("2021-07-01"), new Date("2022-01-01")),
+    start: new Date("2021-07-01"),
+    end: new Date("2022-01-01"),
     title:
       '<span class="text-tsiakkas-dark dark:text-tsiakkas-light"><a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank" class="hover:underline">Cypriot Military</a></span>',
     info: '<span class="text-tsiakkas-dark dark:text-tsiakkas-light">Ordnance Corps</span>',
     position: '<span class="text-tsiakkas-dark dark:text-tsiakkas-light">Obligatory military service</span>',
   },
   {
-    start: "Mar 2020",
-    end: "Jun 2021",
-    periodInMonths: getPeriodBetween(new Date("2020-03-01"), new Date("2021-06-01")),
+    start: new Date("2020-03-01"),
+    end: new Date("2021-06-01"),
     title:
       '<a href="https://www.cyberlogic.gr/en/home" rel="noopener noreferrer" target="_blank" class="hover:underline">Cyberlogic</a>',
     info: "Travel Technologies",
@@ -48,9 +44,8 @@ const experiences: ShowcaseType[] = [
     ],
   },
   {
-    start: "May 2019",
-    end: "Mar 2020",
-    periodInMonths: getPeriodBetween(new Date("2019-05-01"), new Date("2020-03-01")),
+    start: new Date("2019-05-01"),
+    end: new Date("2020-03-01"),
     title:
       '<a href="https://www.medwork.gr/index.php" rel="noopener noreferrer" target="_blank" class="hover:underline">Medwork</a>',
     info: "Contract Research Organization",
@@ -63,9 +58,8 @@ const experiences: ShowcaseType[] = [
     ],
   },
   {
-    start: "Jun 2017",
-    end: "Jan 2019",
-    periodInMonths: getPeriodBetween(new Date("2017-06-01"), new Date("2019-01-01")),
+    start: new Date("2017-06-01"),
+    end: new Date("2019-01-01"),
     title:
       '<a href="https://www.ics.forth.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">FORTH</a>',
     info: "Telecommunications Research Lab",
@@ -80,7 +74,7 @@ const experiences: ShowcaseType[] = [
   },
 ];
 
-export default function ExperiencePage(props: any) {
+export default function ExperiencePage() {
   return (
     <div>
       <ShowcaseListings showcases={experiences} />
