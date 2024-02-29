@@ -10,11 +10,9 @@ import Category, { CategoryProps } from "@/components/category";
 import Head from "next/head";
 
 const title = "Ioannis Tsiakkas";
-export const description = "I'm a Software Engineer with professional experience in building \
-  RESTful web applications. My main focus is on the backend client and \
-  infrastructure but have also worked fullstack. I have a passion \
-  for low level programming and building things that solve human \
-  problems on my spare time.";
+export const description = "I'm a Software Engineer with professional experience in building RESTful web applications. \
+  My main focus is on the backend client and infrastructure but I have also worked fullstack. \
+  I have a passion for low level programming and building things that solve human problems.";
 
 const categories: CategoryProps[] = [
   {

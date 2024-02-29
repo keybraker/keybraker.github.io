@@ -8,7 +8,7 @@ const mail = "iantsiakkas@gmail.com";
 const mailDisplay = "iantsiakkas AT gmail DOT com";
 const mailto = "mailto:" + mail;
 const subject = "?subject=" + "Hey%20Ioannis";
-const body = "&body=" + "Email%20Body";
+// const body = "&body=" + "Email%20Body";
 
 const date = new Date(); // Replace with your date object
 const options = {
@@ -66,7 +66,7 @@ export default function Email() {
 
         <p className="mt-2 whitespace-pre-line">{description}</p>
         <p className="mt-2 whitespace-pre-line">
-          You can take a look at some of my work on my Github page by clicking{" "}
+          You can take a look at some of my work on my Github page here{" "}
           <a
             aria-label="Clicking here will take you to my github page"
             href="https://github.com/keybraker"
@@ -79,8 +79,7 @@ export default function Email() {
           .
         </p>
         <p className="mt-2 whitespace-pre-line">
-          If you have any ideas you wish to share something with me, feel free
-          to reply.
+          If you have any ideas you wish to share with me, feel free to reply.
         </p>
 
         <p className="mt-4">Kindly, Ioannis</p>

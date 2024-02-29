@@ -69,8 +69,8 @@ export default function Header() {
       ">
         <Link href="/">
           <h1 className="flex flex-col self-center text-center gap-1 font-helvetica text-2xl font-bold leading-100 text-tsiakkas-dark dark:text-tsiakkas-light tn:flex-row xs:gap-2">
-            <span>Ioannis</span>
             <span>Tsiakkas</span>
+            <span>Ioannis</span>
           </h1>
         </Link>
         <AboutPageInner></AboutPageInner>
