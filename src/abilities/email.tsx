@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { description } from "@/pages";
 
 const mail = "iantsiakkas@gmail.com";
-const mailDisplay = "iantsiakkas AT gmail DOT com";
+const mailDisplay = "me@mail.com";
 const mailto = "mailto:" + mail;
 const subject = "?subject=" + "Hey%20Ioannis";
 // const body = "&body=" + "Email%20Body";
@@ -35,27 +35,35 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-4 shadow-xl">
+    <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-2 shadow-xl">
       {/* <HeadScene /> */}
-      <div className="flex-start flex justify-between">
-        <div className="flex flex-col">
+      <div className="grid grid-cols-2 justify-between w-full">
+        <div className="flex flex-col w-full ">
           <span>
-            from:{" "}
-            <a
-              className="font-semibold hover:underline"
-              href={`${mailto}${subject}`}
-            >
-              {mailDisplay}
-            </a>
+            <span>
+              from:{" "}
+            </span>
+            <span>
+              <a
+                className="font-semibold hover:underline"
+                href={`${mailto}${subject}`}
+              >
+                {mailDisplay}
+              </a>
+            </span>
           </span>
-          <span>to: you</span>
-          <span>subject: Welcome to my website</span>
+          <span className="flex flex-row gap-2">
+            <span>to:</span>
+            <span>you</span>
+          </span>
+          <span className="flex flex-row gap-2">
+            <span>subject:</span>
+            <span>My website</span>
+          </span>
         </div>
-        <div className="flex flex-col items-end">
-          {hasMounted ? (
-            <span>{formattedDate}</span>
-          ) : null}
-          <span className="italic">one attachment (1)</span>
+        <div className="flex flex-col w-full items-end">
+          {hasMounted && (<span className="flex self-end">{formattedDate}</span>)}
+          <span className="italic text-gray-700">one attachment (1)</span>
         </div>
       </div>
 

@@ -31,9 +31,9 @@ function ShowcaseListing({
           ></div>
         </div>
 
-        <div className="w-6/12 no-wrap flex flex-col items-end justify-start text-end align-top">
+        <div className="w-6/12 no-wrap flex flex-col items-end justify-start text-end align-baseline">
           <div
-            className="flex flex-col sm:flex-row content text-md italic sm:gap-2"
+            className="flex flex-col sm:flex-row content text-md italic sm:gap-2 align-baseline"
           >
             <span>{getDateFormatted(showcase.start)} - {getDateFormatted(showcase.end)}</span>
             <span className="text-sm text-tsiakkas-bark2 dark:text-tsiakkas-light2">({period})</span>
