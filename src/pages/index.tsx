@@ -17,27 +17,37 @@ export const description = "I'm a Software Engineer with professional experience
 const categories: CategoryProps[] = [
   {
     title: "Professional Experience",
-    description: "In my professional career, I have worked in a variety of projects, ranging from web development to API design and implementation to cloud computing and infrastructure. I have worked in both small and large teams, in agile environments, and in both frontend and backend development.",
+    description: "In my professional career, I have worked in a variety of projects, ranging from web development, API design and implementation to cloud computing and infrastructure. \
+    I have worked in both small and large teams, in agile environments, in the frontend and backend.",
     colour: "bg-verge-lime",
   },
   {
     title: "Technical Skills",
-    description: "I have a strong background in computer science, with a focus on software engineering. I have worked with a variety of programming languages, frameworks, and tools, and I am always eager to learn new technologies. I am a team player, and I enjoy working in a team environment. I am also a fast learner, and I am always looking for new challenges to overcome.",
+    description: "I have a strong background in computer science, with a focus on software engineering. \
+    I have worked with a variety of programming languages, frameworks, and tools, and I am always eager to learn new technologies. \
+    I am a team player, and I enjoy working in a team environment. \
+    Learning fast is a strong-suit of mine, and I am always looking for new challenges to overcome.",
     colour: "bg-verge-pink",
   },
   {
     title: "Software Design",
-    description: "I am continuously working on improving and bettering my software design skills. In my jobs one of my main focuses it to design systems in the most appropriate way, in order for the systems to be performant, easy to work with and scalable.",
+    description: "I am continuously working on improving and bettering my software design skills. \
+    I always focus on my work being well designed and structured, in order for the systems I build to be performant, expandable, scalable and easy to work with.",
     colour: "bg-verge-blue",
   },
   {
     title: "Education",
-    description: "My education has provided me with a strong foundation in computer science, with a focus on software engineering. In a demanding academic setting I have learned to work under pressure and to meet deadlines. I have also learned to work in a team environment, and to communicate effectively with my peers.",
+    description: "My education has provided me with a strong foundation in computer science, with a focus on software engineering. \
+    In a demanding academic setting I have learned to work under pressure and to meet deadlines. \
+    I have also learned to work in a team environment, and to communicate effectively with my peers.",
     colour: "bg-verge-red",
   },
   {
     title: "Notable Projects",
-    description: "I am always working on side projects to improve my skills and learn new technologies. Some of my projects are available on my <a href=\"https://github.com/keybraker\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"hover:underline\">Github</a> where I contribute to open source projects, while also creating my own.",
+    description: "I am always working on side projects to improve my skills and learn new technologies. \
+    I find it very important to keep up with the latest trends in technology, and to always be learning. \
+    And it does not heart when you can also have an impact on other people's lives. \
+    Some of my projects are available on my <a href=\"https://github.com/keybraker\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"hover:underline\">Github</a> where I contribute to open source projects, while also creating my own.",
     colour: "bg-verge-purple",
   },
 ];

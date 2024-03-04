@@ -22,11 +22,11 @@ function ShowcaseListing({
       <div className="flex flex-row justify-between text-tsiakkas-dark dark:text-tsiakkas-light">
         <div className=" w-4/12 no-wrap flex flex-col justify-start text-start align-top">
           <div
-            className="content font-extrabold text-lg"
+            className="content font-extrabold text-lg white"
             dangerouslySetInnerHTML={{ __html: showcase.title }}
           ></div>
           <div
-            className="content text-md italic"
+            className="content text-md italic ml-[2px]"
             dangerouslySetInnerHTML={{ __html: showcase.info }}
           ></div>
         </div>
