@@ -4,11 +4,11 @@ import { SkillType } from "@/types/skill";
 const skills: SkillType[] = [
   {
     category: "Tools",
-    qualifications: ["Git", "Github Actions", "Docker", "AWS", "ExpressJS", "Jest"],
+    qualifications: ["Git", "Github Actions", "Docker", "AWS", "ExpressJS", "Jest", "Zod"],
   },
   {
     category: "Databases & ORMs",
-    qualifications: ["PostgreSQL", "MySQL", "MongoDB", "Mongoose", "Sequelize"],
+    qualifications: ["PostgreSQL", "MySQL", "MongoDB", "Mongoose", "Raw SQL", "Sequelize"],
   },
   {
     category: "Languages",
