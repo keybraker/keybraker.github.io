@@ -32,8 +32,8 @@ const projects: ShowcaseType[] = [
   //   position: "(C++)",
   // },
   {
-    start: new Date("2024-05-01"),
-    end: null,
+    start: new Date("2023-09-01"),
+    end: new Date("2024-02-01"),
     title:
       '<a href="https://medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">medwork.gr</a>',
     info: "Created the website for Medwork a CRO situated in Athens, Greece.",
