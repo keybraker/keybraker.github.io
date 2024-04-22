@@ -35,7 +35,7 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-2 shadow-xl">
+    <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-4 sm:p-6 shadow-xl">
       {/* <HeadScene /> */}
       <div className="grid grid-cols-2 justify-between w-full">
         <div className="flex flex-col w-full ">

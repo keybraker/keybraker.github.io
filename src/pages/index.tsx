@@ -19,7 +19,7 @@ const categories: CategoryProps[] = [
     title: "Professional Experience",
     description: "In my professional career, I have worked in a variety of projects, ranging from web development, API design and implementation to cloud computing and infrastructure. \
     I have worked in both small and large teams, in agile environments, in the frontend and backend.",
-    colour: "bg-verge-lime",
+    colour: "bg-verge-green",
   },
   {
     title: "Technical Skills",
