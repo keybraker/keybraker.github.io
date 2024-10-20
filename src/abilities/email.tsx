@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { description } from "@/pages";
 
 const mail = "iantsiakkas@gmail.com";
-const mailDisplay = "ioannis.tsiakkas@mail.com";
 const mailto = "mailto:" + mail;
 const subject = "?subject=" + "Hey%20Ioannis";
 // const body = "&body=" + "Email%20Body";
@@ -38,7 +37,7 @@ export default function Email() {
     <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-6 shadow-xl">
       {/* <HeadScene /> */}
       <div className="grid grid-cols-2 justify-between w-full">
-        <div className="flex flex-col w-full ">
+        <div className="flex flex-col w-full">
           <span>
             <span>
               from:{" "}
@@ -48,7 +47,7 @@ export default function Email() {
                 className="font-semibold hover:underline"
                 href={`${mailto}${subject}`}
               >
-                {mailDisplay}
+                me@mail.com
               </a>
             </span>
           </span>
@@ -61,7 +60,7 @@ export default function Email() {
             <span>My website</span>
           </span>
         </div>
-        <div className="flex flex-col w-full items-end">
+        <div className="flex flex-col h-full w-full items-end">
           {hasMounted && (<span className="flex self-end">{formattedDate}</span>)}
           <span className="italic text-gray-700">one attachment (1)</span>
         </div>
