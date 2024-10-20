@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { description } from "@/pages";
 
 const mail = "iantsiakkas@gmail.com";
-const mailDisplay = "me@mail.com";
+const mailDisplay = "ioannis.tsiakkas@mail.com";
 const mailto = "mailto:" + mail;
 const subject = "?subject=" + "Hey%20Ioannis";
 // const body = "&body=" + "Email%20Body";
@@ -35,7 +35,7 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-4 sm:p-6 shadow-xl">
+    <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-6 shadow-xl">
       {/* <HeadScene /> */}
       <div className="grid grid-cols-2 justify-between w-full">
         <div className="flex flex-col w-full ">
@@ -67,11 +67,10 @@ export default function Email() {
         </div>
       </div>
 
-      <div className="my-4 border border-dashed border-tsiakkas-dark"></div>
+      <div className="my-4 border border-dashed border-tsiakkas-dark opacity-40"></div>
 
       <div>
         <p>Hello,</p>
-
         <p className="mt-2 whitespace-pre-line">{description}</p>
         <p className="mt-2 whitespace-pre-line">
           You can take a look at some of my work on my Github page here{" "}
@@ -80,13 +79,13 @@ export default function Email() {
             href="https://github.com/keybraker"
             target="_blank"
             rel="noreferrer"
-            className="underline"
+            className="font-semibold hover:underline hover:text-blue-700 hover:shadow-2xl"
           >
             github.com/keybraker
           </a>
           .
         </p>
-        <p className="mt-2 whitespace-pre-line">
+        <p className="mt-1 whitespace-pre-line">
           If you have any ideas you wish to share with me, feel free to reply.
         </p>
 

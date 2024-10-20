@@ -12,13 +12,11 @@ const experiences: ShowcaseType[] = [
     technologies: ["TypeScript", "PostgreSQL", "Sequelize", "AWS", "Gitlab"],
     description: [
       "Handling the dunning process of the company, with close collaboration with a third party provider.",
-      "Revamped the email sending process, made emails more coherent, easier to maintain and high quality.",
-      "Updated the calculations on loan construction which decreased the amount of processing time needed and improved user experience.",
-      "Working on designing and implementing REST endpoints to be used by the company's frontend applications.",
-      "Implement and maintain robust testing practices, including unit testing, integration testing, and end-to-end testing, to ensure high code quality and minimise the risk of defects and regressions.",
+      "Revamped the email sending process, made emails more coherent, easier to maintain and increased quality.",
+      "Updated the calculations on loan construction which decreased the amount of processing time needed and improved user experience, programmer experience and saved money.",
       "Collaborating with other team members, including front-end developers, product managers, and designers, to develop and implement new features and enhancements.",
-      "Conducting code reviews, writing and updating technical documentation, and providing support to other developers when needed.",
-      "Proactively identifying and addressing technical issues and potential areas of improvement to optimise the platform's functionality and user experience.",
+      "Conducting code reviews, writing and updating technical documentation, and providing support to other developers/product when needed.",
+      "Implemented version 6 of BankID, a third party authentication system.",
     ],
   },
   {
@@ -28,6 +26,9 @@ const experiences: ShowcaseType[] = [
       '<span class="text-tsiakkas-dark dark:text-tsiakkas-light"><a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank" class="hover:underline">Cypriot Military</a></span>',
     info: '<span class="text-tsiakkas-dark dark:text-tsiakkas-light">Ordnance Corps</span>',
     position: '<span class="text-tsiakkas-dark dark:text-tsiakkas-light">Obligatory military service</span>',
+    description: [
+      "Completed my obligatory military service.",
+    ],
   },
   {
     start: new Date("2020-03-01"),
@@ -47,11 +48,12 @@ const experiences: ShowcaseType[] = [
     start: new Date("2019-05-01"),
     end: new Date("2020-03-01"),
     title:
-      '<a href="https://www.medwork.gr/index.php" rel="noopener noreferrer" target="_blank" class="hover:underline">Medwork</a>',
+      '<a href="https://www.medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">Medwork</a>',
     info: "Contract Research Organization",
     position: "Full Stack",
     technologies: ["React", "Java", "MySQL"],
     description: [
+      "Design, build and maintain the company's website, including the front-end and back-end systems (<a href=\"https://www.medwork.gr\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"hover:underline\">medwork.gr</a>).",
       "Created a new system to handle pharmaceutical products achieving a big increase in productivity compared to the previous solution.",
       "Digitalised the company's processes by creating a new system to handle the company's data.",
       "Achieved a big increase in productivity compared to the previous solution, by bring tailored made solutions to employees.",
@@ -69,7 +71,7 @@ const experiences: ShowcaseType[] = [
       '<a href="https://www.ics.forth.gr/tnl" rel="noopener noreferrer" target="_blank" class="hover:underline">TNL</a>',
     ],
     description: [
-      "As an undergraduate researcher I mainly focused on creating faster ways to train AI models using CUDA to leverage the power of GPGPUs.",
+      "As an undergraduate researcher, I mainly focused on creating the backbone system for the researcher's machine learning model testing; written in CUDA to leverage the power of GPGPUs.",
     ],
   },
 ];

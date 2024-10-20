@@ -50,6 +50,11 @@ module.exports = {
           red: "#FF3D00",
           blue: "#1B96F5",
           pink: "#FFC2E7",
+          yellow: "#FFEB3B",
+          green: "#4CAF50",
+          orange: "#FF9800",
+          navy: "#001F3F",
+          grey: "#9E9E9E"
         },
         primary: {
           50: "#eff6ff",

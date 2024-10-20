@@ -1,5 +1,7 @@
 # Ioannis Tsiakkas Online CV
 
+The personal website for Ioannis Tsiakkas
+
 ## Deployment
 
 When merging to master a `gh-pages` branch is deployed and served online.

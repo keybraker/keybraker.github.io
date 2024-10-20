@@ -11,8 +11,8 @@ import Head from "next/head";
 
 const title = "Ioannis Tsiakkas";
 export const description = "I'm a Software Engineer with professional experience in building RESTful web applications. \
-  My main focus is on the backend client and infrastructure but I have also worked fullstack. \
-  I have a passion for low level programming and building things that solve human problems.";
+  My main focus is on the backend client and infrastructure but have always found UX/UI fascinating. \
+  I have a passion for low level programming and building things that solve human problems, in pleasant and fast manner.";
 
 const categories: CategoryProps[] = [
   {
@@ -40,7 +40,7 @@ const categories: CategoryProps[] = [
     description: "My education has provided me with a strong foundation in computer science, with a focus on software engineering. \
     In a demanding academic setting I have learned to work under pressure and to meet deadlines. \
     I have also learned to work in a team environment, and to communicate effectively with my peers.",
-    colour: "bg-verge-red",
+    colour: "bg-verge-orange",
   },
   {
     title: "Notable Projects",
@@ -48,7 +48,7 @@ const categories: CategoryProps[] = [
     I find it very important to keep up with the latest trends in technology, and to always be learning. \
     And it does not heart when you can also have an impact on other people's lives. \
     Some of my projects are available on my <a href=\"https://github.com/keybraker\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"hover:underline\">Github</a> where I contribute to open source projects, while also creating my own.",
-    colour: "bg-verge-purple",
+    colour: "bg-verge-green",
   },
 ];
 
@@ -137,8 +137,7 @@ export default function Home() {
                 <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
                   <ProjectsPage />
                   <p className="text-md font-bold mt-12 italic">
-                    (Find all my work on my{" "}
-                    <a
+                    (Find all my work on{" "}<a
                       role="link"
                       aria-label="keybraker's GitHub page"
                       href="https://github.com/keybraker"
@@ -146,9 +145,8 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="hover:text-medwork-dark hover:text-verge-blue hover:underline"
                     >
-                      GitHub
-                    </a>
-                    {" "}page)
+                      github.com/keybraker
+                    </a>)
                   </p>
                 </div>
                 <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">

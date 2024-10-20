@@ -4,16 +4,28 @@ import { SkillType } from "@/types/skill";
 const skills: SkillType[] = [
   {
     category: "Code Design",
-    qualifications: ["Testing", "Test driven development", "Refactoring", "Clean code"],
+    qualifications: ["Testing (unit, integration, e2e)", "Domain Driven Design"],
   },
   {
     category: "Architecture",
-    qualifications: ["Event Bridge", "Lambdas", "CronJob", "Microservices"],
+    qualifications: [
+      "Events",
+      "Lambdas",
+      "CronJobs",
+      "Microservices",
+      "Monoliths",
+      "REST",
+      "APIs",
+    ],
   },
   {
-    category: "Practices",
-    qualifications: ["Agile", "Scrum", "Kanban"],
+    category: "Databases",
+    qualifications: ["SQL", "non SQL", "Raw SQL", "ORMs"],
   },
+  {
+    category: "Frontend",
+    qualifications: ["React", "Angular", "Next.js", "TypeScript"]
+  }
 ];
 
 export default function SoftwareEngineeringPage() {
