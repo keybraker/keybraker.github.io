@@ -10,7 +10,7 @@ const projects: ShowcaseType[] = [
     info: 'An ad flagger for the price comparison site, <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
     position: "(TypeScript, Wepback)",
     description: [
-      "Current user-base of 500+ users.",
+      "More than <b>550+</b> daily active users.",
       "Created and deployed an extension to both Chrome's and Firefox's store.",
       "Used the latest technologies to make deployments fast and of the highest quality.",
     ],
