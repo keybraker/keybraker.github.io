@@ -10,20 +10,23 @@ import Category, { CategoryProps } from "@/components/category";
 import Head from "next/head";
 
 const title = "Ioannis Tsiakkas";
-export const description = "I'm a Software Engineer with professional experience in building RESTful web applications. \
+export const description =
+  "I'm a Software Engineer with professional experience in building RESTful web applications. \
   My main focus is on the backend client and infrastructure but have always found UX/UI fascinating. \
   I have a passion for low level programming and building things that solve human problems, in pleasant and fast manner.";
 
 const categories: CategoryProps[] = [
   {
     title: "Professional Experience",
-    description: "In my professional career, I have worked in a variety of projects, ranging from web development, API design and implementation to cloud computing and infrastructure. \
+    description:
+      "In my professional career, I have worked in a variety of projects, ranging from web development, API design and implementation to cloud computing and infrastructure. \
     I have worked in both small and large teams, in agile environments, in the frontend and backend.",
-    colour: "bg-verge-green",
+    colour: "bg-verge-navy",
   },
   {
     title: "Technical Skills",
-    description: "I have a strong background in computer science, with a focus on software engineering. \
+    description:
+      "I have a strong background in computer science, with a focus on software engineering. \
     I have worked with a variety of programming languages, frameworks, and tools, and I am always eager to learn new technologies. \
     I am a team player, and I enjoy working in a team environment. \
     Learning fast is a strong-suit of mine, and I am always looking for new challenges to overcome.",
@@ -31,38 +34,37 @@ const categories: CategoryProps[] = [
   },
   {
     title: "Software Design",
-    description: "I am continuously working on improving and bettering my software design skills. \
+    description:
+      "I am continuously working on improving and bettering my software design skills. \
     I always focus on my work being well designed and structured, in order for the systems I build to be performant, expandable, scalable and easy to work with.",
     colour: "bg-verge-blue",
   },
   {
     title: "Education",
-    description: "My education has provided me with a strong foundation in computer science, with a focus on software engineering. \
+    description:
+      "My education has provided me with a strong foundation in computer science, with a focus on software engineering. \
     In a demanding academic setting I have learned to work under pressure and to meet deadlines. \
     I have also learned to work in a team environment, and to communicate effectively with my peers.",
     colour: "bg-verge-orange",
   },
   {
     title: "Notable Projects",
-    description: "I am always working on side projects to improve my skills and learn new technologies. \
+    description:
+      'I am always working on side projects to improve my skills and learn new technologies. \
     I find it very important to keep up with the latest trends in technology, and to always be learning. \
-    And it does not heart when you can also have an impact on other people's lives. \
-    Some of my projects are available on my <a href=\"https://github.com/keybraker\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"hover:underline\">Github</a> where I contribute to open source projects, while also creating my own.",
-    colour: "bg-verge-green",
+    And it does not heart when you can also have an impact on other people\'s lives. \
+    Some of my projects are available on my <a href="https://github.com/keybraker" rel="noopener noreferrer" target="_blank" class="hover:underline">Github</a> where I contribute to open source projects, while also creating my own.',
+    colour: "bg-verge-blue",
   },
 ];
 
 function WaveSvg() {
   return (
-    <div className="absolute select-none bottom-0 left-0 w-full opacity-10">
+    <div className="absolute bottom-0 left-0 w-full select-none opacity-10">
       {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path fill="#06B6D4" fillOpacity="1" d="M0,64L48,80C96,96,192,128,288,144C384,160,480,160,576,138.7C672,117,768,75,864,69.3C960,64,1056,96,1152,122.7C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
       </svg> */}
-      <svg
-        id="svg"
-        viewBox="0 0 1440 490"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg id="svg" viewBox="0 0 1440 490" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M 0,500 C 0,500 0,166 0,166 C 140.42857142857144,179.46428571428572 280.8571428571429,192.92857142857142 410,187 C 539.1428571428571,181.07142857142858 657,155.75 768,138 C 879,120.24999999999999 983.1428571428571,110.07142857142858 1094,116 C 1204.857142857143,121.92857142857142 1322.4285714285716,143.96428571428572 1440,166 C 1440,166 1440,500 1440,500 Z"
           stroke="none"
@@ -116,28 +118,28 @@ export default function Home() {
       </Head>
 
       <main>
-        <div className="flex flex-col items-center justify-center place-self-center h-full w-full">
-
+        <div className="flex h-full w-full flex-col items-center justify-center place-self-center">
           <Header />
 
-          <div className="flex flex-row flex-wrap gap-8 justify-center eq:mx-auto w-full max-w-[560px] eq:max-w-[1320px] my-8 px-4 sm:px-6 eq:px-0 text-tsiakkas-dark dark:text-tsiakkas-light">
+          <div className="my-8 flex w-full max-w-[560px] flex-row flex-wrap justify-center gap-8 px-4 text-tsiakkas-dark dark:text-tsiakkas-light sm:px-6 eq:mx-auto eq:max-w-[1320px] eq:px-0">
             <Email />
 
-            <div className="flex flex-col gap-16 eq:gap-48 mb-32">
-              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
-                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+            <div className="mb-32 flex flex-col gap-16 eq:gap-48">
+              <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+                <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
                   <ExperiencePage />
                 </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
+                <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
                   <Category {...categories[0]} />
                 </div>
               </div>
 
-              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
-                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+              <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+                <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
                   <ProjectsPage />
-                  <p className="text-md font-bold mt-12 italic">
-                    (Find all my work on{" "}<a
+                  <p className="mt-12 text-md font-bold italic">
+                    (Find all my work on{" "}
+                    <a
                       role="link"
                       aria-label="keybraker's GitHub page"
                       href="https://github.com/keybraker"
@@ -146,30 +148,31 @@ export default function Home() {
                       className="hover:text-medwork-dark hover:text-verge-blue hover:underline"
                     >
                       github.com/keybraker
-                    </a>)
+                    </a>
+                    )
                   </p>
                 </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
+                <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
                   <Category {...categories[4]} />
                 </div>
               </div>
 
-              <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
-                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+              <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+                <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
                   <EducationPage />
                 </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
+                <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
                   <Category {...categories[3]} />
                 </div>
               </div>
 
-              <div className="flex flex-col eq:flex-row items-center eq:items-start w-full border-tsiakkas-dark dark:border-tsiakkas-light border rounded-lg p-8">
-                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+              <div className="flex w-full flex-col items-center rounded-lg border border-tsiakkas-dark p-8 dark:border-tsiakkas-light eq:flex-row eq:items-start">
+                <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
                   <SkillPage />
                 </div>
-                <div className="border-t border-dashed border-gray-300 dark:border-gray-800 w-full eq:w-0 my-8"></div>
-                <div className="border-l border-dashed border-gray-300 dark:border-gray-800 h-0 eq:h-full mx-16"></div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
+                <div className="my-8 w-full border-t border-dashed border-gray-300 dark:border-gray-800 eq:w-0"></div>
+                <div className="mx-16 h-0 border-l border-dashed border-gray-300 dark:border-gray-800 eq:h-full"></div>
+                <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
                   {/* <Category {...categories[1]} /> */}
                   <SoftwareEngineeringPage />
                 </div>

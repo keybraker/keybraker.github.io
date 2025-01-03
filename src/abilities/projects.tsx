@@ -19,7 +19,7 @@ const projects: ShowcaseType[] = [
     start: new Date("2020-02-01"),
     end: null,
     title:
-      '<a href="https://github.com/The-Portal-Bot/Portal" rel="noopener noreferrer" target="_blank" class="hover:underline">Portal</a>',
+      '<a href="https://github.com/The-Portal-Bot/Portal" rel="noopener noreferrer" target="_blank" class="hover:underline">portal (discord bot)</a>',
     info: "A fully functional Discord bot.",
     position: "(TypeScript, MongoDB, Mongoose)",
   },
