@@ -13,6 +13,7 @@ const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
 
 function AboutPageInner() {
   return (
+
     <div className="flex flex-row items-center justify-between xs:justify-around gap-4 align-baseline text-tsiakkas-dark dark:text-tsiakkas-light">
       <a
         aria-label="By clicking you will be taken to Maps"
@@ -69,16 +70,24 @@ export default function Header() {
         border-b-2 border-tsiakkas-dark dark:border-tsiakkas-light
       ">
           <Link href="/">
-            <div className="flex flex-col gap-1">
-              <div className="w-full border-t-2 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]"></div>
-              <h1 className="flex flex-col self-center text-center gap-1 font-helvetica text-2xl font-bold leading-100 text-tsiakkas-dark dark:text-tsiakkas-light tn:flex-row xs:gap-2">
+            <div className="flex flex-col gap-0 justify-between text-tsiakkas-dark dark:text-tsiakkas-light">
+              <div className="w-full text-start italic text-[10px] border-b-2 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]">
+                Deutscher
+              </div>
+              <h1 className="
+                flex flex-col self-center text-center font-helvetica text-2xl font-bold leading-100 tn:flex-row xs:gap-2 gap-1
+              ">
                 <span>Tsiakkas</span>
                 <span>Ioannis</span>
               </h1>
-              <div className="w-full border-b-2 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]"></div>
             </div>
           </Link>
-          <AboutPageInner></AboutPageInner>
+          <div className="flex flex-col gap-0 justify-between text-tsiakkas-dark dark:text-tsiakkas-light">
+            <div className="w-full text-end italic text-[10px] border-b-2 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]">
+              Έλληνας
+            </div>
+            <AboutPageInner />
+          </div>
         </div>
       </div>
     </header>

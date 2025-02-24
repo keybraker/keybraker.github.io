@@ -24,10 +24,6 @@ export default function Footer() {
           </div>
         </a>
       </div>
-      <div className="flex flex-col gap-2 mt-4">
-        <div className="w-full border-t-2 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]"></div>
-        <div className="w-full border-t-2 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]"></div>
-      </div>
     </div>
   );
 }
