@@ -69,10 +69,14 @@ export default function Header() {
         border-b-2 border-tsiakkas-dark dark:border-tsiakkas-light
       ">
           <Link href="/">
-            <h1 className="flex flex-col self-center text-center gap-1 font-helvetica text-2xl font-bold leading-100 text-tsiakkas-dark dark:text-tsiakkas-light tn:flex-row xs:gap-2">
-              <span>Tsiakkas</span>
-              <span>Ioannis</span>
-            </h1>
+            <div className="flex flex-col gap-1">
+              <div className="w-full border-t-2 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]"></div>
+              <h1 className="flex flex-col self-center text-center gap-1 font-helvetica text-2xl font-bold leading-100 text-tsiakkas-dark dark:text-tsiakkas-light tn:flex-row xs:gap-2">
+                <span>Tsiakkas</span>
+                <span>Ioannis</span>
+              </h1>
+              <div className="w-full border-b-2 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]"></div>
+            </div>
           </Link>
           <AboutPageInner></AboutPageInner>
         </div>
