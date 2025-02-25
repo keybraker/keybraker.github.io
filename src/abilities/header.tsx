@@ -62,6 +62,12 @@ function AboutPageInner() {
 export default function Header() {
   return (
     <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[560px] eq:max-w-[1320px] w-full bg-tsiakkas-light dark:bg-tsiakkas-dark">
+      <div className="text-tsiakkas-dark dark:text-tsiakkas-light w-full flex flex-row">
+        <div className="w-1/2 text-start italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]">
+        </div>
+        <div className="w-1/2 text-end italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]">
+        </div>
+      </div>
       <div className=" px-4 eq:px-0">
         <div className="
         flex flex-col sm:flex-row items-center justify-around xs:justify-between
@@ -70,24 +76,15 @@ export default function Header() {
         border-b-2 border-tsiakkas-dark dark:border-tsiakkas-light
       ">
           <Link href="/">
-            <div className="flex flex-col gap-0 justify-between text-tsiakkas-dark dark:text-tsiakkas-light">
-              <div className="w-full text-start italic text-[10px] border-b-2 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]">
-                Deutscher
-              </div>
-              <h1 className="
+            <h1 className="
                 flex flex-col self-center text-center font-helvetica text-2xl font-bold leading-100 tn:flex-row xs:gap-2 gap-1
+                text-tsiakkas-dark dark:text-tsiakkas-light
               ">
-                <span>Tsiakkas</span>
-                <span>Ioannis</span>
-              </h1>
-            </div>
+              <span>Tsiakkas</span>
+              <span>Ioannis</span>
+            </h1>
           </Link>
-          <div className="flex flex-col gap-0 justify-between text-tsiakkas-dark dark:text-tsiakkas-light">
-            <div className="w-full text-end italic text-[10px] border-b-2 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]">
-              Έλληνας
-            </div>
-            <AboutPageInner />
-          </div>
+          <AboutPageInner />
         </div>
       </div>
     </header>
