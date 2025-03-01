@@ -13,7 +13,6 @@ const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
 
 function AboutPageInner() {
   return (
-
     <div className="flex flex-row items-center justify-between xs:justify-around gap-4 align-baseline text-tsiakkas-dark dark:text-tsiakkas-light">
       <a
         aria-label="By clicking you will be taken to Maps"
@@ -68,7 +67,7 @@ export default function Header() {
         <div className="w-1/2 text-end italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]">
         </div>
       </div>
-      <div className=" px-4 eq:px-0">
+      <div className="px-4 eq:px-0">
         <div className="
         flex flex-col sm:flex-row items-center justify-around xs:justify-between
         px-0 tn:px-4 pt-2 tn:pt-2 pb-4 tn:pb-4 gap-4
