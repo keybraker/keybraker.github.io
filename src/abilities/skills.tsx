@@ -17,7 +17,9 @@ const skills: SkillType[] = [
   {
     category: "Languages",
     qualifications: [
-      "Greek <i>Native</i>, German <i>Native</i>, English <i>Fluent</i>",
+      'Greek <i class="text-md text-gray-600">native</i>',
+      'German <i class="text-md text-gray-600">mother tongue</i>',
+      'English <i class="text-md text-gray-600">fluent</i>',
     ],
   },
 ];
