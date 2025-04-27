@@ -14,11 +14,11 @@ export default function Footer() {
             alt="signature"
             width={148}
             height={84}
-            className="subpixel-antialiased bg-tsiakkas-electric-orange dark:bg-tsiakkas-electric-yellow transform rotate-3"
+            className="subpixel-antialiased bg-tsiakkas-blueLight dark:bg-tsiakkas-electric-yellow transform rotate-3"
           />
           <a rel="noopener noreferrer" target="_blank" href={repo}>
             <div className="flex flex-wrap gap-2 hover:underline text-tsiakkas-dark dark:text-tsiakkas-light text-sm">
-              Designed and created by me<br></br>@keybraker.github.io
+              Designed and created by me<br></br><b>@Keybraker</b>
             </div>
           </a>
         </div>

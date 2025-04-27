@@ -1,14 +1,13 @@
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
-import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
-import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
-import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
+import { MdEmail } from "@react-icons/all-files/md/MdEmail";
+import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
 import Link from "next/link";
+import DarkModeToggle from "../components/DarkModeToggle";
 
 const mail = "mailto:" + "iantsiakkas@gmail.com";
 const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
 const github = "https://github.com/" + "Keybraker";
-const twitter = "https://twitter.com/" + "RealTsiakkas";
 const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
 
 function AboutPageInner() {
@@ -46,14 +45,8 @@ function AboutPageInner() {
       >
         <FaLinkedin className="antialiased" size={"20px"} />
       </a>
-      <a
-        aria-label="By clicking you will be taken to Twitter"
-        rel="noopener noreferrer"
-        target="_blank"
-        href={twitter}
-      >
-        <FaTwitter className="antialiased" size={"20px"} />
-      </a>
+      <div className="h-5 w-px bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2"></div>
+      <DarkModeToggle />
     </div>
   );
 }
