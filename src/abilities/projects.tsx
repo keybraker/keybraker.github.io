@@ -7,12 +7,13 @@ const projects: ShowcaseType[] = [
     end: null,
     title:
       '<a href="https://github.com/keybraker/skroutz-sponsored-flagger" rel="noopener noreferrer" target="_blank" class="hover:underline">reSkroutzed</a>',
-    info: 'An ad flagger for the price comparison site, <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
+    info: 'A must-have enhancer for the  website <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
     position: "(TypeScript, Wepback)",
     description: [
-      "More than <b>550+</b> daily active users.",
+      "More than <b>600+</b> daily active users.",
       "Created and deployed an extension to both Chrome's and Firefox's store.",
       "Used the latest technologies to make deployments fast and of the highest quality.",
+      "Open source.",
     ],
   },
   {
@@ -22,6 +23,9 @@ const projects: ShowcaseType[] = [
       '<a href="https://github.com/The-Portal-Bot/Portal" rel="noopener noreferrer" target="_blank" class="hover:underline">portal (discord bot)</a>',
     info: "A fully functional Discord bot.",
     position: "(TypeScript, MongoDB, Mongoose)",
+    description: [
+      "Open source.",
+    ],
   },
   // {
   //   start: "2017",
