@@ -84,9 +84,9 @@ export default function Email() {
           </a>
           .
         </p>
-        <p className="mt-1 whitespace-pre-line">
+        {/* <p className="mt-1 whitespace-pre-line">
           If you have any ideas you wish to share with me, feel free to reply.
-        </p>
+        </p> */}
 
         <p className="mt-4">Kindly, Ioannis</p>
       </div>

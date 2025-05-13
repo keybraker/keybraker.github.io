@@ -11,9 +11,10 @@ import Head from "next/head";
 
 const title = "Ioannis Tsiakkas";
 export const description =
-  "I'm a Software Engineer with professional experience in building RESTful web applications. \
-  My main focus is on the backend client and infrastructure but have always found UX/UI fascinating. \
-  I have a passion for low level programming and building things that solve human problems, in pleasant and fast manner.";
+  "I'm a software engineer with professional experience in building web applications. \
+  My main focus is on the backend client (where the logic is), infrastructure, and system architecture. \
+  I have always found UX/UI fascinating and am thus always working on a side website. \
+  I am passionate about low-level programming and building things that solve my own and others' problems.";
 
 const categories: CategoryProps[] = [
   {
