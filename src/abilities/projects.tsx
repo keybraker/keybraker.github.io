@@ -45,7 +45,7 @@ const projects: ShowcaseType[] = [
     info: "A fully functional Discord bot.",
     position: "(TypeScript, MongoDB, Mongoose)",
     description: [
-      `<a href="https://portal-bot.xyz/" rel="noopener noreferrer" target="_blank" class="underline text-blue-500 hover:text-blue-700 font-semibold">Documentation</a>`,
+      `<a href="https://portal-bot.xyz/" rel="noopener noreferrer" target="_blank" class="hover:underline text-blue-500 hover:text-blue-700 font-semibold">Documentation</a>`,
       "Open source.",
     ],
   },
