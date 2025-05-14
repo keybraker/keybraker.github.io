@@ -36,7 +36,7 @@ function ShowcaseListing({
             className="flex flex-col sm:flex-row content text-md italic sm:gap-2 align-baseline"
           >
             <span>{getDateFormatted(showcase.start)} - {getDateFormatted(showcase.end)}</span>
-            <span className="text-sm text-tsiakkas-dark2 dark:text-tsiakkas-light2">({period})</span>
+            <span className="text-sm text-tsiakkas-dark dark:text-tsiakkas-light">({period})</span>
           </div>
           <div className="flex flex-col items-end">
             <div
@@ -45,7 +45,7 @@ function ShowcaseListing({
             ></div>
             {showcase?.technologies ? (
               <div
-                className="content text-sm text-tsiakkas-dark2 dark:text-tsiakkas-light2 eq:whitespace-nowrap"
+                className="content text-sm text-tsiakkas-dark dark:text-tsiakkas-light eq:whitespace-nowrap"
                 dangerouslySetInnerHTML={{
                   __html: `(${showcase.technologies.join(", ")})`,
                 }}
@@ -59,7 +59,7 @@ function ShowcaseListing({
 
 
       {showcase?.description && (<>
-        <div className="mt-4 w-full border-t-2 border-dashed border-tsiakkas-dark2 dark:border-tsiakkas-light2 opacity-5 dark:opacity-5"></div>
+        <div className="mt-4 w-full border-t border-dashed border-tsiakkas-dark dark:border-tsiakkas-light opacity-5 dark:opacity-5"></div>
         <ul
           className="content mt-8 ml-4 text-md text-gray-800 dark:text-gray-400 italic list-disc"
           dangerouslySetInnerHTML={{
@@ -68,7 +68,7 @@ function ShowcaseListing({
         ></ul>
       </>
       )}
-      {!last ? <div className="my-8 border-t border-tsiakkas-dark2 dark:border-tsiakkas-light2 opacity-10 dark:opacity-10"></div> : ""}
+      {!last ? <div className="my-8 border-t border-tsiakkas-dark dark:border-tsiakkas-light opacity-10 dark:opacity-10"></div> : ""}
     </>
   );
 }
