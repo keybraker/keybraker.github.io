@@ -5,8 +5,10 @@ const skills: SkillType[] = [
   {
     category: "Code Design",
     qualifications: [
-      "Testing (unit, integration, e2e)",
       "Domain Driven",
+      "Testing (unit, integration, end-to-end)",
+      "Test Driven",
+      "Monoliths",
     ],
   },
   {
@@ -14,8 +16,6 @@ const skills: SkillType[] = [
     qualifications: [
       "REST",
       "APIs",
-      "Domain Driven",
-      "Monoliths",
       "Events",
       "Lambdas",
       "CronJobs",

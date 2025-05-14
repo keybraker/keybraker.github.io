@@ -13,11 +13,7 @@ const projects: ShowcaseType[] = [
       "Created and deployed an extension to both Chrome's and Firefox's store.",
       "Used the latest technologies to make deployments fast and of the highest quality.",
       "Open source.",
-      `<table class="w-full border-collapse mb-4">
-        <tr>
-          <th class="pr-1 pb-1 text-start">Firefox</th>
-          <th class="pr-1 pb-1 text-start">Chrome</th>
-        </tr>
+      `<table class="w-full border-collapse mt-2 mb-4">
         <tr>
           <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/amo/users/reskroutzed" alt="Firefox Add-on Users"/></td>
           <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/chrome-web-store/users/amglnkndjeoojnjjeepeheobhneeogcl" alt="Chrome Web Store Users"/></td>
@@ -31,8 +27,22 @@ const projects: ShowcaseType[] = [
           <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/chrome-web-store/rating/amglnkndjeoojnjjeepeheobhneeogcl" alt="Chrome Rating"/></td>
         </tr>
         <tr>
-          <td class="pr-1 pb-1 pt-2 text-start"><a href="https://addons.mozilla.org/en-US/firefox/addon/reskroutzed" class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded" rel="noopener noreferrer" target="_blank">Download</a></td>
-          <td class="pr-1 pb-1 pt-2 text-start"><a href="https://chrome.google.com/webstore/detail/reskroutzed/amglnkndjeoojnjjeepeheobhneeogcl" class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded" rel="noopener noreferrer" target="_blank">Download</a></td>
+          <td class="pr-1 pb-1 pt-2 text-start">
+            <a
+              href="https://addons.mozilla.org/en-US/firefox/addon/reskroutzed"
+              class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded" rel="noopener noreferrer" target="_blank"
+            >
+                Get for Firefox
+            </a>
+          </td>
+          <td class="pr-1 pb-1 pt-2 text-start">
+            <a
+              href="https://chrome.google.com/webstore/detail/reskroutzed/amglnkndjeoojnjjeepeheobhneeogcl"
+              class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded" rel="noopener noreferrer" target="_blank"
+            >
+                Get for Chrome
+            </a>
+          </td>
         </tr>
       </table>`,
     ],
@@ -45,7 +55,7 @@ const projects: ShowcaseType[] = [
     info: "A fully functional Discord bot.",
     position: "(TypeScript, MongoDB, Mongoose)",
     description: [
-      `<a href="https://portal-bot.xyz/" rel="noopener noreferrer" target="_blank" class="hover:underline text-blue-500 hover:text-blue-700 font-semibold">Documentation</a>`,
+      `<a href="https://portal-bot.xyz/" rel="noopener noreferrer" target="_blank" class="text-verge-blue/60 hover:text-verge-blue hover:underline font-semibold">Documentation</a>`,
       "Open source.",
     ],
   },
@@ -65,7 +75,7 @@ const projects: ShowcaseType[] = [
     info: "A focused cinema website where you can see all movies in Heraklion.",
     position: "(NextJS, Tailwind)",
     description: [
-      `<a href="https://github.com/sinemas/sinemas-info-adapters" rel="noopener noreferrer" target="_blank" class="hover:underline text-blue-500 hover:text-blue-700 font-semibold">ΣΙΝΕμας Community Adapters</a>, are available for everyone add their own city to the site.`,
+      `<a href="https://github.com/sinemas/sinemas-info-adapters" rel="noopener noreferrer" target="_blank" class="text-verge-blue/60 hover:text-verge-blue hover:underline font-semibold">ΣΙΝΕμας Community Adapters</a>, are available for everyone add their own city to the site.`,
       "Closed source.",
     ],
   },

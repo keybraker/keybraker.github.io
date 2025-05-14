@@ -138,19 +138,18 @@ export default function Home() {
               <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
                 <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
                   <ProjectsPage />
-                  <p className="mt-12 text-md font-bold italic">
-                    (Find all my work on{" "}
+                  <p className="text-center mt-12 text-md font-extrabold">
+                    [ Find all my work on{" "}
                     <a
                       role="link"
                       aria-label="keybraker's GitHub page"
                       href="https://github.com/keybraker"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-medwork-dark hover:text-verge-blue hover:underline"
+                      className="text-verge-blue/60 hover:text-verge-blue hover:underline"
                     >
                       github.com/keybraker
-                    </a>
-                    )
+                    </a> ]
                   </p>
                 </div>
                 <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
