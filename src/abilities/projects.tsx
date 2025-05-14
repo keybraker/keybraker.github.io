@@ -10,6 +10,9 @@ const projects: ShowcaseType[] = [
     info: 'A must-have enhancer for the website <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
     position: "(TypeScript, Wepback)",
     description: [
+      "Created and deployed an extension to both Chrome's and Firefox's store.",
+      "Used the latest technologies to make deployments fast and of the highest quality.",
+      "Open source.",
       `<table class="w-full border-collapse mb-4">
         <tr>
           <th class="pr-1 pb-1 text-start">Firefox</th>
@@ -32,9 +35,6 @@ const projects: ShowcaseType[] = [
           <td class="pr-1 pb-1 pt-2 text-start"><a href="https://chrome.google.com/webstore/detail/reskroutzed/amglnkndjeoojnjjeepeheobhneeogcl" class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded" rel="noopener noreferrer" target="_blank">Download</a></td>
         </tr>
       </table>`,
-      "Created and deployed an extension to both Chrome's and Firefox's store.",
-      "Used the latest technologies to make deployments fast and of the highest quality.",
-      "Open source.",
     ],
   },
   {
@@ -64,6 +64,10 @@ const projects: ShowcaseType[] = [
       '<a href="https://sinemas.info" rel="noopener noreferrer" target="_blank" class="hover:underline">sinemas.info</a>',
     info: "A focused cinema website where you can see all movies in Heraklion.",
     position: "(NextJS, Tailwind)",
+    description: [
+      `<a href="https://github.com/sinemas/sinemas-info-adapters" rel="noopener noreferrer" target="_blank" class="hover:underline text-blue-500 hover:text-blue-700 font-semibold">ΣΙΝΕμας Community Adapters</a>, are available for everyone add their own city to the site.`,
+      "Closed source.",
+    ],
   },
 ];
 
