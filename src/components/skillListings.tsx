@@ -6,7 +6,8 @@ function SkillListing({ skill, last }: { skill: SkillType; last: boolean }) {
       <div className="flex flex-col text-start align-top text-tsiakkas-dark dark:text-tsiakkas-light">
         <div className="flex flex-row justify-between text-start align-top">
           <div
-            className="content font-semibold"
+            className="
+              content font-semibold italic mb-2"
             dangerouslySetInnerHTML={{ __html: skill.category }}
           ></div>
           {skill?.technologies ? (

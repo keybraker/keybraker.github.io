@@ -55,7 +55,7 @@ const projects: ShowcaseType[] = [
     info: "A fully functional Discord bot.",
     position: "(TypeScript, MongoDB, Mongoose)",
     description: [
-      `<a href="https://portal-bot.xyz/" rel="noopener noreferrer" target="_blank" class="text-verge-blue/60 hover:text-verge-blue hover:underline font-semibold">Documentation</a>`,
+      `<a href="https://portal-bot.xyz/" rel="noopener noreferrer" target="_blank" class="hover:underline font-semibold">Documentation</a>`,
       "Open source.",
     ],
   },
@@ -75,7 +75,7 @@ const projects: ShowcaseType[] = [
     info: "A focused cinema website where you can see all movies in Heraklion.",
     position: "(NextJS, Tailwind)",
     description: [
-      `<a href="https://github.com/sinemas/sinemas-info-adapters" rel="noopener noreferrer" target="_blank" class="text-verge-blue/60 hover:text-verge-blue hover:underline font-semibold">ΣΙΝΕμας Community Adapters</a>, are available for everyone add their own city to the site.`,
+      `<a href="https://github.com/sinemas/sinemas-info-adapters" rel="noopener noreferrer" target="_blank" class="hover:underline font-semibold">ΣΙΝΕμας Community Adapters</a>, are available for everyone add their own city to the site.`,
       "Closed source.",
     ],
   },
