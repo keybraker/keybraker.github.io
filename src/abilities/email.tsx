@@ -124,7 +124,7 @@ export default function Email() {
             </span>
             <span className="hidden group-hover:contents dark:text-tsiakkas-light text-tsiakkas-light">
               <HiOutlineDownload />
-              <span>72.11 Kb</span>
+              <span>79.80 Kb</span>
             </span>
           </a>
         </div>

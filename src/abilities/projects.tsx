@@ -60,24 +60,24 @@ const projects: ShowcaseType[] = [
     ],
   },
   {
-    start: new Date("2023-09-01"),
-    end: new Date("2024-02-01"),
-    title:
-      '<a href="https://medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">medwork.gr</a>',
-    info: "Created the website for Medwork a CRO situated in Athens, Greece.",
-    position: "(NextJS, Tailwind)",
-  },
-  {
     start: new Date("2024-03-01"),
     end: new Date("2024-04-01"),
     title:
       '<a href="https://sinemas.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">sinemas.gr</a>',
     info: "A focused cinema website where you can see all movies in Heraklion.",
-    position: "(NextJS, Tailwind)",
+    position: "(Next.js, Tailwind)",
     description: [
       `<a href="https://github.com/sinemas/sinemas-info-adapters" rel="noopener noreferrer" target="_blank" class="hover:underline font-semibold">ΣΙΝΕμας Community Adapters</a>, are available for everyone add their own city to the site.`,
       "Closed source.",
     ],
+  },
+  {
+    start: new Date("2023-09-01"),
+    end: new Date("2024-02-01"),
+    title:
+      '<a href="https://medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">medwork.gr</a>',
+    info: "Created the website for Medwork a CRO situated in Athens, Greece.",
+    position: "(Next.js, Tailwind)",
   },
 ];
 
