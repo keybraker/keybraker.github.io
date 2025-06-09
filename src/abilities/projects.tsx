@@ -71,7 +71,7 @@ const projects: ShowcaseType[] = [
     start: new Date("2024-03-01"),
     end: new Date("2024-04-01"),
     title:
-      '<a href="https://sinemas.info" rel="noopener noreferrer" target="_blank" class="hover:underline">sinemas.info</a>',
+      '<a href="https://sinemas.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">sinemas.gr</a>',
     info: "A focused cinema website where you can see all movies in Heraklion.",
     position: "(NextJS, Tailwind)",
     description: [

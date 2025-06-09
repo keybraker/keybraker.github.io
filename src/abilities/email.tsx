@@ -93,7 +93,12 @@ export default function Email() {
 
       <div className="flex-end align-start h-42 mt-7 flex justify-between gap-1 text-tsiakkas-dark dark:text-tsiakkas-light ">
         <a
-          className="flex h-full w-24 items-center justify-around gap-0 hover:text-tsiakkas-dark rounded-full bg-tsiakkas-light dark:bg-tsiakkas-dark py-1.5 px-2.5 shadow-md hover:bg-gray-300"
+          className="
+            flex h-full w-24 items-center justify-around
+            gap-0 rounded-full py-1.5 px-2.5 shadow-md
+            hover:text-tsiakkas-dark hover:dark:text-tsiakkas-light
+            bg-tsiakkas-light dark:bg-tsiakkas-dark
+            hover:bg-tsiakkas-light/75 hover:dark:bg-tsiakkas-dark/75"
           href={`${mailto}${subject}`}
         >
           <HiOutlineReply />
@@ -103,7 +108,11 @@ export default function Email() {
         <div className="group relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
-            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md bg-tsiakkas-light dark:bg-tsiakkas-dark shadow-md ring-1 ring-gray-900/5 hover:bg-gray-300"
+            className="
+              relative flex h-full w-28 items-center justify-around gap-0 rounded-md
+              bg-tsiakkas-light dark:bg-tsiakkas-dark
+              shadow-md ring-1 ring-gray-900/5
+              hover:bg-tsiakkas-dark/10 hover:dark:bg-tsiakkas-dark/10"
             href="/assets/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -113,7 +122,7 @@ export default function Email() {
               <ImFilePdf />
               <span>Resume</span>
             </span>
-            <span className="hidden group-hover:contents dark:text-tsiakkas-dark text-tsiakkas-dark">
+            <span className="hidden group-hover:contents dark:text-tsiakkas-light text-tsiakkas-light">
               <HiOutlineDownload />
               <span>72.11 Kb</span>
             </span>
