@@ -69,13 +69,13 @@ export default function Header() {
         border-tsiakkas-dark dark:border-tsiakkas-light
       ">
           <Link href="/">
-            <h1 className="
+            <h1 className="font-serif
                 flex flex-col self-center tn:flex-row xs:gap-2 gap-1
                 text-center text-2xl font-extrabold leading-100
                 text-tsiakkas-dark dark:text-tsiakkas-light
               ">
-              <span className="">Tsiakkas</span>
-              <span className="">Ioannis</span>
+              <span>Tsiakkas</span>
+              <span>Ioannis</span>
             </h1>
           </Link>
           <AboutPageInner />
