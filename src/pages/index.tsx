@@ -169,12 +169,12 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex w-full flex-col items-center rounded-lg border border-tsiakkas-dark p-8 dark:border-tsiakkas-light eq:flex-row eq:items-start">
+              <div className="flex w-full flex-col items-center rounded-lg border-2 border-tsiakkas-dark p-8 dark:border-tsiakkas-light eq:flex-row eq:items-start">
                 <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
                   <SkillPage />
                 </div>
-                <div className="my-8 w-full border-t border-dashed border-gray-300 dark:border-gray-800 eq:w-0"></div>
-                <div className="mx-16 h-0 border-l border-dashed border-gray-300 dark:border-gray-800 eq:h-full"></div>
+                <div className="my-8 w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:w-0"></div>
+                <div className="mx-16 h-0 border-l border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:h-full"></div>
                 <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
                   {/* <Category {...categories[1]} /> */}
                   <SoftwareEngineeringPage />

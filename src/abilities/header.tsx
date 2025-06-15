@@ -45,7 +45,7 @@ function AboutPageInner() {
       >
         <FaLinkedin className="antialiased" size={"20px"} />
       </a>
-      <div className="h-5 w-px bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2"></div>
+      <div className="h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2"></div>
       <DarkModeToggle />
     </div>
   );
@@ -54,7 +54,7 @@ function AboutPageInner() {
 export default function Header() {
   return (
     <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[560px] eq:max-w-[1320px] w-full bg-tsiakkas-light dark:bg-tsiakkas-dark">
-      <div className="text-tsiakkas-dark dark:text-tsiakkas-light w-full flex flex-row">
+      <div className="text-tsiakkas-light dark:text-tsiakkas-dark w-full flex flex-row">
         <div className="w-1/2 text-start italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]">
         </div>
         <div className="w-1/2 text-end italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]">
@@ -64,16 +64,18 @@ export default function Header() {
         <div className="
         flex flex-col sm:flex-row items-center justify-around xs:justify-between
         px-0 tn:px-4 pt-2 tn:pt-2 pb-4 tn:pb-4 gap-4
-        bg-tsiakkas-light dark:bg-tsiakkas-dark xs:py-4 sm:items-stretch
-        border-b-2 border-tsiakkas-dark dark:border-tsiakkas-light
+        xs:py-4 sm:items-stretch
+        border-b-2
+        border-tsiakkas-dark dark:border-tsiakkas-light
       ">
           <Link href="/">
             <h1 className="
-                flex flex-col self-center text-center font-helvetica text-2xl font-bold leading-100 tn:flex-row xs:gap-2 gap-1
+                flex flex-col self-center tn:flex-row xs:gap-2 gap-1
+                text-center text-2xl font-extrabold leading-100
                 text-tsiakkas-dark dark:text-tsiakkas-light
               ">
-              <span>Tsiakkas</span>
-              <span>Ioannis</span>
+              <span className="">Tsiakkas</span>
+              <span className="">Ioannis</span>
             </h1>
           </Link>
           <AboutPageInner />

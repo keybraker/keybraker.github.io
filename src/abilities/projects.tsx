@@ -30,7 +30,7 @@ const projects: ShowcaseType[] = [
           <td class="pr-1 pb-1 pt-2 text-start">
             <a
               href="https://addons.mozilla.org/en-US/firefox/addon/reskroutzed"
-              class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded" rel="noopener noreferrer" target="_blank"
+              class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded-full" rel="noopener noreferrer" target="_blank"
             >
                 Get for Firefox
             </a>
@@ -38,7 +38,7 @@ const projects: ShowcaseType[] = [
           <td class="pr-1 pb-1 pt-2 text-start">
             <a
               href="https://chrome.google.com/webstore/detail/reskroutzed/amglnkndjeoojnjjeepeheobhneeogcl"
-              class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded" rel="noopener noreferrer" target="_blank"
+              class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded-full" rel="noopener noreferrer" target="_blank"
             >
                 Get for Chrome
             </a>
