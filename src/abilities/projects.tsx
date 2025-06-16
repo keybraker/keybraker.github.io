@@ -1,4 +1,5 @@
 import { ShowcaseListings } from "@/components/showcaseListings";
+import { createLinkDiv } from "@/functions/linkCreator";
 import { ShowcaseType } from "@/types/showcase";
 
 const projects: ShowcaseType[] = [
@@ -8,7 +9,10 @@ const projects: ShowcaseType[] = [
     title:
       '<a href="https://github.com/keybraker/skroutz-sponsored-flagger" rel="noopener noreferrer" target="_blank" class="hover:underline">reSkroutzed</a>',
     info: 'A must-have enhancer for the website <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
-    position: "(TypeScript, Wepback)",
+    position: `(${createLinkDiv(
+      "https://www.typescriptlang.org/",
+      "TypeScript"
+    )}, ${createLinkDiv("https://webpack.js.org/", "Wepback")})`,
     description: [
       "Created and deployed an extension to both Chrome's and Firefox's store.",
       "Used the latest technologies to make deployments fast and of the highest quality.",
@@ -50,34 +54,51 @@ const projects: ShowcaseType[] = [
   {
     start: new Date("2020-02-01"),
     end: null,
-    title:
-      '<a href="https://github.com/The-Portal-Bot/Portal" rel="noopener noreferrer" target="_blank" class="hover:underline">portal (discord bot)</a>',
+    title: createLinkDiv(
+      "https://github.com/The-Portal-Bot/Portal",
+      "portal (discord bot)"
+    ),
     info: "A fully functional Discord bot.",
-    position: "(TypeScript, MongoDB, Mongoose)",
+    position: `(${createLinkDiv(
+      "https://www.typescriptlang.org/",
+      "TypeScript"
+    )}, ${createLinkDiv("https://www.mongodb.com/", "MongoDB")})`,
     description: [
-      `<a href="https://portal-bot.xyz/" rel="noopener noreferrer" target="_blank" class="hover:underline font-semibold">Documentation</a>`,
+      createLinkDiv(
+        "https://portal-bot.xyz/",
+        "Documentation",
+        "hover:underline font-semibold"
+      ),
       "Open source.",
     ],
   },
   {
     start: new Date("2024-03-01"),
     end: new Date("2024-04-01"),
-    title:
-      '<a href="https://sinemas.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">sinemas.gr</a>',
+    title: createLinkDiv("https://sinemas.gr", "sinemas.gr"),
     info: "A focused cinema website where you can see all movies in Heraklion.",
-    position: "(Next.js, Tailwind)",
+    position: `(${createLinkDiv("https://nextjs.org/", "Next.js")}, ${createLinkDiv(
+      "https://tailwindcss.com",
+      "Tailwind"
+    )})`,
     description: [
-      `<a href="https://github.com/sinemas/sinemas-info-adapters" rel="noopener noreferrer" target="_blank" class="hover:underline font-semibold">ΣΙΝΕμας Community Adapters</a>, are available for everyone add their own city to the site.`,
+      `${createLinkDiv(
+        "https://github.com/sinemas/sinemas-info-adapters",
+        "ΣΙΝΕμας Community Adapters",
+        "hover:underline font-semibold"
+      )}, are available for everyone add their own city to the site.`,
       "Closed source.",
     ],
   },
   {
     start: new Date("2023-09-01"),
     end: new Date("2024-02-01"),
-    title:
-      '<a href="https://medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">medwork.gr</a>',
+    title: createLinkDiv("https://medwork.gr", "medwork.gr"),
     info: "Created the website for Medwork a CRO situated in Athens, Greece.",
-    position: "(Next.js, Tailwind)",
+    position: `(${createLinkDiv("https://nextjs.org/", "Next.js")}, ${createLinkDiv(
+      "https://tailwindcss.com",
+      "Tailwind"
+    )})`,
   },
 ];
 
