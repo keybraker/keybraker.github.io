@@ -8,6 +8,7 @@ const projects: ShowcaseType[] = [
     end: null,
     title:
       '<a href="https://github.com/keybraker/skroutz-sponsored-flagger" rel="noopener noreferrer" target="_blank" class="hover:underline">reSkroutzed</a>',
+    titleDescription: "(web extension, open source)",
     info: 'A must-have enhancer for the website <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
     position: `(${createLinkDiv(
       "https://www.typescriptlang.org/",
@@ -16,7 +17,6 @@ const projects: ShowcaseType[] = [
     description: [
       "Created and deployed an extension to both Chrome's and Firefox's store.",
       "Used the latest technologies to make deployments fast and of the highest quality.",
-      "Open source.",
       `<table class="w-full border-collapse mt-2 mb-4">
         <tr>
           <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/amo/users/reskroutzed" alt="Firefox Add-on Users"/></td>
@@ -56,8 +56,9 @@ const projects: ShowcaseType[] = [
     end: null,
     title: createLinkDiv(
       "https://github.com/The-Portal-Bot/Portal",
-      "portal (discord bot)"
+      "portal"
     ),
+    titleDescription: "(discord bot, open source)",
     info: "A fully functional Discord bot.",
     position: `(${createLinkDiv(
       "https://www.typescriptlang.org/",
@@ -69,12 +70,11 @@ const projects: ShowcaseType[] = [
         "Documentation",
         "hover:underline font-semibold"
       ),
-      "Open source.",
     ],
   },
   {
-    start: new Date("2024-03-01"),
-    end: new Date("2024-04-01"),
+    start: new Date("2024-03-16"),
+    end: null,
     title: createLinkDiv("https://sinemas.gr", "sinemas.gr"),
     info: "A focused cinema website where you can see all movies in Heraklion.",
     position: `(${createLinkDiv("https://nextjs.org/", "Next.js")}, ${createLinkDiv(
@@ -87,7 +87,6 @@ const projects: ShowcaseType[] = [
         "ΣΙΝΕμας Community Adapters",
         "hover:underline font-semibold"
       )}, are available for everyone add their own city to the site.`,
-      "Closed source.",
     ],
   },
   {

@@ -21,10 +21,16 @@ function ShowcaseListing({
     <>
       <div className="flex flex-row justify-between text-tsiakkas-dark dark:text-tsiakkas-light">
         <div className="w-6/12 no-wrap flex flex-col justify-start text-start align-top">
-          <div
-            className="content font-extrabold text-lg white"
-            dangerouslySetInnerHTML={{ __html: showcase.title }}
-          ></div>
+          <div className="flex flex-row gap-2">
+            <div
+              className="content font-extrabold text-lg white"
+              dangerouslySetInnerHTML={{ __html: showcase.title }}
+            ></div>
+            {showcase.titleDescription && (<div
+              className="content font-thin text-md white flex items-center italic"
+              dangerouslySetInnerHTML={{ __html: showcase.titleDescription }}
+            ></div>)}
+          </div>
           <div
             className="content text-md italic ml-[2px]"
             dangerouslySetInnerHTML={{ __html: showcase.info }}
@@ -35,8 +41,8 @@ function ShowcaseListing({
           <div
             className="flex flex-col sm:flex-row content text-md italic sm:gap-2 align-baseline"
           >
-            <span>{getDateFormatted(showcase.start)} - {getDateFormatted(showcase.end)}</span>
-            <span className="text-sm text-tsiakkas-dark dark:text-tsiakkas-light">({period})</span>
+            <span className="flex items-center text-sm text-tsiakkas-dark dark:text-tsiakkas-light">{period} - </span>
+            <span className="font-semibold">{getDateFormatted(showcase.start)} - {getDateFormatted(showcase.end)}</span>
           </div>
           <div className="flex flex-col items-end">
             <div

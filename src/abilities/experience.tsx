@@ -86,7 +86,7 @@ const experiences: ShowcaseType[] = [
       createLinkDiv("https://www.ics.forth.gr/tnl", "TNL"),
     ],
     description: [
-      "As an undergraduate researcher, I mainly focused on creating the backbone system for the researcher's machine learning model testing; written in CUDA to leverage the power of GPGPUs.",
+      `As an undergraduate researcher, I mainly focused on creating the backbone system for the researcher's machine learning model testing; written in ${createLinkDiv("https://developer.nvidia.com/cuda-zone", "CUDA")} to leverage the power of GPGPUs.`,
     ],
   },
 ];
