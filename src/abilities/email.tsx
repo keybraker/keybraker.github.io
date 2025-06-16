@@ -36,13 +36,13 @@ export default function Email() {
   return (
     <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-6 shadow-xl">
       {/* <HeadScene /> */}
-      <div className="grid grid-cols-2 justify-between w-full">
+      <div className="flex flex-col-reverse sm:flex-row justify-between w-full gap-4">
         <div className="flex flex-col w-full">
-          <span>
-            <span>
+          <span className="flex flex-row gap-2">
+            <span className="w-20">
               from:{" "}
             </span>
-            <span>
+            <span className="w-full text-end xs:text-start">
               <a
                 className="font-semibold hover:underline"
                 href={`${mailto}${subject}`}
@@ -52,15 +52,15 @@ export default function Email() {
             </span>
           </span>
           <span className="flex flex-row gap-2">
-            <span>to:</span>
-            <span>you</span>
+            <span className="w-20">to:</span>
+            <span className="w-full text-end xs:text-start">you</span>
           </span>
           <span className="flex flex-row gap-2">
-            <span>subject:</span>
-            <span>My website</span>
+            <span className="w-20">subject:</span>
+            <span className="w-full text-end xs:text-start">My website</span>
           </span>
         </div>
-        <div className="flex flex-col h-full w-full items-end">
+        <div className="flex flex-row justify-between sm:flex-col h-full w-full items-end">
           {hasMounted && (<span className="flex self-end">{formattedDate}</span>)}
           <span className="italic text-gray-700">one attachment (1)</span>
         </div>

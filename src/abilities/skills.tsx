@@ -1,10 +1,16 @@
 import { SkillListings } from "@/components/skillListings";
+import { createLinkDiv } from "@/functions/linkCreator";
 import { SkillType } from "@/types/skill";
 
 const skills: SkillType[] = [
   {
     category: "Tools",
-    qualifications: ["Git", "Github Actions", "Docker", "AWS"],
+    qualifications: [
+      createLinkDiv("https://git-scm.com/", "Git"),
+      createLinkDiv("https://github.com/features/actions", "Github Actions"),
+      createLinkDiv("https://www.docker.com/", "Docker"),
+      createLinkDiv("https://aws.amazon.com/", "AWS"),
+    ],
   },
   {
     category: "Personal Attributes",

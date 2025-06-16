@@ -1,4 +1,5 @@
 import { SkillListings } from "@/components/skillListings";
+import { createLinkDiv } from "@/functions/linkCreator";
 import { SkillType } from "@/types/skill";
 
 const skills: SkillType[] = [
@@ -14,21 +15,29 @@ const skills: SkillType[] = [
   {
     category: "Architecture",
     qualifications: [
-      "REST",
-      "APIs",
-      "Events",
+      createLinkDiv("https://en.wikipedia.org/wiki/REST", "REST"),
+      createLinkDiv("https://en.wikipedia.org/wiki/API", "APIs"),
+      createLinkDiv("https://en.wikipedia.org/wiki/API", "Events"),
       "Lambdas",
-      "CronJobs",
-      "Microservices",
+      createLinkDiv("https://en.wikipedia.org/wiki/Microservices", "Microservices"),
     ],
   },
   {
     category: "Databases",
-    qualifications: ["SQL", "non SQL", "Raw SQL", "ORMs"],
+    qualifications: [
+      createLinkDiv("https://en.wikipedia.org/wiki/SQL", "SQL"),
+      createLinkDiv("https://en.wikipedia.org/wiki/NoSQL", "NoSQL"),
+      createLinkDiv("https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping", "ORMs"),
+    ],
   },
   {
     category: "Frontend",
-    qualifications: ["React", "Angular", "Next.js", "TypeScript"],
+    qualifications: [
+      createLinkDiv("https://angular.dev/", "Angular"),
+      createLinkDiv("https://react.dev/", "React"),
+      createLinkDiv("https://nextjs.org/", "Next.js"),
+      createLinkDiv("https://www.typescriptlang.org/", "TypeScript")
+    ],
   },
 ];
 

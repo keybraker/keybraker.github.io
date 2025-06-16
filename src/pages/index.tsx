@@ -141,7 +141,7 @@ export default function Home() {
               <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
                 <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
                   <ProjectsPage />
-                  <p className="w-full flex flex-col sm:flex-row items-center sm:items-baseline justify-center mt-12 text-md font-semibold gap-1 sm:gap-[6px]">
+                  <p className="w-full flex flex-col items-center mt-12 text-md font-semibold gap-[6px]">
                     <span>Find all my work at</span>
                     <a
                       role="link"
