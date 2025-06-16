@@ -8,11 +8,9 @@ export default function Category(props: CategoryProps) {
   return (
     <section
       id={props.title.split(" ").join("-").toLowerCase()}
-      className={`
-        w-full rounded-2xl p-6 text-tsiakkas-dark eq:sticky eq:top-[98px] eq:ml-16 eq:min-h-[240px] eq:w-fit eq:min-w-[400px] ${props.colour}
-      `}
+      className={`w-full rounded-2xl p-6 text-tsiakkas-dark eq:sticky eq:top-[98px] eq:ml-16 eq:min-h-[240px] eq:w-fit eq:min-w-[400px] ${props.colour}`}
     >
-      <div className="leading-100 brief-title mb-4  border-b-2 border-dotted border-b-tsiakkas-dark block text-xl font-extrabold text-tsiakkas-dark sm:text-2xl eq:hidden">
+      <div className="leading-100 brief-title mb-4 pb-4 border-b-2 border-dotted border-b-tsiakkas-dark/40 block text-xl font-extrabold text-tsiakkas-dark eq:hidden text-center">
         {props.title}
       </div>
       <div

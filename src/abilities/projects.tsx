@@ -10,10 +10,12 @@ const projects: ShowcaseType[] = [
       '<a href="https://github.com/keybraker/skroutz-sponsored-flagger" rel="noopener noreferrer" target="_blank" class="hover:underline">reSkroutzed</a>',
     titleDescription: "(web extension, open source)",
     info: 'A must-have enhancer for the website <a href="https://skroutz.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">skroutz.gr</a>.',
-    position: `(${createLinkDiv(
+    position: '',
+    technologies: [createLinkDiv(
       "https://www.typescriptlang.org/",
       "TypeScript"
-    )}, ${createLinkDiv("https://webpack.js.org/", "Wepback")})`,
+    ),
+    createLinkDiv("https://webpack.js.org/", "Wepback")],
     description: [
       "Created and deployed an extension to both Chrome's and Firefox's store.",
       "Used the latest technologies to make deployments fast and of the highest quality.",
@@ -60,10 +62,12 @@ const projects: ShowcaseType[] = [
     ),
     titleDescription: "(discord bot, open source)",
     info: "A fully functional Discord bot.",
-    position: `(${createLinkDiv(
+    position: '',
+    technologies: [createLinkDiv(
       "https://www.typescriptlang.org/",
       "TypeScript"
-    )}, ${createLinkDiv("https://www.mongodb.com/", "MongoDB")})`,
+    ),
+    createLinkDiv("https://www.mongodb.com/", "MongoDB")],
     description: [
       createLinkDiv(
         "https://portal-bot.xyz/",
@@ -77,10 +81,12 @@ const projects: ShowcaseType[] = [
     end: null,
     title: createLinkDiv("https://sinemas.gr", "sinemas.gr"),
     info: "A focused cinema website where you can see all movies in Heraklion.",
-    position: `(${createLinkDiv("https://nextjs.org/", "Next.js")}, ${createLinkDiv(
+    position: '',
+    technologies: [createLinkDiv("https://nextjs.org/", "Next.js"),
+    createLinkDiv(
       "https://tailwindcss.com",
       "Tailwind"
-    )})`,
+    )],
     description: [
       `${createLinkDiv(
         "https://github.com/sinemas/sinemas-info-adapters",
@@ -94,10 +100,12 @@ const projects: ShowcaseType[] = [
     end: new Date("2024-02-01"),
     title: createLinkDiv("https://medwork.gr", "medwork.gr"),
     info: "Created the website for Medwork a CRO situated in Athens, Greece.",
-    position: `(${createLinkDiv("https://nextjs.org/", "Next.js")}, ${createLinkDiv(
+    position: '',
+    technologies: [createLinkDiv("https://nextjs.org/", "Next.js"),
+    createLinkDiv(
       "https://tailwindcss.com",
       "Tailwind"
-    )})`,
+    )],
   },
 ];
 
