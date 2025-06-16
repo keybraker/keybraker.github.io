@@ -32,8 +32,7 @@ const experiences: ShowcaseType[] = [
   {
     start: new Date("2021-07-01"),
     end: new Date("2022-01-01"),
-    title:
-      '<span class="text-tsiakkas-dark dark:text-tsiakkas-light"><a href="http://www.army.gov.cy/" rel="noopener noreferrer" target="_blank" class="hover:underline">Cypriot Military</a></span>',
+    title: createLinkDiv("http://www.army.gov.cy/", "Cypriot Military", "hover:underline text-tsiakkas-dark dark:text-tsiakkas-light"),
     info: '<span class="text-tsiakkas-dark dark:text-tsiakkas-light">Ordnance Corps</span>',
     position:
       '<span class="text-tsiakkas-dark dark:text-tsiakkas-light">Obligatory military service</span>',
