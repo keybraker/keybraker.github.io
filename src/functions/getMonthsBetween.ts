@@ -14,7 +14,7 @@ export function getPeriodBetween(from: Date, to: Date | null): string {
     }
 
     if (months > 0) {
-        result = result.concat(months === 1 ? [`${months}m`] : [`${months}ms`]);
+        result = result.concat(months === 1 ? [`${months}m`] : [`${months}m`]);
     }
 
     return result.join(' and ') || '';
