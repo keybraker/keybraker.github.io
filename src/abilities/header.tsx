@@ -2,7 +2,9 @@ import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
+import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import DarkModeToggle from "../components/DarkModeToggle";
 
 const mail = "mailto:" + "iantsiakkas@gmail.com";
@@ -10,9 +12,28 @@ const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
 const github = "https://github.com/" + "Keybraker";
 const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
 
-function AboutPageInner() {
+function AboutPageInner({ showPhotographyLink }: { showPhotographyLink: boolean }) {
   return (
     <div className="flex flex-row items-center justify-between xs:justify-around gap-4 align-baseline text-tsiakkas-dark dark:text-tsiakkas-light">
+      {showPhotographyLink && (
+        <Link
+          href="/photography"
+          aria-label="Go to photography page"
+          className="group relative flex items-center justify-center h-8 w-8 rounded-md
+            border border-tsiakkas-dark/10 dark:border-tsiakkas-light/10
+            text-tsiakkas-dark dark:text-tsiakkas-light
+            bg-tsiakkas-dark/10 dark:bg-tsiakkas-light/10
+            hover:bg-tsiakkas-dark/10 dark:hover:bg-tsiakkas-light/20
+            shadow-[0_0_0_1px_rgba(0,0,0,0.06)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.15)]
+            hover:shadow-[0_2px_6px_-1px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_2px_6px_-1px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.25)]
+            transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40"
+        >
+          <MdPhotoCamera size={18} className="opacity-80 group-hover:opacity-100 transition" />
+        </Link>
+      )}
+      {showPhotographyLink && (
+        <div className="h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2"></div>
+      )}
       <a
         aria-label="By clicking you will be taken to Maps"
         rel="noopener noreferrer"
@@ -52,6 +73,8 @@ function AboutPageInner() {
 }
 
 export default function Header() {
+  const router = useRouter();
+  const isPhotography = router.pathname.startsWith('/photography');
   return (
     <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[560px] eq:max-w-[1320px] w-full bg-tsiakkas-light dark:bg-tsiakkas-dark">
       <div className="text-tsiakkas-light dark:text-tsiakkas-dark w-full flex flex-row">
@@ -78,7 +101,7 @@ export default function Header() {
               <span>Ioannis</span>
             </h1>
           </Link>
-          <AboutPageInner />
+          <AboutPageInner showPhotographyLink={!isPhotography} />
         </div>
       </div>
     </header>

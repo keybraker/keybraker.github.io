@@ -1,7 +1,6 @@
 import Head from "next/head";
-import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type Photo = {
     id: number;
@@ -15,7 +14,6 @@ type Section = {
     photos: Photo[];
 };
 
-// Single placeholder image (user provided) used for all frames for now
 const placeholderImage = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
 const landscapes: Photo[] = [
@@ -29,7 +27,6 @@ const landscapes: Photo[] = [
     { id: 8, caption: "The coast exhaling color as twilight refuses to let the day end.", settings: "18mm · f/13 · 2.0s · ISO 64", location: "Azores" },
 ];
 
-// Placeholder alternate thematic sections (using same placeholder image & dummy metadata for now)
 const zurichAtNight: Photo[] = [
     { id: 101, caption: "Tram lines glowing while the river swallows the city lights.", settings: "35mm · f/1.8 · 1/50s · ISO 1250", location: "Zürich, Switzerland" },
     { id: 102, caption: "Reflections layering time across quiet cobblestone.", settings: "50mm · f/2.2 · 1/60s · ISO 1600", location: "Zürich, Switzerland" },
@@ -67,7 +64,7 @@ function PhotoCard({ photo, onOpen }: { photo: Photo; onOpen: (p: Photo) => void
                     alt={photo.caption}
                     width={800}
                     height={600}
-                    className="h-64 w-full object-cover select-none border-2 border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 cursor-zoom-in"
+                    className="h-64 w-full object-cover select-none  cursor-zoom-in"
                 />
             </button>
             <div className="w-full flex flex-col gap-4 text-tsiakkas-dark bg-tsiakkas-dark/10 dark:bg-tsiakkas-light/10 p-4">
@@ -85,9 +82,46 @@ export default function PhotographyPage() {
 
     const close = useCallback(() => setActive(null), []);
 
+
+    const allPhotos: Photo[] = useMemo(() => [...zurichAtNight, ...cats, ...landscapes], []);
+    const activeIndex = active ? allPhotos.findIndex(p => p.id === active.id) : -1;
+    const hasPrev = activeIndex > 0;
+    const hasNext = activeIndex >= 0 && activeIndex < allPhotos.length - 1;
+
+    const goPrev = useCallback(() => {
+        if (hasPrev) setActive(allPhotos[activeIndex - 1]);
+    }, [hasPrev, activeIndex, allPhotos]);
+    const goNext = useCallback(() => {
+        if (hasNext) setActive(allPhotos[activeIndex + 1]);
+    }, [hasNext, activeIndex, allPhotos]);
+
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        if (active) {
+            const h = `#photo-${active.id}`;
+            if (window.location.hash !== h) history.replaceState(null, '', h);
+        } else if (window.location.hash.startsWith('#photo-')) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+    }, [active]);
+
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const hash = window.location.hash;
+        if (hash.startsWith('#photo-')) {
+            const id = parseInt(hash.replace('#photo-', ''), 10);
+            const found = allPhotos.find(p => p.id === id);
+            if (found) setActive(found);
+        }
+    }, [allPhotos]);
+
     useEffect(() => {
         function onKey(e: KeyboardEvent) {
             if (e.key === "Escape") close();
+            if (e.key === "ArrowLeft") goPrev();
+            if (e.key === "ArrowRight") goNext();
         }
         if (active) {
             document.addEventListener("keydown", onKey);
@@ -99,7 +133,7 @@ export default function PhotographyPage() {
             document.removeEventListener("keydown", onKey);
             document.documentElement.classList.remove("overflow-hidden");
         };
-    }, [active, close]);
+    }, [active, close, goPrev, goNext]);
     return (
         <>
             <Head>
@@ -107,7 +141,7 @@ export default function PhotographyPage() {
                 <meta name="description" content="A curated landscape photography showcase." />
                 <meta name="robots" content="index,follow" />
             </Head>
-            <div className="flex flex-col gap-8">
+            <div id="top" className="flex flex-col gap-8">
                 <div className="flex flex-col gap-6">
                     <h2 className="text-3xl font-extrabold font-serif leading-tight">Photography</h2>
                     <p className="text-md leading-relaxed">
@@ -125,8 +159,7 @@ export default function PhotographyPage() {
                     </p>
                 </div>
 
-                {/* Section quick nav */}
-                <nav className="flex flex-wrap gap-4 text-[12px] font-semibold tracking-wide">
+                <nav className="flex flex-wrap gap-4 text-[12px] font-semibold tracking-wide justify-center">
                     {sections.map(s => (
                         <a key={s.title} href={`#${slugify(s.title)}`} className="underline decoration-dashed underline-offset-4 hover:decoration-solid">
                             {s.title}
@@ -135,26 +168,30 @@ export default function PhotographyPage() {
                 </nav>
 
                 <div className="flex flex-col gap-16">
-                    {sections.map(section => (
-                        <section
-                            key={section.title}
-                            id={slugify(section.title)}
-                            className="flex flex-col gap-6 relative"
-                        >
-                            <div className="absolute inset-0 rounded-md bg-tsiakkas-dark/5 dark:bg-tsiakkas-light/5 opacity-30 pointer-events-none" />
-                            <div className="relative flex flex-col gap-6 p-6">
-                                <div className="flex flex-row items-end justify-between">
-                                    <h3 className="text-2xl font-bold font-serif">{section.title}</h3>
-                                    <a href="#top" className="text-[11px] uppercase tracking-wide underline decoration-dotted">Top</a>
+                    {sections.map((section, idx) => {
+                        const prev = idx > 0 ? sections[idx - 1] : null;
+                        const next = idx < sections.length - 1 ? sections[idx + 1] : null;
+                        return (
+                            <section
+                                key={section.title}
+                                id={slugify(section.title)}
+                                className="flex flex-col gap-6 relative"
+                            >
+                                <div className="absolute inset-0 rounded-md bg-tsiakkas-dark/5 dark:bg-tsiakkas-light/5 opacity-30 pointer-events-none" />
+                                <div className="relative flex flex-col gap-6 p-6">
+                                    <h3 className="text-2xl font-bold font-serif mb-2">{section.title}</h3>
+                                    <div className="grid gap-8 grid-cols-1 tn:grid-cols-2 lg:grid-cols-3">
+                                        {section.photos.map(p => (
+                                            <PhotoCard key={p.id} photo={p} onOpen={setActive} />
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className="grid gap-8 grid-cols-1 tn:grid-cols-2 lg:grid-cols-3">
-                                    {section.photos.map(p => (
-                                        <PhotoCard key={p.id} photo={p} onOpen={setActive} />
-                                    ))}
-                                </div>
-                            </div>
-                        </section>
-                    ))}
+                            </section>
+                        );
+                    })}
+                </div>
+                <div className="mt-24 text-center text-[11px] tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70 px-6">
+                    <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas. They may not be copied, redistributed, or used in any form, including for any commercial purpose, without explicit written permission. Not for commercial use.</p>
                 </div>
             </div>
             {active && (
@@ -165,36 +202,98 @@ export default function PhotographyPage() {
                     className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-sm"
                     onClick={close}
                 >
-                    <div className="flex flex-row justify-end p-4" onClick={(e) => e.stopPropagation()}>
-                        <button
-                            onClick={close}
-                            aria-label="Close fullscreen viewer"
-                            className="text-tsiakkas-light hover:opacity-80 text-xl font-bold px-3 py-1 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 rounded"
-                        >
-                            ×
-                        </button>
-                    </div>
-                    <div className="flex-1 flex flex-col items-center justify-center px-4 pb-12 gap-6">
-                        <div onClick={(e) => e.stopPropagation()} className="flex items-center justify-center">
-                            <Image
-                                src={placeholderImage}
-                                alt={active.caption}
-                                width={1600}
-                                height={1200}
-                                className="max-h-[70vh] w-auto object-contain select-none"
-                                priority
-                            />
+                    <div className="flex flex-row items-center justify-between p-4 gap-4" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex flex-row gap-2">
+                            <button
+                                onClick={goPrev}
+                                disabled={!hasPrev}
+                                aria-label="Previous photo"
+                                className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wide rounded bg-tsiakkas-light/10 text-tsiakkas-light enabled:hover:bg-tsiakkas-light/20 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40"
+                            >
+                                Previous
+                            </button>
+                            <button
+                                onClick={goNext}
+                                disabled={!hasNext}
+                                aria-label="Next photo"
+                                className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wide rounded bg-tsiakkas-light/10 text-tsiakkas-light enabled:hover:bg-tsiakkas-light/20 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40"
+                            >
+                                Next
+                            </button>
+                            <span className="text-[10px] font-mono px-2 py-1 text-tsiakkas-light/70 select-none">{activeIndex + 1}/{allPhotos.length}</span>
                         </div>
-                        <div className="max-w-3xl w-full text-center flex flex-col gap-2 text-tsiakkas-light px-2">
-                            <div className="text-[12px] tracking-wide font-semibold flex flex-row justify-center gap-4 flex-wrap">
-                                <span>{active.settings}</span>
-                                <span className="italic opacity-80">{active.location}</span>
-                            </div>
-                            <p className="italic text-sm opacity-90 leading-relaxed">{active.caption}</p>
+                        <div className="flex flex-row gap-2 items-center">
+                            <button
+                                onClick={() => {
+                                    try {
+                                        const url = window.location.href;
+                                        if (navigator?.clipboard?.writeText) navigator.clipboard.writeText(url);
+                                    } catch { }
+                                }}
+                                aria-label="Copy link to this photo"
+                                className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wide rounded bg-tsiakkas-light/10 text-tsiakkas-light hover:bg-tsiakkas-light/20 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40"
+                            >Copy Link</button>
+                            <button
+                                onClick={close}
+                                aria-label="Close fullscreen viewer"
+                                className="text-tsiakkas-light hover:opacity-80 text-xl font-bold px-3 py-1 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 rounded"
+                            >
+                                ×
+                            </button>
                         </div>
                     </div>
+                    <LightboxContent
+                        active={active}
+                        goNext={goNext}
+                        goPrev={goPrev}
+                        hasNext={hasNext}
+                        hasPrev={hasPrev}
+                        close={close}
+                    />
                 </div>
             )}
         </>
+    );
+}
+
+function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
+    active: Photo; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void;
+}) {
+    const [touchStartX, setTouchStartX] = useState<number | null>(null);
+    const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
+    const onTouchEnd = (e: React.TouchEvent) => {
+        if (touchStartX == null) return;
+        const delta = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(delta) > 60) {
+            if (delta > 0) goPrev(); else goNext();
+        }
+        setTouchStartX(null);
+    };
+    return (
+        <div className="flex-1 flex flex-col items-center justify-center px-4 pb-12 gap-6 select-none" onClick={close}>
+            <div
+                className="flex items-center justify-center max-w-full"
+                onClick={(e) => e.stopPropagation()}
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
+            >
+                <Image
+                    src={placeholderImage}
+                    alt={active.caption}
+                    width={1600}
+                    height={1200}
+                    className="max-h-[70vh] w-auto object-contain select-none"
+                    priority
+                />
+            </div>
+            <div className="max-w-3xl w-full text-center flex flex-col gap-2 text-tsiakkas-light px-2" onClick={(e) => e.stopPropagation()}>
+                <div className="text-[12px] tracking-wide font-semibold flex flex-row justify-center gap-4 flex-wrap">
+                    <span>{active.settings}</span>
+                    <span className="italic opacity-80">{active.location}</span>
+                </div>
+                <p className="italic text-sm opacity-90 leading-relaxed">{active.caption}</p>
+                <p className="text-[10px] opacity-60 mt-2">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</p>
+            </div>
+        </div>
     );
 }
