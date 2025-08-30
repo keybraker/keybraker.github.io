@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
+import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 
 type Photo = {
     id: number;
@@ -203,24 +205,8 @@ export default function PhotographyPage() {
                     onClick={close}
                 >
                     <div className="flex flex-row items-center justify-between p-4 gap-4" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex flex-row gap-2">
-                            <button
-                                onClick={goPrev}
-                                disabled={!hasPrev}
-                                aria-label="Previous photo"
-                                className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wide rounded bg-tsiakkas-light/10 text-tsiakkas-light enabled:hover:bg-tsiakkas-light/20 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40"
-                            >
-                                Previous
-                            </button>
-                            <button
-                                onClick={goNext}
-                                disabled={!hasNext}
-                                aria-label="Next photo"
-                                className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wide rounded bg-tsiakkas-light/10 text-tsiakkas-light enabled:hover:bg-tsiakkas-light/20 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40"
-                            >
-                                Next
-                            </button>
-                            <span className="text-[10px] font-mono px-2 py-1 text-tsiakkas-light/70 select-none">{activeIndex + 1}/{allPhotos.length}</span>
+                        <div className="flex flex-row gap-2 items-center">
+                            <span className="text-[10px] font-mono px-2 py-1 text-tsiakkas-light/60 bg-tsiakkas-light/10 rounded select-none">{activeIndex + 1}/{allPhotos.length}</span>
                         </div>
                         <div className="flex flex-row gap-2 items-center">
                             <button
@@ -270,7 +256,26 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
         setTouchStartX(null);
     };
     return (
-        <div className="flex-1 flex flex-col items-center justify-center px-4 pb-12 gap-6 select-none" onClick={close}>
+        <div className="flex-1 flex flex-col items-center justify-center px-4 pb-12 gap-6 select-none relative" onClick={close}>
+            {/* Overlay navigation arrows */}
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-6 md:px-10">
+                <button
+                    onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                    disabled={!hasPrev}
+                    aria-label="Previous photo"
+                    className="pointer-events-auto h-12 w-12 flex items-center justify-center rounded-full bg-black/30 text-tsiakkas-light hover:bg-black/50 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition"
+                >
+                    <IoIosArrowBack size={28} />
+                </button>
+                <button
+                    onClick={(e) => { e.stopPropagation(); goNext(); }}
+                    disabled={!hasNext}
+                    aria-label="Next photo"
+                    className="pointer-events-auto h-12 w-12 flex items-center justify-center rounded-full bg-black/30 text-tsiakkas-light hover:bg-black/50 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition"
+                >
+                    <IoIosArrowForward size={28} />
+                </button>
+            </div>
             <div
                 className="flex items-center justify-center max-w-full"
                 onClick={(e) => e.stopPropagation()}
