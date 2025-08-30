@@ -4,35 +4,33 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 
-type Photo = {
-    id: number;
-    caption: string;
-    settings: string;
-    location: string;
-};
+// Types
+type Photo = { id: number; caption: string; settings: string; location: string };
+type Section = { title: string; photos: Photo[] };
 
-type Section = {
-    title: string;
-    photos: Photo[];
-};
-
+// Shared placeholder image & blur data
 const placeholderImage = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
+// Photo data (grouped logically – IDs segmented per category)
 const landscapes: Photo[] = [
-    { id: 1, caption: "First light bleeding over a silent ridge – a small reminder that patience always pays in golden hues.", settings: "24mm · f/8 · 1/125s · ISO 100", location: "Crete, Greece" },
-    { id: 2, caption: "A shy river hiding under morning mist; elegance in the art of almost being seen.", settings: "35mm · f/11 · 1/60s · ISO 160", location: "Epirus, Greece" },
-    { id: 3, caption: "Mountains wearing a brief blush of alpenglow – nature's quiet standing ovation.", settings: "70mm · f/5.6 · 1/200s · ISO 125", location: "Alps" },
-    { id: 4, caption: "Still water translating sky into a language only reflection understands.", settings: "50mm · f/9 · 1/100s · ISO 80", location: "Lake District" },
-    { id: 5, caption: "Heavy clouds wandering slow – tension and calm sharing the same breath.", settings: "28mm · f/5 · 1/320s · ISO 200", location: "Iceland" },
-    { id: 6, caption: "Wind-scripted dunes tracing time in soft, repeating geometry.", settings: "85mm · f/4 · 1/400s · ISO 100", location: "Sahara" },
+    { id: 1, caption: "First light bleeding over a silent ridge – a reminder that patience pays in gold.", settings: "24mm · f/8 · 1/125s · ISO 100", location: "Crete, Greece" },
+    { id: 2, caption: "A shy river hiding under morning mist; elegance in the almost becoming.", settings: "70mm · f/5.6 · 1/200s · ISO 200", location: "Black Forest" },
+    { id: 3, caption: "Wind-combed grass leaning into the unseen conversation offshore.", settings: "35mm · f/11 · 1/160s · ISO 100", location: "North Sea" },
+    { id: 4, caption: "Distant peaks dissolving into layered pastel breathing.", settings: "105mm · f/9 · 1/250s · ISO 200", location: "Alps" },
+    { id: 5, caption: "A single tree orchestrating the quiet around it.", settings: "50mm · f/4 · 1/320s · ISO 100", location: "Central Europe" },
+    { id: 6, caption: "Desert light carving temporary hieroglyphs in sand.", settings: "35mm · f/8 · 1/400s · ISO 100", location: "Sahara" },
     { id: 7, caption: "Filtered forest light stitching warmth through a cool green hush.", settings: "35mm · f/2.8 · 1/160s · ISO 250", location: "Black Forest" },
-    { id: 8, caption: "The coast exhaling color as twilight refuses to let the day end.", settings: "18mm · f/13 · 2.0s · ISO 64", location: "Azores" },
+    { id: 8, caption: "Coastal twilight exhaling color that refuses to let the day end.", settings: "18mm · f/13 · 2s · ISO 64", location: "Azores" },
 ];
 
 const zurichAtNight: Photo[] = [
     { id: 101, caption: "Tram lines glowing while the river swallows the city lights.", settings: "35mm · f/1.8 · 1/50s · ISO 1250", location: "Zürich, Switzerland" },
     { id: 102, caption: "Reflections layering time across quiet cobblestone.", settings: "50mm · f/2.2 · 1/60s · ISO 1600", location: "Zürich, Switzerland" },
-    { id: 103, caption: "Cathedral towers sketching calm into the night fog.", settings: "24mm · f/4 · 1/15s · ISO 800", location: "Zürich, Switzerland" },
+    { id: 103, caption: "Midnight façades breathing in sodium dusk.", settings: "28mm · f/2.8 · 1/25s · ISO 2000", location: "Zürich, Switzerland" },
+    { id: 104, caption: "Rain-brushed arcades humming with after-hours neon.", settings: "35mm · f/2 · 1/40s · ISO 3200", location: "Zürich, Switzerland" },
+    { id: 105, caption: "Clock face suspended over the river's dark grammar.", settings: "85mm · f/2.2 · 1/80s · ISO 1600", location: "Zürich, Switzerland" },
+    { id: 106, caption: "Bridge ribs holding the hush between late footsteps.", settings: "24mm · f/4 · 1/15s · ISO 2500", location: "Zürich, Switzerland" },
 ];
 
 const cats: Photo[] = [
@@ -47,55 +45,77 @@ const sections: Section[] = [
     { title: "Landscapes", photos: landscapes },
 ];
 
+// Flatten photos with category for filtering
+type PhotoWithCategory = Photo & { category: string };
+const allPhotoObjects: PhotoWithCategory[] = sections.flatMap(s => s.photos.map(p => ({ ...p, category: s.title })));
+
 function slugify(title: string) {
     return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
-function PhotoCard({ photo, onOpen }: { photo: Photo; onOpen: (p: Photo) => void }) {
-    const imgSrc = placeholderImage;
+function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: PhotoWithCategory) => void }) {
+    const imgSrc = placeholderImage; // placeholder for all
+    // Deterministic stylistic variations (avoid SSR/client mismatch)
+    const variant = photo.id % 5; // 0-4
+    const isPortrait = photo.id % 3 === 0; // simple rule for diversity
+    const heightClass = isPortrait ? 'h-[520px]' : (variant % 2 === 0 ? 'h-[340px]' : 'h-[400px]');
+    // Removed positional offsets to keep spacing consistent
     return (
-        <div className="flex flex-col gap-0">
-            <button
-                type="button"
-                onClick={() => onOpen(photo)}
-                aria-label="Open image fullscreen"
-                className="block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40"
-            >
+        <button
+            type="button"
+            onClick={() => onOpen(photo)}
+            aria-label="Open image fullscreen"
+            className={`
+                group relative mb-8 w-full break-inside-avoid
+                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
+                rounded-sm overflow-hidden ring-1 ring-tsiakkas-dark/10 dark:ring-tsiakkas-light/10
+                bg-white/40 dark:bg-white/5 backdrop-blur-[2px] transition-colors
+                shadow-[0_4px_16px_-4px_rgba(0,0,0,0.25)] dark:shadow-[0_4px_18px_-6px_rgba(0,0,0,0.55)]
+            `}
+        >
+            <div className={`relative w-full ${heightClass}`}>
                 <Image
                     src={imgSrc}
                     alt={photo.caption}
-                    width={800}
-                    height={600}
-                    className="h-64 w-full object-cover select-none  cursor-zoom-in"
+                    fill
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                    className={`object-cover select-none transition duration-500 ease-out group-hover:blur-sm group-focus-visible:blur-sm ${isPortrait ? 'object-center' : 'object-center'}`}
                 />
-            </button>
-            <div className="w-full flex flex-col gap-4 text-tsiakkas-dark bg-tsiakkas-dark/10 dark:bg-tsiakkas-light/10 p-4">
-                <div className="flex flex-row justify-between">
-                    <div className="text-start text-[11px] font-bold tracking-wide">{photo.settings}</div>
-                    <div className="text-end text-[11px] font-bold tracking-wide italic">{photo.location}</div>
+            </div>
+            {/* Overlay info (hidden until hover/focus) centered */}
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 py-6 text-center
+                bg-black/0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
+                <div className="text-md font-semibold tracking-wide text-tsiakkas-light drop-shadow-sm">
+                    {photo.settings}
+                </div>
+                <div className="text-md font-thin italic tracking-wide text-tsiakkas-light/80 drop-shadow-sm">
+                    {photo.location}
                 </div>
             </div>
-        </div>
+        </button>
     );
 }
 
 export default function PhotographyPage() {
-    const [active, setActive] = useState<Photo | null>(null);
+    const [active, setActive] = useState<PhotoWithCategory | null>(null);
+    const [filter, setFilter] = useState<string>("All");
 
     const close = useCallback(() => setActive(null), []);
 
 
-    const allPhotos: Photo[] = useMemo(() => [...zurichAtNight, ...cats, ...landscapes], []);
-    const activeIndex = active ? allPhotos.findIndex(p => p.id === active.id) : -1;
+    const allPhotos: PhotoWithCategory[] = useMemo(() => allPhotoObjects, []);
+    const filtered = filter === "All" ? allPhotos : allPhotos.filter(p => p.category === filter);
+    const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
     const hasPrev = activeIndex > 0;
-    const hasNext = activeIndex >= 0 && activeIndex < allPhotos.length - 1;
+    const hasNext = activeIndex >= 0 && activeIndex < filtered.length - 1;
 
     const goPrev = useCallback(() => {
-        if (hasPrev) setActive(allPhotos[activeIndex - 1]);
-    }, [hasPrev, activeIndex, allPhotos]);
+        if (hasPrev) setActive(filtered[activeIndex - 1]);
+    }, [hasPrev, activeIndex, filtered]);
     const goNext = useCallback(() => {
-        if (hasNext) setActive(allPhotos[activeIndex + 1]);
-    }, [hasNext, activeIndex, allPhotos]);
+        if (hasNext) setActive(filtered[activeIndex + 1]);
+    }, [hasNext, activeIndex, filtered]);
 
 
     useEffect(() => {
@@ -118,6 +138,13 @@ export default function PhotographyPage() {
             if (found) setActive(found);
         }
     }, [allPhotos]);
+
+    // If active photo filtered out, close lightbox
+    useEffect(() => {
+        if (active && !filtered.some(p => p.id === active.id)) {
+            setActive(null);
+        }
+    }, [filter, active, filtered]);
 
     useEffect(() => {
         function onKey(e: KeyboardEvent) {
@@ -143,54 +170,69 @@ export default function PhotographyPage() {
                 <meta name="description" content="A curated landscape photography showcase." />
                 <meta name="robots" content="index,follow" />
             </Head>
-            <div id="top" className="flex flex-col gap-8">
-                <div className="flex flex-col gap-6">
-                    <h2 className="text-3xl font-extrabold font-serif leading-tight">Photography</h2>
-                    <p className="text-md leading-relaxed">
-                        I like to document the world around me with my photos, to catch the vibrancy of city street, the movement of people in time. I want to share my vision of the world, one frame at a time.
-                        And for people to relieve the moment I captured, to feel the same emotions I felt when I pressed the shutter button.
-                    </p>
-                    <p className="text-md leading-relaxed">
-                        I also provide services such as product photography. You can see some of my work here, and if you wish to get in contact with me for any project, you can contact me at {" "}
-                        <a
-                            href="mailto:hello@ioannistsiakkas.com"
-                            className="underline decoration-dotted hover:decoration-solid focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40"
-                        >
-                            hello@ioannistsiakkas.com
-                        </a>
-                    </p>
+            <div id="top" className="relative flex flex-col gap-16">{/* modified wrapper */}
+                {/* Ambient subtle artistic backdrop */}
+                <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">{/* new backdrop container */}
+                    <div
+                        className="absolute inset-0 opacity-[0.55] dark:opacity-[0.35] mix-blend-multiply dark:mix-blend-screen"
+                        style={{
+                            backgroundImage: `radial-gradient(at 28% 20%, rgba(0,0,0,0.05), transparent 60%), radial-gradient(at 78% 80%, rgba(0,0,0,0.045), transparent 65%)`
+                        }}
+                    />
+                    <div
+                        className="absolute inset-0 opacity-[0.10] dark:opacity-[0.14]"
+                        style={{
+                            backgroundImage: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAACqZ0cjAAAAPElEQVR4Ae3PMQ0AIBDDwMS/56wAAl2E1GQt8HkzM2ZmZmZmZmZmZj4BkfKe1p3XgqNHjx49evTo0aPHvwAQvUY2rG35QwAAAABJRU5ErkJggg==)',
+                            backgroundSize: '180px 180px'
+                        }}
+                    />
                 </div>
 
-                <nav className="flex flex-wrap gap-4 text-[12px] font-semibold tracking-wide justify-center">
-                    {sections.map(s => (
-                        <a key={s.title} href={`#${slugify(s.title)}`} className="underline decoration-dashed underline-offset-4 hover:decoration-solid">
-                            {s.title}
-                        </a>
-                    ))}
-                </nav>
-
-                <div className="flex flex-col gap-16">
-                    {sections.map((section, idx) => {
-                        const prev = idx > 0 ? sections[idx - 1] : null;
-                        const next = idx < sections.length - 1 ? sections[idx + 1] : null;
-                        return (
-                            <section
-                                key={section.title}
-                                id={slugify(section.title)}
-                                className="flex flex-col gap-6 relative"
+                {/* Text-only top section (no background image) */}
+                <section className="w-full flex flex-col items-center gap-8 pt-10 px-4">
+                    <h2 className="text-4xl md:text-5xl font-serif font-extrabold text-center text-tsiakkas-dark dark:text-tsiakkas-light">Photography</h2>
+                    <div className="flex flex-col gap-6 max-w-3xl w-full">
+                        <p className="text-md leading-relaxed">
+                            I document urban atmosphere, still landscapes, and the subtle narratives in motion. Each frame is a study of tone, patience, and timing.
+                        </p>
+                        <p className="text-md leading-relaxed">
+                            I also take on commissioned work (products, editorial, brand storytelling). For inquiries: {" "}
+                            <a
+                                href="mailto:hello@ioannistsiakkas.com"
+                                className="underline decoration-dotted hover:decoration-solid focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40"
                             >
-                                <div className="absolute inset-0 rounded-md bg-tsiakkas-dark/5 dark:bg-tsiakkas-light/5 opacity-30 pointer-events-none" />
-                                <div className="relative flex flex-col gap-6 p-6">
-                                    <h3 className="text-2xl font-bold font-serif mb-2">{section.title}</h3>
-                                    <div className="grid gap-8 grid-cols-1 tn:grid-cols-2 lg:grid-cols-3">
-                                        {section.photos.map(p => (
-                                            <PhotoCard key={p.id} photo={p} onOpen={setActive} />
-                                        ))}
-                                    </div>
-                                </div>
-                            </section>
+                                hello@ioannistsiakkas.com
+                            </a>.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Filter bar */}
+                <nav className="flex flex-wrap gap-3 justify-center px-2" aria-label="Photo categories filter">
+                    {["All", ...sections.map(s => s.title)].map(cat => {
+                        const activeFilter = filter === cat;
+                        return (
+                            <button
+                                key={cat}
+                                onClick={() => setFilter(cat)}
+                                className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeFilter
+                                    ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
+                                    : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'} `}
+                                aria-pressed={activeFilter}
+                            >
+                                {cat}
+                            </button>
                         );
                     })}
+                </nav>
+
+                {/* Masonry gallery */}
+                <div className="w-full max-w-6xl mx-auto px-2">
+                    <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+                        {filtered.map(p => (
+                            <PhotoCard key={p.id} photo={p} onOpen={setActive as any} />
+                        ))}
+                    </div>
                 </div>
                 <div className="mt-24 text-center text-[11px] tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70 px-6">
                     <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas. They may not be copied, redistributed, or used in any form, including for any commercial purpose, without explicit written permission. Not for commercial use.</p>
@@ -205,10 +247,8 @@ export default function PhotographyPage() {
                     onClick={close}
                 >
                     <div className="flex flex-row items-center justify-between p-4 gap-4" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex flex-row gap-2 items-center">
-                            <span className="text-[10px] font-mono px-2 py-1 text-tsiakkas-light/60 bg-tsiakkas-light/10 rounded select-none">{activeIndex + 1}/{allPhotos.length}</span>
-                        </div>
-                        <div className="flex flex-row gap-2 items-center">
+                        <span className="text-[11px] font-mono px-2 py-1 text-tsiakkas-light/70 bg-tsiakkas-light/10 rounded select-none">{activeIndex + 1}/{filtered.length}</span>
+                        <div className="flex flex-row gap-2 items-center ml-auto">
                             <button
                                 onClick={() => {
                                     try {
@@ -243,7 +283,7 @@ export default function PhotographyPage() {
 }
 
 function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
-    active: Photo; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void;
+    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void;
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
@@ -256,48 +296,45 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
         setTouchStartX(null);
     };
     return (
-        <div className="flex-1 flex flex-col items-center justify-center px-4 pb-12 gap-6 select-none relative" onClick={close}>
-            {/* Overlay navigation arrows */}
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-6 md:px-10">
-                <button
-                    onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                    disabled={!hasPrev}
-                    aria-label="Previous photo"
-                    className="pointer-events-auto h-12 w-12 flex items-center justify-center rounded-full bg-black/30 text-tsiakkas-light hover:bg-black/50 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition"
-                >
-                    <IoIosArrowBack size={28} />
-                </button>
-                <button
-                    onClick={(e) => { e.stopPropagation(); goNext(); }}
-                    disabled={!hasNext}
-                    aria-label="Next photo"
-                    className="pointer-events-auto h-12 w-12 flex items-center justify-center rounded-full bg-black/30 text-tsiakkas-light hover:bg-black/50 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition"
-                >
-                    <IoIosArrowForward size={28} />
-                </button>
-            </div>
-            <div
-                className="flex items-center justify-center max-w-full"
-                onClick={(e) => e.stopPropagation()}
-                onTouchStart={onTouchStart}
-                onTouchEnd={onTouchEnd}
-            >
-                <Image
-                    src={placeholderImage}
-                    alt={active.caption}
-                    width={1600}
-                    height={1200}
-                    className="max-h-[70vh] w-auto object-contain select-none"
-                    priority
-                />
-            </div>
-            <div className="max-w-3xl w-full text-center flex flex-col gap-2 text-tsiakkas-light px-2" onClick={(e) => e.stopPropagation()}>
-                <div className="text-[12px] tracking-wide font-semibold flex flex-row justify-center gap-4 flex-wrap">
-                    <span>{active.settings}</span>
-                    <span className="italic opacity-80">{active.location}</span>
+        <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-10 gap-6 select-none relative" onClick={close}>
+            <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
+                <div className="flex-1 flex items-center justify-center relative" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+                    {/* Overlay nav arrows */}
+                    <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-4 md:px-6">
+                        <button
+                            onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                            disabled={!hasPrev}
+                            aria-label="Previous photo"
+                            className="pointer-events-auto h-11 w-11 flex items-center justify-center rounded-full bg-black/30 text-tsiakkas-light hover:bg-black/50 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition"
+                        >
+                            <IoIosArrowBack size={26} />
+                        </button>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); goNext(); }}
+                            disabled={!hasNext}
+                            aria-label="Next photo"
+                            className="pointer-events-auto h-11 w-11 flex items-center justify-center rounded-full bg-black/30 text-tsiakkas-light hover:bg-black/50 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition"
+                        >
+                            <IoIosArrowForward size={26} />
+                        </button>
+                    </div>
+                    <Image
+                        src={placeholderImage}
+                        alt={active.caption}
+                        width={1600}
+                        height={1200}
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
+                        className="max-h-[72vh] w-auto object-contain select-none"
+                        priority
+                    />
                 </div>
-                <p className="italic text-sm opacity-90 leading-relaxed">{active.caption}</p>
-                <p className="text-[10px] opacity-60 mt-2">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</p>
+                <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light text-sm">
+                    <div className="text-[11px] font-mono tracking-wide">{active.settings}</div>
+                    <div className="italic text-[11px] opacity-80">{active.location}</div>
+                    <p className="italic leading-relaxed">{active.caption}</p>
+                    <div className="mt-2 text-[10px] opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
+                </aside>
             </div>
         </div>
     );
