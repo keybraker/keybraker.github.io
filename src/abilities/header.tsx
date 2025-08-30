@@ -75,8 +75,16 @@ function AboutPageInner({ showPhotographyLink }: { showPhotographyLink: boolean 
 export default function Header() {
   const router = useRouter();
   const isPhotography = router.pathname.startsWith('/photography');
+  const isHome = router.pathname === '/';
+
+  const firstSegment = router.pathname.split('/').filter(Boolean)[0];
+  const routeLabel = !isHome && firstSegment
+    ? firstSegment
+      .replace(/-/g, ' ')
+    : '';
+
   return (
-    <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[560px] eq:max-w-[1320px] w-full bg-tsiakkas-light dark:bg-tsiakkas-dark">
+    <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[820px] eq:max-w-[1320px] w-full bg-tsiakkas-light dark:bg-tsiakkas-dark">
       <div className="text-tsiakkas-light dark:text-tsiakkas-dark w-full flex flex-row">
         <div className="w-1/2 text-start italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]">
         </div>
@@ -99,6 +107,15 @@ export default function Header() {
               ">
               <span>Tsiakkas</span>
               <span>Ioannis</span>
+              {!isHome && routeLabel && (
+                <span className="
+                  font-light not-italic tracking-wide flex flex-row gap-1
+                  items-center justify-center leading-tight self-center
+                ">
+                  <span className="opacity-60 text-3xl leading-none">×</span>
+                  <span className="leading-none">{routeLabel}</span>
+                </span>
+              )}
             </h1>
           </Link>
           <AboutPageInner showPhotographyLink={!isPhotography} />

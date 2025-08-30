@@ -1,18 +1,20 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import MyWords from "@/components/myWords";
+import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
+import { HiOutlineMail } from "@react-icons/all-files/hi/HiOutlineMail";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
+import Image from "next/image";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-// Types
+
 type Photo = { id: number; caption: string; settings: string; location: string };
 type Section = { title: string; photos: Photo[] };
 
-// Shared placeholder image & blur data
+
 const placeholderImage = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
-// Photo data (grouped logically – IDs segmented per category)
+
 const landscapes: Photo[] = [
     { id: 1, caption: "First light bleeding over a silent ridge – a reminder that patience pays in gold.", settings: "24mm · f/8 · 1/125s · ISO 100", location: "Crete, Greece" },
     { id: 2, caption: "A shy river hiding under morning mist; elegance in the almost becoming.", settings: "70mm · f/5.6 · 1/200s · ISO 200", location: "Black Forest" },
@@ -45,21 +47,16 @@ const sections: Section[] = [
     { title: "Landscapes", photos: landscapes },
 ];
 
-// Flatten photos with category for filtering
 type PhotoWithCategory = Photo & { category: string };
 const allPhotoObjects: PhotoWithCategory[] = sections.flatMap(s => s.photos.map(p => ({ ...p, category: s.title })));
 
-function slugify(title: string) {
-    return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-}
-
 function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: PhotoWithCategory) => void }) {
-    const imgSrc = placeholderImage; // placeholder for all
-    // Deterministic stylistic variations (avoid SSR/client mismatch)
-    const variant = photo.id % 5; // 0-4
-    const isPortrait = photo.id % 3 === 0; // simple rule for diversity
+    const imgSrc = placeholderImage;
+
+    const variant = photo.id % 5;
+    const isPortrait = photo.id % 3 === 0;
     const heightClass = isPortrait ? 'h-[520px]' : (variant % 2 === 0 ? 'h-[340px]' : 'h-[400px]');
-    // Removed positional offsets to keep spacing consistent
+
     return (
         <button
             type="button"
@@ -83,7 +80,7 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
                     className={`object-cover select-none transition duration-500 ease-out group-hover:blur-sm group-focus-visible:blur-sm ${isPortrait ? 'object-center' : 'object-center'}`}
                 />
             </div>
-            {/* Overlay info (hidden until hover/focus) centered */}
+
             <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 py-6 text-center
                 bg-black/0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
                 <div className="text-md font-semibold tracking-wide text-tsiakkas-light drop-shadow-sm">
@@ -103,7 +100,6 @@ export default function PhotographyPage() {
 
     const close = useCallback(() => setActive(null), []);
 
-
     const allPhotos: PhotoWithCategory[] = useMemo(() => allPhotoObjects, []);
     const filtered = filter === "All" ? allPhotos : allPhotos.filter(p => p.category === filter);
     const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
@@ -117,7 +113,6 @@ export default function PhotographyPage() {
         if (hasNext) setActive(filtered[activeIndex + 1]);
     }, [hasNext, activeIndex, filtered]);
 
-
     useEffect(() => {
         if (typeof window === 'undefined') return;
         if (active) {
@@ -127,7 +122,6 @@ export default function PhotographyPage() {
             history.replaceState(null, '', window.location.pathname + window.location.search);
         }
     }, [active]);
-
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -139,7 +133,6 @@ export default function PhotographyPage() {
         }
     }, [allPhotos]);
 
-    // If active photo filtered out, close lightbox
     useEffect(() => {
         if (active && !filtered.some(p => p.id === active.id)) {
             setActive(null);
@@ -165,50 +158,56 @@ export default function PhotographyPage() {
     }, [active, close, goPrev, goNext]);
     return (
         <>
-            <Head>
-                <title>Photography | Ioannis Tsiakkas</title>
-                <meta name="description" content="A curated landscape photography showcase." />
+            <div>
+                <title>Ioannis Tsiakkas photography</title>
+                <meta name="description" content="A curated photography showcase." />
                 <meta name="robots" content="index,follow" />
-            </Head>
-            <div id="top" className="relative flex flex-col gap-16">{/* modified wrapper */}
-                {/* Ambient subtle artistic backdrop */}
-                <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">{/* new backdrop container */}
-                    <div
-                        className="absolute inset-0 opacity-[0.55] dark:opacity-[0.35] mix-blend-multiply dark:mix-blend-screen"
-                        style={{
-                            backgroundImage: `radial-gradient(at 28% 20%, rgba(0,0,0,0.05), transparent 60%), radial-gradient(at 78% 80%, rgba(0,0,0,0.045), transparent 65%)`
-                        }}
-                    />
-                    <div
-                        className="absolute inset-0 opacity-[0.10] dark:opacity-[0.14]"
-                        style={{
-                            backgroundImage: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAACqZ0cjAAAAPElEQVR4Ae3PMQ0AIBDDwMS/56wAAl2E1GQt8HkzM2ZmZmZmZmZmZj4BkfKe1p3XgqNHjx49evTo0aPHvwAQvUY2rG35QwAAAABJRU5ErkJggg==)',
-                            backgroundSize: '180px 180px'
-                        }}
-                    />
-                </div>
-
-                {/* Text-only top section (no background image) */}
-                <section className="w-full flex flex-col items-center gap-8 pt-10 px-4">
-                    <h2 className="text-4xl md:text-5xl font-serif font-extrabold text-center text-tsiakkas-dark dark:text-tsiakkas-light">Photography</h2>
-                    <div className="flex flex-col gap-6 max-w-3xl w-full">
-                        <p className="text-md leading-relaxed">
-                            I document urban atmosphere, still landscapes, and the subtle narratives in motion. Each frame is a study of tone, patience, and timing.
+            </div>
+            <div id="top" className="relative flex flex-col gap-8">
+                {/* <section aria-labelledby="contact-heading" className="w-full">
+                    <div className="w-full flex flex-col gap-5 items-center">
+                        <p className="text-center text-sm md:text-lg leading-relaxed text-tsiakkas-dark/80 dark:text-tsiakkas-light/80">
+                            I take on commissioned photography work (products, editorial, brand storytelling). Reach out and let’s craft something meaningful.
                         </p>
-                        <p className="text-md leading-relaxed">
-                            I also take on commissioned work (products, editorial, brand storytelling). For inquiries: {" "}
+
+                        <div className="flex flex-col sm:flex-row gap-4">
                             <a
-                                href="mailto:hello@ioannistsiakkas.com"
-                                className="underline decoration-dotted hover:decoration-solid focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40"
+                                href="mailto:tsiakkas-photography@gmail.com"
+                                className="group flex items-center gap-2 rounded-md px-4 py-3 text-sm font-medium
+                                           border border-tsiakkas-dark/25 dark:border-tsiakkas-light/25
+                                           bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark
+                                           hover:shadow focus:outline-none focus:ring-2 focus:ring-offset-2
+                                           focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 transition"
+                                aria-label="Send me an email"
+                                title="tsiakkas-photography@gmail.com"
                             >
-                                hello@ioannistsiakkas.com
-                            </a>.
-                        </p>
-                    </div>
-                </section>
+                                <HiOutlineMail className="text-lg" />
+                                <span className="font-mono tracking-wide">Email</span>
+                            </a>
 
-                {/* Filter bar */}
-                <nav className="flex flex-wrap gap-3 justify-center px-2" aria-label="Photo categories filter">
+                            <a
+                                href="https://instagram.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group flex items-center gap-2 rounded-md px-4 py-3 text-sm font-medium
+                                           border border-tsiakkas-dark/25 dark:border-tsiakkas-light/25
+                                           hover:bg-white/60 dark:hover:bg-white/10
+                                           text-tsiakkas-dark dark:text-tsiakkas-light
+                                           focus:outline-none focus:ring-2 focus:ring-offset-2
+                                           focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 transition"
+                                aria-label="Visit my Instagram profile"
+                                title="@instagram"
+                            >
+                                <FaInstagram className="text-lg" />
+                                <span className="font-mono tracking-wide">Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                </section> */}
+
+                {MyWords({ text: "My work, in my own shots", className: "mb-8" })}
+
+                <nav className="flex flex-wrap gap-3 justify-start" aria-label="Photo categories filter">
                     {["All", ...sections.map(s => s.title)].map(cat => {
                         const activeFilter = filter === cat;
                         return (
@@ -226,18 +225,17 @@ export default function PhotographyPage() {
                     })}
                 </nav>
 
-                {/* Masonry gallery */}
-                <div className="w-full max-w-6xl mx-auto px-2">
-                    <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
-                        {filtered.map(p => (
-                            <PhotoCard key={p.id} photo={p} onOpen={setActive as any} />
-                        ))}
-                    </div>
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+                    {filtered.map(p => (
+                        <PhotoCard key={p.id} photo={p} onOpen={setActive as any} />
+                    ))}
                 </div>
-                <div className="mt-24 text-center text-[11px] tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70 px-6">
+
+                <div className="text-start text-[11px] tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
                     <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas. They may not be copied, redistributed, or used in any form, including for any commercial purpose, without explicit written permission. Not for commercial use.</p>
                 </div>
             </div>
+
             {active && (
                 <div
                     role="dialog"
@@ -299,7 +297,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-10 gap-6 select-none relative" onClick={close}>
             <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
                 <div className="flex-1 flex items-center justify-center relative" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-                    {/* Overlay nav arrows */}
+
                     <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-4 md:px-6">
                         <button
                             onClick={(e) => { e.stopPropagation(); goPrev(); }}

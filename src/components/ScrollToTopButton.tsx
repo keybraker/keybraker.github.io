@@ -32,7 +32,8 @@ const ScrollToTopButton = () => {
             onClick={scrollToTop}
             className={`scrollToTopButton
             fixed bottom-8 right-4 p-3 rounded-full
-            text-tsiakkas-dark dark:text-tsiakkas-light bg-tsiakkas-light dark:bg-tsiakkas-dark
+            text-tsiakkas-dark dark:text-tsiakkas-light
+            bg-tsiakkas-light dark:bg-tsiakkas-dark
             border-tsiakkas-dark dark:border-tsiakkas-light border z-50
             ${isVisible ? 'visible' : ''}`}
         >
