@@ -155,8 +155,9 @@ export default function PhotographyPage() {
             document.documentElement.classList.remove("overflow-hidden");
         };
     }, [active, close, goPrev, goNext]);
+
     return (
-        <>
+        <main>
             <div>
                 <title>Ioannis Tsiakkas photography</title>
                 <meta name="description" content="A curated photography showcase." />
@@ -224,7 +225,7 @@ export default function PhotographyPage() {
                     })}
                 </nav>
 
-                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 px-1">
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
                     {filtered.map(p => (
                         <PhotoCard key={p.id} photo={p} onOpen={setActive as any} />
                     ))}
@@ -275,7 +276,7 @@ export default function PhotographyPage() {
                     />
                 </div>
             )}
-        </>
+        </main>
     );
 }
 

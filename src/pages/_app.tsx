@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="flex flex-1 h-full w-full flex-col items-center justify-center">
         <div className="
           flex w-full max-w-[820px] flex-wrap justify-center gap-8
-          px-4 sm:px-6 eq:px-0 my-8 eq:max-w-[1320px]
+          px-4 sm:px-8 eq:px-2 my-8 eq:max-w-[1320px]
           text-tsiakkas-dark dark:text-tsiakkas-light eq:mx-auto
         ">
           <Component {...pageProps} />
