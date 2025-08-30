@@ -19,16 +19,8 @@ function AboutPageInner({ showPhotographyLink }: { showPhotographyLink: boolean 
         <Link
           href="/photography"
           aria-label="Go to photography page"
-          className="group relative flex items-center justify-center h-8 w-8 rounded-md
-            border border-tsiakkas-dark/10 dark:border-tsiakkas-light/10
-            text-tsiakkas-dark dark:text-tsiakkas-light
-            bg-tsiakkas-dark/10 dark:bg-tsiakkas-light/10
-            hover:bg-tsiakkas-dark/10 dark:hover:bg-tsiakkas-light/20
-            shadow-[0_0_0_1px_rgba(0,0,0,0.06)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.15)]
-            hover:shadow-[0_2px_6px_-1px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_2px_6px_-1px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.25)]
-            transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40"
         >
-          <MdPhotoCamera size={18} className="opacity-80 group-hover:opacity-100 transition" />
+          <MdPhotoCamera size={"20px"} />
         </Link>
       )}
       {showPhotographyLink && (
@@ -78,10 +70,12 @@ export default function Header() {
   const isHome = router.pathname === '/';
 
   const firstSegment = router.pathname.split('/').filter(Boolean)[0];
-  const routeLabel = !isHome && firstSegment
-    ? firstSegment
-      .replace(/-/g, ' ')
-    : '';
+  const routeLabel = isHome
+    ? 'resume'
+    : firstSegment
+      ? firstSegment
+        .replace(/-/g, ' ')
+      : 'resume';
 
   return (
     <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[820px] eq:max-w-[1320px] w-full bg-tsiakkas-light dark:bg-tsiakkas-dark">
@@ -107,9 +101,9 @@ export default function Header() {
               ">
               <span>Tsiakkas</span>
               <span>Ioannis</span>
-              {!isHome && routeLabel && (
+              {routeLabel && (
                 <span className="
-                  font-light not-italic tracking-wide flex flex-row gap-1
+                  font-light italic tracking-wide flex flex-row gap-1
                   items-center justify-center leading-tight self-center
                 ">
                   <span className="opacity-60 text-3xl leading-none">×</span>

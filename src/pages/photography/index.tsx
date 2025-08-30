@@ -67,7 +67,6 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
                 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
                 rounded-sm overflow-hidden ring-1 ring-tsiakkas-dark/10 dark:ring-tsiakkas-light/10
                 bg-white/40 dark:bg-white/5 backdrop-blur-[2px] transition-colors
-                shadow-[0_4px_16px_-4px_rgba(0,0,0,0.25)] dark:shadow-[0_4px_18px_-6px_rgba(0,0,0,0.55)]
             `}
         >
             <div className={`relative w-full ${heightClass}`}>
@@ -213,11 +212,11 @@ export default function PhotographyPage() {
                         return (
                             <button
                                 key={cat}
+                                aria-pressed={activeFilter}
                                 onClick={() => setFilter(cat)}
                                 className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeFilter
                                     ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
                                     : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'} `}
-                                aria-pressed={activeFilter}
                             >
                                 {cat}
                             </button>
@@ -297,7 +296,6 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-10 gap-6 select-none relative" onClick={close}>
             <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
                 <div className="flex-1 flex items-center justify-center relative" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-
                     <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-4 md:px-6">
                         <button
                             onClick={(e) => { e.stopPropagation(); goPrev(); }}
