@@ -225,7 +225,7 @@ export default function PhotographyPage() {
                     })}
                 </nav>
 
-                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 px-1">
                     {filtered.map(p => (
                         <PhotoCard key={p.id} photo={p} onOpen={setActive as any} />
                     ))}
