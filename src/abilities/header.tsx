@@ -1,10 +1,12 @@
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
+import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
 import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import DarkModeToggle from "../components/DarkModeToggle";
 
 const mail = "mailto:" + "iantsiakkas@gmail.com";
@@ -12,54 +14,95 @@ const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
 const github = "https://github.com/" + "Keybraker";
 const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
 
-function AboutPageInner({ showPhotographyLink }: { showPhotographyLink: boolean }) {
+function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotographyLink: boolean, showResumeIcon: boolean }) {
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  const baseIconClasses = "antialiased transition-all duration-300 ease-out";
+  const dimmedClasses = "opacity-30 grayscale"; // greys out and lowers emphasis
+
+  const iconWrapper = (id: string, node: JSX.Element, props?: any) => (
+    <span
+      onMouseEnter={() => setHovered(id)}
+      onMouseLeave={() => setHovered(null)}
+      onFocus={() => setHovered(id)}
+      onBlur={() => setHovered(null)}
+      className={`flex transition-all duration-300 ease-out ${hovered && hovered !== id ? dimmedClasses : ""}`}
+      {...props}
+    >
+      {node}
+    </span>
+  );
+
   return (
     <div className="flex flex-row items-center justify-between xs:justify-around gap-4 align-baseline text-tsiakkas-dark dark:text-tsiakkas-light">
-      {showPhotographyLink && (
+      {showPhotographyLink && !showResumeIcon && (
         <Link
           href="/photography"
           aria-label="Go to photography page"
+          className="focus:outline-none"
         >
-          <MdPhotoCamera size={"20px"} />
+          {iconWrapper("photography", <MdPhotoCamera className={baseIconClasses} size={"20px"} />)}
         </Link>
       )}
-      {showPhotographyLink && (
-        <div className="h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2"></div>
+      {showResumeIcon && (
+        <Link
+          href="/"
+          aria-label="Go to resume (home) page"
+          className="focus:outline-none"
+        >
+          {iconWrapper("resume", <IoIosPaper className={baseIconClasses} size={"20px"} />)}
+        </Link>
+      )}
+      {(showPhotographyLink || showResumeIcon) && (
+        <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
       )}
       <a
         aria-label="By clicking you will be taken to Maps"
         rel="noopener noreferrer"
         target="_blank"
         href={address}
+        className="focus:outline-none"
       >
-        <MdLocationOn className="antialiased" size={"20px"} />
+        {iconWrapper("location", <MdLocationOn className={baseIconClasses} size={"20px"} />)}
       </a>
       <a
         aria-label="By clicking you will be taken to Mail"
         rel="noopener noreferrer"
         target="_blank"
         href={mail}
+        className="focus:outline-none"
       >
-        <MdEmail className="antialiased" size={"20px"} />
+        {iconWrapper("mail", <MdEmail className={baseIconClasses} size={"20px"} />)}
       </a>
       <a
         aria-label="By clicking you will be taken to Github"
         rel="noopener noreferrer"
         target="_blank"
         href={github}
+        className="focus:outline-none"
       >
-        <FaGithub className="antialiased" size={"20px"} />
+        {iconWrapper("github", <FaGithub className={baseIconClasses} size={"20px"} />)}
       </a>
       <a
         aria-label="By clicking you will be taken to LinkedIn"
         rel="noopener noreferrer"
         target="_blank"
         href={linkedin}
+        className="focus:outline-none"
       >
-        <FaLinkedin className="antialiased" size={"20px"} />
+        {iconWrapper("linkedin", <FaLinkedin className={baseIconClasses} size={"20px"} />)}
       </a>
-      <div className="h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2"></div>
-      <DarkModeToggle />
+  <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
+      {/* Dark mode toggle also participates */}
+      <div
+        onMouseEnter={() => setHovered("darkmode")}
+        onMouseLeave={() => setHovered(null)}
+        onFocus={() => setHovered("darkmode")}
+        onBlur={() => setHovered(null)}
+        className={`transition-all duration-300 ease-out ${hovered && hovered !== "darkmode" ? dimmedClasses : ""}`}
+      >
+        <DarkModeToggle />
+      </div>
     </div>
   );
 }
@@ -112,7 +155,7 @@ export default function Header() {
               )}
             </h1>
           </Link>
-          <AboutPageInner showPhotographyLink={!isPhotography} />
+          <AboutPageInner showPhotographyLink={!isPhotography && isHome} showResumeIcon={!isHome} />
         </div>
       </div>
     </header>
