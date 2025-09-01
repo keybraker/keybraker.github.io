@@ -53,63 +53,67 @@ const allPhotoObjects: PhotoWithCategory[] = sections.flatMap(s => s.photos.map(
 function commissionInfo() {
     return (
         <section aria-labelledby="contact-heading" className="w-full relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-t from-tsiakkas-dark/5 via-transparent to-tsiakkas-light/10 dark:from-tsiakkas-light/5 dark:via-transparent dark:to-tsiakkas-dark/10 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-tsiakkas-dark/10 via-transparent to-tsiakkas-light/10 dark:from-tsiakkas-light/10 dark:via-transparent dark:to-tsiakkas-dark/10 rounded-2xl"></div>
 
-            <div className="relative w-full flex flex-col gap-8 items-center py-12 px-6 md:px-12">
-                <div className="text-center space-y-6 max-w-4xl">
+            <div className="relative w-full flex flex-col gap-2 items-center py-12 px-6 md:px-12">
+                <div className="text-start space-y-6 max-w-4xl">
                     <h2 className="text-2xl md:text-4xl font-light tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light mb-4">
                         Commissioned Works
                     </h2>
 
-                    <p className="text-center text-lg md:text-xl leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light italic max-w-3xl mx-auto">
+                    <p className="text-start text-lg md:text-xl leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light italic max-w-4xl mx-auto">
                         Specializing in products, editorial narratives, and brand storytelling through the lens of artistry.
-                        <span className="block mt-3 text-base md:text-lg font-normal not-italic">
-                            Let&apos;s collaborate to create something truly extraordinary.
-                        </span>
+
                     </p>
                 </div>
 
-                {/* Enhanced contact buttons */}
-                <div className="flex flex-col sm:flex-row gap-6 mt-8">
-                    <a
-                        href="mailto:tsiakkas-photography@gmail.com"
-                        className="group relative flex items-center gap-3 rounded-xl px-8 py-4 text-base font-medium
-                                           border-2 border-tsiakkas-dark/20 dark:border-tsiakkas-light/20
-                                           bg-gradient-to-r from-tsiakkas-dark to-tsiakkas-dark/90 text-tsiakkas-light
-                                           dark:from-tsiakkas-light dark:to-tsiakkas-light/90 dark:text-tsiakkas-dark
-                                           hover:shadow-lg hover:shadow-tsiakkas-dark/25 dark:hover:shadow-tsiakkas-light/25
-                                           hover:scale-105 transform transition-all duration-300 ease-out
-                                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/50 dark:focus:ring-tsiakkas-light/50"
-                        aria-label="Send me an email"
-                        title="tsiakkas-photography@gmail.com"
-                    >
-                        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <HiOutlineMail className="text-xl relative z-10" />
-                        <span className="font-mono tracking-wider relative z-10">Commission Inquiry</span>
-                    </a>
+                <div className="flex flex-col gap-4 mt-8">
+                    <span className="block mt-3 text-base text-center md:text-lg font-normal not-italic">
+                        Let&apos;s collaborate to create something truly extraordinary.
+                    </span>
+                    <div className="flex flex-col sm:flex-row gap-6">
+                        <a
+                            href="mailto:tsiakkas-photography@gmail.com"
+                            className="group relative flex items-center gap-3 rounded-xl px-8 py-4 text-base font-medium
+                            border-2 border-tsiakkas-dark/20 dark:border-tsiakkas-light/20
+                            bg-gradient-to-r from-tsiakkas-dark to-tsiakkas-dark/90 text-tsiakkas-light
+                            dark:from-tsiakkas-light dark:to-tsiakkas-light/90 dark:text-tsiakkas-dark
+                            hover:shadow-lg hover:shadow-tsiakkas-dark/25 dark:hover:shadow-tsiakkas-light/25
+                            hover:scale-105 transform transition-all duration-300 ease-out
+                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/50 dark:focus:ring-tsiakkas-light/50
+                        "
+                            aria-label="Send me an email"
+                            title="tsiakkas-photography@gmail.com"
+                        >
+                            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <HiOutlineMail className="text-xl relative z-10" />
+                            <span className="font-mono tracking-wider relative z-10">Commission Inquiry</span>
+                        </a>
 
-                    <a
-                        href="https://instagram.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative flex items-center gap-3 rounded-xl px-8 py-4 text-base font-medium
-                                           border-2 border-tsiakkas-dark/30 dark:border-tsiakkas-light/30
-                                           bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm
-                                           dark:from-white/5 dark:to-white/2
-                                           hover:bg-gradient-to-r hover:from-white/20 hover:to-white/10
-                                           dark:hover:from-white/10 dark:hover:to-white/5
-                                           text-tsiakkas-dark dark:text-tsiakkas-light
-                                           hover:shadow-lg hover:shadow-tsiakkas-dark/15 dark:hover:shadow-tsiakkas-light/15
-                                           hover:scale-105 hover:border-tsiakkas-dark/50 dark:hover:border-tsiakkas-light/50
-                                           transform transition-all duration-300 ease-out
-                                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/50 dark:focus:ring-tsiakkas-light/50"
-                        aria-label="Visit my Instagram profile"
-                        title="@instagram"
-                    >
-                        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-tsiakkas-dark/5 to-transparent dark:from-tsiakkas-light/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <FaInstagram className="text-xl relative z-10" />
-                        <span className="font-mono tracking-wider relative z-10">Portfolio Gallery</span>
-                    </a>
+                        <a
+                            href="https://instagram.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative flex items-center gap-3 rounded-xl px-8 py-4 text-base font-medium
+                            border-2 border-tsiakkas-dark/30 dark:border-tsiakkas-light/30
+                            bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm
+                            dark:from-white/5 dark:to-white/2
+                            hover:bg-gradient-to-r hover:from-white/20 hover:to-white/10
+                            dark:hover:from-white/10 dark:hover:to-white/5
+                            text-tsiakkas-dark dark:text-tsiakkas-light
+                            hover:shadow-lg hover:shadow-tsiakkas-dark/15 dark:hover:shadow-tsiakkas-light/15
+                            hover:scale-105 hover:border-tsiakkas-dark/50 dark:hover:border-tsiakkas-light/50
+                            transform transition-all duration-300 ease-out
+                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/50 dark:focus:ring-tsiakkas-light/50
+                        "
+                            aria-label="Visit my Instagram profile"
+                            title="@instagram"
+                        >
+                            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-tsiakkas-dark/5 to-transparent dark:from-tsiakkas-light/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <FaInstagram className="text-xl relative z-10" />
+                            <span className="font-mono tracking-wider relative z-10">Portfolio Gallery</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>)
@@ -230,7 +234,7 @@ export default function PhotographyPage() {
             </div>
             <div id="top" className="relative flex flex-col gap-8">
 
-                {MyWords({ text: "My work, in my own shots", className: "mb-8" })}
+                {MyWords({ text: "My work, in my own shots", className: "mt-12 mb-8" })}
 
                 <nav className="flex flex-wrap gap-3 justify-start" aria-label="Photo categories filter">
                     {["All", ...sections.map(s => s.title)].map(cat => {

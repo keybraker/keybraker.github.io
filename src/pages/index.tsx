@@ -165,11 +165,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex w-full flex-col eq:flex-row eq:items-start items-center rounded-lg bg-tsiakkas-dark bg-opacity-10 dark:bg-tsiakkas-light dark:bg-opacity-5 border-2 border-tsiakkas-dark p-8 dark:border-tsiakkas-light">
+          <div className="
+            flex w-full flex-col eq:flex-row eq:items-start items-center rounded-lg
+            bg-tsiakkas-blueDark bg-opacity-5 dark:bg-tsiakkas-blueLight dark:bg-opacity-5
+            border-2 border-tsiakkas-dark p-8 dark:border-tsiakkas-light
+          ">
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <SkillPage />
             </div>
-            <div className="my-8 w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:w-0"></div>
+            <div className="my-12 w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:w-0"></div>
             <div className="mx-16 h-0 border-l border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:h-full"></div>
             <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
               {/* <Category {...categories[1]} /> */}
@@ -178,13 +182,13 @@ export default function Home() {
           </div>
 
           {/* <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
-                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
-                  <SoftwareEngineeringPage />
-                </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
-                  <Category {...categories[2]} />
-                </div>
-              </div> */}
+            <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+              <SoftwareEngineeringPage />
+            </div>
+            <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
+              <Category {...categories[2]} />
+            </div>
+          </div> */}
         </div>
       </main>
     </div>
