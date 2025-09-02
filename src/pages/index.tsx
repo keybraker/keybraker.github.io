@@ -1,12 +1,11 @@
 import EducationPage from "@/abilities/education";
 import Email from "@/abilities/email";
 import ExperiencePage from "@/abilities/experience";
-import Footer from "@/abilities/footer";
-import Header from "@/abilities/header";
 import ProjectsPage from "@/abilities/projects";
 import SkillPage from "@/abilities/skills";
 import SoftwareEngineeringPage from "@/abilities/softwareEngineering";
 import Category, { CategoryProps } from "@/components/category";
+import MyWords from "@/components/myWords";
 import Head from "next/head";
 
 const title = "Ioannis Tsiakkas";
@@ -122,77 +121,74 @@ export default function Home() {
       </Head>
 
       <main>
-        <div className="flex h-full w-full flex-col items-center justify-center place-self-center">
-          <Header />
+        <Email />
 
-          <div className="my-8 flex w-full max-w-[560px] flex-row flex-wrap justify-center gap-8 px-4 text-tsiakkas-dark dark:text-tsiakkas-light sm:px-6 eq:mx-auto eq:max-w-[1320px] eq:px-0">
-            <Email />
-
-            <div className="mb-32 flex flex-col gap-16 eq:gap-48">
-              <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
-                <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
-                  <ExperiencePage />
-                </div>
-                <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
-                  <Category {...categories[0]} />
-                </div>
-              </div>
-
-              <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
-                <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
-                  <ProjectsPage />
-                  <p className="w-full flex flex-col items-center mt-12 text-md font-semibold gap-[6px]">
-                    <span>Find all my work at</span>
-                    <a
-                      role="link"
-                      aria-label="keybraker's GitHub page"
-                      href="https://github.com/keybraker"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline text-lg font-extrabold"
-                    >
-                      github.com/keybraker
-                    </a>
-                  </p>
-                </div>
-                <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
-                  <Category {...categories[4]} />
-                </div>
-              </div>
-
-              <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
-                <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
-                  <EducationPage />
-                </div>
-                <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
-                  <Category {...categories[3]} />
-                </div>
-              </div>
-
-              <div className="flex w-full flex-col eq:flex-row eq:items-start items-center rounded-lg bg-tsiakkas-dark bg-opacity-10 dark:bg-tsiakkas-light dark:bg-opacity-5 border-2 border-tsiakkas-dark p-8 dark:border-tsiakkas-light">
-                <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
-                  <SkillPage />
-                </div>
-                <div className="my-8 w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:w-0"></div>
-                <div className="mx-16 h-0 border-l border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:h-full"></div>
-                <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
-                  {/* <Category {...categories[1]} /> */}
-                  <SoftwareEngineeringPage />
-                </div>
-              </div>
-
-              {/* <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
-                <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
-                  <SoftwareEngineeringPage />
-                </div>
-                <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
-                  <Category {...categories[2]} />
-                </div>
-              </div> */}
+        <div className="mb-32 flex flex-col gap-16 eq:gap-48">
+          <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+            <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
+              <ExperiencePage />
+            </div>
+            <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
+              <Category {...categories[0]} />
             </div>
           </div>
 
-          <Footer />
+          <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+            <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
+              <ProjectsPage />
+              {MyWords({ text: "My work, in my own words", className: "mt-12" })}
+              <p className="w-full flex flex-col items-center mt-6 text-md font-semibold gap-[6px]">
+                <span>Find all my work at</span>
+                <a
+                  role="link"
+                  aria-label="keybraker's GitHub page"
+                  href="https://github.com/keybraker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline text-lg font-extrabold"
+                >
+                  github.com/keybraker
+                </a>
+              </p>
+            </div>
+            <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
+              <Category {...categories[4]} />
+            </div>
+          </div>
+
+          <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+            <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
+              <EducationPage />
+            </div>
+            <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
+              <Category {...categories[3]} />
+            </div>
+          </div>
+
+          <div className="
+            flex w-full flex-col eq:flex-row eq:items-start items-center rounded-lg
+            bg-tsiakkas-blueDark bg-opacity-5 dark:bg-tsiakkas-blueLight dark:bg-opacity-5
+            border-2 border-tsiakkas-dark p-8 dark:border-tsiakkas-light
+          ">
+            <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
+              <SkillPage />
+            </div>
+            <div className="my-12 w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:w-0"></div>
+            <div className="mx-16 h-0 border-l border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:h-full"></div>
+            <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
+              {/* <Category {...categories[1]} /> */}
+              <SoftwareEngineeringPage />
+            </div>
+          </div>
+
+          {/* <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
+            <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
+              <SoftwareEngineeringPage />
+            </div>
+            <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
+              <Category {...categories[2]} />
+            </div>
+          </div> */}
         </div>
       </main>
     </div>

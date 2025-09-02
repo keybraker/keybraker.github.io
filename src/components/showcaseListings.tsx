@@ -92,7 +92,7 @@ export function ShowcaseListings({ showcases }: { showcases: ShowcaseType[] }) {
     <>
       {showcases.map((showcase, i) => {
         return (
-          <div key={i} className="sm:ml-2">
+          <div key={i}>
             <ShowcaseListing
               showcase={showcase}
               last={i + 1 === showcases.length}

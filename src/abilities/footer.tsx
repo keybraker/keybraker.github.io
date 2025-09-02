@@ -5,7 +5,7 @@ const repo = "https://github.com/keybraker/keybraker.github.io";
 
 export default function Footer() {
   return (
-    <div className="z-10 px-4 eq:px-0 place-self-center max-w-[560px] eq:max-w-[1320px] w-full">
+    <div className="z-10 px-4 eq:px-0 place-self-center max-w-[820px] eq:max-w-[1320px] w-full">
       <div className="py-4 border-t-2 border-tsiakkas-dark dark:border-tsiakkas-light">
         <div className="flex w-full flex-row justify-center gap-4">
           {/* <Image
