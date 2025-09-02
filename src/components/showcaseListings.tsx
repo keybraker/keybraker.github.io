@@ -39,7 +39,7 @@ function ShowcaseListing({
         </div>
 
         <div className="no-wrap flex w-6/12 flex-col items-end justify-start text-end align-baseline">
-          <div className="content flex flex-col-reverse  items-baseline align-baseline text-md italic sm:flex-row sm:gap-2">
+          <div className="content flex flex-col-reverse  items-baseline align-baseline text-md italic sm:flex-row sm:gap-3">
             <span className="hidden items-center rounded-2xl bg-tsiakkas-dark/10 px-2 text-xs text-tsiakkas-dark dark:bg-tsiakkas-light/10 dark:text-tsiakkas-light sm:flex eq:text-sm">
               {period}
             </span>
