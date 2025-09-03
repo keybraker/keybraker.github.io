@@ -33,7 +33,7 @@ const projects: ShowcaseType[] = [
           <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/chrome-web-store/rating/amglnkndjeoojnjjeepeheobhneeogcl" alt="Chrome Rating"/></td>
         </tr>
         <tr>
-          <td class="pr-1 pb-1 pt-2 text-start">
+          <td class="pr-1 pb-1 pt-4 text-start">
             <a
               href="https://addons.mozilla.org/en-US/firefox/addon/reskroutzed"
               class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded-full" rel="noopener noreferrer" target="_blank"
@@ -41,7 +41,7 @@ const projects: ShowcaseType[] = [
                 Get for Firefox
             </a>
           </td>
-          <td class="pr-1 pb-1 pt-2 text-start">
+          <td class="pr-1 pb-1 pt-4 text-start">
             <a
               href="https://chrome.google.com/webstore/detail/reskroutzed/amglnkndjeoojnjjeepeheobhneeogcl"
               class="border-2 border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 rounded-full" rel="noopener noreferrer" target="_blank"
@@ -51,29 +51,6 @@ const projects: ShowcaseType[] = [
           </td>
         </tr>
       </table>`,
-    ],
-  },
-  {
-    start: new Date("2020-02-01"),
-    end: null,
-    title: createLinkDiv(
-      "https://github.com/The-Portal-Bot/Portal",
-      "portal"
-    ),
-    titleDescription: "(discord bot, open source)",
-    info: "A fully functional Discord bot.",
-    position: '',
-    technologies: [createLinkDiv(
-      "https://www.typescriptlang.org/",
-      "TypeScript"
-    ),
-    createLinkDiv("https://www.mongodb.com/", "MongoDB")],
-    description: [
-      createLinkDiv(
-        "https://portal-bot.xyz/",
-        "Documentation",
-        "hover:underline font-semibold"
-      ),
     ],
   },
   {
@@ -93,6 +70,29 @@ const projects: ShowcaseType[] = [
         "ΣΙΝΕμας Community Adapters",
         "hover:underline font-semibold"
       )}, are available for everyone add their own city to the site.`,
+    ],
+  },
+  {
+    start: new Date("2020-02-01"),
+    end: new Date("2023-05-01"),
+    title: createLinkDiv(
+      "https://github.com/The-Portal-Bot/Portal",
+      "portal"
+    ),
+    titleDescription: "(discord bot, open source)",
+    info: "A fully functional Discord bot.",
+    position: '',
+    technologies: [createLinkDiv(
+      "https://www.typescriptlang.org/",
+      "TypeScript"
+    ),
+    createLinkDiv("https://www.mongodb.com/", "MongoDB")],
+    description: [
+      createLinkDiv(
+        "https://portal-bot.xyz/",
+        "Documentation",
+        "hover:underline font-semibold"
+      ),
     ],
   },
   {

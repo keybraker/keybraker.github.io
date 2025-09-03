@@ -27,7 +27,7 @@ function ShowcaseListing({
             ></div>
             {showcase.titleDescription && (
               <div
-                className="content white flex items-center text-sm font-thin italic"
+                className="content white flex items-center text-sm font-thin italic mb-1"
                 dangerouslySetInnerHTML={{ __html: showcase.titleDescription }}
               ></div>
             )}

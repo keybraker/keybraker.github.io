@@ -123,8 +123,8 @@ export default function Home() {
       <main>
         <Email />
 
-        <div className="mb-32 flex flex-col gap-16 eq:gap-48">
-          <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+        <div className="mb-32 mt-32 flex flex-col gap-16 eq:gap-48">
+          <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <ExperiencePage />
             </div>
@@ -133,7 +133,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+          <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <ProjectsPage />
               {MyWords({ text: "My work, in my own words", className: "mt-12" })}
@@ -156,7 +156,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex w-full flex-col items-center gap-16 eq:flex-row eq:items-start eq:gap-0">
+          <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <EducationPage />
             </div>
@@ -173,8 +173,8 @@ export default function Home() {
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <SkillPage />
             </div>
-            <div className="my-12 w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:w-0"></div>
-            <div className="mx-16 h-0 border-l border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10 eq:h-full"></div>
+            <div className="my-12 w-full eq:w-0 border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
+            <div className="mx-16 h-0 eq:h-full border-l border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
             <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
               {/* <Category {...categories[1]} /> */}
               <SoftwareEngineeringPage />
