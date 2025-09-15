@@ -65,7 +65,8 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
 
     const variant = photo.id % 5;
     const isPortrait = photo.id % 3 === 0;
-    const heightClass = isPortrait ? 'h-[520px]' : (variant % 2 === 0 ? 'h-[340px]' : 'h-[400px]');
+    // const heightClass = isPortrait ? 'h-[520px]' : (variant % 2 === 0 ? 'h-[340px]' : 'h-[400px]');
+    const heightClass = 'w-[420px] h-[420px]';
 
     return (
         <button
@@ -79,7 +80,7 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
                 bg-white/40 dark:bg-white/5 backdrop-blur-[2px] transition-colors
             `}
         >
-            <div className={`relative w-full ${heightClass}`}>
+            <div className={`relative ${heightClass}`}>
                 <Image
                     src={imgSrc}
                     alt={photo.caption}
