@@ -1,54 +1,20 @@
 import MyWords from "@/components/myWords";
-import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import { HiOutlineMail } from "@react-icons/all-files/hi/HiOutlineMail";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import fs from 'fs';
+import path from 'path';
+const exifParser = require('exif-parser');
 
 
-type Photo = { id: number; caption: string; settings: string; location: string };
+type Photo = { id: number; caption: string; settings: string; location: string; image: string };
 type Section = { title: string; photos: Photo[] };
 
-
-const placeholderImage = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
-
-const landscapes: Photo[] = [
-    { id: 1, caption: "First light bleeding over a silent ridge – a reminder that patience pays in gold.", settings: "24mm · f/8 · 1/125s · ISO 100", location: "Crete, Greece" },
-    { id: 2, caption: "A shy river hiding under morning mist; elegance in the almost becoming.", settings: "70mm · f/5.6 · 1/200s · ISO 200", location: "Black Forest" },
-    { id: 3, caption: "Wind-combed grass leaning into the unseen conversation offshore.", settings: "35mm · f/11 · 1/160s · ISO 100", location: "North Sea" },
-    { id: 4, caption: "Distant peaks dissolving into layered pastel breathing.", settings: "105mm · f/9 · 1/250s · ISO 200", location: "Alps" },
-    { id: 5, caption: "A single tree orchestrating the quiet around it.", settings: "50mm · f/4 · 1/320s · ISO 100", location: "Central Europe" },
-    { id: 6, caption: "Desert light carving temporary hieroglyphs in sand.", settings: "35mm · f/8 · 1/400s · ISO 100", location: "Sahara" },
-    { id: 7, caption: "Filtered forest light stitching warmth through a cool green hush.", settings: "35mm · f/2.8 · 1/160s · ISO 250", location: "Black Forest" },
-    { id: 8, caption: "Coastal twilight exhaling color that refuses to let the day end.", settings: "18mm · f/13 · 2s · ISO 64", location: "Azores" },
-];
-
-const zurichAtNight: Photo[] = [
-    { id: 101, caption: "Tram lines glowing while the river swallows the city lights.", settings: "35mm · f/1.8 · 1/50s · ISO 1250", location: "Zürich, Switzerland" },
-    { id: 102, caption: "Reflections layering time across quiet cobblestone.", settings: "50mm · f/2.2 · 1/60s · ISO 1600", location: "Zürich, Switzerland" },
-    { id: 103, caption: "Midnight façades breathing in sodium dusk.", settings: "28mm · f/2.8 · 1/25s · ISO 2000", location: "Zürich, Switzerland" },
-    { id: 104, caption: "Rain-brushed arcades humming with after-hours neon.", settings: "35mm · f/2 · 1/40s · ISO 3200", location: "Zürich, Switzerland" },
-    { id: 105, caption: "Clock face suspended over the river's dark grammar.", settings: "85mm · f/2.2 · 1/80s · ISO 1600", location: "Zürich, Switzerland" },
-    { id: 106, caption: "Bridge ribs holding the hush between late footsteps.", settings: "24mm · f/4 · 1/15s · ISO 2500", location: "Zürich, Switzerland" },
-];
-
-const cats: Photo[] = [
-    { id: 201, caption: "Sun-warmed whiskers measuring the morning.", settings: "85mm · f/2 · 1/320s · ISO 200", location: "Home Studio" },
-    { id: 202, caption: "A velvet pause between curiosity and pounce.", settings: "50mm · f/1.8 · 1/250s · ISO 400", location: "Kitchen Window" },
-    { id: 203, caption: "Moonlit guardian on a silent railing.", settings: "35mm · f/2.2 · 1/80s · ISO 1250", location: "Balcony" },
-];
-
-const sections: Section[] = [
-    { title: "Zurich at night", photos: zurichAtNight },
-    { title: "Cats", photos: cats },
-    { title: "Landscapes", photos: landscapes },
-];
-
 type PhotoWithCategory = Photo & { category: string };
-const allPhotoObjects: PhotoWithCategory[] = sections.flatMap(s => s.photos.map(p => ({ ...p, category: s.title })));
 
 function commissionInfo() {
     return (
@@ -95,7 +61,7 @@ function commissionInfo() {
 }
 
 function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: PhotoWithCategory) => void }) {
-    const imgSrc = placeholderImage;
+    const imgSrc = photo.image;
 
     const variant = photo.id % 5;
     const isPortrait = photo.id % 3 === 0;
@@ -125,11 +91,11 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
             </div>
 
             <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 py-6 text-center
-                bg-black/0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
-                <div className="text-md font-semibold tracking-wide text-tsiakkas-light drop-shadow-sm">
+                bg-black/50 backdrop-blur-[4px] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
+                <div className="text-lg font-semibold tracking-wide text-tsiakkas-light drop-shadow-md">
                     {photo.settings}
                 </div>
-                <div className="text-md font-thin italic tracking-wide text-tsiakkas-light/80 drop-shadow-sm">
+                <div className="text-lg font-thin italic tracking-wide text-tsiakkas-light drop-shadow-md">
                     {photo.location}
                 </div>
             </div>
@@ -137,13 +103,68 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
     );
 }
 
-export default function PhotographyPage() {
+export async function getStaticProps() {
+    const photosDir = path.join(process.cwd(), 'public', 'photos');
+    const files = fs.readdirSync(photosDir).filter(file => file.endsWith('.jpg'));
+    const tempPhotos = files.map((file, index) => {
+        const name = file.replace('.jpg', '');
+        const parts = name.split('-');
+        if (parts.length < 3) return null;
+        const section = parts.pop()!;
+        const location = parts.pop()!.replace(/_/g, ' ');
+        const title = parts.join(' ').replace(/_/g, ' ');
+        const buffer = fs.readFileSync(path.join(photosDir, file));
+        let settings = '';
+        try {
+            const parser = exifParser.create(buffer);
+            const result = parser.parse();
+            const focalLength = result.tags.FocalLength;
+            const fNumber = result.tags.FNumber;
+            const exposureTime = result.tags.ExposureTime;
+            const iso = result.tags.ISO;
+            if (focalLength && fNumber && exposureTime && iso) {
+                const shutter = exposureTime >= 1 ? `${exposureTime}s` : `1/${Math.round(1 / exposureTime)}s`;
+                settings = `${focalLength}mm · f/${fNumber} · ${shutter} · ISO ${iso}`;
+            }
+        } catch (e) {
+            // ignore
+        }
+        return {
+            id: index + 1,
+            caption: title,
+            settings,
+            location,
+            image: `/photos/${file}`,
+            section
+        };
+    }).filter(Boolean) as { id: number; caption: string; settings: string; location: string; image: string; section: string }[];
+    const sectionMap = new Map<string, Photo[]>();
+    tempPhotos.forEach(tp => {
+        if (!sectionMap.has(tp.section)) sectionMap.set(tp.section, []);
+        sectionMap.get(tp.section)!.push({
+            id: tp.id,
+            caption: tp.caption,
+            settings: tp.settings,
+            location: tp.location,
+            image: tp.image
+        });
+    });
+    const sections = Array.from(sectionMap.entries()).map(([title, photos]) => ({ title, photos }));
+    return {
+        props: {
+            sections
+        }
+    };
+}
+
+export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const [active, setActive] = useState<PhotoWithCategory | null>(null);
     const [filter, setFilter] = useState<string>("All");
 
     const close = useCallback(() => setActive(null), []);
 
-    const allPhotos: PhotoWithCategory[] = useMemo(() => allPhotoObjects, []);
+    const allPhotoObjects: PhotoWithCategory[] = useMemo(() => sections.flatMap(s => s.photos.map(p => ({ ...p, category: s.title }))), [sections]);
+    const allPhotos: PhotoWithCategory[] = useMemo(() => allPhotoObjects, [allPhotoObjects]);
     const filtered = filter === "All" ? allPhotos : allPhotos.filter(p => p.category === filter);
     const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
     const hasPrev = activeIndex > 0;
@@ -201,7 +222,7 @@ export default function PhotographyPage() {
     }, [active, close, goPrev, goNext]);
 
     return (
-        <main>
+        <main className="w-full h-full">
             <div>
                 <title>Ioannis Tsiakkas photography</title>
                 <meta name="description" content="A curated photography showcase." />
@@ -211,7 +232,7 @@ export default function PhotographyPage() {
 
                 {MyWords({ text: "My work, in my own shots", className: "mt-12 mb-8" })}
 
-                {/* <nav className="flex flex-wrap gap-3 justify-start" aria-label="Photo categories filter">
+                <nav className="flex flex-wrap gap-3 justify-start" aria-label="Photo categories filter">
                     {["All", ...sections.map(s => s.title)].map(cat => {
                         const activeFilter = filter === cat;
                         return (
@@ -227,19 +248,19 @@ export default function PhotographyPage() {
                             </button>
                         );
                     })}
-                </nav> */}
+                </nav>
 
-                {/* <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 w-full">
                     {filtered.map(p => (
                         <PhotoCard key={p.id} photo={p} onOpen={setActive as any} />
                     ))}
-                </div> */}
+                </div>
 
-                {/* {commissionInfo()}
+                {/* {commissionInfo()} */}
 
-                <div className="text-start text-[11px] tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
+                <div className="text-start text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
                     <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas. They may not be copied, redistributed, or used in any form, including for any commercial purpose, without explicit written permission. Not for commercial use.</p>
-                </div> */}
+                </div>
             </div>
 
             {active && (
@@ -322,7 +343,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
                         </button>
                     </div>
                     <Image
-                        src={placeholderImage}
+                        src={active.image}
                         alt={active.caption}
                         width={1600}
                         height={1200}
