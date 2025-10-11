@@ -106,9 +106,9 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
 
 export async function getStaticProps() {
     const photosDir = path.join(process.cwd(), 'public', 'photos');
-    const files = fs.readdirSync(photosDir).filter(file => file.endsWith('.jpg'));
+    const files = fs.readdirSync(photosDir).filter(file => file.endsWith('.jpg') || file.endsWith('.JPG'));
     const tempPhotos = files.map((file, index) => {
-        const name = file.replace('.jpg', '');
+        const name = file.replace('.jpg', '').replace('.JPG', '');
         const parts = name.split('-');
         if (parts.length < 3) return null;
         const section = parts.pop()!;
@@ -162,8 +162,12 @@ export async function getStaticProps() {
 export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const [active, setActive] = useState<PhotoWithCategory | null>(null);
     const [filter, setFilter] = useState<string>("All");
+    const [isZoomed, setIsZoomed] = useState(false);
 
-    const close = useCallback(() => setActive(null), []);
+    const close = useCallback(() => {
+        setActive(null);
+        setIsZoomed(false);
+    }, []);
 
     const allPhotoObjects: PhotoWithCategory[] = useMemo(() => sections.flatMap(s => s.photos.map(p => ({ ...p, category: s.title }))), [sections]);
     const allPhotos: PhotoWithCategory[] = useMemo(() => allPhotoObjects, [allPhotoObjects]);
@@ -277,16 +281,6 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         <span className="text-[11px] font-mono px-2 py-1 text-tsiakkas-light/70 bg-tsiakkas-light/10 rounded select-none">{activeIndex + 1}/{filtered.length}</span>
                         <div className="flex flex-row gap-2 items-center ml-auto">
                             <button
-                                onClick={() => {
-                                    try {
-                                        const url = window.location.href;
-                                        if (navigator?.clipboard?.writeText) navigator.clipboard.writeText(url);
-                                    } catch { }
-                                }}
-                                aria-label="Copy link to this photo"
-                                className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wide rounded bg-tsiakkas-light/10 text-tsiakkas-light hover:bg-tsiakkas-light/20 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40"
-                            >Copy Link</button>
-                            <button
                                 onClick={close}
                                 aria-label="Close fullscreen viewer"
                                 className="text-tsiakkas-light hover:opacity-80 text-xl font-bold px-3 py-1 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 rounded"
@@ -302,6 +296,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         hasNext={hasNext}
                         hasPrev={hasPrev}
                         close={close}
+                        isZoomed={isZoomed}
+                        setIsZoomed={setIsZoomed}
                     />
                 </div>
             )}
@@ -309,8 +305,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     );
 }
 
-function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
-    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void;
+function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed }: {
+    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void;
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
@@ -324,9 +320,9 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
     };
     return (
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-10 gap-6 select-none relative" onClick={close}>
-            <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
-                <div className="flex-1 flex items-center justify-center relative" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-                    <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-4 md:px-6">
+            <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
+                <div className={`flex-1 flex items-center justify-center relative ${isZoomed ? 'overflow-auto max-h-[90vh]' : ''}`} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+                    <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-4 md:px-6 z-10">
                         <button
                             onClick={(e) => { e.stopPropagation(); goPrev(); }}
                             disabled={!hasPrev}
@@ -344,16 +340,18 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close }: {
                             <IoIosArrowForward size={26} />
                         </button>
                     </div>
-                    <Image
-                        src={active.image}
-                        alt={active.caption}
-                        width={1600}
-                        height={1200}
-                        placeholder="blur"
-                        blurDataURL={BLUR_DATA_URL}
-                        className="max-h-[72vh] w-auto object-contain select-none"
-                        priority
-                    />
+                    <div className={`transition-transform duration-300 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} onClick={() => setIsZoomed(!isZoomed)}>
+                        <Image
+                            src={active.image}
+                            alt={active.caption}
+                            width={1600}
+                            height={1200}
+                            placeholder="blur"
+                            blurDataURL={BLUR_DATA_URL}
+                            className="max-h-[90vh] w-auto object-contain select-none"
+                            priority
+                        />
+                    </div>
                 </div>
                 <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light text-sm">
                     <div className="text-[11px] font-mono tracking-wide">{active.settings}</div>
