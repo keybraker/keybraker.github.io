@@ -340,7 +340,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             <IoIosArrowForward size={26} />
                         </button>
                     </div>
-                    <div className={`transition-transform duration-300 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} onClick={() => setIsZoomed(!isZoomed)}>
+                    <div className={`relative transition-transform duration-300 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} onClick={() => setIsZoomed(!isZoomed)}>
                         <Image
                             src={active.image}
                             alt={active.caption}
@@ -350,7 +350,19 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             blurDataURL={BLUR_DATA_URL}
                             className="max-h-[90vh] w-auto object-contain select-none"
                             priority
+                            onContextMenu={(e) => e.preventDefault()}
+                            draggable={false}
                         />
+                        <div
+                            className="absolute inset-0 bg-transparent"
+                            onContextMenu={(e) => e.preventDefault()}
+                            style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
+                        />
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
+                            <span className="text-white/70 text-xl font-extrabold italic tracking-widest select-none" style={{ fontFamily: '"Playfair Display", "Times New Roman", serif', textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.5)' }}>
+                                Ioannis Tsiakkas
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light text-sm">
