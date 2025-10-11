@@ -130,6 +130,7 @@ export async function getStaticProps() {
         } catch (e) {
             // ignore
         }
+
         return {
             id: index + 1,
             caption: title,
