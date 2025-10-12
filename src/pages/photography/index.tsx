@@ -63,7 +63,7 @@ function applyVisibleWatermark(ctx: CanvasRenderingContext2D, canvas: HTMLCanvas
     // Calculate font size based on image diagonal to maintain consistency
     // Reference: 1000px diagonal = 24px font
     const diagonal = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height);
-    const baseFontSize = 24; // Base font size for 1000px diagonal
+    const baseFontSize = 18; // Base font size for 1000px diagonal
     const referenceDiagonal = 1000;
     const fontSize = Math.max(Math.round((diagonal / referenceDiagonal) * baseFontSize), 16);
 
@@ -138,7 +138,7 @@ async function downloadImageWithWatermark(photo: Photo) {
     try {
         // Create watermark messages
         const hiddenMessage = `© ${new Date().getFullYear()} Ioannis Tsiakkas. All rights reserved. Original photo: ${photo.caption}`;
-        const visibleText = '© Ioannis Tsiakkas';
+        const visibleText = 'Ioannis Tsiakkas';
 
         // Load the original image and apply watermarks
         const canvas = await createWatermarkedImage(
