@@ -2,6 +2,7 @@ import MyWords from "@/components/myWords";
 import { HiOutlineMail } from "@react-icons/all-files/hi/HiOutlineMail";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
+import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import fs from 'fs';
@@ -15,6 +16,67 @@ type Section = { title: string; photos: Photo[] };
 const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
 type PhotoWithCategory = Photo & { category: string };
+
+async function downloadImageWithWatermark(photo: Photo) {
+    try {
+        // Create a canvas element
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        // Create an image element to load the photo
+        const img = new window.Image();
+        img.crossOrigin = 'anonymous';
+
+        // Wait for the image to load
+        await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = reject;
+            img.src = photo.image;
+        });
+
+        // Set canvas dimensions to match the image
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        // Draw the image on the canvas
+        ctx.drawImage(img, 0, 0);
+
+        // Add watermark text
+        const fontSize = Math.max(img.width * 0.02, 20);
+        ctx.font = `bold italic ${fontSize}px "Playfair Display", "Times New Roman", serif`;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+
+        // Add text shadow for better visibility
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+        ctx.shadowBlur = 8;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 2;
+
+        // Draw watermark at the bottom center
+        const watermarkText = 'Ioannis Tsiakkas';
+        const x = canvas.width / 2;
+        const y = canvas.height - (fontSize * 0.5);
+        ctx.fillText(watermarkText, x, y);
+
+        // Convert canvas to blob and download
+        canvas.toBlob((blob) => {
+            if (!blob) return;
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${photo.caption.replace(/\s+/g, '_')}-IoannisT siakkas.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }, 'image/jpeg', 0.95);
+    } catch (error) {
+        console.error('Failed to download image:', error);
+    }
+}
 
 function commissionInfo() {
     return (
@@ -287,6 +349,13 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         <span className="text-[11px] font-mono px-2 py-1 text-tsiakkas-light/70 bg-tsiakkas-light/10 rounded select-none">{activeIndex + 1}/{filtered.length}</span>
                         <div className="flex flex-row gap-2 items-center ml-auto">
                             <button
+                                onClick={() => downloadImageWithWatermark(active)}
+                                aria-label="Download image with watermark"
+                                className="text-tsiakkas-light hover:opacity-80 px-3 py-1 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 rounded flex items-center gap-2"
+                            >
+                                <HiDownload size={20} />
+                            </button>
+                            <button
                                 onClick={close}
                                 aria-label="Close fullscreen viewer"
                                 className="text-tsiakkas-light hover:opacity-80 text-xl font-bold px-3 py-1 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 rounded"
@@ -316,7 +385,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
-    
+
     const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
     const onTouchEnd = (e: React.TouchEvent) => {
         if (touchStartX == null) return;
@@ -326,7 +395,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
         }
         setTouchStartX(null);
     };
-    
+
     const handleZoomClick = (e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
