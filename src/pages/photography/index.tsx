@@ -358,8 +358,8 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             onContextMenu={(e) => e.preventDefault()}
                             style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
                         />
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
-                            <span className="text-white/70 text-xl font-extrabold italic tracking-widest select-none" style={{ fontFamily: '"Playfair Display", "Times New Roman", serif', textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.5)' }}>
+                        <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
+                            <span className="text-white/70 text-sm md:text-xl font-extrabold italic tracking-wider md:tracking-widest select-none" style={{ fontFamily: '"Playfair Display", "Times New Roman", serif', textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.5)' }}>
                                 Ioannis Tsiakkas
                             </span>
                         </div>
