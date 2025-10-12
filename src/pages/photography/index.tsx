@@ -177,10 +177,16 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const hasNext = activeIndex >= 0 && activeIndex < filtered.length - 1;
 
     const goPrev = useCallback(() => {
-        if (hasPrev) setActive(filtered[activeIndex - 1]);
+        if (hasPrev) {
+            setActive(filtered[activeIndex - 1]);
+            setIsZoomed(false);
+        }
     }, [hasPrev, activeIndex, filtered]);
     const goNext = useCallback(() => {
-        if (hasNext) setActive(filtered[activeIndex + 1]);
+        if (hasNext) {
+            setActive(filtered[activeIndex + 1]);
+            setIsZoomed(false);
+        }
     }, [hasNext, activeIndex, filtered]);
 
     useEffect(() => {
