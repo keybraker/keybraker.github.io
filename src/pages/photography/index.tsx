@@ -491,6 +491,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
+    const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
 
     const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
     const onTouchEnd = (e: React.TouchEvent) => {
@@ -528,6 +529,10 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 onContextMenu={(e) => e.preventDefault()}
                                 draggable={false}
                                 unoptimized
+                                onLoad={(e) => {
+                                    const img = e.target as HTMLImageElement;
+                                    setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+                                }}
                             />
                             <div
                                 className="absolute inset-0 bg-transparent"
@@ -557,6 +562,13 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                     {setting}
                                 </span>
                             ))}
+                        </div>
+                    )}
+
+                    {/* Image Dimensions */}
+                    {imageDimensions && (
+                        <div className="text-sm font-mono opacity-80">
+                            {imageDimensions.width} × {imageDimensions.height} px
                         </div>
                     )}
 
