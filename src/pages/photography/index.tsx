@@ -11,7 +11,7 @@ import path from 'path';
 
 const exifParser = require('exif-parser');
 
-type Photo = { id: number; caption: string; settings: string; location: string; country: string; image: string };
+type Photo = { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string };
 type Section = { title: string; photos: Photo[] };
 
 const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
@@ -131,24 +131,39 @@ async function createWatermarkedImage(
 }
 
 /**
- * Downloads the watermarked image
- * All images are pre-watermarked at build time
+ * Downloads the image with dynamically applied watermarks
+ * Applies both LSB steganography and visible watermark at download time
  */
 async function downloadImageWithWatermark(photo: Photo) {
     try {
-        // Fetch and download the already-watermarked image
-        const response = await fetch(photo.image);
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${photo.caption.replace(/\s+/g, '_')}-Ioannis_Tsiakkas.png`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
+        // Create watermark messages
+        const hiddenMessage = `© ${new Date().getFullYear()} Ioannis Tsiakkas. All rights reserved. Original photo: ${photo.caption}`;
+        const visibleText = '© Ioannis Tsiakkas';
+
+        // Load the original image and apply watermarks
+        const canvas = await createWatermarkedImage(
+            photo.originalImage,
+            hiddenMessage,
+            visibleText
+        );
+
+        // Convert canvas to blob and download
+        canvas.toBlob((blob) => {
+            if (!blob) {
+                console.error('Failed to create blob from canvas');
+                return;
+            }
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${photo.caption.replace(/\s+/g, '_')}-Ioannis_Tsiakkas.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }, 'image/png');
     } catch (error) {
-        console.error('Failed to download image:', error);
+        console.error('Failed to download image with watermark:', error);
     }
 }
 
@@ -229,11 +244,8 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
 
             <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 py-6 text-center
                 bg-black/50 backdrop-blur-[4px] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
-                <div className="text-lg font-semibold tracking-wide text-tsiakkas-light drop-shadow-md">
-                    {photo.settings}
-                </div>
-                <div className="text-lg font-thin italic tracking-wide text-tsiakkas-light drop-shadow-md">
-                    {photo.location}
+                <div className="text-xl font-light italic tracking-wide text-tsiakkas-light drop-shadow-md">
+                    {photo.location}, {photo.country}
                 </div>
             </div>
         </button>
@@ -288,9 +300,10 @@ export async function getStaticProps() {
             country,
             // Use watermarked PNG if available, otherwise fall back to original JPG
             image: useWatermarked ? `/photos-watermarked/${watermarkedFile}` : `/photos/${file}`,
+            originalImage: `/photos/${file}`, // Always store the original JPG path
             section: country // Use country as the section/category
         };
-    }).filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; section: string }[];
+    }).filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; section: string }[];
 
     const sectionMap = new Map<string, Photo[]>();
     tempPhotos.forEach(tp => {
@@ -301,7 +314,8 @@ export async function getStaticProps() {
             settings: tp.settings,
             location: tp.location,
             country: tp.country,
-            image: tp.image
+            image: tp.image,
+            originalImage: tp.originalImage
         });
     });
     const sections = Array.from(sectionMap.entries()).map(([title, photos]) => ({ title, photos }));
@@ -538,10 +552,29 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                         />
                     </div>
                 </div>
-                <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light text-sm">
-                    <div className="text-base font-mono tracking-wide">{active.settings}</div>
-                    <div className="italic text-base opacity-80">{active.location}, {active.country}</div>
-                    <p className="italic leading-relaxed text-lg">{active.caption}</p>
+                <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
+                    {/* Image Name */}
+                    <h3 className="text-xl font-semibold leading-relaxed">{active.caption}</h3>
+
+                    {/* Location */}
+                    <div className="text-base italic opacity-90">
+                        {active.location}, {active.country}
+                    </div>
+
+                    {/* Camera Settings in Pills */}
+                    {active.settings && (
+                        <div className="flex flex-wrap gap-2">
+                            {active.settings.split(' · ').map((setting, index) => (
+                                <span
+                                    key={index}
+                                    className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
+                                >
+                                    {setting}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
                     <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
                 </aside>
             </div>
