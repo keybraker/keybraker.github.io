@@ -340,7 +340,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             <IoIosArrowForward size={26} />
                         </button>
                     </div>
-                    <div className={`relative transition-transform duration-300 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} onClick={() => setIsZoomed(!isZoomed)}>
+                    <div className={`relative transition-transform duration-300 ${isZoomed ? 'cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} style={{ transform: isZoomed ? 'scale(2)' : 'scale(1)' }} onClick={() => setIsZoomed(!isZoomed)}>
                         <Image
                             src={active.image}
                             alt={active.caption}
