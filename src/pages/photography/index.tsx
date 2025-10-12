@@ -42,7 +42,33 @@ async function downloadImageWithWatermark(photo: Photo) {
         // Draw the image on the canvas
         ctx.drawImage(img, 0, 0);
 
-        // Add watermark text
+        // LSB Steganography: Embed hidden watermark in the least significant bits
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        // Message to hide: "COPYRIGHT_OF_IOANNIS_TSIAKKAS"
+        const hiddenMessage = "COPYRIGHT_OF_IOANNIS_TSIAKKAS";
+        const messageBinary = hiddenMessage.split('').map(char =>
+            char.charCodeAt(0).toString(2).padStart(8, '0')
+        ).join('');
+
+        // Add a header to identify the watermark (magic number + length)
+        const header = "11111111" + messageBinary.length.toString(2).padStart(16, '0');
+        const fullBinary = header + messageBinary;
+
+        // Embed the binary data into the LSB of red channel pixels
+        let bitIndex = 0;
+        for (let i = 0; i < data.length && bitIndex < fullBinary.length; i += 4) {
+            // Modify the least significant bit of the red channel
+            if (bitIndex < fullBinary.length) {
+                data[i] = (data[i] & 0xFE) | parseInt(fullBinary[bitIndex]);
+                bitIndex++;
+            }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        // Add visible watermark text
         const fontSize = Math.max(img.width * 0.02, 20);
         ctx.font = `bold italic ${fontSize}px "Playfair Display", "Times New Roman", serif`;
         ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
@@ -61,18 +87,18 @@ async function downloadImageWithWatermark(photo: Photo) {
         const y = canvas.height - (fontSize * 0.5);
         ctx.fillText(watermarkText, x, y);
 
-        // Convert canvas to blob and download
+        // Convert canvas to blob and download (PNG to preserve LSB steganography)
         canvas.toBlob((blob) => {
             if (!blob) return;
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `${photo.caption.replace(/\s+/g, '_')}-IoannisT siakkas.jpg`;
+            link.download = `${photo.caption.replace(/\s+/g, '_')}-Ioannis_Tsiakkas.png`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
-        }, 'image/jpeg', 0.95);
+        }, 'image/png');
     } catch (error) {
         console.error('Failed to download image:', error);
     }
