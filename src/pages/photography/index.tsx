@@ -309,6 +309,8 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
     active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void;
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
+    const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
+    
     const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
     const onTouchEnd = (e: React.TouchEvent) => {
         if (touchStartX == null) return;
@@ -317,6 +319,14 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
             if (delta > 0) goPrev(); else goNext();
         }
         setTouchStartX(null);
+    };
+    
+    const handleZoomClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        setZoomOrigin({ x, y });
+        setIsZoomed(!isZoomed);
     };
     return (
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-10 gap-6 select-none relative" onClick={close}>
@@ -340,7 +350,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             <IoIosArrowForward size={26} />
                         </button>
                     </div>
-                    <div className={`relative transition-transform duration-300 ${isZoomed ? 'cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} style={{ transform: isZoomed ? 'scale(2)' : 'scale(1)' }} onClick={() => setIsZoomed(!isZoomed)}>
+                    <div className={`relative transition-transform duration-300 ${isZoomed ? 'cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} style={{ transform: isZoomed ? 'scale(2)' : 'scale(1)', transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }} onClick={handleZoomClick}>
                         <Image
                             src={active.image}
                             alt={active.caption}
