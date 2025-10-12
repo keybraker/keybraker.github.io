@@ -510,22 +510,12 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
         setIsZoomed(!isZoomed);
     };
     return (
-        <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-10 gap-6 select-none relative" onClick={close}>
+        <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
             <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
-                <div className="flex-1 flex items-center justify-center relative">
-                    {/* Previous Button - Fixed Position */}
-                    <button
-                        onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                        disabled={!hasPrev}
-                        aria-label="Previous photo"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all"
-                    >
-                        <IoIosArrowBack size={28} />
-                    </button>
-
+                <div className="flex-1 flex items-center justify-center">
                     {/* Image Container */}
-                    <div className={`flex items-center justify-center ${isZoomed ? 'overflow-auto max-h-[90vh]' : ''}`} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-                        <div className={`relative transition-transform duration-300 ${isZoomed ? 'cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} style={{ transform: isZoomed ? 'scale(2)' : 'scale(1)', transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }} onClick={handleZoomClick}>
+                    <div className={`flex items-center justify-center ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+                        <div className={`relative transition-transform duration-300 border border-white/70 ${isZoomed ? 'cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} style={{ transform: isZoomed ? 'scale(2)' : 'scale(1)', transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }} onClick={handleZoomClick}>
                             <Image
                                 src={active.image}
                                 alt={active.caption}
@@ -533,7 +523,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 height={1200}
                                 placeholder="blur"
                                 blurDataURL={BLUR_DATA_URL}
-                                className="max-h-[90vh] w-auto object-contain select-none"
+                                className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
                                 priority
                                 onContextMenu={(e) => e.preventDefault()}
                                 draggable={false}
@@ -546,16 +536,6 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             />
                         </div>
                     </div>
-
-                    {/* Next Button - Fixed Position */}
-                    <button
-                        onClick={(e) => { e.stopPropagation(); goNext(); }}
-                        disabled={!hasNext}
-                        aria-label="Next photo"
-                        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all"
-                    >
-                        <IoIosArrowForward size={28} />
-                    </button>
                 </div>
                 <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
                     {/* Image Name */}
@@ -582,6 +562,26 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 
                     <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
                 </aside>
+            </div>
+
+            {/* Fixed Navigation Buttons Container - Always at Bottom */}
+            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 z-50" onClick={(e) => e.stopPropagation()}>
+                <button
+                    onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                    disabled={!hasPrev}
+                    aria-label="Previous photo"
+                    className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all"
+                >
+                    <IoIosArrowBack size={28} />
+                </button>
+                <button
+                    onClick={(e) => { e.stopPropagation(); goNext(); }}
+                    disabled={!hasNext}
+                    aria-label="Next photo"
+                    className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all"
+                >
+                    <IoIosArrowForward size={28} />
+                </button>
             </div>
         </div>
     );
