@@ -3,102 +3,150 @@ import { HiOutlineMail } from "@react-icons/all-files/hi/HiOutlineMail";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
+import { MdClose } from "@react-icons/all-files/md/MdClose";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import fs from 'fs';
 import path from 'path';
+
 const exifParser = require('exif-parser');
 
-
-type Photo = { id: number; caption: string; settings: string; location: string; image: string };
+type Photo = { id: number; caption: string; settings: string; location: string; country: string; image: string };
 type Section = { title: string; photos: Photo[] };
 
 const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
 type PhotoWithCategory = Photo & { category: string };
 
+// ============================================================================
+// WATERMARK UTILITY FUNCTIONS
+// ============================================================================
+
+/**
+ * Applies LSB (Least Significant Bit) steganography to embed hidden copyright text
+ * @param imageData - Canvas ImageData object containing pixel data
+ * @param message - The hidden message to embed
+ * @returns Modified ImageData with embedded message
+ */
+function applyLSBSteganography(imageData: ImageData, message: string): ImageData {
+    const data = imageData.data;
+
+    // Convert message to binary
+    const messageBinary = message.split('').map(char =>
+        char.charCodeAt(0).toString(2).padStart(8, '0')
+    ).join('');
+
+    // Add header: magic number (11111111) + message length (16 bits)
+    const header = "11111111" + messageBinary.length.toString(2).padStart(16, '0');
+    const fullBinary = header + messageBinary;
+
+    // Embed binary data into LSB of red channel pixels
+    let bitIndex = 0;
+    for (let i = 0; i < data.length && bitIndex < fullBinary.length; i += 4) {
+        if (bitIndex < fullBinary.length) {
+            // Modify the least significant bit of the red channel
+            data[i] = (data[i] & 0xFE) | parseInt(fullBinary[bitIndex]);
+            bitIndex++;
+        }
+    }
+
+    return imageData;
+}
+
+/**
+ * Draws visible watermark text on canvas
+ * @param ctx - Canvas 2D context
+ * @param canvas - Canvas element
+ * @param text - Watermark text to display
+ */
+function applyVisibleWatermark(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, text: string): void {
+    // Calculate font size based on image diagonal to maintain consistency
+    // Reference: 1000px diagonal = 24px font
+    const diagonal = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height);
+    const baseFontSize = 24; // Base font size for 1000px diagonal
+    const referenceDiagonal = 1000;
+    const fontSize = Math.max(Math.round((diagonal / referenceDiagonal) * baseFontSize), 16);
+
+    ctx.font = `bold italic ${fontSize}px "Playfair Display", "Times New Roman", serif`;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+
+    // Scale shadow blur proportionally to font size
+    const shadowBlur = Math.max(Math.round(fontSize * 0.33), 4);
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+    ctx.shadowBlur = shadowBlur;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = Math.max(Math.round(fontSize * 0.08), 2);
+
+    // Draw watermark at the bottom center with proportional padding
+    const x = canvas.width / 2;
+    const padding = Math.max(Math.round(fontSize * 0.6), 10);
+    const y = canvas.height - padding;
+    ctx.fillText(text, x, y);
+}
+
+/**
+ * Loads an image and applies both LSB steganography and visible watermark
+ * @param imageSrc - Source URL of the image
+ * @param hiddenMessage - Hidden message for steganography
+ * @param visibleText - Visible watermark text
+ * @returns Promise resolving to canvas element with watermarked image
+ */
+async function createWatermarkedImage(
+    imageSrc: string,
+    hiddenMessage: string,
+    visibleText: string
+): Promise<HTMLCanvasElement> {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Could not get canvas context');
+
+    // Load image
+    const img = new window.Image();
+    img.crossOrigin = 'anonymous';
+
+    await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = imageSrc;
+    });
+
+    // Set canvas dimensions
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Draw original image
+    ctx.drawImage(img, 0, 0);
+
+    // Apply LSB steganography
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const watermarkedData = applyLSBSteganography(imageData, hiddenMessage);
+    ctx.putImageData(watermarkedData, 0, 0);
+
+    // Apply visible watermark
+    applyVisibleWatermark(ctx, canvas, visibleText);
+
+    return canvas;
+}
+
+/**
+ * Downloads the watermarked image
+ * All images are pre-watermarked at build time
+ */
 async function downloadImageWithWatermark(photo: Photo) {
     try {
-        // Create a canvas element
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        // Create an image element to load the photo
-        const img = new window.Image();
-        img.crossOrigin = 'anonymous';
-
-        // Wait for the image to load
-        await new Promise((resolve, reject) => {
-            img.onload = resolve;
-            img.onerror = reject;
-            img.src = photo.image;
-        });
-
-        // Set canvas dimensions to match the image
-        canvas.width = img.width;
-        canvas.height = img.height;
-
-        // Draw the image on the canvas
-        ctx.drawImage(img, 0, 0);
-
-        // LSB Steganography: Embed hidden watermark in the least significant bits
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
-
-        // Message to hide: "COPYRIGHT_OF_IOANNIS_TSIAKKAS"
-        const hiddenMessage = "COPYRIGHT_OF_IOANNIS_TSIAKKAS";
-        const messageBinary = hiddenMessage.split('').map(char =>
-            char.charCodeAt(0).toString(2).padStart(8, '0')
-        ).join('');
-
-        // Add a header to identify the watermark (magic number + length)
-        const header = "11111111" + messageBinary.length.toString(2).padStart(16, '0');
-        const fullBinary = header + messageBinary;
-
-        // Embed the binary data into the LSB of red channel pixels
-        let bitIndex = 0;
-        for (let i = 0; i < data.length && bitIndex < fullBinary.length; i += 4) {
-            // Modify the least significant bit of the red channel
-            if (bitIndex < fullBinary.length) {
-                data[i] = (data[i] & 0xFE) | parseInt(fullBinary[bitIndex]);
-                bitIndex++;
-            }
-        }
-
-        ctx.putImageData(imageData, 0, 0);
-
-        // Add visible watermark text
-        const fontSize = Math.max(img.width * 0.02, 20);
-        ctx.font = `bold italic ${fontSize}px "Playfair Display", "Times New Roman", serif`;
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'bottom';
-
-        // Add text shadow for better visibility
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
-        ctx.shadowBlur = 8;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 2;
-
-        // Draw watermark at the bottom center
-        const watermarkText = 'Ioannis Tsiakkas';
-        const x = canvas.width / 2;
-        const y = canvas.height - (fontSize * 0.5);
-        ctx.fillText(watermarkText, x, y);
-
-        // Convert canvas to blob and download (PNG to preserve LSB steganography)
-        canvas.toBlob((blob) => {
-            if (!blob) return;
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${photo.caption.replace(/\s+/g, '_')}-Ioannis_Tsiakkas.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }, 'image/png');
+        // Fetch and download the already-watermarked image
+        const response = await fetch(photo.image);
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${photo.caption.replace(/\s+/g, '_')}-Ioannis_Tsiakkas.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     } catch (error) {
         console.error('Failed to download image:', error);
     }
@@ -194,14 +242,27 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
 
 export async function getStaticProps() {
     const photosDir = path.join(process.cwd(), 'public', 'photos');
-    const files = fs.readdirSync(photosDir).filter(file => file.endsWith('.jpg') || file.endsWith('.JPG'));
+    const watermarkedDir = path.join(process.cwd(), 'public', 'photos-watermarked');
+
+    // Read original photos directory (JPG files)
+    const files = fs.readdirSync(photosDir).filter(file =>
+        file.endsWith('.jpg') || file.endsWith('.JPG') || file.endsWith('.jpeg') || file.endsWith('.JPEG')
+    );
+
     const tempPhotos = files.map((file, index) => {
-        const name = file.replace('.jpg', '').replace('.JPG', '');
+        const name = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '');
         const parts = name.split('-');
         if (parts.length < 3) return null;
-        const section = parts.pop()!;
+        const country = parts.pop()!.replace(/_/g, ' ');
         const location = parts.pop()!.replace(/_/g, ' ');
-        const title = parts.join(' ').replace(/_/g, ' ');
+        const title = parts.join('-').replace(/_/g, ' ');
+
+        // Check if watermarked version exists (PNG format)
+        const watermarkedFile = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '.png');
+        const watermarkedPath = path.join(watermarkedDir, watermarkedFile);
+        const useWatermarked = fs.existsSync(watermarkedPath);
+
+        // Read EXIF data from original JPG
         const buffer = fs.readFileSync(path.join(photosDir, file));
         let settings = '';
         try {
@@ -216,7 +277,7 @@ export async function getStaticProps() {
                 settings = `${focalLength}mm · f/${fNumber} · ${shutter} · ISO ${iso}`;
             }
         } catch (e) {
-            // ignore
+            // ignore - EXIF might not be available
         }
 
         return {
@@ -224,10 +285,13 @@ export async function getStaticProps() {
             caption: title,
             settings,
             location,
-            image: `/photos/${file}`,
-            section
+            country,
+            // Use watermarked PNG if available, otherwise fall back to original JPG
+            image: useWatermarked ? `/photos-watermarked/${watermarkedFile}` : `/photos/${file}`,
+            section: country // Use country as the section/category
         };
-    }).filter(Boolean) as { id: number; caption: string; settings: string; location: string; image: string; section: string }[];
+    }).filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; section: string }[];
+
     const sectionMap = new Map<string, Photo[]>();
     tempPhotos.forEach(tp => {
         if (!sectionMap.has(tp.section)) sectionMap.set(tp.section, []);
@@ -236,6 +300,7 @@ export async function getStaticProps() {
             caption: tp.caption,
             settings: tp.settings,
             location: tp.location,
+            country: tp.country,
             image: tp.image
         });
     });
@@ -359,7 +424,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                 {/* {commissionInfo()} */}
 
                 <div className="text-start text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
-                    <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas. They may not be copied, redistributed, or used in any form, including for any commercial purpose, without explicit written permission. Not for commercial use.</p>
+                    <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas. They may not be copied, redistributed, or used in any form, including for any commercial purpose, without explicit written permission.</p>
+                    <p>Photographs may be downloaded and used solely for personal purposes, such as personal wallpapers.</p>
                 </div>
             </div>
 
@@ -377,16 +443,16 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                             <button
                                 onClick={() => downloadImageWithWatermark(active)}
                                 aria-label="Download image with watermark"
-                                className="text-tsiakkas-light hover:opacity-80 px-3 py-1 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 rounded flex items-center gap-2"
+                                className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
                             >
                                 <HiDownload size={20} />
                             </button>
                             <button
                                 onClick={close}
                                 aria-label="Close fullscreen viewer"
-                                className="text-tsiakkas-light hover:opacity-80 text-xl font-bold px-3 py-1 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 rounded"
+                                className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all leading-none"
                             >
-                                ×
+                                <MdClose size={20} />
                             </button>
                         </div>
                     </div>
@@ -463,24 +529,20 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             priority
                             onContextMenu={(e) => e.preventDefault()}
                             draggable={false}
+                            unoptimized
                         />
                         <div
                             className="absolute inset-0 bg-transparent"
                             onContextMenu={(e) => e.preventDefault()}
                             style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
                         />
-                        <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
-                            <span className="text-white/70 text-sm md:text-xl font-extrabold italic tracking-wider md:tracking-widest select-none" style={{ fontFamily: '"Playfair Display", "Times New Roman", serif', textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.5)' }}>
-                                Ioannis Tsiakkas
-                            </span>
-                        </div>
                     </div>
                 </div>
                 <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light text-sm">
-                    <div className="text-[11px] font-mono tracking-wide">{active.settings}</div>
-                    <div className="italic text-[11px] opacity-80">{active.location}</div>
-                    <p className="italic leading-relaxed">{active.caption}</p>
-                    <div className="mt-2 text-[10px] opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
+                    <div className="text-base font-mono tracking-wide">{active.settings}</div>
+                    <div className="italic text-base opacity-80">{active.location}, {active.country}</div>
+                    <p className="italic leading-relaxed text-lg">{active.caption}</p>
+                    <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
                 </aside>
             </div>
         </div>
