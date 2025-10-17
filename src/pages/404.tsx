@@ -1,12 +1,9 @@
 import React from "react"
 import Image from "next/image";
-import Header from "@/abilities/header";
 
 const NotFoundPage = () => {
   return (
     <div className="flex flex-col items-center">
-      <Header />
-
       <h1 className="
         text-center mt-24
         text-5xl italic text-tsiakkas-dark dark:text-tsiakkas-light
