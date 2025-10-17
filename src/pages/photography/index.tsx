@@ -489,10 +489,16 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
     active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void;
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
+    const [touchCurrentX, setTouchCurrentX] = useState<number | null>(null);
     const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
     const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
 
     const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
+    const onTouchMove = (e: React.TouchEvent) => {
+        if (touchStartX != null) {
+            setTouchCurrentX(e.touches[0].clientX);
+        }
+    };
     const onTouchEnd = (e: React.TouchEvent) => {
         if (touchStartX == null) return;
         const delta = e.changedTouches[0].clientX - touchStartX;
@@ -500,7 +506,10 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
             if (delta > 0) goPrev(); else goNext();
         }
         setTouchStartX(null);
+        setTouchCurrentX(null);
     };
+
+    const swipeTranslate = touchStartX && touchCurrentX ? touchCurrentX - touchStartX : 0;
 
     const handleZoomClick = (e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -512,9 +521,18 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
     return (
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
             <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
-                <div className="flex-1 flex items-center justify-center">
+                <div className="flex-1 flex items-center justify-center overflow-hidden">
                     {/* Image Container */}
-                    <div className={`flex items-center justify-center ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+                    <div 
+                        className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`}
+                        style={{ 
+                            transform: `translateX(${swipeTranslate}px)`,
+                            transitionDuration: touchStartX ? '0ms' : '500ms'
+                        }}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                    >
                         <div className={`relative transition-transform duration-300 border border-white/70 ${isZoomed ? 'cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} style={{ transform: isZoomed ? 'scale(2)' : 'scale(1)', transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }} onClick={handleZoomClick}>
                             <Image
                                 src={active.image}
