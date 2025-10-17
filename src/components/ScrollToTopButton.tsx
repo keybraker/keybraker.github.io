@@ -3,6 +3,7 @@ import { FaArrowUp } from "@react-icons/all-files/fa/FaArrowUp";
 
 const ScrollToTopButton = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
 
     const toggleVisibility = () => {
         if (window.scrollY > document.documentElement.clientHeight) {
@@ -16,6 +17,24 @@ const ScrollToTopButton = () => {
         window.addEventListener('scroll', toggleVisibility);
 
         return () => window.removeEventListener('scroll', toggleVisibility);
+    }, []);
+
+    useEffect(() => {
+        const checkPhotoModal = () => {
+            const photoDialog = document.querySelector('[role="dialog"]');
+            setIsPhotoModalOpen(!!photoDialog);
+        };
+
+        checkPhotoModal();
+        window.addEventListener('scroll', checkPhotoModal);
+        
+        const observer = new MutationObserver(checkPhotoModal);
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        return () => {
+            window.removeEventListener('scroll', checkPhotoModal);
+            observer.disconnect();
+        };
     }, []);
 
     const scrollToTop = () => {
@@ -35,7 +54,7 @@ const ScrollToTopButton = () => {
             text-tsiakkas-dark dark:text-tsiakkas-light
             bg-tsiakkas-light dark:bg-tsiakkas-dark
             border-tsiakkas-dark dark:border-tsiakkas-light border z-50
-            ${isVisible ? 'visible' : ''}`}
+            ${isVisible && !isPhotoModalOpen ? 'visible' : ''}`}
         >
             <FaArrowUp className="antialiased" size={"20px"} />
         </button>
