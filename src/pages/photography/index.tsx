@@ -60,12 +60,11 @@ function applyLSBSteganography(imageData: ImageData, message: string): ImageData
  * @param text - Watermark text to display
  */
 function applyVisibleWatermark(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, text: string): void {
-    // Calculate font size based on image diagonal to maintain consistency
-    // Reference: 1000px diagonal = 24px font
-    const diagonal = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height);
-    const baseFontSize = 18; // Base font size for 1000px diagonal
-    const referenceDiagonal = 1000;
-    const fontSize = Math.max(Math.round((diagonal / referenceDiagonal) * baseFontSize), 16);
+    // Calculate font size based on image width to maintain consistency across portrait and landscape
+    // Reference: 1000px width = 24px font
+    const baseFontSize = 24;
+    const referenceWidth = 1000;
+    const fontSize = Math.max(Math.round((canvas.width / referenceWidth) * baseFontSize), 16);
 
     ctx.font = `bold italic ${fontSize}px "Playfair Display", "Times New Roman", serif`;
     ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
