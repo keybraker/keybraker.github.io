@@ -3,6 +3,7 @@ import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
 import { HiOutlineDownload } from "@react-icons/all-files/hi/HiOutlineDownload";
 import { useEffect, useState } from "react";
 import { description } from "@/pages";
+import Link from 'next/link';
 
 const mail = "iantsiakkas@gmail.com";
 const mailto = "mailto:" + mail;
@@ -71,7 +72,7 @@ export default function Email() {
       <div>
         <p>Hello,</p>
         <p className="mt-2 whitespace-pre-line">{description}</p>
-        <p className="mt-2 whitespace-pre-line">
+        <p className="mt-0 whitespace-pre-line">
           You can take a look at some of my work on my Github page here{" "}
           <a
             aria-label="Clicking here will take you to my github page"
@@ -84,9 +85,19 @@ export default function Email() {
           </a>
           .
         </p>
-        {/* <p className="mt-1 whitespace-pre-line">
-          If you have any ideas you wish to share with me, feel free to reply.
-        </p> */}
+
+        <p className="mt-2 whitespace-pre-line">
+          I am also very much into photography. You can check out some of my work at
+          {" "}
+          <Link
+            href="/photography"
+            aria-label="Clicking here will take you to my photography portfolio"
+            className="font-semibold hover:underline hover:text-blue-700 hover:shadow-2xl"
+          >
+            here
+          </Link>
+          .
+        </p>
 
         <p className="mt-4">Kindly, Ioannis</p>
       </div>
