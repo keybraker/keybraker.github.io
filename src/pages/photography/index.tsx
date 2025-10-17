@@ -4,6 +4,9 @@ import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
+import { MdInfo } from "@react-icons/all-files/md/MdInfo";
+import { HiOutlineEye } from "@react-icons/all-files/hi/HiOutlineEye";
+import { HiOutlineEyeOff } from "@react-icons/all-files/hi/HiOutlineEyeOff";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import fs from 'fs';
@@ -329,10 +332,14 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const [active, setActive] = useState<PhotoWithCategory | null>(null);
     const [filter, setFilter] = useState<string>("All");
     const [isZoomed, setIsZoomed] = useState(false);
+    const [showInfo, setShowInfo] = useState(true);
+    const [showShortcuts, setShowShortcuts] = useState(false);
 
     const close = useCallback(() => {
         setActive(null);
         setIsZoomed(false);
+        setShowInfo(true);
+        setShowShortcuts(false);
     }, []);
 
     const allPhotoObjects: PhotoWithCategory[] = useMemo(() => sections.flatMap(s => s.photos.map(p => ({ ...p, category: s.title }))), [sections]);
@@ -454,6 +461,22 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         <span className="text-[11px] font-mono px-2 py-1 text-tsiakkas-light/70 bg-tsiakkas-light/10 rounded select-none">{activeIndex + 1}/{filtered.length}</span>
                         <div className="flex flex-row gap-2 items-center ml-auto">
                             <button
+                                onClick={(e) => { e.stopPropagation(); setShowShortcuts(!showShortcuts); }}
+                                aria-label="Show keyboard shortcuts"
+                                className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all text-lg font-bold"
+                                title="Press '?' for shortcuts"
+                            >
+                                ?
+                            </button>
+                            <button
+                                onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
+                                aria-label={showInfo ? "Hide photo info" : "Show photo info"}
+                                className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
+                                title="Press 'I' to toggle (I key)"
+                            >
+                                {showInfo ? <HiOutlineEyeOff size={20} /> : <HiOutlineEye size={20} />}
+                            </button>
+                            <button
                                 onClick={() => downloadImageWithWatermark(active)}
                                 aria-label="Download image with watermark"
                                 className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
@@ -478,6 +501,10 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         close={close}
                         isZoomed={isZoomed}
                         setIsZoomed={setIsZoomed}
+                        showInfo={showInfo}
+                        setShowInfo={setShowInfo}
+                        showShortcuts={showShortcuts}
+                        setShowShortcuts={setShowShortcuts}
                     />
                 </div>
             )}
@@ -485,13 +512,14 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     );
 }
 
-function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed }: {
-    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void;
+function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed, showInfo, setShowInfo, showShortcuts, setShowShortcuts }: {
+    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void; showInfo: boolean; setShowInfo: (v: boolean) => void; showShortcuts: boolean; setShowShortcuts: (v: boolean) => void;
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const [touchCurrentX, setTouchCurrentX] = useState<number | null>(null);
     const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
     const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
+    const [isImageLoading, setIsImageLoading] = useState(true);
 
     const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
     const onTouchMove = (e: React.TouchEvent) => {
@@ -518,14 +546,31 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
         setZoomOrigin({ x, y });
         setIsZoomed(!isZoomed);
     };
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key.toLowerCase() === 'i' && !showShortcuts) {
+                e.preventDefault();
+                setShowInfo(!showInfo);
+            }
+            if (e.key === '?') {
+                e.preventDefault();
+                setShowShortcuts(!showShortcuts);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [showInfo, showShortcuts, setShowInfo, setShowShortcuts]);
+
     return (
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
             <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
                 <div className="flex-1 flex items-center justify-center overflow-hidden">
                     {/* Image Container */}
-                    <div 
+                    <div
                         className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`}
-                        style={{ 
+                        style={{
                             transform: `translateX(${swipeTranslate}px)`,
                             transitionDuration: touchStartX ? '0ms' : '500ms'
                         }}
@@ -534,6 +579,10 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                         onTouchEnd={onTouchEnd}
                     >
                         <div className={`relative transition-transform duration-300 border border-white/70 ${isZoomed ? 'cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} style={{ transform: isZoomed ? 'scale(2)' : 'scale(1)', transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }} onClick={handleZoomClick}>
+                            {/* Loading skeleton */}
+                            {isImageLoading && (
+                                <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
+                            )}
                             <Image
                                 src={active.image}
                                 alt={active.caption}
@@ -546,9 +595,11 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 onContextMenu={(e) => e.preventDefault()}
                                 draggable={false}
                                 unoptimized
+                                onLoadingComplete={() => setIsImageLoading(false)}
                                 onLoad={(e) => {
                                     const img = e.target as HTMLImageElement;
                                     setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+                                    setIsImageLoading(false);
                                 }}
                             />
                             <div
@@ -559,39 +610,94 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                         </div>
                     </div>
                 </div>
-                <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
-                    {/* Image Name */}
-                    <h3 className="text-xl font-semibold leading-relaxed">{active.caption}</h3>
+                {/* Info Sidebar - Toggleable */}
+                {showInfo && (
+                    <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
+                        {/* Image Name */}
+                        <h3 className="text-xl font-semibold leading-relaxed">{active.caption}</h3>
 
-                    {/* Location */}
-                    <div className="text-base italic opacity-90">
-                        {active.location}, {active.country}
-                    </div>
-
-                    {/* Camera Settings in Pills */}
-                    {active.settings && (
-                        <div className="flex flex-wrap gap-2">
-                            {active.settings.split(' · ').map((setting, index) => (
-                                <span
-                                    key={index}
-                                    className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                                >
-                                    {setting}
-                                </span>
-                            ))}
+                        {/* Location */}
+                        <div className="text-base italic opacity-90">
+                            {active.location}, {active.country}
                         </div>
-                    )}
 
-                    {/* Image Dimensions */}
-                    {imageDimensions && (
-                        <div className="text-sm font-mono opacity-80">
-                            {imageDimensions.width} × {imageDimensions.height} px
-                        </div>
-                    )}
+                        {/* Camera Settings in Pills */}
+                        {active.settings && (
+                            <div className="flex flex-wrap gap-2">
+                                {active.settings.split(' · ').map((setting, index) => (
+                                    <span
+                                        key={index}
+                                        className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
+                                    >
+                                        {setting}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
 
-                    <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
-                </aside>
+                        {/* Image Dimensions */}
+                        {imageDimensions && (
+                            <div className="text-sm font-mono opacity-80">
+                                {imageDimensions.width} × {imageDimensions.height} px
+                            </div>
+                        )}
+
+                        <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
+                    </aside>
+                )}
             </div>
+
+            {/* Keyboard Shortcuts Modal */}
+            {showShortcuts && (
+                <div
+                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                    onClick={(e) => {
+                        if (e.target === e.currentTarget) setShowShortcuts(false);
+                    }}
+                >
+                    <div className="bg-tsiakkas-dark/95 border border-white/20 rounded-lg p-6 max-w-md w-full text-tsiakkas-light" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-xl font-semibold flex items-center gap-2">
+                                <MdInfo size={24} />
+                                Keyboard Shortcuts
+                            </h2>
+                            <button
+                                onClick={() => setShowShortcuts(false)}
+                                className="p-1 hover:bg-white/20 rounded transition-all"
+                                aria-label="Close shortcuts"
+                            >
+                                <MdClose size={24} />
+                            </button>
+                        </div>
+                        <div className="space-y-3 text-sm">
+                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                <span>← / → Arrow</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Previous/Next</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                <span>Escape</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Close viewer</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                <span>Click image</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom in/out</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                <span>Swipe (mobile)</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Navigate</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                <span>I</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Toggle info</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span>?</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">This menu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Fixed Navigation Buttons Container - Always at Bottom */}
             <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 z-50" onClick={(e) => e.stopPropagation()}>
