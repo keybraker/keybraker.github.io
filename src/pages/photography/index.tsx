@@ -19,8 +19,7 @@ type Section = { title: string; photos: Photo[] };
 
 const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
-type PhotoWithCategory = Photo & { category: string };
-
+type PhotoWithCategory = Photo & { category: string; orientation: 'portrait' | 'landscape' };
 // ============================================================================
 // WATERMARK UTILITY FUNCTIONS
 // ============================================================================
@@ -215,32 +214,26 @@ function commissionInfo() {
 
 function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: PhotoWithCategory) => void }) {
     const imgSrc = photo.image;
-
-    const variant = photo.id % 5;
-    const isPortrait = photo.id % 3 === 0;
-    // const heightClass = isPortrait ? 'h-[520px]' : (variant % 2 === 0 ? 'h-[340px]' : 'h-[400px]');
-    const heightClass = 'w-[420px] h-[420px]';
-
     return (
         <button
             type="button"
             onClick={() => onOpen(photo)}
             aria-label="Open image fullscreen"
             className={`
-                group relative mb-8 w-full break-inside-avoid
+                group relative w-full h-full
                 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
                 rounded-sm overflow-hidden ring-1 ring-tsiakkas-dark/10 dark:ring-tsiakkas-light/10
                 bg-white/40 dark:bg-white/5 backdrop-blur-[2px] transition-colors
             `}
         >
-            <div className={`relative ${heightClass}`}>
+            <div className="relative w-full h-full">
                 <Image
                     src={imgSrc}
                     alt={photo.caption}
                     fill
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
-                    className={`object-cover select-none transition duration-500 ease-out group-hover:blur-sm group-focus-visible:blur-sm ${isPortrait ? 'object-center' : 'object-center'}`}
+                    className={`object-cover select-none transition duration-500 ease-out group-hover:blur-sm group-focus-visible:blur-sm`}
                 />
             </div>
 
@@ -342,7 +335,32 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         setShowShortcuts(false);
     }, []);
 
-    const allPhotoObjects: PhotoWithCategory[] = useMemo(() => sections.flatMap(s => s.photos.map(p => ({ ...p, category: s.title }))), [sections]);
+    const allPhotoObjects: PhotoWithCategory[] = useMemo(() =>
+        sections.flatMap(s => {
+            return s.photos.map((p, index) => {
+                // Alternating pattern with randomization to avoid clustering
+                // Pattern: P-P-L-P-P-L (portrait-portrait-landscape repeats)
+                // This ensures landscapes are spaced out and no long stretches of same orientation
+                const positionInPattern = index % 6;
+                let isLandscape: boolean;
+
+                if (positionInPattern === 2 || positionInPattern === 5) {
+                    // Landscape positions in the pattern
+                    isLandscape = true;
+                } else {
+                    // Portrait positions
+                    isLandscape = false;
+                }
+
+                return {
+                    ...p,
+                    category: s.title,
+                    orientation: isLandscape ? 'landscape' as const : 'portrait' as const
+                };
+            });
+        }),
+        [sections]
+    );
     const allPhotos: PhotoWithCategory[] = useMemo(() => allPhotoObjects, [allPhotoObjects]);
     const filtered = filter === "All" ? allPhotos : allPhotos.filter(p => p.category === filter);
     const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
@@ -435,9 +453,17 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                     })}
                 </nav>
 
-                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 w-full">
+                <div className="grid gap-6 w-full auto-rows-[300px] grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
                     {filtered.map(p => (
-                        <PhotoCard key={p.id} photo={p} onOpen={setActive as any} />
+                        <div
+                            key={p.id}
+                            style={{
+                                gridColumn: p.orientation === 'landscape' ? 'span 2' : 'span 2',
+                                gridRow: p.orientation === 'landscape' ? 'span 1' : 'span 2'
+                            }}
+                        >
+                            <PhotoCard photo={p} onOpen={setActive as any} />
+                        </div>
                     ))}
                 </div>
 
