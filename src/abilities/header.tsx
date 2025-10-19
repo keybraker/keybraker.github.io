@@ -1,3 +1,4 @@
+import { DarkModeToggle } from "@/components/darkModeToggle";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
@@ -7,7 +8,6 @@ import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import DarkModeToggle from "../components/DarkModeToggle";
 
 const mail = "mailto:" + "iantsiakkas@gmail.com";
 const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";

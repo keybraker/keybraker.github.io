@@ -2,7 +2,7 @@ import { HiMoon } from "@react-icons/all-files/hi/HiMoon";
 import { HiSun } from "@react-icons/all-files/hi/HiSun";
 import { useEffect, useState } from 'react';
 
-const DarkModeToggle = () => {
+export function DarkModeToggle() {
     const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
@@ -44,5 +44,3 @@ const DarkModeToggle = () => {
         </button>
     );
 };
-
-export default DarkModeToggle;
