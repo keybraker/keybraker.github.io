@@ -1,20 +1,19 @@
 import MyWords from "@/components/myWords";
-import { HiOutlineMail } from "@react-icons/all-files/hi/HiOutlineMail";
-import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
-import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
-import { MdClose } from "@react-icons/all-files/md/MdClose";
-import { MdInfo } from "@react-icons/all-files/md/MdInfo";
 import { HiOutlineEye } from "@react-icons/all-files/hi/HiOutlineEye";
 import { HiOutlineEyeOff } from "@react-icons/all-files/hi/HiOutlineEyeOff";
-import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState, useRef } from "react";
+import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
+import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
+import { MdClose } from "@react-icons/all-files/md/MdClose";
+import { MdInfo } from "@react-icons/all-files/md/MdInfo";
 import fs from 'fs';
+import Image from "next/image";
 import path from 'path';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const exifParser = require('exif-parser');
 
-type Photo = { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string };
+type Photo = { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean };
 type Section = { title: string; photos: Photo[] };
 
 const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
@@ -209,13 +208,24 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
 
 export async function getStaticProps() {
     const photosDir = path.join(process.cwd(), 'public', 'photos');
+    const commissionedDir = path.join(process.cwd(), 'public', 'photos', 'commissioned');
     const watermarkedDir = path.join(process.cwd(), 'public', 'photos-watermarked');
 
+    // Read regular photos
     const files = fs.readdirSync(photosDir).filter(file =>
-        file.endsWith('.jpg') || file.endsWith('.JPG') || file.endsWith('.jpeg') || file.endsWith('.JPEG')
+        (file.endsWith('.jpg') || file.endsWith('.JPG') || file.endsWith('.jpeg') || file.endsWith('.JPEG')) &&
+        !fs.statSync(path.join(photosDir, file)).isDirectory()
     );
 
-    const tempPhotos = files.map((file, index) => {
+    // Read commissioned photos
+    let commissionedFiles: string[] = [];
+    if (fs.existsSync(commissionedDir)) {
+        commissionedFiles = fs.readdirSync(commissionedDir).filter(file =>
+            file.endsWith('.jpg') || file.endsWith('.JPG') || file.endsWith('.jpeg') || file.endsWith('.JPEG')
+        );
+    }
+
+    const processPhoto = (file: string, isCommissioned: boolean, dirPath: string, index: number) => {
         const name = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '');
         const parts = name.split('-');
         if (parts.length < 3) return null;
@@ -224,10 +234,10 @@ export async function getStaticProps() {
         const title = parts.join('-').replace(/_/g, ' ');
 
         const watermarkedFile = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '.png');
-        const watermarkedPath = path.join(watermarkedDir, watermarkedFile);
+        const watermarkedPath = path.join(watermarkedDir, isCommissioned ? `commissioned/${watermarkedFile}` : watermarkedFile);
         const useWatermarked = fs.existsSync(watermarkedPath);
 
-        const buffer = fs.readFileSync(path.join(photosDir, file));
+        const buffer = fs.readFileSync(path.join(dirPath, file));
         let settings = '';
         try {
             const parser = exifParser.create(buffer);
@@ -244,18 +254,26 @@ export async function getStaticProps() {
             // ignore - EXIF might not be available
         }
 
+        const photoPath = isCommissioned ? `/photos/commissioned/${file}` : `/photos/${file}`;
+        const watermarkedPhotoPath = isCommissioned ? `/photos-watermarked/commissioned/${watermarkedFile}` : `/photos-watermarked/${watermarkedFile}`;
+
         return {
             id: index + 1,
             caption: title,
             settings,
             location,
             country,
-            // Use watermarked PNG if available, otherwise fall back to original JPG
-            image: useWatermarked ? `/photos-watermarked/${watermarkedFile}` : `/photos/${file}`,
-            originalImage: `/photos/${file}`, // Always store the original JPG path
-            section: country // Use country as the section/category
+            image: useWatermarked ? watermarkedPhotoPath : photoPath,
+            originalImage: photoPath,
+            isCommissioned,
+            section: country
         };
-    }).filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; section: string }[];
+    };
+
+    const tempPhotos = [
+        ...files.map((file, index) => processPhoto(file, false, photosDir, index)),
+        ...commissionedFiles.map((file, index) => processPhoto(file, true, commissionedDir, files.length + index))
+    ].filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean; section: string }[];
 
     const sectionMap = new Map<string, Photo[]>();
     tempPhotos.forEach(tp => {
@@ -267,7 +285,8 @@ export async function getStaticProps() {
             location: tp.location,
             country: tp.country,
             image: tp.image,
-            originalImage: tp.originalImage
+            originalImage: tp.originalImage,
+            isCommissioned: tp.isCommissioned
         });
     });
     const sections = Array.from(sectionMap.entries()).map(([title, photos]) => ({ title, photos }));
@@ -324,9 +343,9 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
 
     const filtered = useMemo(() => {
         if (showCommissioned) {
-            return allPhotos.filter(p => p.caption.startsWith('com-'));
+            return allPhotos.filter(p => p.isCommissioned);
         }
-        const regularPhotos = allPhotos.filter(p => !p.caption.startsWith('com-'));
+        const regularPhotos = allPhotos.filter(p => !p.isCommissioned);
         return filter === "All" ? regularPhotos : regularPhotos.filter(p => p.category === filter);
     }, [allPhotos, filter, showCommissioned]);
     const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
@@ -706,10 +725,10 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                 {showInfo && (
                     <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
                         {/* Image Name */}
-                        <h3 className="text-xl font-semibold leading-relaxed">{active.caption.startsWith('com-') ? active.caption.slice(4) : active.caption}</h3>
+                        <h3 className="text-xl font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
 
                         {/* Location */}
-                        <div className="text-base italic opacity-90">
+                        <div className="text-base opacity-90">
                             {active.location}, {active.country}
                         </div>
 
