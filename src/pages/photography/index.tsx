@@ -193,6 +193,8 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
                     className={`object-cover select-none transition duration-500 ease-out group-hover:blur-sm group-focus-visible:blur-sm`}
+                    onContextMenu={(e) => e.preventDefault()}
+                    draggable={false}
                 />
             </div>
 
