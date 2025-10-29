@@ -160,46 +160,39 @@ async function downloadImageWithWatermark(photo: Photo) {
 
 function commissionInfo() {
     return (
-        <section aria-labelledby="contact-heading" className="w-full relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-t from-tsiakkas-dark/10 via-transparent to-tsiakkas-light/10 dark:from-tsiakkas-light/10 dark:via-transparent dark:to-tsiakkas-dark/10 rounded-2xl"></div>
+        <section aria-labelledby="contact-heading" className="w-full py-12 text-center">
+            <div className="flex flex-col gap-6">
+                <h2 className="text-2xl md:text-3xl font-light tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light">
+                    Commissioned Works
+                </h2>
 
-            <div className="relative w-full flex flex-col gap-2 items-start py-12 px-6 md:px-12">
-                <div className="text-start space-y-6 max-w-4xl">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light mb-4">
-                        Commissioned Works
-                    </h2>
-
-                    <div className="flex flex-col text-start text-lg md:text-xl leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light italic max-w-4xl mx-auto">
-                        <p>
-                            Specializing in products, editorial narratives, and brand storytelling through the lens of artistry.
-                        </p>
-                        <p>Let&apos;s collaborate to create something truly extraordinary.</p>
-                        <a
-                            href="mailto:tsiakkas-photography@gmail.com"
-                            className="
-                            group relative flex items-center gap-3 rounded-xl px-8 py-4 text-base font-medium mt-4 w-fit
-                            border-2 border-tsiakkas-dark/30 dark:border-tsiakkas-light/30
-                            bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm
-                            dark:from-white/5 dark:to-white/2
-                            hover:bg-gradient-to-r hover:from-white/20 hover:to-white/10
-                            dark:hover:from-white/10 dark:hover:to-white/5
-                            text-tsiakkas-dark dark:text-tsiakkas-light
-                            hover:shadow-lg hover:shadow-tsiakkas-dark/15 dark:hover:shadow-tsiakkas-light/15
-                            hover:scale-105 hover:border-tsiakkas-dark/50 dark:hover:border-tsiakkas-light/50
-                            transform transition-all duration-300 ease-out
-                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/50 dark:focus:ring-tsiakkas-light/50
-                        "
-                            aria-label="Send me an email"
-                            title="tsiakkas-photography@gmail.com"
-                        >
-                            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            <HiOutlineMail className="text-xl relative z-10" />
-                            <span className="font-mono tracking-wider relative z-10">Commission Inquiry</span>
-                        </a>
-                    </div>
+                <div className="flex flex-col gap-4 text-base md:text-lg leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light">
+                    <p>
+                        Specializing in products, editorial narratives, and brand storytelling through the lens of artistry.
+                    </p>
+                    <p>Let&apos;s collaborate to create something truly extraordinary.</p>
                 </div>
+
+                <a
+                    href="mailto:tsiakkas-photography@gmail.com"
+                    className="
+                    inline-flex items-center gap-3 px-6 py-3 text-sm uppercase tracking-wide rounded-sm
+                    border border-tsiakkas-dark/30 dark:border-tsiakkas-light/30
+                    text-tsiakkas-dark dark:text-tsiakkas-light
+                    hover:bg-tsiakkas-dark hover:text-tsiakkas-light hover:border-tsiakkas-dark
+                    dark:hover:bg-tsiakkas-light dark:hover:text-tsiakkas-dark dark:hover:border-tsiakkas-light
+                    transition-colors duration-300
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
+                "
+                    aria-label="Send commission inquiry email"
+                    title="tsiakkas-photography@gmail.com"
+                >
+                    <HiOutlineMail className="text-lg" />
+                    <span>Commission Inquiry</span>
+                </a>
             </div>
-        </section>)
+        </section>
+    )
 }
 
 function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: PhotoWithCategory) => void }) {
@@ -436,6 +429,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
             </div>
             <div id="top" className="relative flex flex-col gap-8">
 
+                {/* {commissionInfo()} */}
+
                 {MyWords({ text: "My work, in my own shots", className: "mt-12 mb-8" })}
 
                 <nav className="flex flex-wrap gap-3 justify-start" aria-label="Photo categories filter">
@@ -469,8 +464,6 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         </div>
                     ))}
                 </div>
-
-                {/* {commissionInfo()} */}
 
                 <div className="text-center text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
                     <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas.</p>
