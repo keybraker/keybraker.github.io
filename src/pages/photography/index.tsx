@@ -8,7 +8,7 @@ import { MdInfo } from "@react-icons/all-files/md/MdInfo";
 import { HiOutlineEye } from "@react-icons/all-files/hi/HiOutlineEye";
 import { HiOutlineEyeOff } from "@react-icons/all-files/hi/HiOutlineEyeOff";
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import fs from 'fs';
 import path from 'path';
 
@@ -33,16 +33,13 @@ type PhotoWithCategory = Photo & { category: string; orientation: 'portrait' | '
 function applyLSBSteganography(imageData: ImageData, message: string): ImageData {
     const data = imageData.data;
 
-    // Convert message to binary
     const messageBinary = message.split('').map(char =>
         char.charCodeAt(0).toString(2).padStart(8, '0')
     ).join('');
 
-    // Add header: magic number (11111111) + message length (16 bits)
     const header = "11111111" + messageBinary.length.toString(2).padStart(16, '0');
     const fullBinary = header + messageBinary;
 
-    // Embed binary data into LSB of red channel pixels
     let bitIndex = 0;
     for (let i = 0; i < data.length && bitIndex < fullBinary.length; i += 4) {
         if (bitIndex < fullBinary.length) {
@@ -113,19 +110,15 @@ async function createWatermarkedImage(
         img.src = imageSrc;
     });
 
-    // Set canvas dimensions
     canvas.width = img.width;
     canvas.height = img.height;
 
-    // Draw original image
     ctx.drawImage(img, 0, 0);
 
-    // Apply LSB steganography
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const watermarkedData = applyLSBSteganography(imageData, hiddenMessage);
     ctx.putImageData(watermarkedData, 0, 0);
 
-    // Apply visible watermark
     applyVisibleWatermark(ctx, canvas, visibleText);
 
     return canvas;
@@ -137,18 +130,15 @@ async function createWatermarkedImage(
  */
 async function downloadImageWithWatermark(photo: Photo) {
     try {
-        // Create watermark messages
         const hiddenMessage = `© ${new Date().getFullYear()} Ioannis Tsiakkas. All rights reserved. Original photo: ${photo.caption}`;
         const visibleText = 'Ioannis Tsiakkas';
 
-        // Load the original image and apply watermarks
         const canvas = await createWatermarkedImage(
             photo.originalImage,
             hiddenMessage,
             visibleText
         );
 
-        // Convert canvas to blob and download
         canvas.toBlob((blob) => {
             if (!blob) {
                 console.error('Failed to create blob from canvas');
@@ -251,7 +241,6 @@ export async function getStaticProps() {
     const photosDir = path.join(process.cwd(), 'public', 'photos');
     const watermarkedDir = path.join(process.cwd(), 'public', 'photos-watermarked');
 
-    // Read original photos directory (JPG files)
     const files = fs.readdirSync(photosDir).filter(file =>
         file.endsWith('.jpg') || file.endsWith('.JPG') || file.endsWith('.jpeg') || file.endsWith('.JPEG')
     );
@@ -264,12 +253,10 @@ export async function getStaticProps() {
         const location = parts.pop()!.replace(/_/g, ' ');
         const title = parts.join('-').replace(/_/g, ' ');
 
-        // Check if watermarked version exists (PNG format)
         const watermarkedFile = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '.png');
         const watermarkedPath = path.join(watermarkedDir, watermarkedFile);
         const useWatermarked = fs.existsSync(watermarkedPath);
 
-        // Read EXIF data from original JPG
         const buffer = fs.readFileSync(path.join(photosDir, file));
         let settings = '';
         try {
@@ -327,6 +314,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const [isZoomed, setIsZoomed] = useState(false);
     const [showInfo, setShowInfo] = useState(true);
     const [showShortcuts, setShowShortcuts] = useState(false);
+    const hashCheckedRef = useRef(false);
 
     const close = useCallback(() => {
         setActive(null);
@@ -396,9 +384,24 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         if (hash.startsWith('#photo-')) {
             const id = parseInt(hash.replace('#photo-', ''), 10);
             const found = allPhotos.find(p => p.id === id);
-            if (found) setActive(found);
+            if (found) {
+                setActive(found);
+                hashCheckedRef.current = true;
+            }
         }
     }, [allPhotos]);
+
+    // Check hash on initial mount - this runs only once
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        if (hashCheckedRef.current) return; // Already checked
+
+        const hash = window.location.hash;
+        if (hash.startsWith('#photo-')) {
+            // Hash is present, check again when allPhotos is loaded
+            // by triggering the above effect
+        }
+    }, []);
 
     useEffect(() => {
         if (active && !filtered.some(p => p.id === active.id)) {
@@ -543,20 +546,57 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const [touchCurrentX, setTouchCurrentX] = useState<number | null>(null);
+    const [zoomLevel, setZoomLevel] = useState(100);
     const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
     const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
     const [isImageLoading, setIsImageLoading] = useState(true);
+    const [touchDistance, setTouchDistance] = useState<number | null>(null);
+    const imageContainerRef = useRef<HTMLDivElement>(null);
 
-    const onTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
+    const onTouchStart = (e: React.TouchEvent) => {
+        if (e.touches.length === 1) {
+            setTouchStartX(e.touches[0].clientX);
+        } else if (e.touches.length === 2) {
+            // Pinch zoom start
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            setTouchDistance(Math.sqrt(dx * dx + dy * dy));
+        }
+    };
+
     const onTouchMove = (e: React.TouchEvent) => {
-        if (touchStartX != null) {
+        if (e.touches.length === 2 && touchDistance !== null) {
+            // Pinch zoom in progress
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            const newDistance = Math.sqrt(dx * dx + dy * dy);
+            const ratio = newDistance / touchDistance;
+
+            // Calculate midpoint for zoom origin
+            const midX = ((e.touches[0].clientX + e.touches[1].clientX) / 2);
+            const midY = ((e.touches[0].clientY + e.touches[1].clientY) / 2);
+
+            if (imageContainerRef.current) {
+                const rect = imageContainerRef.current.getBoundingClientRect();
+                const x = ((midX - rect.left) / rect.width) * 100;
+                const y = ((midY - rect.top) / rect.height) * 100;
+                setZoomOrigin({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
+            }
+
+            setZoomLevel(prev => Math.max(100, Math.min(300, prev * ratio)));
+            setTouchDistance(newDistance);
+        } else if (touchStartX != null && e.touches.length === 1) {
             setTouchCurrentX(e.touches[0].clientX);
         }
     };
+
     const onTouchEnd = (e: React.TouchEvent) => {
+        if (e.touches.length < 2) {
+            setTouchDistance(null);
+        }
         if (touchStartX == null) return;
         const delta = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(delta) > 60) {
+        if (Math.abs(delta) > 60 && zoomLevel === 100) {
             if (delta > 0) goPrev(); else goNext();
         }
         setTouchStartX(null);
@@ -565,12 +605,22 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 
     const swipeTranslate = touchStartX && touchCurrentX ? touchCurrentX - touchStartX : 0;
 
-    const handleZoomClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        setZoomOrigin({ x, y });
-        setIsZoomed(!isZoomed);
+    const handleImageClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.button === 0) {
+            e.preventDefault();
+            const rect = imageContainerRef.current?.getBoundingClientRect();
+            if (rect) {
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                setZoomOrigin({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
+            }
+            setZoomLevel(prev => Math.min(prev + 50, 300));
+        }
+    };
+
+    const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setZoomLevel(prev => Math.max(100, prev - 50));
     };
 
     useEffect(() => {
@@ -583,11 +633,25 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                 e.preventDefault();
                 setShowShortcuts(!showShortcuts);
             }
+            if (e.key === '+' || e.key === '=') {
+                e.preventDefault();
+                setZoomLevel(prev => Math.min(prev + 50, 300));
+            }
+            if (e.key === '-' || e.key === '_') {
+                e.preventDefault();
+                setZoomLevel(prev => Math.max(100, prev - 50));
+            }
         };
 
         document.addEventListener('keydown', handleKeyDown);
         return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [showInfo, showShortcuts, setShowInfo, setShowShortcuts]);
+    }, [showInfo, showShortcuts, setShowInfo, setShowShortcuts, active]);
+
+    useEffect(() => {
+        // Reset zoom when active image changes
+        setZoomLevel(100);
+        setZoomOrigin({ x: 50, y: 50 });
+    }, [active]);
 
     return (
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
@@ -604,8 +668,16 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                         onTouchMove={onTouchMove}
                         onTouchEnd={onTouchEnd}
                     >
-                        <div className={`relative transition-transform duration-300 border border-white/70 ${isZoomed ? 'cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`} style={{ transform: isZoomed ? 'scale(2)' : 'scale(1)', transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }} onClick={handleZoomClick}>
-                            {/* Loading skeleton */}
+                    <div
+                        ref={imageContainerRef}
+                        className={`relative transition-transform duration-300 border border-white/70 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+                        style={{
+                            transform: `scale(${zoomLevel / 100})`,
+                            transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                        }}
+                        onClick={handleImageClick}
+                        onContextMenu={handleContextMenu}
+                    >
                             {isImageLoading && (
                                 <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
                             )}
@@ -636,7 +708,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                         </div>
                     </div>
                 </div>
-                {/* Info Sidebar - Toggleable */}
+
                 {showInfo && (
                     <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
                         {/* Image Name */}
@@ -673,7 +745,6 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                 )}
             </div>
 
-            {/* Keyboard Shortcuts Modal */}
             {showShortcuts && (
                 <div
                     className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -705,8 +776,16 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Close viewer</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Click image</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom in/out</span>
+                                <span>Left Click / + Key</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom in</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                <span>Right Click / - Key</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom out</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                <span>Pinch (mobile)</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
                                 <span>Swipe (mobile)</span>
@@ -725,7 +804,6 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                 </div>
             )}
 
-            {/* Fixed Navigation Buttons Container - Always at Bottom */}
             <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 z-50" onClick={(e) => e.stopPropagation()}>
                 <button
                     onClick={(e) => { e.stopPropagation(); goPrev(); }}
