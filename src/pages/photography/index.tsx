@@ -147,12 +147,12 @@ async function downloadImageWithWatermark(photo: Photo) {
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `${photo.caption.replace(/\s+/g, '_')}-Ioannis_Tsiakkas.png`;
+            link.download = `${photo.caption.replace(/\s+/g, '_')}-Ioannis_Tsiakkas.jpg`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
-        }, 'image/png');
+        }, 'image/jpeg', 0.85);
     } catch (error) {
         console.error('Failed to download image with watermark:', error);
     }
@@ -472,9 +472,10 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
 
                 {/* {commissionInfo()} */}
 
-                <div className="text-start text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
-                    <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas. They may not be copied, redistributed, or used in any form, including for any commercial purpose, without explicit written permission.</p>
-                    <p>Photographs may be downloaded and used solely for personal purposes, such as personal wallpapers.</p>
+                <div className="text-center text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
+                    <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas.</p>
+                    <p>They MAY BE copied, redistributed, or used in any form, apart from any commercial purpose, without explicit written permission.</p>
+                    <p>For full resolution of images please contact me at <a href="mailto:iantsiakkas@gmail.com" className="underline hover:opacity-80 transition-opacity">here</a>.</p>
                 </div>
             </div>
 
@@ -668,16 +669,16 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                         onTouchMove={onTouchMove}
                         onTouchEnd={onTouchEnd}
                     >
-                    <div
-                        ref={imageContainerRef}
-                        className={`relative transition-transform duration-300 border border-white/70 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
-                        style={{
-                            transform: `scale(${zoomLevel / 100})`,
-                            transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
-                        }}
-                        onClick={handleImageClick}
-                        onContextMenu={handleContextMenu}
-                    >
+                        <div
+                            ref={imageContainerRef}
+                            className={`relative transition-transform duration-300 border border-white/70 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+                            style={{
+                                transform: `scale(${zoomLevel / 100})`,
+                                transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                            }}
+                            onClick={handleImageClick}
+                            onContextMenu={handleContextMenu}
+                        >
                             {isImageLoading && (
                                 <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
                             )}
