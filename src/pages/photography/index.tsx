@@ -160,36 +160,13 @@ async function downloadImageWithWatermark(photo: Photo) {
 
 function commissionInfo() {
     return (
-        <section aria-labelledby="contact-heading" className="w-full py-12 text-center">
+        <section aria-labelledby="contact-heading" className="w-full text-start">
             <div className="flex flex-col gap-6">
-                <h2 className="text-2xl md:text-3xl font-light tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light">
-                    Commissioned Works
-                </h2>
-
-                <div className="flex flex-col gap-4 text-base md:text-lg leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light">
-                    <p>
-                        Specializing in products, editorial narratives, and brand storytelling through the lens of artistry.
-                    </p>
-                    <p>Let&apos;s collaborate to create something truly extraordinary.</p>
+                {MyWords({ text: "Commissioned Works" })}
+                <div className="flex flex-col gap-0 text-base md:text-lg leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light">
+                    <p>Available for event photography, product shoots, and commercial projects, get in touch to discuss your photography needs.</p>
+                    <p>For inquiries and bookings, please contact me <a href="mailto:iantsiakkas@gmail.com" className="underline hover:opacity-80 transition-opacity">here</a>.</p>
                 </div>
-
-                <a
-                    href="mailto:tsiakkas-photography@gmail.com"
-                    className="
-                    inline-flex items-center gap-3 px-6 py-3 text-sm uppercase tracking-wide rounded-sm
-                    border border-tsiakkas-dark/30 dark:border-tsiakkas-light/30
-                    text-tsiakkas-dark dark:text-tsiakkas-light
-                    hover:bg-tsiakkas-dark hover:text-tsiakkas-light hover:border-tsiakkas-dark
-                    dark:hover:bg-tsiakkas-light dark:hover:text-tsiakkas-dark dark:hover:border-tsiakkas-light
-                    transition-colors duration-300
-                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
-                "
-                    aria-label="Send commission inquiry email"
-                    title="tsiakkas-photography@gmail.com"
-                >
-                    <HiOutlineMail className="text-lg" />
-                    <span>Commission Inquiry</span>
-                </a>
             </div>
         </section>
     )
@@ -304,6 +281,7 @@ export async function getStaticProps() {
 export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const [active, setActive] = useState<PhotoWithCategory | null>(null);
     const [filter, setFilter] = useState<string>("All");
+    const [showCommissioned, setShowCommissioned] = useState(false);
     const [isZoomed, setIsZoomed] = useState(false);
     const [showInfo, setShowInfo] = useState(true);
     const [showShortcuts, setShowShortcuts] = useState(false);
@@ -343,7 +321,14 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         [sections]
     );
     const allPhotos: PhotoWithCategory[] = useMemo(() => allPhotoObjects, [allPhotoObjects]);
-    const filtered = filter === "All" ? allPhotos : allPhotos.filter(p => p.category === filter);
+
+    const filtered = useMemo(() => {
+        if (showCommissioned) {
+            return allPhotos.filter(p => p.caption.startsWith('com-'));
+        }
+        const regularPhotos = allPhotos.filter(p => !p.caption.startsWith('com-'));
+        return filter === "All" ? regularPhotos : regularPhotos.filter(p => p.category === filter);
+    }, [allPhotos, filter, showCommissioned]);
     const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
     const hasPrev = activeIndex > 0;
     const hasNext = activeIndex >= 0 && activeIndex < filtered.length - 1;
@@ -400,7 +385,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         if (active && !filtered.some(p => p.id === active.id)) {
             setActive(null);
         }
-    }, [filter, active, filtered]);
+    }, [filter, active, filtered, showCommissioned]);
 
     useEffect(() => {
         function onKey(e: KeyboardEvent) {
@@ -429,27 +414,42 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
             </div>
             <div id="top" className="relative flex flex-col gap-8">
 
-                {/* {commissionInfo()} */}
+                <div className="mt-12 mb-8">
+                    {showCommissioned ? commissionInfo() : MyWords({ text: "My work, in my own shots" })}
+                </div>
 
-                {MyWords({ text: "My work, in my own shots", className: "mt-12 mb-8" })}
+                <div className="flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
+                    <nav className="flex flex-wrap gap-3 justify-start">
+                        {["All", ...sections.map(s => s.title)].map(cat => {
+                            const activeFilter = !showCommissioned && filter === cat;
+                            return (
+                                <button
+                                    key={cat}
+                                    aria-pressed={activeFilter}
+                                    onClick={() => {
+                                        setShowCommissioned(false);
+                                        setFilter(cat);
+                                    }}
+                                    className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeFilter
+                                        ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
+                                        : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'} `}
+                                >
+                                    {cat}
+                                </button>
+                            );
+                        })}
+                    </nav>
 
-                <nav className="flex flex-wrap gap-3 justify-start" aria-label="Photo categories filter">
-                    {["All", ...sections.map(s => s.title)].map(cat => {
-                        const activeFilter = filter === cat;
-                        return (
-                            <button
-                                key={cat}
-                                aria-pressed={activeFilter}
-                                onClick={() => setFilter(cat)}
-                                className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeFilter
-                                    ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
-                                    : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'} `}
-                            >
-                                {cat}
-                            </button>
-                        );
-                    })}
-                </nav>
+                    <button
+                        aria-pressed={showCommissioned}
+                        onClick={() => setShowCommissioned(!showCommissioned)}
+                        className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 flex-shrink-0 ${showCommissioned
+                            ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
+                            : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'} `}
+                    >
+                        Commissioned Work
+                    </button>
+                </div>
 
                 <div className="grid gap-6 w-full auto-rows-[300px] grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
                     {filtered.map(p => (
@@ -706,7 +706,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                 {showInfo && (
                     <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
                         {/* Image Name */}
-                        <h3 className="text-xl font-semibold leading-relaxed">{active.caption}</h3>
+                        <h3 className="text-xl font-semibold leading-relaxed">{active.caption.startsWith('com-') ? active.caption.slice(4) : active.caption}</h3>
 
                         {/* Location */}
                         <div className="text-base italic opacity-90">
