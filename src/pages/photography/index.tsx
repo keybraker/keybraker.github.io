@@ -761,15 +761,10 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             onClick={(e) => e.stopPropagation()}
                         >
                             <aside className="flex flex-col gap-3 text-tsiakkas-light max-w-full mx-auto">
-                                {/* Image Name */}
                                 <h3 className="text-base font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
-
-                                {/* Location */}
                                 <div className="text-sm opacity-90">
                                     {active.location}, {active.country}
                                 </div>
-
-                                {/* Camera Settings in Pills */}
                                 {active.settings && (
                                     <div className="flex flex-wrap gap-2">
                                         {active.settings.split(' · ').map((setting, index) => (
