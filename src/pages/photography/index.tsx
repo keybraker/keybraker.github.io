@@ -257,7 +257,7 @@ export async function getStaticProps() {
             // ignore - EXIF might not be available
         }
 
-        const photoPath = isCommissioned ? `/photos/commissioned/${file}` : `/photos/${file}`;
+        const photoPath = isCommissioned ? `/photos/commissioned/${file}` : `/photos/personal/${file}`;
         const watermarkedPhotoPath = isCommissioned ? `/photos-watermarked/commissioned/${watermarkedFile}` : `/photos-watermarked/${watermarkedFile}`;
 
         return {
