@@ -6,6 +6,7 @@ import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
 import { MdInfo } from "@react-icons/all-files/md/MdInfo";
+import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
 import fs from 'fs';
 import Image from "next/image";
 import path from 'path';
@@ -300,20 +301,35 @@ export async function getStaticProps() {
 }
 
 export default function PhotographyPage({ sections }: { sections: Section[] }) {
+    const [isMobile, setIsMobile] = useState(false);
     const [active, setActive] = useState<PhotoWithCategory | null>(null);
     const [filter, setFilter] = useState<string>("All");
     const [showCommissioned, setShowCommissioned] = useState(false);
     const [isZoomed, setIsZoomed] = useState(false);
-    const [showInfo, setShowInfo] = useState(true);
+    const [showInfo, setShowInfo] = useState(!isMobile);
     const [showShortcuts, setShowShortcuts] = useState(false);
     const hashCheckedRef = useRef(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Set showInfo based on mobile state after it's determined
+    useEffect(() => {
+        setShowInfo(!isMobile);
+    }, [isMobile]);
 
     const close = useCallback(() => {
         setActive(null);
         setIsZoomed(false);
-        setShowInfo(true);
+        setShowInfo(!isMobile);
         setShowShortcuts(false);
-    }, []);
+    }, [isMobile]);
 
     const allPhotoObjects: PhotoWithCategory[] = useMemo(() =>
         sections.flatMap(s => {
@@ -512,14 +528,25 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                             >
                                 ?
                             </button>
-                            <button
-                                onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
-                                aria-label={showInfo ? "Hide photo info" : "Show photo info"}
-                                className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
-                                title="Press 'I' to toggle (I key)"
-                            >
-                                {showInfo ? <HiOutlineEyeOff size={20} /> : <HiOutlineEye size={20} />}
-                            </button>
+                            {isMobile ? (
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
+                                    aria-label={showInfo ? "Hide photo info" : "Show photo info"}
+                                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
+                                    title="Press 'I' to toggle (I key)"
+                                >
+                                    {showInfo ? <MdInfo size={20} /> : <MdInfoOutline size={20} />}
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
+                                    aria-label={showInfo ? "Hide photo info" : "Show photo info"}
+                                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
+                                    title="Press 'I' to toggle (I key)"
+                                >
+                                    {showInfo ? <MdInfo size={20} /> : <MdInfoOutline size={20} />}
+                                </button>
+                            )}
                             <button
                                 onClick={() => downloadImageWithWatermark(active)}
                                 aria-label="Download image with watermark"
@@ -549,6 +576,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         setShowInfo={setShowInfo}
                         showShortcuts={showShortcuts}
                         setShowShortcuts={setShowShortcuts}
+                        isMobile={isMobile}
                     />
                 </div>
             )}
@@ -556,8 +584,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     );
 }
 
-function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed, showInfo, setShowInfo, showShortcuts, setShowShortcuts }: {
-    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void; showInfo: boolean; setShowInfo: (v: boolean) => void; showShortcuts: boolean; setShowShortcuts: (v: boolean) => void;
+function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed, showInfo, setShowInfo, showShortcuts, setShowShortcuts, isMobile }: {
+    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void; showInfo: boolean; setShowInfo: (v: boolean) => void; showShortcuts: boolean; setShowShortcuts: (v: boolean) => void; isMobile: boolean;
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const [touchCurrentX, setTouchCurrentX] = useState<number | null>(null);
@@ -670,61 +698,160 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 
     return (
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
-            <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
-                <div className="flex-1 flex items-center justify-center overflow-hidden">
-                    {/* Image Container */}
-                    <div
-                        className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`}
-                        style={{
-                            transform: `translateX(${swipeTranslate}px)`,
-                            transitionDuration: touchStartX ? '0ms' : '500ms'
-                        }}
-                        onTouchStart={onTouchStart}
-                        onTouchMove={onTouchMove}
-                        onTouchEnd={onTouchEnd}
-                    >
+            {isMobile ? (
+                // Mobile layout: image, info overlay, buttons stacked vertically
+                <div className="w-full flex flex-col items-center justify-center gap-4" onClick={(e) => e.stopPropagation()}>
+                    {/* Image Container - Smaller on mobile */}
+                    <div className="w-full flex items-center justify-center overflow-hidden">
                         <div
-                            ref={imageContainerRef}
-                            className={`relative transition-transform duration-300 border border-white/70 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+                            className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(70vh-8rem)]' : ''}`}
                             style={{
-                                transform: `scale(${zoomLevel / 100})`,
-                                transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                                transform: `translateX(${swipeTranslate}px)`,
+                                transitionDuration: touchStartX ? '0ms' : '500ms'
                             }}
-                            onClick={handleImageClick}
-                            onContextMenu={handleContextMenu}
+                            onTouchStart={onTouchStart}
+                            onTouchMove={onTouchMove}
+                            onTouchEnd={onTouchEnd}
                         >
-                            {isImageLoading && (
-                                <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
-                            )}
-                            <Image
-                                src={active.image}
-                                alt={active.caption}
-                                width={1600}
-                                height={1200}
-                                placeholder="blur"
-                                blurDataURL={BLUR_DATA_URL}
-                                className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
-                                priority
-                                onContextMenu={(e) => e.preventDefault()}
-                                draggable={false}
-                                unoptimized
-                                onLoadingComplete={() => setIsImageLoading(false)}
-                                onLoad={(e) => {
-                                    const img = e.target as HTMLImageElement;
-                                    setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-                                    setIsImageLoading(false);
-                                }}
-                            />
                             <div
-                                className="absolute inset-0 bg-transparent"
-                                onContextMenu={(e) => e.preventDefault()}
-                                style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
-                            />
+                                ref={imageContainerRef}
+                                className={`relative transition-transform duration-300 border border-white/70 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+                                style={{
+                                    transform: `scale(${zoomLevel / 100})`,
+                                    transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                                }}
+                                onClick={handleImageClick}
+                                onContextMenu={handleContextMenu}
+                            >
+                                {isImageLoading && (
+                                    <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
+                                )}
+                                <Image
+                                    src={active.image}
+                                    alt={active.caption}
+                                    width={1600}
+                                    height={1200}
+                                    placeholder="blur"
+                                    blurDataURL={BLUR_DATA_URL}
+                                    className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                    priority
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    draggable={false}
+                                    unoptimized
+                                    onLoadingComplete={() => setIsImageLoading(false)}
+                                    onLoad={(e) => {
+                                        const img = e.target as HTMLImageElement;
+                                        setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+                                        setIsImageLoading(false);
+                                    }}
+                                />
+                                <div
+                                    className="absolute inset-0 bg-transparent"
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {showInfo && (
+                    {/* Info Overlay - Between image and buttons on mobile */}
+                    {showInfo && (
+                        <div
+                            className="w-full p-4"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <aside className="flex flex-col gap-3 text-tsiakkas-light max-w-full mx-auto">
+                                {/* Image Name */}
+                                <h3 className="text-base font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
+
+                                {/* Location */}
+                                <div className="text-sm opacity-90">
+                                    {active.location}, {active.country}
+                                </div>
+
+                                {/* Camera Settings in Pills */}
+                                {active.settings && (
+                                    <div className="flex flex-wrap gap-2">
+                                        {active.settings.split(' · ').map((setting, index) => (
+                                            <span
+                                                key={index}
+                                                className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
+                                            >
+                                                {setting}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {/* Image Dimensions */}
+                                {imageDimensions && (
+                                    <div className="text-xs font-mono opacity-80">
+                                        {imageDimensions.width} × {imageDimensions.height} px
+                                    </div>
+                                )}
+
+                                <div className="mt-1 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
+                            </aside>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                // Desktop layout: original side-by-side layout
+                <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex-1 flex items-center justify-center overflow-hidden">
+                        {/* Image Container */}
+                        <div
+                            className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`}
+                            style={{
+                                transform: `translateX(${swipeTranslate}px)`,
+                                transitionDuration: touchStartX ? '0ms' : '500ms'
+                            }}
+                            onTouchStart={onTouchStart}
+                            onTouchMove={onTouchMove}
+                            onTouchEnd={onTouchEnd}
+                        >
+                            <div
+                                ref={imageContainerRef}
+                                className={`relative transition-transform duration-300 border border-white/70 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+                                style={{
+                                    transform: `scale(${zoomLevel / 100})`,
+                                    transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                                }}
+                                onClick={handleImageClick}
+                                onContextMenu={handleContextMenu}
+                            >
+                                {isImageLoading && (
+                                    <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
+                                )}
+                                <Image
+                                    src={active.image}
+                                    alt={active.caption}
+                                    width={1600}
+                                    height={1200}
+                                    placeholder="blur"
+                                    blurDataURL={BLUR_DATA_URL}
+                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
+                                    priority
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    draggable={false}
+                                    unoptimized
+                                    onLoadingComplete={() => setIsImageLoading(false)}
+                                    onLoad={(e) => {
+                                        const img = e.target as HTMLImageElement;
+                                        setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+                                        setIsImageLoading(false);
+                                    }}
+                                />
+                                <div
+                                    className="absolute inset-0 bg-transparent"
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {showInfo && !isMobile && (
                     <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
                         {/* Image Name */}
                         <h3 className="text-xl font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
@@ -757,9 +884,10 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 
                         <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
                     </aside>
-                )}
-            </div>
-
+                    )}
+                </div>
+            )}
+            
             {showShortcuts && (
                 <div
                     className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
