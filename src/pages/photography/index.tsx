@@ -210,7 +210,7 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
 }
 
 export async function getStaticProps() {
-    const photosDir = path.join(process.cwd(), 'public', 'photos');
+    const photosDir = path.join(process.cwd(), 'public', 'photos', 'personal');
     const commissionedDir = path.join(process.cwd(), 'public', 'photos', 'commissioned');
     const watermarkedDir = path.join(process.cwd(), 'public', 'photos-watermarked');
 
@@ -237,7 +237,7 @@ export async function getStaticProps() {
         const title = parts.join('-').replace(/_/g, ' ');
 
         const watermarkedFile = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '.png');
-        const watermarkedPath = path.join(watermarkedDir, isCommissioned ? `commissioned/${watermarkedFile}` : watermarkedFile);
+        const watermarkedPath = path.join(watermarkedDir, isCommissioned ? `commissioned/${watermarkedFile}` : `personal/${watermarkedFile}`);
         const useWatermarked = fs.existsSync(watermarkedPath);
 
         const buffer = fs.readFileSync(path.join(dirPath, file));
@@ -258,7 +258,7 @@ export async function getStaticProps() {
         }
 
         const photoPath = isCommissioned ? `/photos/commissioned/${file}` : `/photos/personal/${file}`;
-        const watermarkedPhotoPath = isCommissioned ? `/photos-watermarked/commissioned/${watermarkedFile}` : `/photos-watermarked/${watermarkedFile}`;
+        const watermarkedPhotoPath = isCommissioned ? `/photos-watermarked/commissioned/${watermarkedFile}` : `/photos-watermarked/personal/${watermarkedFile}`;
 
         return {
             id: index + 1,
