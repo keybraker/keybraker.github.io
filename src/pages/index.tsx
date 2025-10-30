@@ -136,7 +136,7 @@ export default function Home() {
           <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <ProjectsPage />
-              {MyWords({ text: "My work, in my own words", className: "mt-12" })}
+              {MyWords({ text: "My work, in my own code", className: "mt-12" })}
               <p className="w-full flex flex-col items-center mt-6 text-md font-semibold gap-[6px]">
                 <span>Find all my work at</span>
                 <a

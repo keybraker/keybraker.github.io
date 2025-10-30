@@ -87,7 +87,7 @@ export default function Email() {
         </p>
 
         <p className="mt-2 whitespace-pre-line">
-          I am also very much into photography. You can check out some of my work at
+          P.S: I am also very much into photography. You can check out some of my work at
           {" "}
           <Link
             href="/photography"
