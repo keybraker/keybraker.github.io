@@ -12,7 +12,7 @@ const title = "Ioannis Tsiakkas";
 export const description =
   "I'm a software engineer with professional experience in building web applications. \
   My main focus is on the backend client (where the logic is), infrastructure, and system architecture. \
-  I have always found UX/UI fascinating and am thus always working on a side website. \
+  I have always found UI/UX fascinating and am thus always working on a side website. \
   I am passionate about low-level programming and building things that solve my own and others' problems.";
 
 const categories: CategoryProps[] = [
