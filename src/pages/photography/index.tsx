@@ -814,7 +814,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                 </div>
             ) : (
                 // Desktop layout: original side-by-side layout
-                <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-start md:items-stretch gap-8" onClick={(e) => e.stopPropagation()}>
+                <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-center md:items-center gap-8" onClick={(e) => e.stopPropagation()}>
                     <div className="flex-1 flex items-center justify-center overflow-hidden">
                         {/* Image Container */}
                         <div
