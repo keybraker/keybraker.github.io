@@ -691,6 +691,28 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
     }, [showInfo, showShortcuts, setShowInfo, setShowShortcuts, active]);
 
     useEffect(() => {
+        const handleWheel = (e: WheelEvent) => {
+            if (!isMobile && imageContainerRef.current?.contains(e.target as Node)) {
+                e.preventDefault();
+
+                const rect = imageContainerRef.current.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                setZoomOrigin({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
+
+                if (e.deltaY < 0) {
+                    setZoomLevel(prev => Math.min(prev + 25, 300));
+                } else {
+                    setZoomLevel(prev => Math.max(100, prev - 25));
+                }
+            }
+        };
+
+        document.addEventListener('wheel', handleWheel, { passive: false });
+        return () => document.removeEventListener('wheel', handleWheel);
+    }, [isMobile]);
+
+    useEffect(() => {
         // Reset zoom when active image changes
         setZoomLevel(100);
         setZoomOrigin({ x: 50, y: 50 });
@@ -845,44 +867,44 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             </div>
                         </div>
                     </div>
-                    
+
                     {showInfo && !isMobile && (
-                    <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
-                        {/* Image Name */}
-                        <h3 className="text-xl font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
+                        <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
+                            {/* Image Name */}
+                            <h3 className="text-xl font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
 
-                        {/* Location */}
-                        <div className="text-base opacity-90">
-                            {active.location}, {active.country}
-                        </div>
-
-                        {/* Camera Settings in Pills */}
-                        {active.settings && (
-                            <div className="flex flex-wrap gap-2">
-                                {active.settings.split(' · ').map((setting, index) => (
-                                    <span
-                                        key={index}
-                                        className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                                    >
-                                        {setting}
-                                    </span>
-                                ))}
+                            {/* Location */}
+                            <div className="text-base opacity-90">
+                                {active.location}, {active.country}
                             </div>
-                        )}
 
-                        {/* Image Dimensions */}
-                        {imageDimensions && (
-                            <div className="text-sm font-mono opacity-80">
-                                {imageDimensions.width} × {imageDimensions.height} px
-                            </div>
-                        )}
+                            {/* Camera Settings in Pills */}
+                            {active.settings && (
+                                <div className="flex flex-wrap gap-2">
+                                    {active.settings.split(' · ').map((setting, index) => (
+                                        <span
+                                            key={index}
+                                            className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
+                                        >
+                                            {setting}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
 
-                        <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
-                    </aside>
+                            {/* Image Dimensions */}
+                            {imageDimensions && (
+                                <div className="text-sm font-mono opacity-80">
+                                    {imageDimensions.width} × {imageDimensions.height} px
+                                </div>
+                            )}
+
+                            <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
+                        </aside>
                     )}
                 </div>
             )}
-            
+
             {showShortcuts && (
                 <div
                     className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
