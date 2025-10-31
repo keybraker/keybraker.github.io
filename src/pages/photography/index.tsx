@@ -479,13 +479,14 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                 <meta name="description" content="A curated photography showcase." />
                 <meta name="robots" content="index,follow" />
             </div>
-            <div id="top" className="relative flex flex-col gap-8">
 
+            <div id="top" className="relative flex flex-col gap-8">
                 <div className="mt-12 mb-8">
                     {showCommissioned ? commissionInfo() : MyWords({ text: "My work, in my own shots" })}
                 </div>
 
-                <div className="flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
+                <div className="sm:sticky sm:top-[70px] sm:z-30 bg-tsiakkas-light dark:bg-tsiakkas-dark py-4 px-6 -mx-4">
+                    <div className="flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
                     <nav className="flex flex-wrap gap-3 justify-start">
                         {["All", ...sections.map(s => s.title)].map(cat => {
                             const activeFilter = !showCommissioned && filter === cat;
@@ -516,6 +517,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                     >
                         Commissioned Work
                     </button>
+                    </div>
                 </div>
 
                 <div className="grid gap-6 w-full auto-rows-[300px] grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
