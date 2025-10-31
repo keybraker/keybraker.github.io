@@ -202,7 +202,7 @@ function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: Ph
             <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 py-6 text-center
                 bg-black/50 backdrop-blur-[4px] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
                 <div className="text-xl font-light italic tracking-wide text-tsiakkas-light drop-shadow-md">
-                    {photo.location}, {photo.country}
+                    {photo.caption}
                 </div>
             </div>
         </button>
@@ -308,6 +308,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const [isZoomed, setIsZoomed] = useState(false);
     const [showInfo, setShowInfo] = useState(!isMobile);
     const [showShortcuts, setShowShortcuts] = useState(false);
+    const [displayCount, setDisplayCount] = useState(12);
+    const observerTargetRef = useRef<HTMLDivElement>(null);
     const hashCheckedRef = useRef(false);
 
     useEffect(() => {
@@ -442,6 +444,34 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         };
     }, [active, close, goPrev, goNext]);
 
+    // Lazy loading with Intersection Observer
+    useEffect(() => {
+        const currentTarget = observerTargetRef.current;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && displayCount < filtered.length) {
+                    setDisplayCount(prev => Math.min(prev + 12, filtered.length));
+                }
+            },
+            { threshold: 0.1, rootMargin: '200px' }
+        );
+
+        if (currentTarget) {
+            observer.observe(currentTarget);
+        }
+
+        return () => {
+            if (currentTarget) {
+                observer.unobserve(currentTarget);
+            }
+        };
+    }, [filtered.length, displayCount]);
+
+    // Reset display count when filter changes
+    useEffect(() => {
+        setDisplayCount(12);
+    }, [filter, showCommissioned]);
+
     return (
         <main className="w-full h-full">
             <div>
@@ -489,7 +519,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                 </div>
 
                 <div className="grid gap-6 w-full auto-rows-[300px] grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
-                    {filtered.map(p => (
+                    {filtered.slice(0, displayCount).map(p => (
                         <div
                             key={p.id}
                             style={{
@@ -501,6 +531,10 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         </div>
                     ))}
                 </div>
+
+                {displayCount < filtered.length && (
+                    <div ref={observerTargetRef} className="h-4 w-full" aria-label="Loading indicator" />
+                )}
 
                 <div className="text-center text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
                     <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas.</p>
