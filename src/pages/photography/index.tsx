@@ -776,7 +776,6 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                         </div>
                     </div>
 
-                    {/* Info Overlay - Between image and buttons on mobile */}
                     {showInfo && (
                         <div
                             className="w-full p-4"
@@ -787,6 +786,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 <div className="text-sm opacity-90">
                                     {active.location}, {active.country}
                                 </div>
+                                <div className="h-px bg-white/20 my-2" />
                                 {active.settings && (
                                     <div className="flex flex-wrap gap-2">
                                         {active.settings.split(' · ').map((setting, index) => (
@@ -797,26 +797,26 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                                 {setting}
                                             </span>
                                         ))}
+                                        {/* <span
+                                            key={'resolution'}
+                                            className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
+                                        >
+                                            {imageDimensions && (
+                                                <div className="text-sm font-mono opacity-80">
+                                                    {imageDimensions.width} × {imageDimensions.height} px
+                                                </div>
+                                            )}
+                                        </span> */}
                                     </div>
                                 )}
-
-                                {/* Image Dimensions */}
-                                {imageDimensions && (
-                                    <div className="text-xs font-mono opacity-80">
-                                        {imageDimensions.width} × {imageDimensions.height} px
-                                    </div>
-                                )}
-
                                 <div className="mt-1 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
                             </aside>
                         </div>
                     )}
                 </div>
             ) : (
-                // Desktop layout: original side-by-side layout
                 <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-center md:items-center gap-8" onClick={(e) => e.stopPropagation()}>
                     <div className="flex-1 flex items-center justify-center overflow-hidden">
-                        {/* Image Container */}
                         <div
                             className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`}
                             style={{
@@ -829,7 +829,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                         >
                             <div
                                 ref={imageContainerRef}
-                                className={`relative transition-transform duration-300 border border-white/70 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+                                className={`relative transition-transform duration-300 border-4 border-white/80 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
                                 style={{
                                     transform: `scale(${zoomLevel / 100})`,
                                     transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
@@ -870,15 +870,12 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 
                     {showInfo && !isMobile && (
                         <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
-                            {/* Image Name */}
                             <h3 className="text-xl font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
-
-                            {/* Location */}
                             <div className="text-base opacity-90">
                                 {active.location}, {active.country}
                             </div>
+                            <div className="h-px bg-white/20 my-2" />
 
-                            {/* Camera Settings in Pills */}
                             {active.settings && (
                                 <div className="flex flex-wrap gap-2">
                                     {active.settings.split(' · ').map((setting, index) => (
@@ -889,16 +886,18 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                             {setting}
                                         </span>
                                     ))}
+                                    <span
+                                        key={'resolution'}
+                                        className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
+                                    >
+                                        {imageDimensions && (
+                                            <div className="text-sm font-mono opacity-80">
+                                                {imageDimensions.width} × {imageDimensions.height} px
+                                            </div>
+                                        )}
+                                    </span>
                                 </div>
                             )}
-
-                            {/* Image Dimensions */}
-                            {imageDimensions && (
-                                <div className="text-sm font-mono opacity-80">
-                                    {imageDimensions.width} × {imageDimensions.height} px
-                                </div>
-                            )}
-
                             <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
                         </aside>
                     )}
@@ -936,11 +935,11 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Close viewer</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Left Click / + Key</span>
+                                <span>Scroll in / Left Click / + Key</span>
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom in</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Right Click / - Key</span>
+                                <span>Scroll out / Right Click / - Key</span>
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom out</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
@@ -952,7 +951,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Navigate</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>I</span>
+                                <span>i</span>
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Toggle info</span>
                             </div>
                             <div className="flex justify-between items-center">
