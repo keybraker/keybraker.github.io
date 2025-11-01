@@ -65,8 +65,8 @@ function applyVisibleWatermark(ctx: CanvasRenderingContext2D, canvas: HTMLCanvas
     const referenceWidth = 1000;
     const fontSize = Math.max(Math.round((canvas.width / referenceWidth) * baseFontSize), 16);
 
-    ctx.font = `bold italic ${fontSize}px "Playfair Display", "Times New Roman", serif`;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.font = `italic ${fontSize}px "Cormorant Garamond", "Didot", "Times New Roman", serif`;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
 
