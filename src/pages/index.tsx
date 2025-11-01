@@ -21,7 +21,7 @@ const categories: CategoryProps[] = [
     description:
       "In my professional career, I have worked in a variety of projects, ranging from web development, API design and implementation to cloud computing and infrastructure. \
     I have worked in both small and large teams, in agile environments, in the frontend and backend.",
-    colour: "bg-verge-purple",
+    colour: "bg-verge-purple/50 dark:bg-verge-purple/75",
   },
   {
     title: "Technical Skills",
@@ -30,7 +30,7 @@ const categories: CategoryProps[] = [
     I have worked with a variety of programming languages, frameworks, and tools, and I am always eager to learn new technologies. \
     I am a team player, and I enjoy working in a team environment. \
     Learning fast is a strong-suit of mine, and I am always looking for new challenges to overcome.",
-    colour: "bg-verge-pink",
+    colour: "bg-verge-pink/50 dark:bg-verge-pink/75",
   },
   {
     title: "Software Design",
@@ -40,7 +40,7 @@ const categories: CategoryProps[] = [
     if not the most important think a software engineer has to do. \
     All of this effort is put in order for the systems I design and build to be performant, \
     extendable and easy to work with and contribute to.",
-    colour: "bg-verge-blue",
+    colour: "bg-verge-blue/50 dark:bg-verge-blue/75",
   },
   {
     title: "Education",
@@ -48,7 +48,7 @@ const categories: CategoryProps[] = [
       "My education has provided me with a strong foundation in computer science, with a focus on software engineering ans sytem architecture. \
     In a demanding academic setting I have learned to work under pressure and to meet deadlines. \
     I have also learned to work in a team environment, and to communicate effectively with my peers.",
-    colour: "bg-verge-orange",
+    colour: "bg-verge-orange/50 dark:bg-verge-orange/75",
   },
   {
     title: "Notable Projects",
@@ -57,7 +57,7 @@ const categories: CategoryProps[] = [
     I find it very important to keep up with the latest trends in technology, and to always be learning; \
     it also does not hurt when you can have an impact on other people\'s lives alogside. \
     Some of my projects are available on my <a href="https://github.com/keybraker" rel="noopener noreferrer" target="_blank" class="hover:underline">github</a>, where I contribute to open source projects, while also creating my own.',
-    colour: "bg-verge-blue",
+    colour: "bg-verge-blue/50 dark:bg-verge-blue/75",
   },
 ];
 

@@ -35,7 +35,7 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mb-12 rounded-[10px] bg-verge-cyan text-tsiakkas-dark p-6 shadow-xl">
+    <section className="mb-12 rounded-[10px] bg-verge-cyan/50 dark:bg-verge-cyan/75 text-tsiakkas-dark p-6 shadow-xl">
       {/* <HeadScene /> */}
       <div className="flex flex-col-reverse sm:flex-row justify-between w-full gap-4">
         <div className="flex flex-col w-full">
