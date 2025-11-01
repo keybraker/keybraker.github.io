@@ -1,12 +1,12 @@
 import MyWords from "@/components/myWords";
 import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
-import { HiOutlineEye } from "@react-icons/all-files/hi/HiOutlineEye";
-import { HiOutlineEyeOff } from "@react-icons/all-files/hi/HiOutlineEyeOff";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
 import { MdInfo } from "@react-icons/all-files/md/MdInfo";
 import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
+import { MdPause } from "@react-icons/all-files/md/MdPause";
+import { MdPlayArrow } from "@react-icons/all-files/md/MdPlayArrow";
 import fs from 'fs';
 import Image from "next/image";
 import path from 'path';
@@ -309,6 +309,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const [showInfo, setShowInfo] = useState(!isMobile);
     const [showShortcuts, setShowShortcuts] = useState(false);
     const [displayCount, setDisplayCount] = useState(12);
+    const [isCarouselMode, setIsCarouselMode] = useState(false);
     const observerTargetRef = useRef<HTMLDivElement>(null);
     const hashCheckedRef = useRef(false);
 
@@ -331,6 +332,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         setIsZoomed(false);
         setShowInfo(!isMobile);
         setShowShortcuts(false);
+        setIsCarouselMode(false);
     }, [isMobile]);
 
     const allPhotoObjects: PhotoWithCategory[] = useMemo(() =>
@@ -583,6 +585,16 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                                     {showInfo ? <MdInfo size={20} /> : <MdInfoOutline size={20} />}
                                 </button>
                             )}
+                            {!isMobile && (
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setIsCarouselMode(!isCarouselMode); }}
+                                    aria-label={isCarouselMode ? "Stop carousel" : "Start carousel"}
+                                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
+                                    title="Auto-play carousel (5 second interval)"
+                                >
+                                    {isCarouselMode ? <MdPause size={20} /> : <MdPlayArrow size={20} />}
+                                </button>
+                            )}
                             <button
                                 onClick={() => downloadImageWithWatermark(active)}
                                 aria-label="Download image with watermark"
@@ -613,6 +625,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                         showShortcuts={showShortcuts}
                         setShowShortcuts={setShowShortcuts}
                         isMobile={isMobile}
+                        isCarouselMode={isCarouselMode}
+                        setIsCarouselMode={setIsCarouselMode}
                     />
                 </div>
             )}
@@ -620,8 +634,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     );
 }
 
-function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed, showInfo, setShowInfo, showShortcuts, setShowShortcuts, isMobile }: {
-    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void; showInfo: boolean; setShowInfo: (v: boolean) => void; showShortcuts: boolean; setShowShortcuts: (v: boolean) => void; isMobile: boolean;
+function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed, showInfo, setShowInfo, showShortcuts, setShowShortcuts, isMobile, isCarouselMode, setIsCarouselMode }: {
+    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void; showInfo: boolean; setShowInfo: (v: boolean) => void; showShortcuts: boolean; setShowShortcuts: (v: boolean) => void; isMobile: boolean; isCarouselMode: boolean; setIsCarouselMode: (v: boolean) => void;
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const [touchCurrentX, setTouchCurrentX] = useState<number | null>(null);
@@ -631,6 +645,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
     const [isImageLoading, setIsImageLoading] = useState(true);
     const [touchDistance, setTouchDistance] = useState<number | null>(null);
     const imageContainerRef = useRef<HTMLDivElement>(null);
+    const carouselIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
     const onTouchStart = (e: React.TouchEvent) => {
         if (e.touches.length === 1) {
@@ -753,6 +768,21 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
         setZoomLevel(100);
         setZoomOrigin({ x: 50, y: 50 });
     }, [active]);
+
+    useEffect(() => {
+        // Handle carousel auto-play on desktop only
+        if (isCarouselMode && !isMobile && hasNext) {
+            carouselIntervalRef.current = setInterval(() => {
+                goNext();
+            }, 5000);
+        }
+
+        return () => {
+            if (carouselIntervalRef.current) {
+                clearInterval(carouselIntervalRef.current);
+            }
+        };
+    }, [isCarouselMode, isMobile, hasNext, goNext]);
 
     return (
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
