@@ -882,7 +882,7 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                                     height={1200}
                                                     placeholder="blur"
                                                     blurDataURL={BLUR_DATA_URL}
-                                                    className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                                    className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none border border-white/40"
                                                     draggable={false}
                                                     onContextMenu={(e) => e.preventDefault()}
                                                 />
@@ -896,7 +896,7 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                                 height={1200}
                                                 placeholder="blur"
                                                 blurDataURL={BLUR_DATA_URL}
-                                                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none border border-white/40"
                                                 draggable={false}
                                                 onContextMenu={(e) => e.preventDefault()}
                                                 onLoad={(e) => {
@@ -914,7 +914,7 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                                     height={1200}
                                                     placeholder="blur"
                                                     blurDataURL={BLUR_DATA_URL}
-                                                    className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                                    className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none border border-white/40"
                                                     draggable={false}
                                                     onContextMenu={(e) => e.preventDefault()}
                                                 />
@@ -930,14 +930,14 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                 >
                                     <div
                                         ref={imageContainerRef}
-                                        className={`relative border border-white/70`}
+                                        className={`relative border border-white/40`}
                                         style={{
                                             transform: `scale(${zoomLevel / 100})`,
                                             transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
                                         }}
                                     >
                                         {isImageLoading && (
-                                            <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
+                                            <div className="absolute inset-0 bg-white/10 animate-pulse" style={{ width: '1600px', height: '1200px' }} />
                                         )}
                                         <Image
                                             src={active.image}
@@ -946,7 +946,7 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                             height={1200}
                                             placeholder="blur"
                                             blurDataURL={BLUR_DATA_URL}
-                                            className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                            className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none border border-white/40"
                                             priority
                                             onContextMenu={(e) => e.preventDefault()}
                                             draggable={false}
@@ -1046,7 +1046,7 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                                     height={1200}
                                                     placeholder="blur"
                                                     blurDataURL={BLUR_DATA_URL}
-                                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
+                                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none border border-white/40"
                                                     draggable={false}
                                                     onContextMenu={(e) => e.preventDefault()}
                                                 />
@@ -1060,7 +1060,7 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                                 height={1200}
                                                 placeholder="blur"
                                                 blurDataURL={BLUR_DATA_URL}
-                                                className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
+                                                className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none border border-white/40"
                                                 draggable={false}
                                                 onContextMenu={(e) => e.preventDefault()}
                                                 onLoad={(e) => {
@@ -1078,7 +1078,7 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                                     height={1200}
                                                     placeholder="blur"
                                                     blurDataURL={BLUR_DATA_URL}
-                                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
+                                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none border border-white/40"
                                                     draggable={false}
                                                     onContextMenu={(e) => e.preventDefault()}
                                                 />
@@ -1110,7 +1110,7 @@ function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext
                                     height={1200}
                                     placeholder="blur"
                                     blurDataURL={BLUR_DATA_URL}
-                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
+                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none border border-white/40"
                                     priority
                                     onContextMenu={(e) => e.preventDefault()}
                                     draggable={false}
