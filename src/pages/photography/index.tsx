@@ -569,7 +569,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                                     onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
                                     aria-label={showInfo ? "Hide photo info" : "Show photo info"}
                                     className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
-                                    title="Press 'I' to toggle (I key)"
+                                    title="Toggle info (I)"
                                 >
                                     {showInfo ? <MdInfo size={20} /> : <MdInfoOutline size={20} />}
                                 </button>
@@ -578,7 +578,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                                     onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
                                     aria-label={showInfo ? "Hide photo info" : "Show photo info"}
                                     className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
-                                    title="Press 'I' to toggle (I key)"
+                                    title="Toggle info (I)"
                                 >
                                     {showInfo ? <MdInfo size={20} /> : <MdInfoOutline size={20} />}
                                 </button>
@@ -643,6 +643,10 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
     const [isImageLoading, setIsImageLoading] = useState(true);
     const [touchDistance, setTouchDistance] = useState<number | null>(null);
     const imageContainerRef = useRef<HTMLDivElement>(null);
+    const viewportRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null);
+    const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
     const carouselIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
     const onTouchStart = (e: React.TouchEvent) => {
@@ -697,23 +701,50 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 
     const swipeTranslate = touchStartX && touchCurrentX ? touchCurrentX - touchStartX : 0;
 
-    const handleImageClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.button === 0) {
-            e.preventDefault();
-            const rect = imageContainerRef.current?.getBoundingClientRect();
-            if (rect) {
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                setZoomOrigin({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
-            }
-            setZoomLevel(prev => Math.min(prev + 50, 300));
-        }
+    // Left click drag to pan (only when zoomed)
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.button !== 0) return;
+        if (zoomLevel <= 100) return;
+        e.preventDefault();
+        setIsDragging(true);
+        setDragStart({ x: e.clientX - panOffset.x, y: e.clientY - panOffset.y });
     };
 
-    const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        setZoomLevel(prev => Math.max(100, prev - 50));
-    };
+    // Clamp desired pan to viewport bounds
+    const clampPan = useCallback((desired: { x: number; y: number }) => {
+        const viewport = viewportRef.current?.getBoundingClientRect();
+        if (!viewport || !imageDimensions) return { x: 0, y: 0 };
+        const imgAspect = imageDimensions.width / imageDimensions.height;
+        const viewAspect = viewport.width / viewport.height;
+        let baseWidth: number, baseHeight: number;
+        if (viewAspect > imgAspect) {
+            baseHeight = viewport.height; baseWidth = baseHeight * imgAspect;
+        } else {
+            baseWidth = viewport.width; baseHeight = baseWidth / imgAspect;
+        }
+        const scale = zoomLevel / 100;
+        const zoomedWidth = baseWidth * scale;
+        const zoomedHeight = baseHeight * scale;
+        const overflowX = Math.max(0, (zoomedWidth - viewport.width) / 2);
+        const overflowY = Math.max(0, (zoomedHeight - viewport.height) / 2);
+        return {
+            x: Math.max(-overflowX, Math.min(overflowX, desired.x)),
+            y: Math.max(-overflowY, Math.min(overflowY, desired.y)),
+        };
+    }, [imageDimensions, zoomLevel]);
+
+    useEffect(() => {
+        if (!isDragging) return;
+        const onMove = (e: MouseEvent) => {
+            if (!dragStart) return;
+            const desired = { x: e.clientX - dragStart.x, y: e.clientY - dragStart.y };
+            setPanOffset(clampPan(desired));
+        };
+        const onUp = () => { setIsDragging(false); setDragStart(null); };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+        return () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp); };
+    }, [isDragging, dragStart, clampPan]);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -765,7 +796,19 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
         // Reset zoom when active image changes
         setZoomLevel(100);
         setZoomOrigin({ x: 50, y: 50 });
+        setPanOffset({ x: 0, y: 0 });
+        setIsDragging(false);
+        setDragStart(null);
     }, [active]);
+
+    // Clamp pan when zoom changes
+    useEffect(() => {
+        if (zoomLevel <= 100) {
+            setPanOffset({ x: 0, y: 0 });
+            return;
+        }
+        setPanOffset(prev => clampPan(prev));
+    }, [zoomLevel, clampPan]);
 
     useEffect(() => {
         // Handle carousel auto-play on desktop only
@@ -790,6 +833,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                     {/* Image Container - Smaller on mobile */}
                     <div className="w-full flex items-center justify-center overflow-hidden">
                         <div
+                            ref={viewportRef}
                             className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(70vh-8rem)]' : ''}`}
                             style={{
                                 transform: `translateX(${swipeTranslate}px)`,
@@ -799,16 +843,21 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             onTouchMove={onTouchMove}
                             onTouchEnd={onTouchEnd}
                         >
+                            {/* Pan wrapper */}
                             <div
-                                ref={imageContainerRef}
-                                className={`relative transition-transform duration-300 border border-white/70 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
-                                style={{
-                                    transform: `scale(${zoomLevel / 100})`,
-                                    transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
-                                }}
-                                onClick={handleImageClick}
-                                onContextMenu={handleContextMenu}
+                                className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
+                                style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
+                                onMouseDown={handleMouseDown}
                             >
+                                {/* Scale wrapper */}
+                                <div
+                                    ref={imageContainerRef}
+                                    className={`relative border border-white/70`}
+                                    style={{
+                                        transform: `scale(${zoomLevel / 100})`,
+                                        transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                                    }}
+                                >
                                 {isImageLoading && (
                                     <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
                                 )}
@@ -830,12 +879,13 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                         setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
                                         setIsImageLoading(false);
                                     }}
-                                />
+                                    />
                                 <div
                                     className="absolute inset-0 bg-transparent"
                                     onContextMenu={(e) => e.preventDefault()}
                                     style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
                                 />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -882,6 +932,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                 <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-center md:items-center gap-8" onClick={(e) => e.stopPropagation()}>
                     <div className="flex-1 flex items-center justify-center overflow-hidden">
                         <div
+                            ref={viewportRef}
                             className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`}
                             style={{
                                 transform: `translateX(${swipeTranslate}px)`,
@@ -891,16 +942,21 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             onTouchMove={onTouchMove}
                             onTouchEnd={onTouchEnd}
                         >
+                            {/* Pan wrapper */}
                             <div
-                                ref={imageContainerRef}
-                                className={`relative transition-transform duration-300 border-4 border-white/80 ${zoomLevel > 100 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
-                                style={{
-                                    transform: `scale(${zoomLevel / 100})`,
-                                    transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
-                                }}
-                                onClick={handleImageClick}
-                                onContextMenu={handleContextMenu}
+                                className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
+                                style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
+                                onMouseDown={handleMouseDown}
                             >
+                                {/* Scale wrapper */}
+                                <div
+                                    ref={imageContainerRef}
+                                    className={`relative border-4 border-white/80`}
+                                    style={{
+                                        transform: `scale(${zoomLevel / 100})`,
+                                        transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                                    }}
+                                >
                                 {isImageLoading && (
                                     <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
                                 )}
@@ -922,12 +978,13 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                         setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
                                         setIsImageLoading(false);
                                     }}
-                                />
+                                    />
                                 <div
                                     className="absolute inset-0 bg-transparent"
                                     onContextMenu={(e) => e.preventDefault()}
                                     style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
                                 />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -999,12 +1056,16 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Close viewer</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Scroll in / Left Click / + Key</span>
+                                <span>Scroll in / + Key</span>
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom in</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Scroll out / Right Click / - Key</span>
+                                <span>Scroll out / - Key</span>
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom out</span>
+                            </div>
+                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                <span>Left click + drag (when zoomed)</span>
+                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Pan around</span>
                             </div>
                             <div className="flex justify-between items-center pb-2 border-b border-white/10">
                                 <span>Pinch (mobile)</span>
