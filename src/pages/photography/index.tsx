@@ -367,6 +367,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
     const hasPrev = activeIndex > 0;
     const hasNext = activeIndex >= 0 && activeIndex < filtered.length - 1;
+    const prevPhoto: PhotoWithCategory | null = hasPrev ? filtered[activeIndex - 1] : null;
+    const nextPhoto: PhotoWithCategory | null = hasNext ? filtered[activeIndex + 1] : null;
 
     const goPrev = useCallback(() => {
         if (hasPrev) {
@@ -611,6 +613,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                     </div>
                     <LightboxContent
                         active={active}
+                        prevPhoto={prevPhoto}
+                        nextPhoto={nextPhoto}
                         goNext={goNext}
                         goPrev={goPrev}
                         hasNext={hasNext}
@@ -632,8 +636,8 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     );
 }
 
-function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed, showInfo, setShowInfo, showShortcuts, setShowShortcuts, isMobile, isCarouselMode, setIsCarouselMode }: {
-    active: PhotoWithCategory; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void; showInfo: boolean; setShowInfo: (v: boolean) => void; showShortcuts: boolean; setShowShortcuts: (v: boolean) => void; isMobile: boolean; isCarouselMode: boolean; setIsCarouselMode: (v: boolean) => void;
+function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext, hasPrev, close, isZoomed, setIsZoomed, showInfo, setShowInfo, showShortcuts, setShowShortcuts, isMobile, isCarouselMode, setIsCarouselMode }: {
+    active: PhotoWithCategory; prevPhoto: PhotoWithCategory | null; nextPhoto: PhotoWithCategory | null; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; isZoomed: boolean; setIsZoomed: (v: boolean) => void; showInfo: boolean; setShowInfo: (v: boolean) => void; showShortcuts: boolean; setShowShortcuts: (v: boolean) => void; isMobile: boolean; isCarouselMode: boolean; setIsCarouselMode: (v: boolean) => void;
 }) {
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const [touchCurrentX, setTouchCurrentX] = useState<number | null>(null);
@@ -693,13 +697,29 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
         if (touchStartX == null) return;
         const delta = e.changedTouches[0].clientX - touchStartX;
         if (Math.abs(delta) > 60 && zoomLevel === 100) {
-            if (delta > 0) goPrev(); else goNext();
+            // Animate the track to next/prev, then change active on transition end
+            setTrackAnimating(delta < 0 ? 'next' : 'prev');
         }
         setTouchStartX(null);
         setTouchCurrentX(null);
     };
 
     const swipeTranslate = touchStartX && touchCurrentX ? touchCurrentX - touchStartX : 0;
+    const [trackAnimating, setTrackAnimating] = useState<null | 'next' | 'prev'>(null);
+    const shouldUseTrack = zoomLevel === 100; // show side-by-side only when not zoomed
+    const TRACK_MIDDLE = -33.3333; // show middle slide (2nd of 3)
+    const TRACK_NEXT = -66.6667;   // animate to next (3rd)
+    const TRACK_PREV = 0;          // animate to prev (1st)
+    const trackBasePercent = trackAnimating === 'next' ? TRACK_NEXT : trackAnimating === 'prev' ? TRACK_PREV : TRACK_MIDDLE;
+
+    const onTrackTransitionEnd = () => {
+        if (trackAnimating === 'next') {
+            goNext();
+        } else if (trackAnimating === 'prev') {
+            goPrev();
+        }
+        setTrackAnimating(null);
+    };
 
     // Left click drag to pan (only when zoomed)
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -772,10 +792,13 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 
     useEffect(() => {
         const handleWheel = (e: WheelEvent) => {
-            if (!isMobile && imageContainerRef.current?.contains(e.target as Node)) {
+            // Enable wheel zoom on desktop when pointer is inside the viewport (works for both track and pan modes)
+            const viewportEl = viewportRef.current;
+            if (!isMobile && viewportEl && viewportEl.contains(e.target as Node)) {
                 e.preventDefault();
 
-                const rect = imageContainerRef.current.getBoundingClientRect();
+                // Prefer precise rect from the scaled image container when available, otherwise fallback to viewport
+                const rect = (imageContainerRef.current ?? viewportEl).getBoundingClientRect();
                 const x = ((e.clientX - rect.left) / rect.width) * 100;
                 const y = ((e.clientY - rect.top) / rect.height) * 100;
                 setZoomOrigin({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
@@ -834,59 +857,115 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                     <div className="w-full flex items-center justify-center overflow-hidden">
                         <div
                             ref={viewportRef}
-                            className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(70vh-8rem)]' : ''}`}
-                            style={{
-                                transform: `translateX(${swipeTranslate}px)`,
-                                transitionDuration: touchStartX ? '0ms' : '500ms'
-                            }}
+                            className={`flex items-center justify-center w-full ${isZoomed ? 'overflow-auto max-h-[calc(70vh-8rem)]' : ''}`}
                             onTouchStart={onTouchStart}
                             onTouchMove={onTouchMove}
                             onTouchEnd={onTouchEnd}
                         >
-                            {/* Pan wrapper */}
-                            <div
-                                className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
-                                style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
-                                onMouseDown={handleMouseDown}
-                            >
-                                {/* Scale wrapper */}
-                                <div
-                                    ref={imageContainerRef}
-                                    className={`relative border border-white/70`}
-                                    style={{
-                                        transform: `scale(${zoomLevel / 100})`,
-                                        transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
-                                    }}
-                                >
-                                {isImageLoading && (
-                                    <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
-                                )}
-                                <Image
-                                    src={active.image}
-                                    alt={active.caption}
-                                    width={1600}
-                                    height={1200}
-                                    placeholder="blur"
-                                    blurDataURL={BLUR_DATA_URL}
-                                    className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
-                                    priority
-                                    onContextMenu={(e) => e.preventDefault()}
-                                    draggable={false}
-                                    unoptimized
-                                    onLoadingComplete={() => setIsImageLoading(false)}
-                                    onLoad={(e) => {
-                                        const img = e.target as HTMLImageElement;
-                                        setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-                                        setIsImageLoading(false);
-                                    }}
-                                    />
-                                <div
-                                    className="absolute inset-0 bg-transparent"
-                                    onContextMenu={(e) => e.preventDefault()}
-                                    style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
-                                />
+                            {shouldUseTrack ? (
+                                <div className="relative w-full overflow-hidden" style={{ height: 'calc(70vh - 8rem)' }}>
+                                    <div
+                                        className="flex items-center w-[300%]"
+                                        style={{
+                                            transform: trackAnimating ? `translateX(${trackBasePercent}%)` : `translateX(calc(${TRACK_MIDDLE}% + ${swipeTranslate / 3}px))`,
+                                            transition: trackAnimating ? 'transform 300ms ease' : 'none',
+                                            height: 'calc(70vh - 8rem)'
+                                        }}
+                                        onTransitionEnd={onTrackTransitionEnd}
+                                    >
+                                        <div className="basis-full flex items-center justify-center px-2">
+                                            {prevPhoto && (
+                                                <Image
+                                                    src={prevPhoto.image}
+                                                    alt={prevPhoto.caption}
+                                                    width={1600}
+                                                    height={1200}
+                                                    placeholder="blur"
+                                                    blurDataURL={BLUR_DATA_URL}
+                                                    className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                                    draggable={false}
+                                                    onContextMenu={(e) => e.preventDefault()}
+                                                />
+                                            )}
+                                        </div>
+                                        <div className="basis-full flex items-center justify-center px-2">
+                                            <Image
+                                                src={active.image}
+                                                alt={active.caption}
+                                                width={1600}
+                                                height={1200}
+                                                placeholder="blur"
+                                                blurDataURL={BLUR_DATA_URL}
+                                                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                                draggable={false}
+                                                onContextMenu={(e) => e.preventDefault()}
+                                                onLoad={(e) => {
+                                                    const img = e.target as HTMLImageElement;
+                                                    setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="basis-full flex items-center justify-center px-2">
+                                            {nextPhoto && (
+                                                <Image
+                                                    src={nextPhoto.image}
+                                                    alt={nextPhoto.caption}
+                                                    width={1600}
+                                                    height={1200}
+                                                    placeholder="blur"
+                                                    blurDataURL={BLUR_DATA_URL}
+                                                    className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                                    draggable={false}
+                                                    onContextMenu={(e) => e.preventDefault()}
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            ) : (
+                                <div
+                                    className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
+                                    style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
+                                    onMouseDown={handleMouseDown}
+                                >
+                                    <div
+                                        ref={imageContainerRef}
+                                        className={`relative border border-white/70`}
+                                        style={{
+                                            transform: `scale(${zoomLevel / 100})`,
+                                            transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                                        }}
+                                    >
+                                        {isImageLoading && (
+                                            <div className="absolute inset-0 bg-white/10 animate-pulse rounded" style={{ width: '1600px', height: '1200px' }} />
+                                        )}
+                                        <Image
+                                            src={active.image}
+                                            alt={active.caption}
+                                            width={1600}
+                                            height={1200}
+                                            placeholder="blur"
+                                            blurDataURL={BLUR_DATA_URL}
+                                            className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
+                                            priority
+                                            onContextMenu={(e) => e.preventDefault()}
+                                            draggable={false}
+                                            unoptimized
+                                            onLoadingComplete={() => setIsImageLoading(false)}
+                                            onLoad={(e) => {
+                                                const img = e.target as HTMLImageElement;
+                                                setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+                                                setIsImageLoading(false);
+                                            }}
+                                        />
+                                        <div
+                                            className="absolute inset-0 bg-transparent"
+                                            onContextMenu={(e) => e.preventDefault()}
+                                            style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
+                                        />
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -901,28 +980,26 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                     {active.location}, {active.country}
                                 </div>
                                 <div className="h-px bg-white/20 my-2" />
-                                {active.settings && (
-                                    <div className="flex flex-wrap gap-2">
-                                        {active.settings.split(' · ').map((setting, index) => (
-                                            <span
-                                                key={index}
-                                                className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                                            >
-                                                {setting}
-                                            </span>
-                                        ))}
-                                        {/* <span
+                                <div className="flex flex-wrap gap-2">
+                                    {active.settings && active.settings.split(' · ').map((setting, index) => (
+                                        <span
+                                            key={index}
+                                            className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
+                                        >
+                                            {setting}
+                                        </span>
+                                    ))}
+                                    {imageDimensions && (
+                                        <span
                                             key={'resolution'}
                                             className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
                                         >
-                                            {imageDimensions && (
-                                                <div className="text-sm font-mono opacity-80">
-                                                    {imageDimensions.width} × {imageDimensions.height} px
-                                                </div>
-                                            )}
-                                        </span> */}
-                                    </div>
-                                )}
+                                            <div className="text-sm font-mono opacity-80">
+                                                {imageDimensions.width} × {imageDimensions.height} px
+                                            </div>
+                                        </span>
+                                    )}
+                                </div>
                                 <div className="mt-1 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
                             </aside>
                         </div>
@@ -933,22 +1010,88 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                     <div className="flex-1 flex items-center justify-center overflow-hidden">
                         <div
                             ref={viewportRef}
-                            className={`flex items-center justify-center w-full transition-transform ${touchStartX ? '' : 'duration-500'} ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`}
-                            style={{
-                                transform: `translateX(${swipeTranslate}px)`,
-                                transitionDuration: touchStartX ? '0ms' : '500ms'
+                            className={`flex items-center justify-center w-full ${isZoomed ? 'overflow-auto max-h-[calc(90vh-8rem)]' : ''}`}
+                            onTouchStart={(e) => {
+                                onTouchStart(e);
                             }}
-                            onTouchStart={onTouchStart}
                             onTouchMove={onTouchMove}
-                            onTouchEnd={onTouchEnd}
+                            onTouchEnd={(e) => {
+                                // Decide where to animate
+                                if (shouldUseTrack) {
+                                    const delta = touchStartX != null && touchCurrentX != null ? (touchCurrentX - touchStartX) : 0;
+                                    if (Math.abs(delta) > 60) {
+                                        setTrackAnimating(delta < 0 ? 'next' : 'prev');
+                                    }
+                                }
+                                onTouchEnd(e);
+                            }}
                         >
-                            {/* Pan wrapper */}
+                            {shouldUseTrack ? (
+                                <div className="relative w-full overflow-hidden" style={{ height: 'calc(90vh - 8rem)' }}>
+                                    <div
+                                        className="flex items-center w-[300%]"
+                                        style={{
+                                            transform: trackAnimating ? `translateX(${trackBasePercent}%)` : `translateX(calc(${TRACK_MIDDLE}% + ${swipeTranslate / 3}px))`,
+                                            transition: trackAnimating ? 'transform 300ms ease' : 'none',
+                                            height: 'calc(90vh - 8rem)'
+                                        }}
+                                        onTransitionEnd={onTrackTransitionEnd}
+                                    >
+                                        <div className="basis-full flex items-center justify-center px-2">
+                                            {prevPhoto && (
+                                                <Image
+                                                    src={prevPhoto.image}
+                                                    alt={prevPhoto.caption}
+                                                    width={1600}
+                                                    height={1200}
+                                                    placeholder="blur"
+                                                    blurDataURL={BLUR_DATA_URL}
+                                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
+                                                    draggable={false}
+                                                    onContextMenu={(e) => e.preventDefault()}
+                                                />
+                                            )}
+                                        </div>
+                                        <div className="basis-full flex items-center justify-center px-2">
+                                            <Image
+                                                src={active.image}
+                                                alt={active.caption}
+                                                width={1600}
+                                                height={1200}
+                                                placeholder="blur"
+                                                blurDataURL={BLUR_DATA_URL}
+                                                className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
+                                                draggable={false}
+                                                onContextMenu={(e) => e.preventDefault()}
+                                                onLoad={(e) => {
+                                                    const img = e.target as HTMLImageElement;
+                                                    setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="basis-full flex items-center justify-center px-2">
+                                            {nextPhoto && (
+                                                <Image
+                                                    src={nextPhoto.image}
+                                                    alt={nextPhoto.caption}
+                                                    width={1600}
+                                                    height={1200}
+                                                    placeholder="blur"
+                                                    blurDataURL={BLUR_DATA_URL}
+                                                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
+                                                    draggable={false}
+                                                    onContextMenu={(e) => e.preventDefault()}
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
                             <div
                                 className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
                                 style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
                                 onMouseDown={handleMouseDown}
                             >
-                                {/* Scale wrapper */}
                                 <div
                                     ref={imageContainerRef}
                                     className={`relative border-4 border-white/80`}
@@ -986,6 +1129,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 />
                                 </div>
                             </div>
+                            )}
                         </div>
                     </div>
 
@@ -996,29 +1140,26 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                                 {active.location}, {active.country}
                             </div>
                             <div className="h-px bg-white/20 my-2" />
-
-                            {active.settings && (
-                                <div className="flex flex-wrap gap-2">
-                                    {active.settings.split(' · ').map((setting, index) => (
-                                        <span
-                                            key={index}
-                                            className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                                        >
-                                            {setting}
-                                        </span>
-                                    ))}
+                            <div className="flex flex-wrap gap-2">
+                                {active.settings && active.settings.split(' · ').map((setting, index) => (
+                                    <span
+                                        key={index}
+                                        className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
+                                    >
+                                        {setting}
+                                    </span>
+                                ))}
+                                {imageDimensions && (
                                     <span
                                         key={'resolution'}
                                         className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
                                     >
-                                        {imageDimensions && (
-                                            <div className="text-sm font-mono opacity-80">
-                                                {imageDimensions.width} × {imageDimensions.height} px
-                                            </div>
-                                        )}
+                                        <div className="text-sm font-mono opacity-80">
+                                            {imageDimensions.width} × {imageDimensions.height} px
+                                        </div>
                                     </span>
-                                </div>
-                            )}
+                                )}
+                            </div>
                             <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
                         </aside>
                     )}
@@ -1047,42 +1188,61 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                             </button>
                         </div>
                         <div className="space-y-3 text-sm">
-                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>← / → Arrow</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Previous/Next</span>
-                            </div>
-                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Escape</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Close viewer</span>
-                            </div>
-                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Scroll in / + Key</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom in</span>
-                            </div>
-                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Scroll out / - Key</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom out</span>
-                            </div>
-                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Left click + drag (when zoomed)</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Pan around</span>
-                            </div>
-                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Pinch (mobile)</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom</span>
-                            </div>
-                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>Swipe (mobile)</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Navigate</span>
-                            </div>
-                            <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                                <span>i</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">Toggle info</span>
-                            </div>
-                            <div className="flex justify-between items-center">
-                                <span>?</span>
-                                <span className="text-xs bg-white/10 px-2 py-1 rounded">This menu</span>
-                            </div>
+                            {!isMobile ? (
+                                <>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>← / → Arrow</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Previous/Next</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>Escape</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Close viewer</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>Scroll in</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom in</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>Scroll out</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom out</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>Left click + drag (when zoomed)</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Pan around</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>i</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Toggle info</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span>?</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">This menu</span>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>Pinch in</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom in</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>Pinch out</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Zoom out</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>Swipe</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Navigate</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pb-2 border-b border-white/10">
+                                        <span>i</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">Toggle info</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span>?</span>
+                                        <span className="text-xs bg-white/10 px-2 py-1 rounded">This menu</span>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
