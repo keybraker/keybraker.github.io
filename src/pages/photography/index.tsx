@@ -58,26 +58,20 @@ function applyLSBSteganography(imageData: ImageData, message: string): ImageData
  * @param canvas - Canvas element
  * @param text - Watermark text to display
  */
-function applyVisibleWatermark(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, text: string): void {
-    // Calculate font size based on image width to maintain consistency across portrait and landscape
-    // Reference: 1000px width = 24px font
-    const baseFontSize = 24;
-    const referenceWidth = 1000;
-    const fontSize = Math.max(Math.round((canvas.width / referenceWidth) * baseFontSize), 16);
+function applyVisibleWatermark(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, text: string, imgWidth: number): void {
+    const fontSize = 96;
 
     ctx.font = `italic ${fontSize}px "Cormorant Garamond", "Didot", "Times New Roman", serif`;
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
 
-    // Scale shadow blur proportionally to font size
     const shadowBlur = Math.max(Math.round(fontSize * 0.33), 4);
     ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
     ctx.shadowBlur = shadowBlur;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = Math.max(Math.round(fontSize * 0.08), 2);
 
-    // Draw watermark at the bottom center with proportional padding
     const x = canvas.width / 2;
     const padding = Math.max(Math.round(fontSize * 0.6), 10);
     const y = canvas.height - padding;
@@ -119,7 +113,7 @@ async function createWatermarkedImage(
     const watermarkedData = applyLSBSteganography(imageData, hiddenMessage);
     ctx.putImageData(watermarkedData, 0, 0);
 
-    applyVisibleWatermark(ctx, canvas, visibleText);
+    applyVisibleWatermark(ctx, canvas, visibleText, img.width);
 
     return canvas;
 }
@@ -383,6 +377,10 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const goNext = useCallback(() => {
         if (hasNext) {
             setActive(filtered[activeIndex + 1]);
+            setIsZoomed(false);
+        } else if (activeIndex >= 0 && filtered.length > 0) {
+            // Loop back to the start
+            setActive(filtered[0]);
             setIsZoomed(false);
         }
     }, [hasNext, activeIndex, filtered]);
@@ -771,7 +769,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
 
     useEffect(() => {
         // Handle carousel auto-play on desktop only
-        if (isCarouselMode && !isMobile && hasNext) {
+        if (isCarouselMode && !isMobile) {
             carouselIntervalRef.current = setInterval(() => {
                 goNext();
             }, 5000);
@@ -782,7 +780,7 @@ function LightboxContent({ active, goNext, goPrev, hasNext, hasPrev, close, isZo
                 clearInterval(carouselIntervalRef.current);
             }
         };
-    }, [isCarouselMode, isMobile, hasNext, goNext]);
+    }, [isCarouselMode, isMobile, goNext]);
 
     return (
         <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
