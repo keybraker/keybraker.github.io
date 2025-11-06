@@ -1,5 +1,5 @@
-import LightboxHeaderBar from '@/components/photography/LightboxHeaderBar';
 import LightboxContent from '@/components/photography/LightboxContent';
+import LightboxHeaderBar from '@/components/photography/LightboxHeaderBar';
 import type { PhotoWithCategory } from '@/types/photo';
 
 interface LightboxViewerProps {

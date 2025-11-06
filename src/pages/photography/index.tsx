@@ -1,10 +1,15 @@
 import HeroSection from '@/components/photography/HeroSection';
-import PhotoGallerySection from '@/components/photography/PhotoGallerySection';
 import LightboxViewer from '@/components/photography/LightboxViewer';
+import PhotoGallerySection from '@/components/photography/PhotoGallerySection';
+import { useLazyLoading } from '@/hooks/useLazyLoading';
+import { useLightboxState } from '@/hooks/useLightboxState';
+import { useMobileDetection } from '@/hooks/useMobileDetection';
+import { usePhotoFiltering } from '@/hooks/usePhotoFiltering';
+import { usePhotoNavigation } from '@/hooks/usePhotoNavigation';
 import type { Photo, PhotoWithCategory, Section } from '@/types/photo';
 import fs from 'fs';
 import path from 'path';
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 
 const exifParser = require('exif-parser');
 
@@ -100,179 +105,46 @@ export async function getStaticProps() {
 }
 
 export default function PhotographyPage({ sections }: { sections: Section[] }) {
-    const [isMobile, setIsMobile] = useState(false);
+    const { isMobile } = useMobileDetection();
     const [active, setActive] = useState<PhotoWithCategory | null>(null);
-    const [filter, setFilter] = useState<string>("All");
-    const [showCommissioned, setShowCommissioned] = useState(false);
-    const [showInfo, setShowInfo] = useState(!isMobile);
-    const [showShortcuts, setShowShortcuts] = useState(false);
-    const [displayCount, setDisplayCount] = useState(12);
-    const [isCarouselMode, setIsCarouselMode] = useState(false);
-    const observerTargetRef = useRef<HTMLDivElement>(null);
-    const hashCheckedRef = useRef(false);
 
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
+    const {
+        allPhotos,
+        filtered,
+        filter,
+        setFilter,
+        showCommissioned,
+        setShowCommissioned,
+        displayCount,
+        setDisplayCount
+    } = usePhotoFiltering(sections);
 
-    // Set showInfo based on mobile state after it's determined
-    useEffect(() => {
-        setShowInfo(!isMobile);
-    }, [isMobile]);
+    const {
+        activeIndex,
+        hasPrev,
+        hasNext,
+        prevPhoto,
+        nextPhoto,
+        goPrev,
+        goNext
+    } = usePhotoNavigation(active, setActive, filtered, isMobile);
 
-    const close = useCallback(() => {
+    const {
+        showInfo,
+        setShowInfo,
+        showShortcuts,
+        setShowShortcuts,
+        isCarouselMode,
+        setIsCarouselMode
+    } = useLightboxState(isMobile);
+
+    const { observerTargetRef } = useLazyLoading(filtered, displayCount, setDisplayCount);
+
+    const close = () => {
         setActive(null);
-        setShowInfo(!isMobile);
         setShowShortcuts(false);
         setIsCarouselMode(false);
-    }, [isMobile]);
-
-    const allPhotoObjects: PhotoWithCategory[] = useMemo(() =>
-        sections.flatMap(s => {
-            return s.photos.map((p, index) => {
-                // Alternating pattern with randomization to avoid clustering
-                // Pattern: P-P-L-P-P-L (portrait-portrait-landscape repeats)
-                // This ensures landscapes are spaced out and no long stretches of same orientation
-                const positionInPattern = index % 6;
-                let isLandscape: boolean;
-
-                if (positionInPattern === 2 || positionInPattern === 5) {
-                    // Landscape positions in the pattern
-                    isLandscape = true;
-                } else {
-                    // Portrait positions
-                    isLandscape = false;
-                }
-
-                return {
-                    ...p,
-                    category: s.title,
-                    orientation: isLandscape ? 'landscape' as const : 'portrait' as const
-                };
-            });
-        }),
-        [sections]
-    );
-    const allPhotos: PhotoWithCategory[] = useMemo(() => allPhotoObjects, [allPhotoObjects]);
-
-    const filtered = useMemo(() => {
-        if (showCommissioned) {
-            return allPhotos.filter(p => p.isCommissioned);
-        }
-        const regularPhotos = allPhotos.filter(p => !p.isCommissioned);
-        return filter === "All" ? regularPhotos : regularPhotos.filter(p => p.category === filter);
-    }, [allPhotos, filter, showCommissioned]);
-    const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
-    const hasPrev = activeIndex > 0;
-    const hasNext = activeIndex >= 0 && activeIndex < filtered.length - 1;
-    const prevPhoto: PhotoWithCategory | null = hasPrev ? filtered[activeIndex - 1] : null;
-    const nextPhoto: PhotoWithCategory | null = hasNext ? filtered[activeIndex + 1] : null;
-
-    const goPrev = useCallback(() => {
-        if (hasPrev) {
-            setActive(filtered[activeIndex - 1]);
-        }
-    }, [hasPrev, activeIndex, filtered]);
-    const goNext = useCallback(() => {
-        if (hasNext) {
-            setActive(filtered[activeIndex + 1]);
-        } else if (activeIndex >= 0 && filtered.length > 0) {
-            // Loop back to the start
-            setActive(filtered[0]);
-        }
-    }, [hasNext, activeIndex, filtered]);
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        if (active) {
-            const h = `#photo-${active.id}`;
-            if (window.location.hash !== h) history.replaceState(null, '', h);
-        } else if (window.location.hash.startsWith('#photo-')) {
-            history.replaceState(null, '', window.location.pathname + window.location.search);
-        }
-    }, [active]);
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        const hash = window.location.hash;
-        if (hash.startsWith('#photo-')) {
-            const id = parseInt(hash.replace('#photo-', ''), 10);
-            const found = allPhotos.find(p => p.id === id);
-            if (found) {
-                setActive(found);
-                hashCheckedRef.current = true;
-            }
-        }
-    }, [allPhotos]);
-
-    // Check hash on initial mount - this runs only once
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        if (hashCheckedRef.current) return; // Already checked
-
-        const hash = window.location.hash;
-        if (hash.startsWith('#photo-')) {
-            // Hash is present, check again when allPhotos is loaded
-            // by triggering the above effect
-        }
-    }, []);
-
-    useEffect(() => {
-        if (active && !filtered.some(p => p.id === active.id)) {
-            setActive(null);
-        }
-    }, [filter, active, filtered, showCommissioned]);
-
-    useEffect(() => {
-        function onKey(e: KeyboardEvent) {
-            if (e.key === "Escape") close();
-            if (e.key === "ArrowLeft") goPrev();
-            if (e.key === "ArrowRight") goNext();
-        }
-        if (active) {
-            document.addEventListener("keydown", onKey);
-            document.documentElement.classList.add("overflow-hidden");
-        } else {
-            document.documentElement.classList.remove("overflow-hidden");
-        }
-        return () => {
-            document.removeEventListener("keydown", onKey);
-            document.documentElement.classList.remove("overflow-hidden");
-        };
-    }, [active, close, goPrev, goNext]);
-
-    // Lazy loading with Intersection Observer
-    useEffect(() => {
-        const currentTarget = observerTargetRef.current;
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting && displayCount < filtered.length) {
-                    setDisplayCount(prev => Math.min(prev + 12, filtered.length));
-                }
-            },
-            { threshold: 0.1, rootMargin: '200px' }
-        );
-
-        if (currentTarget) {
-            observer.observe(currentTarget);
-        }
-
-        return () => {
-            if (currentTarget) {
-                observer.unobserve(currentTarget);
-            }
-        };
-    }, [filtered.length, displayCount]);
-
-    // Reset display count when filter changes
-    useEffect(() => {
-        setDisplayCount(12);
-    }, [filter, showCommissioned]);
+    };
 
     return (
         <main className="w-full h-full">
