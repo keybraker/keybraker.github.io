@@ -1,208 +1,17 @@
 import MyWords from "@/components/myWords";
-import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
-import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
-import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
-import { MdClose } from "@react-icons/all-files/md/MdClose";
-import { MdInfo } from "@react-icons/all-files/md/MdInfo";
-import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
-import { MdPause } from "@react-icons/all-files/md/MdPause";
-import { MdPlayArrow } from "@react-icons/all-files/md/MdPlayArrow";
 import fs from 'fs';
-import Image from "next/image";
 import path from 'path';
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import CommissionInfo from '@/components/photography/CommissionInfo';
+import FiltersBar from '@/components/photography/FiltersBar';
+import PhotoMasonry from '@/components/photography/PhotoMasonry';
+import CopyrightNotice from '@/components/photography/CopyrightNotice';
+import LightboxContent from '@/components/photography/LightboxContent';
+import { BLUR_DATA_URL } from '@/utils/watermark';
+import type { Photo, Section, PhotoWithCategory } from '@/types/photo';
 
 const exifParser = require('exif-parser');
-
-type Photo = { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean };
-type Section = { title: string; photos: Photo[] };
-
-const BLUR_DATA_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
-
-type PhotoWithCategory = Photo & { category: string; orientation: 'portrait' | 'landscape' };
-// ============================================================================
-// WATERMARK UTILITY FUNCTIONS
-// ============================================================================
-
-/**
- * Applies LSB (Least Significant Bit) steganography to embed hidden copyright text
- * @param imageData - Canvas ImageData object containing pixel data
- * @param message - The hidden message to embed
- * @returns Modified ImageData with embedded message
- */
-function applyLSBSteganography(imageData: ImageData, message: string): ImageData {
-    const data = imageData.data;
-
-    const messageBinary = message.split('').map(char =>
-        char.charCodeAt(0).toString(2).padStart(8, '0')
-    ).join('');
-
-    const header = "11111111" + messageBinary.length.toString(2).padStart(16, '0');
-    const fullBinary = header + messageBinary;
-
-    let bitIndex = 0;
-    for (let i = 0; i < data.length && bitIndex < fullBinary.length; i += 4) {
-        if (bitIndex < fullBinary.length) {
-            // Modify the least significant bit of the red channel
-            data[i] = (data[i] & 0xFE) | parseInt(fullBinary[bitIndex]);
-            bitIndex++;
-        }
-    }
-
-    return imageData;
-}
-
-/**
- * Draws visible watermark text on canvas
- * @param ctx - Canvas 2D context
- * @param canvas - Canvas element
- * @param text - Watermark text to display
- */
-function applyVisibleWatermark(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, text: string, imgWidth: number): void {
-    const fontSize = 96;
-
-    ctx.font = `italic ${fontSize}px "Cormorant Garamond", "Didot", "Times New Roman", serif`;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'bottom';
-
-    const shadowBlur = Math.max(Math.round(fontSize * 0.33), 4);
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
-    ctx.shadowBlur = shadowBlur;
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = Math.max(Math.round(fontSize * 0.08), 2);
-
-    const x = canvas.width / 2;
-    const padding = Math.max(Math.round(fontSize * 0.6), 10);
-    const y = canvas.height - padding;
-    ctx.fillText(text, x, y);
-}
-
-/**
- * Loads an image and applies both LSB steganography and visible watermark
- * @param imageSrc - Source URL of the image
- * @param hiddenMessage - Hidden message for steganography
- * @param visibleText - Visible watermark text
- * @returns Promise resolving to canvas element with watermarked image
- */
-async function createWatermarkedImage(
-    imageSrc: string,
-    hiddenMessage: string,
-    visibleText: string
-): Promise<HTMLCanvasElement> {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Could not get canvas context');
-
-    // Load image
-    const img = new window.Image();
-    img.crossOrigin = 'anonymous';
-
-    await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = imageSrc;
-    });
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    ctx.drawImage(img, 0, 0);
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const watermarkedData = applyLSBSteganography(imageData, hiddenMessage);
-    ctx.putImageData(watermarkedData, 0, 0);
-
-    applyVisibleWatermark(ctx, canvas, visibleText, img.width);
-
-    return canvas;
-}
-
-/**
- * Downloads the image with dynamically applied watermarks
- * Applies both LSB steganography and visible watermark at download time
- */
-async function downloadImageWithWatermark(photo: Photo) {
-    try {
-        const hiddenMessage = `© ${new Date().getFullYear()} Ioannis Tsiakkas. All rights reserved. Original photo: ${photo.caption}`;
-        const visibleText = 'Ioannis Tsiakkas';
-
-        const canvas = await createWatermarkedImage(
-            photo.originalImage,
-            hiddenMessage,
-            visibleText
-        );
-
-        canvas.toBlob((blob) => {
-            if (!blob) {
-                console.error('Failed to create blob from canvas');
-                return;
-            }
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${photo.caption.replace(/\s+/g, '_')}-Ioannis_Tsiakkas.jpg`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }, 'image/jpeg', 0.85);
-    } catch (error) {
-        console.error('Failed to download image with watermark:', error);
-    }
-}
-
-function commissionInfo() {
-    return (
-        <section aria-labelledby="contact-heading" className="w-full text-start">
-            <div className="flex flex-col gap-6">
-                {MyWords({ text: "Commissioned Work" })}
-                <div className="flex flex-col gap-0 text-base md:text-lg leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light">
-                    <p>Available for event photography, product shoots, and commercial projects, get in touch to discuss your photography needs.</p>
-                    <p>For inquiries and bookings, please contact me <a href="mailto:iantsiakkas@gmail.com" className="underline hover:opacity-80 transition-opacity">here</a>.</p>
-                </div>
-            </div>
-        </section>
-    )
-}
-
-function PhotoCard({ photo, onOpen }: { photo: PhotoWithCategory; onOpen: (p: PhotoWithCategory) => void }) {
-    const imgSrc = photo.image;
-    return (
-        <button
-            type="button"
-            onClick={() => onOpen(photo)}
-            aria-label="Open image fullscreen"
-            className={`
-                group relative w-full h-full
-                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
-                rounded-lg overflow-hidden ring-1 ring-tsiakkas-dark/10 dark:ring-tsiakkas-light/10
-                bg-white/40 dark:bg-white/5 backdrop-blur-[2px] transition-colors
-            `}
-        >
-            <div className="relative w-full h-full">
-                <Image
-                    src={imgSrc}
-                    alt={photo.caption}
-                    fill
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL}
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className={`object-cover select-none transition duration-500 ease-out group-hover:blur-sm group-focus-visible:blur-sm`}
-                    onContextMenu={(e) => e.preventDefault()}
-                    draggable={false}
-                />
-            </div>
-
-            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 py-6 text-center
-                bg-black/50 backdrop-blur-[4px] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
-                <div className="text-xl font-light italic tracking-wide text-tsiakkas-light drop-shadow-md">
-                    {photo.caption}
-                </div>
-            </div>
-        </button>
-    );
-}
+// Inlined UI moved to components
 
 export async function getStaticProps() {
     const photosDir = path.join(process.cwd(), 'public', 'photos', 'personal');
@@ -480,67 +289,31 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
 
             <div id="top" className="relative flex flex-col gap-8">
                 <div className="mt-12 mb-8">
-                    {showCommissioned ? commissionInfo() : MyWords({ text: "My work, in my own shots" })}
+                    {showCommissioned ? (
+                        <CommissionInfo isMobile={isMobile} />
+                    ) : (
+                        MyWords({ text: "My work, in my own shots" })
+                    )}
                 </div>
 
-                <div className="sm:sticky sm:top-[70px] sm:z-30 bg-tsiakkas-light dark:bg-tsiakkas-dark py-4 px-6 -mx-4">
-                    <div className="flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
-                    <nav className="flex flex-wrap gap-3 justify-start">
-                        {["All", ...sections.map(s => s.title)].map(cat => {
-                            const activeFilter = !showCommissioned && filter === cat;
-                            return (
-                                <button
-                                    key={cat}
-                                    aria-pressed={activeFilter}
-                                    onClick={() => {
-                                        setShowCommissioned(false);
-                                        setFilter(cat);
-                                    }}
-                                    className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeFilter
-                                        ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
-                                        : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'} `}
-                                >
-                                    {cat}
-                                </button>
-                            );
-                        })}
-                    </nav>
+                <FiltersBar
+                    sections={sections}
+                    filter={filter}
+                    setFilter={setFilter}
+                    showCommissioned={showCommissioned}
+                    setShowCommissioned={setShowCommissioned}
+                    isMobile={isMobile}
+                />
 
-                    <button
-                        aria-pressed={showCommissioned}
-                        onClick={() => setShowCommissioned(!showCommissioned)}
-                        className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 flex-shrink-0 ${showCommissioned
-                            ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
-                            : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'} `}
-                    >
-                        Commissioned Work
-                    </button>
-                    </div>
-                </div>
+                <PhotoMasonry
+                    photos={filtered}
+                    displayCount={displayCount}
+                    onOpen={setActive as any}
+                    sentinelRef={observerTargetRef}
+                    isMobile={isMobile}
+                />
 
-                <div className="grid gap-6 w-full auto-rows-[300px] grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
-                    {filtered.slice(0, displayCount).map(p => (
-                        <div
-                            key={p.id}
-                            style={{
-                                gridColumn: p.orientation === 'landscape' ? 'span 2' : 'span 2',
-                                gridRow: p.orientation === 'landscape' ? 'span 1' : 'span 2'
-                            }}
-                        >
-                            <PhotoCard photo={p} onOpen={setActive as any} />
-                        </div>
-                    ))}
-                </div>
-
-                {displayCount < filtered.length && (
-                    <div ref={observerTargetRef} className="h-4 w-full" aria-label="Loading indicator" />
-                )}
-
-                <div className="text-center text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70">
-                    <p>All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas.</p>
-                    <p>They MAY BE copied, redistributed, or used in any form, apart from any commercial purpose, without explicit written permission.</p>
-                    <p>For full resolution of images please contact me at <a href="mailto:iantsiakkas@gmail.com" className="underline hover:opacity-80 transition-opacity">here</a>.</p>
-                </div>
+                <CopyrightNotice isMobile={isMobile} />
             </div>
 
             {active && (
@@ -551,62 +324,19 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                     className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-sm"
                     onClick={close}
                 >
-                    <div className="flex flex-row items-center justify-between p-4 gap-4" onClick={(e) => e.stopPropagation()}>
-                        <span className="text-[11px] font-mono px-2 py-1 text-tsiakkas-light/70 bg-tsiakkas-light/10 rounded select-none">{activeIndex + 1}/{filtered.length}</span>
-                        <div className="flex flex-row gap-2 items-center ml-auto">
-                            <button
-                                onClick={(e) => { e.stopPropagation(); setShowShortcuts(!showShortcuts); }}
-                                aria-label="Show keyboard shortcuts"
-                                className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all text-lg font-bold"
-                                title="Press '?' for shortcuts"
-                            >
-                                ?
-                            </button>
-                            {isMobile ? (
-                                <button
-                                    onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
-                                    aria-label={showInfo ? "Hide photo info" : "Show photo info"}
-                                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
-                                    title="Toggle info (I)"
-                                >
-                                    {showInfo ? <MdInfo size={20} /> : <MdInfoOutline size={20} />}
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
-                                    aria-label={showInfo ? "Hide photo info" : "Show photo info"}
-                                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
-                                    title="Toggle info (I)"
-                                >
-                                    {showInfo ? <MdInfo size={20} /> : <MdInfoOutline size={20} />}
-                                </button>
-                            )}
-                            {!isMobile && (
-                                <button
-                                    onClick={(e) => { e.stopPropagation(); setIsCarouselMode(!isCarouselMode); }}
-                                    aria-label={isCarouselMode ? "Stop carousel" : "Start carousel"}
-                                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
-                                    title="Auto-play carousel (5 second interval)"
-                                >
-                                    {isCarouselMode ? <MdPause size={20} /> : <MdPlayArrow size={20} />}
-                                </button>
-                            )}
-                            <button
-                                onClick={() => downloadImageWithWatermark(active)}
-                                aria-label="Download image with watermark"
-                                className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
-                            >
-                                <HiDownload size={20} />
-                            </button>
-                            <button
-                                onClick={close}
-                                aria-label="Close fullscreen viewer"
-                                className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all leading-none"
-                            >
-                                <MdClose size={20} />
-                            </button>
-                        </div>
-                    </div>
+                    <HeaderBar
+                        activeIndex={activeIndex}
+                        total={filtered.length}
+                        isMobile={isMobile}
+                        showInfo={showInfo}
+                        setShowInfo={setShowInfo}
+                        showShortcuts={showShortcuts}
+                        setShowShortcuts={setShowShortcuts}
+                        isCarouselMode={isCarouselMode}
+                        setIsCarouselMode={setIsCarouselMode}
+                        onClose={close}
+                        active={active}
+                    />
                     <LightboxContent
                         active={active}
                         prevPhoto={prevPhoto}
@@ -628,396 +358,83 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         </main>
     );
 }
+// Header bar for lightbox controls (extracted minimal component here for cohesion)
+import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
+import { MdClose } from "@react-icons/all-files/md/MdClose";
+import { MdInfo } from "@react-icons/all-files/md/MdInfo";
+import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
+import { MdPause } from "@react-icons/all-files/md/MdPause";
+import { MdPlayArrow } from "@react-icons/all-files/md/MdPlayArrow";
+import { downloadImageWithWatermark } from "@/utils/watermark";
 
-function LightboxContent({ active, prevPhoto, nextPhoto, goNext, goPrev, hasNext, hasPrev, close, showInfo, setShowInfo, showShortcuts, setShowShortcuts, isMobile, isCarouselMode }: {
-    active: PhotoWithCategory; prevPhoto: PhotoWithCategory | null; nextPhoto: PhotoWithCategory | null; goNext: () => void; goPrev: () => void; hasNext: boolean; hasPrev: boolean; close: () => void; showInfo: boolean; setShowInfo: (v: boolean) => void; showShortcuts: boolean; setShowShortcuts: (v: boolean) => void; isMobile: boolean; isCarouselMode: boolean;
+function HeaderBar({
+    activeIndex,
+    total,
+    isMobile,
+    showInfo,
+    setShowInfo,
+    showShortcuts,
+    setShowShortcuts,
+    isCarouselMode,
+    setIsCarouselMode,
+    onClose,
+    active,
+}: {
+    activeIndex: number;
+    total: number;
+    isMobile: boolean;
+    showInfo: boolean;
+    setShowInfo: (v: boolean) => void;
+    showShortcuts: boolean;
+    setShowShortcuts: (v: boolean) => void;
+    isCarouselMode: boolean;
+    setIsCarouselMode: (v: boolean) => void;
+    onClose: () => void;
+    active: PhotoWithCategory;
 }) {
-    const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
-    const [isImageLoading, setIsImageLoading] = useState(true);
-    // Zoom/Pan state (desktop)
-    const [zoomLevel, setZoomLevel] = useState(100); // percentage, 100–300
-    const [zoomOrigin, setZoomOrigin] = useState<{ x: number; y: number }>({ x: 50, y: 50 }); // percent coords
-    const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null);
-    const imageContainerRef = useRef<HTMLDivElement>(null);
-    const viewportRef = useRef<HTMLDivElement>(null);
-    const touchStartRef = useRef<number | null>(null);
-    const carouselIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
-    const handleTouchStart = (e: React.TouchEvent) => {
-        touchStartRef.current = e.touches[0].clientX;
-    };
-
-    const handleTouchEnd = (e: React.TouchEvent) => {
-        if (touchStartRef.current === null) return;
-        const deltaX = e.changedTouches[0].clientX - touchStartRef.current;
-        const threshold = 50;
-
-        if (Math.abs(deltaX) > threshold) {
-            if (deltaX > 0 && hasPrev) {
-                goPrev();
-            } else if (deltaX < 0 && hasNext) {
-                goNext();
-            }
-        }
-
-        touchStartRef.current = null;
-    };
-
-    // Clamp desired pan to viewport bounds based on zoom and aspect fit
-    const clampPan = useCallback((desired: { x: number; y: number }) => {
-        const viewport = viewportRef.current?.getBoundingClientRect();
-        if (!viewport || !imageDimensions) return { x: 0, y: 0 };
-        const imgAspect = imageDimensions.width / imageDimensions.height;
-        const viewAspect = viewport.width / viewport.height;
-        let baseWidth: number, baseHeight: number;
-        if (viewAspect > imgAspect) {
-            baseHeight = viewport.height; baseWidth = baseHeight * imgAspect;
-        } else {
-            baseWidth = viewport.width; baseHeight = baseWidth / imgAspect;
-        }
-        const scale = zoomLevel / 100;
-        const zoomedWidth = baseWidth * scale;
-        const zoomedHeight = baseHeight * scale;
-        const overflowX = Math.max(0, (zoomedWidth - viewport.width) / 2);
-        const overflowY = Math.max(0, (zoomedHeight - viewport.height) / 2);
-        return {
-            x: Math.max(-overflowX, Math.min(overflowX, desired.x)),
-            y: Math.max(-overflowY, Math.min(overflowY, desired.y)),
-        };
-    }, [imageDimensions, zoomLevel]);
-
-    // Mouse drag panning (desktop)
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.button !== 0 || zoomLevel <= 100) return;
-        e.preventDefault();
-        setIsDragging(true);
-        setDragStart({ x: e.clientX - panOffset.x, y: e.clientY - panOffset.y });
-    };
-
-    useEffect(() => {
-        if (!isDragging) return;
-        const onMove = (e: MouseEvent) => {
-            if (!dragStart) return;
-            const desired = { x: e.clientX - dragStart.x, y: e.clientY - dragStart.y };
-            setPanOffset(clampPan(desired));
-        };
-        const onUp = () => { setIsDragging(false); setDragStart(null); };
-        document.addEventListener('mousemove', onMove);
-        document.addEventListener('mouseup', onUp);
-        return () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp); };
-    }, [isDragging, dragStart, clampPan]);
-
-    // Wheel zoom (desktop)
-    const handleWheel = useCallback((e: React.WheelEvent) => {
-        if (isMobile) return;
-        e.preventDefault();
-        const containerEl = imageContainerRef.current;
-        if (!containerEl) return;
-        const rect = containerEl.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        setZoomOrigin({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
-        if (e.deltaY < 0) {
-            setZoomLevel(prev => Math.min(prev + 25, 300));
-        } else if (e.deltaY > 0) {
-            setZoomLevel(prev => Math.max(100, prev - 25));
-        }
-    }, [isMobile]);
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key.toLowerCase() === 'i' && !showShortcuts) {
-                e.preventDefault();
-                setShowInfo(!showInfo);
-            }
-            if (e.key === '?') {
-                e.preventDefault();
-                setShowShortcuts(!showShortcuts);
-            }
-        };
-
-        document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [showInfo, showShortcuts, setShowInfo, setShowShortcuts]);
-
-    useEffect(() => {
-        // Handle carousel auto-play on desktop only
-        if (isCarouselMode && !isMobile) {
-            carouselIntervalRef.current = setInterval(() => {
-                goNext();
-            }, 5000);
-        }
-
-        return () => {
-            if (carouselIntervalRef.current) {
-                clearInterval(carouselIntervalRef.current);
-            }
-        };
-    }, [isCarouselMode, isMobile, goNext]);
-
-    // Reset zoom when active image changes
-    useEffect(() => {
-        setZoomLevel(100);
-        setZoomOrigin({ x: 50, y: 50 });
-        setPanOffset({ x: 0, y: 0 });
-        setIsDragging(false);
-        setDragStart(null);
-    }, [active]);
-
-    // Clamp pan when zoom changes
-    useEffect(() => {
-        if (zoomLevel <= 100) {
-            setPanOffset({ x: 0, y: 0 });
-            return;
-        }
-        setPanOffset(prev => clampPan(prev));
-    }, [zoomLevel, clampPan]);
-
     return (
-        <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
-            {isMobile ? (
-                // Mobile layout: image, info overlay, buttons stacked vertically
-                <div className="w-full flex flex-col items-center justify-center gap-4" onClick={(e) => e.stopPropagation()}>
-                    {/* Image Container - Smaller on mobile */}
-                    <div className="w-full flex items-center justify-center overflow-hidden">
-                        <div
-                            className="flex items-center justify-center w-full max-h-[calc(70vh-8rem)]"
-                            onTouchStart={handleTouchStart}
-                            onTouchEnd={handleTouchEnd}
-                        >
-                            {isImageLoading && (
-                                <div className="absolute inset-0 bg-white/10 animate-pulse rounded-lg" />
-                            )}
-                            <Image
-                                src={active.image}
-                                alt={active.caption}
-                                width={1600}
-                                height={1200}
-                                placeholder="blur"
-                                blurDataURL={BLUR_DATA_URL}
-                                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
-                                sizes="(max-width: 768px) 100vw, 80vw"
-                                priority
-                                onContextMenu={(e) => e.preventDefault()}
-                                draggable={false}
-                                onLoadingComplete={() => setIsImageLoading(false)}
-                                onLoad={(e) => {
-                                    const img = e.target as HTMLImageElement;
-                                    setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    {showInfo && (
-                        <div
-                            className="w-full p-4"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <aside className="flex flex-col gap-3 text-tsiakkas-light max-w-full mx-auto">
-                                <h3 className="text-base font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
-                                <div className="text-sm opacity-90">
-                                    {active.location}, {active.country}
-                                </div>
-                                <div className="h-px bg-white/20 my-2" />
-                                <div className="flex flex-wrap gap-2">
-                                    {active.settings && active.settings.split(' · ').map((setting, index) => (
-                                        <span
-                                            key={index}
-                                            className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                                        >
-                                            {setting}
-                                        </span>
-                                    ))}
-                                    {imageDimensions && (
-                                        <span
-                                            className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                                        >
-                                            {imageDimensions.width} × {imageDimensions.height} px
-                                        </span>
-                                    )}
-                                </div>
-                                <div className="mt-1 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
-                            </aside>
-                        </div>
-                    )}
-                </div>
-            ) : (
-                <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-center md:items-center gap-8" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex-1 flex items-center justify-center overflow-hidden">
-                        <div
-                            ref={viewportRef}
-                            className="flex items-center justify-center w-full max-h-[calc(90vh-8rem)]"
-                            onTouchStart={handleTouchStart}
-                            onTouchEnd={handleTouchEnd}
-                            onWheel={handleWheel}
-                        >
-                            {isImageLoading && (
-                                <div className="absolute inset-0 bg-white/10 animate-pulse rounded-lg" />
-                            )}
-                            <div
-                                className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'} border-2 border-white/20`}
-                                style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
-                                onMouseDown={handleMouseDown}
-                            >
-                                <div
-                                    ref={imageContainerRef}
-                                    className="relative"
-                                    style={{
-                                        transform: `scale(${zoomLevel / 100})`,
-                                        transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
-                                    }}
-                                >
-                                    <Image
-                                        src={active.image}
-                                        alt={active.caption}
-                                        width={1600}
-                                        height={1200}
-                                        placeholder="blur"
-                                        blurDataURL={BLUR_DATA_URL}
-                                        className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
-                                        sizes="(max-width: 768px) 100vw, 80vw"
-                                        priority
-                                        onContextMenu={(e) => e.preventDefault()}
-                                        draggable={false}
-                                        onLoadingComplete={() => setIsImageLoading(false)}
-                                        onLoad={(e) => {
-                                            const img = e.target as HTMLImageElement;
-                                            setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-                                        }}
-                                    />
-                                    <div
-                                        className="absolute inset-0 bg-transparent"
-                                        onContextMenu={(e) => e.preventDefault()}
-                                        style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {showInfo && !isMobile && (
-                        <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
-                            <h3 className="text-xl font-semibold leading-relaxed italic">{'"'}{active.caption}{'"'}</h3>
-                            <div className="text-base opacity-90">
-                                {active.location}, {active.country}
-                            </div>
-                            <div className="h-px bg-white/20 my-2" />
-                            <div className="flex flex-wrap gap-2">
-                                {active.settings && active.settings.split(' · ').map((setting, index) => (
-                                    <span
-                                        key={index}
-                                        className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                                    >
-                                        {setting}
-                                    </span>
-                                ))}
-                                {imageDimensions && (
-                                    <span
-                                        className="px-3 py-1.5 text-sm font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                                    >
-                                        {imageDimensions.width} × {imageDimensions.height} px
-                                    </span>
-                                )}
-                            </div>
-                            <div className="mt-2 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
-                        </aside>
-                    )}
-                </div>
-            )}
-
-            {showShortcuts && (
-                <div
-                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-                    onClick={(e) => {
-                        if (e.target === e.currentTarget) setShowShortcuts(false);
-                    }}
-                >
-                    <div className="bg-tsiakkas-dark/95 border border-white/20 rounded-lg p-6 max-w-md w-full text-tsiakkas-light" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-semibold flex items-center gap-2">
-                                <MdInfo size={24} />
-                                Keyboard Shortcuts
-                            </h2>
-                            <button
-                                onClick={() => setShowShortcuts(false)}
-                                className="p-1 hover:bg-white/20 rounded transition-all"
-                                aria-label="Close shortcuts"
-                            >
-                                <MdClose size={24} />
-                            </button>
-                        </div>
-                        <div className="space-y-3 text-sm">
-                            {!isMobile ? (
-                                <>
-                                    <div className="flex justify-between">
-                                        <span>Previous image</span>
-                                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs">←</kbd>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Next image</span>
-                                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs">→</kbd>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Toggle info</span>
-                                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs">I</kbd>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Auto-play carousel</span>
-                                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs">P</kbd>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Show shortcuts</span>
-                                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs">?</kbd>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Close</span>
-                                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs">Esc</kbd>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <div className="flex justify-between">
-                                        <span>Swipe left/right</span>
-                                        <span className="text-xs opacity-70">Navigate images</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Tap info button</span>
-                                        <span className="text-xs opacity-70">Toggle photo info</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Show shortcuts</span>
-                                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs">?</kbd>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Close</span>
-                                        <span className="text-xs opacity-70">Tap outside</span>
-                                    </div>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 z-50" onClick={(e) => e.stopPropagation()}>
+        <div className="flex flex-row items-center justify-between p-4 gap-4" onClick={(e) => e.stopPropagation()}>
+            <span className="text-[11px] font-mono px-2 py-1 text-tsiakkas-light/70 bg-tsiakkas-light/10 rounded select-none">{activeIndex + 1}/{total}</span>
+            <div className="flex flex-row gap-2 items-center ml-auto">
                 <button
-                    onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                    disabled={!hasPrev}
-                    aria-label="Previous photo"
-                    className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all"
+                    onClick={(e) => { e.stopPropagation(); setShowShortcuts(!showShortcuts); }}
+                    aria-label="Show keyboard shortcuts"
+                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all text-lg font-bold"
+                    title="Press '?' for shortcuts"
                 >
-                    <IoIosArrowBack size={28} />
+                    ?
                 </button>
                 <button
-                    onClick={(e) => { e.stopPropagation(); goNext(); }}
-                    disabled={!hasNext}
-                    aria-label="Next photo"
-                    className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all"
+                    onClick={(e) => { e.stopPropagation(); setShowInfo(!showInfo); }}
+                    aria-label={showInfo ? "Hide photo info" : "Show photo info"}
+                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
+                    title="Toggle info (I)"
                 >
-                    <IoIosArrowForward size={28} />
+                    {showInfo ? <MdInfo size={20} /> : <MdInfoOutline size={20} />}
+                </button>
+                {!isMobile && (
+                    <button
+                        onClick={(e) => { e.stopPropagation(); setIsCarouselMode(!isCarouselMode); }}
+                        aria-label={isCarouselMode ? "Stop carousel" : "Start carousel"}
+                        className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
+                        title="Auto-play carousel (5 second interval)"
+                    >
+                        {isCarouselMode ? <MdPause size={20} /> : <MdPlayArrow size={20} />}
+                    </button>
+                )}
+                <button
+                    onClick={() => downloadImageWithWatermark(active)}
+                    aria-label="Download image with watermark"
+                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
+                >
+                    <HiDownload size={20} />
+                </button>
+                <button
+                    onClick={onClose}
+                    aria-label="Close fullscreen viewer"
+                    className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all leading-none"
+                >
+                    <MdClose size={20} />
                 </button>
             </div>
         </div>
