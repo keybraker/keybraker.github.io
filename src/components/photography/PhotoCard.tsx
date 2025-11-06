@@ -20,9 +20,9 @@ export default function PhotoCard({
       className={`
           group relative w-full h-full
           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
-          border border-tsiakkas-dark/90 dark:border-tsiakkas-light/90 sm:border-tsiakkas-light/90 sm:dark:border-tsiakkas-light/90
-          overflow-hidden ring-1 ring-tsiakkas-dark/10 dark:ring-tsiakkas-light/10
-          bg-white/40 dark:bg-white/5 backdrop-blur-[2px] transition-colors
+          border-2 sm:border-4 border-tsiakkas-dark/90 dark:border-tsiakkas-light/90 sm:border-tsiakkas-light/90 sm:dark:border-tsiakkas-dark/90
+          overflow-hidden ring-0 ring-tsiakkas-dark/10 dark:ring-tsiakkas-light/10
+          backdrop-blur-[2px] transition-colors
       `}
     >
       <div className="relative w-full h-full">
