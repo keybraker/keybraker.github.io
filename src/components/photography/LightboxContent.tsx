@@ -198,7 +198,7 @@ export default function LightboxContent({
                 height={1200}
                 placeholder="blur"
                 blurDataURL={BLUR_DATA_URL}
-                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none border-4 border-white/80"
+                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none border-4 border-tsiakkas-light/80"
                 sizes="(max-width: 768px) 100vw, 80vw"
                 priority
                 onContextMenu={(e) => e.preventDefault()}
@@ -249,7 +249,7 @@ export default function LightboxContent({
                     height={1200}
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
-                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none border-4 border-white/80"
+                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none border-4 border-tsiakkas-light/80"
                     sizes="(max-width: 768px) 100vw, 80vw"
                     priority
                     onContextMenu={(e) => e.preventDefault()}
