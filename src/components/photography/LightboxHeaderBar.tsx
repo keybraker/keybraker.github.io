@@ -4,8 +4,9 @@ import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
 import { MdPause } from "@react-icons/all-files/md/MdPause";
 import { MdPlayArrow } from "@react-icons/all-files/md/MdPlayArrow";
 import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
-import { downloadImageWithWatermark } from "@/utils/watermark";
+import { downloadImageWithWatermark, downloadImageAsPolaroid } from "@/utils/watermark";
 import type { PhotoWithCategory } from '@/types/photo';
+import { useState, useRef, useEffect } from 'react';
 
 interface LightboxHeaderBarProps {
   activeIndex: number;
@@ -34,6 +35,22 @@ export default function LightboxHeaderBar({
   onClose,
   active,
 }: LightboxHeaderBarProps) {
+  const [showDownloadMenu, setShowDownloadMenu] = useState(false);
+  const downloadMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (downloadMenuRef.current && !downloadMenuRef.current.contains(event.target as Node)) {
+        setShowDownloadMenu(false);
+      }
+    }
+
+    if (showDownloadMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showDownloadMenu]);
   return (
     <div
       className="flex flex-row items-center justify-between p-4 gap-4"
@@ -78,13 +95,46 @@ export default function LightboxHeaderBar({
             {isCarouselMode ? <MdPause size={20} /> : <MdPlayArrow size={20} />}
           </button>
         )}
-        <button
-          onClick={() => downloadImageWithWatermark(active)}
-          aria-label="Download image with watermark"
-          className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
-        >
-          <HiDownload size={20} />
-        </button>
+        <div className="relative" ref={downloadMenuRef}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDownloadMenu(!showDownloadMenu);
+            }}
+            aria-label="Download image options"
+            className="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm text-tsiakkas-light hover:bg-white/40 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 flex items-center justify-center transition-all"
+            title="Download options"
+          >
+            <HiDownload size={20} />
+          </button>
+          {showDownloadMenu && (
+            <div className="absolute right-0 mt-3 w-56 bg-tsiakkas-dark/95 rounded-2xl shadow-2xl z-50 overflow-hidden border border-tsiakkas-light/15">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  downloadImageWithWatermark(active);
+                  setShowDownloadMenu(false);
+                }}
+                className="w-full px-5 py-4 text-left text-sm text-tsiakkas-light hover:bg-white/10 transition-all duration-200 border-b border-tsiakkas-light/10 last:border-b-0 group"
+              >
+                <p className="font-medium">With Watermark</p>
+                <p className="text-xs text-tsiakkas-light/50 mt-1">Professional with signature</p>
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  downloadImageAsPolaroid(active);
+                  setShowDownloadMenu(false);
+                }}
+                className="w-full px-5 py-4 text-left text-sm text-tsiakkas-light hover:bg-white/10 transition-all duration-200 border-b border-tsiakkas-light/10 last:border-b-0 group"
+              >
+                <p className="font-medium">Polaroid Style</p>
+                <p className="text-xs text-tsiakkas-light/50 mt-1">Elegant vintage frame</p>
+              </button>
+            </div>
+          )}
+        </div>
         <button
           onClick={onClose}
           aria-label="Close fullscreen viewer"
