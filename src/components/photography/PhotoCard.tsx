@@ -20,7 +20,7 @@ export default function PhotoCard({
       className={`
           group relative w-full h-full
           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
-          border border-tsiakkas-dark/20 dark:border-tsiakkas-light/20 rounded-md
+          border border-tsiakkas-dark/90 dark:border-tsiakkas-light/90 sm:border-tsiakkas-light/90 sm:dark:border-tsiakkas-light/90
           overflow-hidden ring-1 ring-tsiakkas-dark/10 dark:ring-tsiakkas-light/10
           bg-white/40 dark:bg-white/5 backdrop-blur-[2px] transition-colors
       `}
