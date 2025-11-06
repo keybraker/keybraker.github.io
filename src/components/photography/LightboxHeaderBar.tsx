@@ -108,7 +108,7 @@ export default function LightboxHeaderBar({
             <HiDownload size={20} />
           </button>
           {showDownloadMenu && (
-            <div className="absolute right-0 mt-3 w-56 bg-tsiakkas-dark/95 rounded-2xl shadow-2xl z-50 overflow-hidden border border-tsiakkas-light/15">
+            <div className="absolute right-0 mt-3 w-56 bg-tsiakkas-dark/95 rounded-xl shadow-2xl z-50 overflow-hidden border border-tsiakkas-light/50">
               <button
                 onClick={(e) => {
                   e.stopPropagation();

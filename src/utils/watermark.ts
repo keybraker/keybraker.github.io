@@ -1,5 +1,3 @@
-// Utilities for dynamic client-side watermarking.
-
 export const BLUR_DATA_URL =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=';
 
@@ -100,12 +98,11 @@ export async function downloadImageWithWatermark(photo: { caption: string; origi
       0.85
     );
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Failed to download image with watermark:', err);
   }
 }
 
-export async function downloadImageAsPolaroid(photo: { caption: string; location: string; originalImage: string }) {
+export async function downloadImageAsPolaroid(photo: { caption: string; location: string; settings: string; originalImage: string }) {
   try {
     const img = new window.Image();
     img.crossOrigin = 'anonymous';
@@ -166,12 +163,12 @@ export async function downloadImageAsPolaroid(photo: { caption: string; location
 
     // "Shot by Ioannis Tsiakkas" - RIGHT SIDE
     ctx.font = `${subtitleFontSize}px "Georgia", "Garamond", serif`;
-    ctx.fillStyle = '#666666';
+    ctx.fillStyle = '#2c2c2c';
     ctx.textAlign = 'right';
-    ctx.fillText('shot by Ioannis Tsiakkas', rightTextX, rightTextY);
+    ctx.fillText('Shot by Ioannis Tsiakkas', rightTextX, rightTextY);
     rightTextY += subtitleFontSize + Math.round(subtitleFontSize * 0.3);
 
-    // Website URL - RIGHT SIDE
+    // Website URL
     ctx.font = `${subtitleFontSize}px "Georgia", "Garamond", serif`;
     ctx.fillStyle = '#999999';
     ctx.textAlign = 'right';
@@ -193,7 +190,6 @@ export async function downloadImageAsPolaroid(photo: { caption: string; location
       0.9
     );
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Failed to download image as Polaroid:', err);
   }
 }
