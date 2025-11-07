@@ -109,7 +109,6 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
     const [active, setActive] = useState<PhotoWithCategory | null>(null);
 
     const {
-        allPhotos,
         filtered,
         filter,
         setFilter,

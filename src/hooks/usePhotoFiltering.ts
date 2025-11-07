@@ -3,7 +3,6 @@ import type { PhotoWithCategory, Section } from '@/types/photo';
 import { usePhotoOrientation } from './usePhotoOrientation';
 
 interface UsePhotoFilteringReturn {
-  allPhotos: PhotoWithCategory[];
   filtered: PhotoWithCategory[];
   filter: string;
   setFilter: (filter: string) => void;
@@ -34,7 +33,6 @@ export function usePhotoFiltering(sections: Section[]): UsePhotoFilteringReturn 
   }, [filter, showCommissioned]);
 
   return {
-    allPhotos,
     filtered,
     filter,
     setFilter,

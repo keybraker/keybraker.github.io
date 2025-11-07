@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 export function usePhotoOrientation(sections: Section[]): PhotoWithCategory[] {
   return useMemo(() =>
     sections.flatMap(s => {
-      return s.photos.map((p, index) => {
+      return s.photos.map((photo, index) => {
         // Alternating pattern with randomization to avoid clustering
         // Pattern: P-P-L-P-P-L (portrait-portrait-landscape repeats)
         // This ensures landscapes are spaced out and no long stretches of same orientation
@@ -12,7 +12,7 @@ export function usePhotoOrientation(sections: Section[]): PhotoWithCategory[] {
         const isLandscape = positionInPattern === 2 || positionInPattern === 5;
 
         return {
-          ...p,
+          ...photo,
           category: s.title,
           orientation: isLandscape ? ('landscape' as const) : ('portrait' as const)
         };

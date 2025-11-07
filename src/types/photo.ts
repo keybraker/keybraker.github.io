@@ -9,7 +9,10 @@ export type Photo = {
   isCommissioned: boolean;
 };
 
-export type Section = { title: string; photos: Photo[] };
+export type Section = {
+  title: string;
+   photos: Photo[]
+};
 
 export type PhotoWithCategory = Photo & {
   category: string;
