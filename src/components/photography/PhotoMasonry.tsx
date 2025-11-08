@@ -30,7 +30,7 @@ export default function PhotoMasonry({
           </div>
         ))}
       </div>
-      {displayCount < photos.length && <div ref={sentinelRef} className="h-4 w-full" aria-label="Loading indicator" />}
+      {displayCount < photos.length && <div ref={sentinelRef} className="h-4 w-full" />}
     </>
   );
 }

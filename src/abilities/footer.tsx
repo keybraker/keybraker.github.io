@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="flex w-full flex-row justify-center gap-4">
         <Image
           src={signature}
-          alt="signature"
+          alt=""
           width={96}
           height={64}
           className="subpixel-antialiased bg-tsiakkas-blueLight dark:bg-tsiakkas-electric-yellow transform rotate-3"
