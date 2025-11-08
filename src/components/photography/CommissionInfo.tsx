@@ -1,7 +1,6 @@
 import MyWords from '@/components/myWords';
 
 export default function CommissionInfo({ isMobile }: { isMobile: boolean }) {
-  // isMobile provided for API consistency; current layout is responsive via CSS
   return (
     <section aria-labelledby="contact-heading" className="w-full text-start">
       <div className="flex flex-col gap-6">

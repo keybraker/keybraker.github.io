@@ -18,7 +18,7 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
   const [hovered, setHovered] = useState<string | null>(null);
 
   const baseIconClasses = "antialiased transition-all duration-300 ease-out";
-  const dimmedClasses = "opacity-30 grayscale"; // greys out and lowers emphasis
+  const dimmedClasses = "opacity-30 grayscale";
 
   const iconWrapper = (id: string, node: JSX.Element, props?: any) => (
     <span

@@ -27,7 +27,6 @@ export function usePhotoFiltering(sections: Section[]): UsePhotoFilteringReturn 
     return filter === "All" ? regularPhotos : regularPhotos.filter(p => p.category === filter);
   }, [allPhotos, filter, showCommissioned]);
 
-  // Reset display count when filter changes
   useEffect(() => {
     setDisplayCount(12);
   }, [filter, showCommissioned]);

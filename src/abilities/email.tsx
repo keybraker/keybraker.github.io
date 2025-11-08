@@ -8,9 +8,8 @@ import Link from 'next/link';
 const mail = "iantsiakkas@gmail.com";
 const mailto = "mailto:" + mail;
 const subject = "?subject=" + "Hey%20Ioannis";
-// const body = "&body=" + "Email%20Body";
 
-const date = new Date(); // Replace with your date object
+const date = new Date();
 const options = {
   year: "numeric",
   month: "short",

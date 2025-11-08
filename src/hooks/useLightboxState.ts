@@ -14,7 +14,6 @@ export function useLightboxState(isMobile: boolean): UseLightboxStateReturn {
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [isCarouselMode, setIsCarouselMode] = useState(false);
 
-  // Update showInfo when mobile state changes
   useEffect(() => {
     setShowInfo(!isMobile);
   }, [isMobile]);

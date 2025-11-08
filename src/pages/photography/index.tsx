@@ -18,13 +18,11 @@ export async function getStaticProps() {
     const commissionedDir = path.join(process.cwd(), 'public', 'photos', 'commissioned');
     const watermarkedDir = path.join(process.cwd(), 'public', 'photos-watermarked');
 
-    // Read regular photos
     const files = fs.readdirSync(photosDir).filter(file =>
         (file.endsWith('.jpg') || file.endsWith('.JPG') || file.endsWith('.jpeg') || file.endsWith('.JPEG')) &&
         !fs.statSync(path.join(photosDir, file)).isDirectory()
     );
 
-    // Read commissioned photos
     let commissionedFiles: string[] = [];
     if (fs.existsSync(commissionedDir)) {
         commissionedFiles = fs.readdirSync(commissionedDir).filter(file =>
