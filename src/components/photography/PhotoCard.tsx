@@ -6,10 +6,12 @@ export default function PhotoCard({
   photo,
   onOpen,
   isMobile,
+  priority = false,
 }: {
   photo: PhotoWithCategory;
   onOpen: (p: PhotoWithCategory) => void;
   isMobile: boolean;
+  priority?: boolean;
 }) {
   const imgSrc = photo.image;
   return (
@@ -33,6 +35,7 @@ export default function PhotoCard({
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          priority={priority}
           className="
             object-cover select-none transition duration-500 ease-out group-hover:blur-sm group-focus-visible:blur-sm
           "

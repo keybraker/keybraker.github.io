@@ -18,7 +18,7 @@ export default function PhotoMasonry({
   return (
     <>
       <div className="grid gap-2 sm:gap-0 w-full auto-rows-[300px] grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
-        {photos.slice(0, displayCount).map((p) => (
+        {photos.slice(0, displayCount).map((p, index) => (
           <div
             key={p.id}
             style={{
@@ -26,7 +26,7 @@ export default function PhotoMasonry({
               gridRow: p.orientation === 'landscape' ? 'span 1' : 'span 2',
             }}
           >
-            <PhotoCard photo={p} onOpen={onOpen} isMobile={isMobile} />
+            <PhotoCard photo={p} onOpen={onOpen} isMobile={isMobile} priority={index === 0} />
           </div>
         ))}
       </div>
