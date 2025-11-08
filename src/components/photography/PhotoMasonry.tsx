@@ -17,7 +17,7 @@ export default function PhotoMasonry({
 }) {
   return (
     <>
-      <div className="grid gap-2 sm:gap-0 w-full auto-rows-[300px] grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
+      <div className="grid gap-2 sm:gap-1 w-full auto-rows-[300px] grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
         {photos.slice(0, displayCount).map((p, index) => (
           <div
             key={p.id}
