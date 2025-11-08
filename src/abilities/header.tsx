@@ -41,7 +41,16 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
           aria-label="Go to photography page"
           className="focus:outline-none"
         >
-          {iconWrapper("photography", <MdPhotoCamera className={baseIconClasses} size={"20px"} />)}
+          {iconWrapper("photography",
+            <span className="
+            md:flex md:gap-2 md:border md:rounded-full md:border-tsiakkas-dark md:dark:border-tsiakkas-light
+            md:px-3 md:py-[2px] md:items-center md:snap-center
+          md:hover:bg-tsiakkas-dark/20 md:hover:dark:bg-tsiakkas-light/20
+            md:transition-all md:duration-300
+          ">
+              <span className="pb-[2px] font-extrabold hidden md:block italic">Photography</span>
+              <span className=""><MdPhotoCamera className={baseIconClasses} size={"20px"} /></span>
+            </span>)}
         </Link>
       )}
       {showResumeIcon && (
@@ -50,7 +59,15 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
           aria-label="Go to resume (home) page"
           className="focus:outline-none"
         >
-          {iconWrapper("resume", <IoIosPaper className={baseIconClasses} size={"20px"} />)}
+          {iconWrapper("resume", <span className="
+            md:flex md:gap-2 md:border md:rounded-full md:border-tsiakkas-dark md:dark:border-tsiakkas-light
+            md:px-3 md:py-[2px] md:items-center md:snap-center
+          md:hover:bg-tsiakkas-dark/20 md:hover:dark:bg-tsiakkas-light/20
+            md:transition-all md:duration-300
+          ">
+            <span className="pb-[2px] font-extrabold hidden md:block italic">Resume</span>
+            <span className=""><IoIosPaper className={baseIconClasses} size={"20px"} /></span>
+          </span>)}
         </Link>
       )}
       {(showPhotographyLink || showResumeIcon) && (
@@ -92,7 +109,7 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
       >
         {iconWrapper("linkedin", <FaLinkedin className={baseIconClasses} size={"20px"} />)}
       </a>
-  <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
+      <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
       {/* Dark mode toggle also participates */}
       <div
         onMouseEnter={() => setHovered("darkmode")}
