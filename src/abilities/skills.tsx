@@ -32,8 +32,6 @@ const skills: SkillType[] = [
 
 export default function SkillPage() {
   return (
-    <div>
-      <SkillListings skills={skills} />
-    </div>
+    <SkillListings skills={skills} />
   );
 }

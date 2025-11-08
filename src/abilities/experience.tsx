@@ -93,8 +93,6 @@ const experiences: ShowcaseType[] = [
 
 export default function ExperiencePage() {
   return (
-    <div>
       <ShowcaseListings showcases={experiences} />
-    </div>
   );
 }

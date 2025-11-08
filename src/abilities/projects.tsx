@@ -111,8 +111,6 @@ const projects: ShowcaseType[] = [
 
 export default function ProjectsPage() {
   return (
-    <div>
-      <ShowcaseListings showcases={projects} />
-    </div>
+    <ShowcaseListings showcases={projects} />
   );
 }

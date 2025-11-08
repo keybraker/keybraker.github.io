@@ -5,7 +5,7 @@ export default function CommissionInfo({ isMobile }: { isMobile: boolean }) {
     <section aria-labelledby="contact-heading" className="w-full text-start">
       <div className="flex flex-col gap-6">
         {MyWords({ text: 'Commissioned Work' })}
-        <div className="flex flex-col gap-0 text-base md:text-lg leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light">
+        <div className="flex flex-col gap-0 text-base md:text-lg leading-relaxed text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 font-light space-y-2">
           <p>
             Available for event photography, product shoots, and commercial projects, get in touch to discuss your
             photography needs.

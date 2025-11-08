@@ -43,8 +43,6 @@ const skills: SkillType[] = [
 
 export default function SoftwareEngineeringPage() {
   return (
-    <div>
-      <SkillListings skills={skills} />
-    </div>
+    <SkillListings skills={skills} />
   );
 }

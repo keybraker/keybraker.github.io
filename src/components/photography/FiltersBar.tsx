@@ -16,9 +16,8 @@ export default function FiltersBar({
   isMobile: boolean;
 }) {
   return (
-    <div className="sm:sticky sm:top-[70px] sm:z-30 bg-tsiakkas-light dark:bg-tsiakkas-dark py-4 px-6 -mx-4">
-      <div className="flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
-        <nav className="flex flex-wrap gap-3 justify-start">
+    <div className="sm:sticky sm:top-[70px] sm:z-30 bg-tsiakkas-light dark:bg-tsiakkas-dark py-4 px-6 -mx-4 flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
+      <nav className="flex flex-wrap gap-3 justify-start">
           {["All", ...sections.map((s) => s.title)].map((cat) => {
             const activeFilter = !showCommissioned && filter === cat;
             return (
@@ -52,7 +51,6 @@ export default function FiltersBar({
         >
           Commissioned Work
         </button>
-      </div>
     </div>
   );
 }

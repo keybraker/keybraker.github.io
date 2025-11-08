@@ -20,8 +20,6 @@ const education: ShowcaseType[] = [
 
 export default function EducationPage() {
   return (
-    <div>
       <ShowcaseListings showcases={education} />
-    </div>
   );
 }

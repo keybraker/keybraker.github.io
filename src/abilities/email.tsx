@@ -37,31 +37,27 @@ export default function Email() {
     <section className="mb-12 rounded-[10px] bg-verge-cyan/50 dark:bg-verge-cyan/75 text-tsiakkas-dark p-6 shadow-xl">
       {/* <HeadScene /> */}
       <div className="flex flex-col-reverse sm:flex-row justify-between w-full gap-4">
-        <div className="flex flex-col w-full">
-          <span className="flex flex-row gap-2">
-            <span className="w-20">
-              from:{" "}
-            </span>
-            <span className="w-full text-end xs:text-start">
-              <a
-                className="font-semibold hover:underline"
-                href={`${mailto}${subject}`}
-              >
-                me@mail.com
-              </a>
-            </span>
-          </span>
-          <span className="flex flex-row gap-2">
+        <div className="flex flex-col w-full space-y-2">
+          <div className="flex flex-row gap-2">
+            <span className="w-20">from:</span>
+            <a
+              className="w-full text-end xs:text-start font-semibold hover:underline"
+              href={`${mailto}${subject}`}
+            >
+              me@mail.com
+            </a>
+          </div>
+          <div className="flex flex-row gap-2">
             <span className="w-20">to:</span>
             <span className="w-full text-end xs:text-start">you</span>
-          </span>
-          <span className="flex flex-row gap-2">
+          </div>
+          <div className="flex flex-row gap-2">
             <span className="w-20">subject:</span>
             <span className="w-full text-end xs:text-start">My website</span>
-          </span>
+          </div>
         </div>
-        <div className="flex flex-row justify-between sm:flex-col h-full w-full items-end">
-          {hasMounted && (<span className="flex self-end">{formattedDate}</span>)}
+        <div className="flex flex-row justify-between sm:flex-col h-full w-full items-end gap-2">
+          {hasMounted && <span className="self-end">{formattedDate}</span>}
           <span className="italic text-gray-700">one attachment (1)</span>
         </div>
       </div>
@@ -101,14 +97,9 @@ export default function Email() {
         <p className="mt-4">Kindly, Ioannis</p>
       </div>
 
-      <div className="flex-end align-start h-42 mt-7 flex justify-between gap-1 text-tsiakkas-dark dark:text-tsiakkas-light ">
+      <div className="flex justify-between gap-1 mt-7 text-tsiakkas-dark dark:text-tsiakkas-light h-42">
         <a
-          className="
-            flex h-full w-24 items-center justify-around
-            gap-0 rounded-full py-1.5 px-2.5 shadow-md
-            hover:text-tsiakkas-dark hover:dark:text-tsiakkas-light
-            bg-tsiakkas-light dark:bg-tsiakkas-dark
-            hover:bg-tsiakkas-light/75 hover:dark:bg-tsiakkas-dark/75"
+          className="flex h-full w-24 items-center justify-around gap-0 rounded-full py-1.5 px-2.5 shadow-md bg-tsiakkas-light dark:bg-tsiakkas-dark hover:bg-tsiakkas-light/75 hover:dark:bg-tsiakkas-dark/75"
           href={`${mailto}${subject}`}
         >
           <HiOutlineReply />
@@ -118,11 +109,7 @@ export default function Email() {
         <div className="group relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
-            className="
-              relative flex h-full w-28 items-center justify-around gap-0 rounded-md
-              bg-tsiakkas-light dark:bg-tsiakkas-dark
-              shadow-md ring-1 ring-gray-900/5
-              hover:bg-tsiakkas-dark/10 hover:dark:bg-tsiakkas-dark/10"
+            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md bg-tsiakkas-light dark:bg-tsiakkas-dark shadow-md ring-1 ring-gray-900/5 hover:bg-tsiakkas-dark/10 hover:dark:bg-tsiakkas-dark/10"
             href="/assets/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
