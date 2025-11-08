@@ -1,0 +1,63 @@
+import React from 'react';
+import { groupPhotosByYearMonth, YearGroup } from '@/functions/groupPhotosByYearMonth';
+import PhotoMasonry from '@/components/photography/PhotoMasonry';
+import type { PhotoWithCategory } from '@/types/photo';
+
+interface YearMonthGalleryProps {
+  photos: PhotoWithCategory[];
+  displayCount: number;
+  onOpen: (p: PhotoWithCategory) => void;
+  sentinelRef: React.RefObject<HTMLDivElement>;
+  isMobile: boolean;
+}
+
+export default function YearMonthGallery({
+  photos,
+  displayCount,
+  onOpen,
+  sentinelRef,
+  isMobile
+}: YearMonthGalleryProps) {
+  const grouped: YearGroup[] = groupPhotosByYearMonth(photos);
+
+  const flatOrdered: PhotoWithCategory[] = grouped.flatMap(g => g.months.flatMap(m => m.photos));
+  const visibleSet = new Set(flatOrdered.slice(0, displayCount).map(p => p.id));
+
+  return (
+    <div className="flex flex-col w-full gap-12">
+      {grouped.map(yearGroup => (
+        <div key={yearGroup.year} className="flex flex-col gap-8">
+          {/* <h2 className="
+            text-3xl font-extrabold italic tracking-wide text-center text-tsiakkas-dark dark:text-tsiakkas-light
+          ">
+            {yearGroup.year === 0 ? 'Undated' : yearGroup.year}
+          </h2> */}
+          {yearGroup.months.map(monthGroup => {
+            const monthPhotos = monthGroup.photos.filter(p => visibleSet.has(p.id));
+            if (monthPhotos.length === 0) return null; // not yet revealed
+            return (
+              <div key={`${yearGroup.year}-${monthGroup.month}`} className="flex flex-col gap-4">
+                <h3 className="
+                    text-2xl font-bold text-tsiakkas-dark/80 dark:text-tsiakkas-light/80
+                ">
+                  <div className="flex items-baseline gap-3">
+                    <span>{monthGroup.label}</span>
+                    {yearGroup.year !== 0 && <span className="text-xs font-extrabold italic text-tsiakkas-dark/60 dark:text-tsiakkas-light/60">{yearGroup.year}</span>}
+                  </div>{yearGroup.year === 0 ? '' : ''}
+                </h3>
+                <PhotoMasonry
+                  photos={monthPhotos}
+                  displayCount={monthPhotos.length}
+                  onOpen={onOpen}
+                  sentinelRef={sentinelRef}
+                  isMobile={isMobile}
+                />
+              </div>
+            );
+          })}
+        </div>
+      ))}
+      {displayCount < photos.length && <div ref={sentinelRef} className="h-4 w-full" />}
+    </div>
+  );
+}

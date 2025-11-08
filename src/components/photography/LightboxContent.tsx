@@ -198,7 +198,7 @@ export default function LightboxContent({
                 height={1200}
                 placeholder="blur"
                 blurDataURL={BLUR_DATA_URL}
-                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none border-4 border-tsiakkas-light/80"
+                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none"
                 sizes="(max-width: 768px) 100vw, 80vw"
                 priority
                 onContextMenu={(e) => e.preventDefault()}
@@ -241,7 +241,11 @@ export default function LightboxContent({
             <div ref={viewportRef} className="flex items-center justify-center w-full max-h-[calc(90vh-8rem)] " onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} onWheel={handleWheel}>
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-lg" />}
               <div className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`} style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }} onMouseDown={handleMouseDown}>
-                <div ref={imageContainerRef} className="relative" style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }}>
+                <div
+                  ref={imageContainerRef}
+                  className="relative"
+                  style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }}
+                >
                   <Image
                     src={active.image}
                     alt={active.caption}
@@ -249,7 +253,7 @@ export default function LightboxContent({
                     height={1200}
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
-                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none border-4 border-tsiakkas-light/80"
+                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none"
                     sizes="(max-width: 768px) 100vw, 80vw"
                     priority
                     onContextMenu={(e) => e.preventDefault()}

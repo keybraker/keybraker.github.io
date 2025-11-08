@@ -1,6 +1,6 @@
-import FiltersBar from '@/components/photography/FiltersBar';
-import PhotoMasonry from '@/components/photography/PhotoMasonry';
 import CopyrightNotice from '@/components/photography/CopyrightNotice';
+import FiltersBar from '@/components/photography/FiltersBar';
+import YearMonthGallery from '@/components/photography/YearMonthGallery';
 import type { PhotoWithCategory, Section } from '@/types/photo';
 
 interface PhotoGallerySectionProps {
@@ -39,7 +39,7 @@ export default function PhotoGallerySection({
         isMobile={isMobile}
       />
 
-      <PhotoMasonry
+      <YearMonthGallery
         photos={filtered}
         displayCount={displayCount}
         onOpen={onOpen}

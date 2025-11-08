@@ -7,6 +7,7 @@ export type Photo = {
   image: string;
   originalImage: string;
   isCommissioned: boolean;
+  date?: string;
 };
 
 export type Section = {

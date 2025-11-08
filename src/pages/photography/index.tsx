@@ -1,6 +1,7 @@
 import HeroSection from '@/components/photography/HeroSection';
 import LightboxViewer from '@/components/photography/LightboxViewer';
 import PhotoGallerySection from '@/components/photography/PhotoGallerySection';
+import { groupPhotosByYearMonth } from '@/functions/groupPhotosByYearMonth';
 import { useLazyLoading } from '@/hooks/useLazyLoading';
 import { useLightboxState } from '@/hooks/useLightboxState';
 import { useMobileDetection } from '@/hooks/useMobileDetection';
@@ -10,7 +11,7 @@ import type { Photo, PhotoWithCategory, Section } from '@/types/photo';
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const exifParser = require('exif-parser');
 
@@ -45,6 +46,8 @@ export async function getStaticProps() {
 
         const buffer = fs.readFileSync(path.join(dirPath, file));
         let settings = '';
+        let date: string | undefined = undefined;
+
         try {
             const parser = exifParser.create(buffer);
             const result = parser.parse();
@@ -52,6 +55,18 @@ export async function getStaticProps() {
             const fNumber = result.tags.FNumber;
             const exposureTime = result.tags.ExposureTime;
             const iso = result.tags.ISO;
+
+            const dateRaw: string | number | undefined = (result.tags.DateTimeOriginal || result.tags.CreateDate);
+            if (dateRaw) {
+                if (typeof dateRaw === 'number') {
+                    date = new Date(dateRaw * 1000).toISOString();
+                } else if (typeof dateRaw === 'string') {
+                    const normalized = dateRaw.replace(/:/g, '-').replace(' ', 'T');
+                    const parsed = new Date(normalized);
+                    if (!isNaN(parsed.getTime())) date = parsed.toISOString();
+                }
+            }
+
             if (focalLength && fNumber && exposureTime && iso) {
                 const shutter = exposureTime >= 1 ? `${exposureTime}s` : `1/${Math.round(1 / exposureTime)}s`;
                 settings = `${focalLength}mm · f/${fNumber} · ${shutter} · ISO ${iso}`;
@@ -72,6 +87,7 @@ export async function getStaticProps() {
             image: useWatermarked ? watermarkedPhotoPath : photoPath,
             originalImage: photoPath,
             isCommissioned,
+            date,
             section: country
         };
     };
@@ -79,7 +95,7 @@ export async function getStaticProps() {
     const tempPhotos = [
         ...files.map((file, index) => processPhoto(file, false, photosDir, index)),
         ...commissionedFiles.map((file, index) => processPhoto(file, true, commissionedDir, files.length + index))
-    ].filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean; section: string }[];
+    ].filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string }[];
 
     const sectionMap = new Map<string, Photo[]>();
     tempPhotos.forEach(tp => {
@@ -92,7 +108,8 @@ export async function getStaticProps() {
             country: tp.country,
             image: tp.image,
             originalImage: tp.originalImage,
-            isCommissioned: tp.isCommissioned
+            isCommissioned: tp.isCommissioned,
+            date: tp.date
         });
     });
     const sections = Array.from(sectionMap.entries()).map(([title, photos]) => ({ title, photos }));
@@ -117,6 +134,11 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         setDisplayCount
     } = usePhotoFiltering(sections);
 
+    const orderedFiltered = useMemo(() => {
+        const grouped = groupPhotosByYearMonth(filtered);
+        return grouped.flatMap(g => g.months.flatMap(m => m.photos));
+    }, [filtered]);
+
     const {
         activeIndex,
         hasPrev,
@@ -125,7 +147,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         nextPhoto,
         goPrev,
         goNext
-    } = usePhotoNavigation(active, setActive, filtered, isMobile);
+    } = usePhotoNavigation(active, setActive, orderedFiltered, isMobile);
 
     const {
         showInfo,
@@ -136,7 +158,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         setIsCarouselMode
     } = useLightboxState(isMobile);
 
-    const { observerTargetRef } = useLazyLoading(filtered, displayCount, setDisplayCount);
+    const { observerTargetRef } = useLazyLoading(orderedFiltered, displayCount, setDisplayCount);
 
     const close = () => {
         setActive(null);
@@ -175,7 +197,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                     setFilter={setFilter}
                     showCommissioned={showCommissioned}
                     setShowCommissioned={setShowCommissioned}
-                    filtered={filtered}
+                    filtered={orderedFiltered}
                     displayCount={displayCount}
                     onOpen={setActive}
                     sentinelRef={observerTargetRef}
@@ -187,7 +209,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                 <LightboxViewer
                     active={active}
                     activeIndex={activeIndex}
-                    filtered={filtered}
+                    filtered={orderedFiltered}
                     prevPhoto={prevPhoto}
                     nextPhoto={nextPhoto}
                     goNext={goNext}
