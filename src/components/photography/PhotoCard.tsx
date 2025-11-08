@@ -32,7 +32,7 @@ export default function PhotoCard({
       <div className="relative w-full h-full">
         <Image
           src={imgSrc}
-          alt={photo.caption}
+          alt=""
           fill
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
