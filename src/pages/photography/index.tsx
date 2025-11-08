@@ -8,6 +8,7 @@ import { usePhotoFiltering } from '@/hooks/usePhotoFiltering';
 import { usePhotoNavigation } from '@/hooks/usePhotoNavigation';
 import type { Photo, PhotoWithCategory, Section } from '@/types/photo';
 import fs from 'fs';
+import Head from 'next/head';
 import path from 'path';
 import { useState } from "react";
 
@@ -145,11 +146,21 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
 
     return (
         <main className="w-full h-full">
-            <div>
+            <Head>
                 <title>Ioannis Tsiakkas photography</title>
                 <meta name="description" content="A curated photography showcase." />
                 <meta name="robots" content="index,follow" />
-            </div>
+                {sections.length > 0 && sections[0].photos.length > 0 && (
+                    <>
+                        <link
+                            rel="preload"
+                            as="image"
+                            href={sections[0].photos[0].image}
+                            imageSrcSet={sections[0].photos[0].image}
+                        />
+                    </>
+                )}
+            </Head>
 
             <div id="top" className="relative flex flex-col gap-8">
                 <HeroSection
