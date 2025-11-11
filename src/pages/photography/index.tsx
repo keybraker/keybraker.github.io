@@ -187,7 +187,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         <main className="w-full h-full">
             <Head>
                 <title>Ioannis Tsiakkas photography</title>
-                <meta name="description" content="A curated photography showcase." />
+                <meta name="description" content="My photography portfolio." />
                 <meta name="robots" content="index,follow" />
                 {sections.length > 0 && sections[0].photos.length > 0 && (
                     <>
