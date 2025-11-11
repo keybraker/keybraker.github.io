@@ -9,6 +9,7 @@ import { usePhotoFiltering } from '@/hooks/usePhotoFiltering';
 import { usePhotoNavigation } from '@/hooks/usePhotoNavigation';
 import type { Photo, PhotoWithCategory, Section } from '@/types/photo';
 import fs from 'fs';
+import sizeOf from 'image-size';
 import Head from 'next/head';
 import path from 'path';
 import { useMemo, useState } from "react";
@@ -47,6 +48,18 @@ export async function getStaticProps() {
         const buffer = fs.readFileSync(path.join(dirPath, file));
         let settings = '';
         let date: string | undefined = undefined;
+        let width = 0;
+        let height = 0;
+
+        try {
+            const dimensions = sizeOf(new Uint8Array(buffer));
+            if (dimensions.width && dimensions.height) {
+                width = dimensions.width;
+                height = dimensions.height;
+            }
+        } catch (e) {
+            // ignore
+        }
 
         try {
             const parser = exifParser.create(buffer);
@@ -88,14 +101,16 @@ export async function getStaticProps() {
             originalImage: photoPath,
             isCommissioned,
             date,
-            section: country
+            section: country,
+            width,
+            height
         };
     };
 
     const tempPhotos = [
         ...files.map((file, index) => processPhoto(file, false, photosDir, index)),
         ...commissionedFiles.map((file, index) => processPhoto(file, true, commissionedDir, files.length + index))
-    ].filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string }[];
+    ].filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string; width: number; height: number; }[];
 
     const sectionMap = new Map<string, Photo[]>();
     tempPhotos.forEach(tp => {
@@ -109,8 +124,10 @@ export async function getStaticProps() {
             image: tp.image,
             originalImage: tp.originalImage,
             isCommissioned: tp.isCommissioned,
-            date: tp.date
-        });
+            date: tp.date,
+            width: tp.width,
+            height: tp.height
+        } satisfies Photo);
     });
     const sections = Array.from(sectionMap.entries()).map(([title, photos]) => ({ title, photos }));
     return {

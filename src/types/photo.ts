@@ -8,6 +8,8 @@ export type Photo = {
   originalImage: string;
   isCommissioned: boolean;
   date?: string;
+  width: number;
+  height: number;
 };
 
 export type Section = {
