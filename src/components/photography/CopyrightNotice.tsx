@@ -1,11 +1,11 @@
 export default function CopyrightNotice({ isMobile }: { isMobile: boolean }) {
   return (
-    <div className="text-center text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70 space-y-3">
+    <div className="text-left text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70 space-y-1">
       <p>
         All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas.
       </p>
       <p>
-        They MAY BE copied, redistributed, or used in any form, apart from any commercial purpose, without explicit
+        They may be copied, redistributed, or used in any form, apart from any commercial purpose, without explicit
         written permission.
       </p>
       <p>
