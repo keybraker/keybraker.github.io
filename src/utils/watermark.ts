@@ -102,7 +102,7 @@ export async function downloadImageWithWatermark(photo: { caption: string; origi
   }
 }
 
-export async function downloadImageAsPolaroid(photo: { caption: string; location: string; settings: string; originalImage: string }) {
+export async function downloadImageAsPolaroid(photo: { caption: string; location: string; country: string; settings: string; originalImage: string }) {
   try {
     const img = new window.Image();
     img.crossOrigin = 'anonymous';
@@ -152,11 +152,11 @@ export async function downloadImageAsPolaroid(photo: { caption: string; location
     ctx.fillText(photo.caption, leftTextX, textY);
     textY += titleFontSize + Math.round(titleFontSize * 0.3);
 
-    // Location - LEFT SIDE
+    // Location, Country - LEFT SIDE
     ctx.font = `${subtitleFontSize}px "Georgia", "Garamond", serif`;
     ctx.fillStyle = '#666666';
     ctx.textAlign = 'left';
-    ctx.fillText(photo.location, leftTextX, textY);
+    ctx.fillText(`${photo.location}, ${photo.country}`, leftTextX, textY);
 
     // Reset to right side for credit
     let rightTextY = img.height + borderSize + textPadding;
