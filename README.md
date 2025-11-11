@@ -1,24 +1,8 @@
-# Ioannis Tsiakkas Online CV
+# Ioannis Tsiakkas Online Resume
 
 [![GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-blue)](https://keybraker.github.io)
 
-A modern, responsive personal website showcasing Ioannis Tsiakkas' professional background, including skills, experience, projects, and contact information.
-
-## Features
-
-- **Responsive Design**: Optimized for all devices
-- **Dark Mode**: Toggle between light and dark themes
-- **Interactive Sections**: Education, experience, skills, projects, and more
-- **SEO Optimized**: Includes sitemap and meta tags
-- **Fast Loading**: Built with Next.js for performance
-
-## Technologies Used
-
-- **Framework**: Next.js
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Build Tool**: PostCSS
-- **Deployment**: GitHub Pages
+A personal website showcasing Ioannis Tsiakkas' professional background, including experience, projects, and contact information. Also my photography portfolio.
 
 ## Prerequisites
 
@@ -63,20 +47,6 @@ This project is configured for deployment on GitHub Pages. When you merge change
 
 To change the custom domain, edit the `CNAME` file in the root directory.
 
-## Contributing
-
-This is a personal project, but contributions are welcome! Feel free to:
-
-- Report bugs or issues
-- Suggest new features
-- Submit pull requests
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-Ioannis Tsiakkas - [Your Email or LinkedIn]
-
-Project Link: [https://github.com/keybraker/keybraker.github.io](https://github.com/keybraker/keybraker.github.io)
