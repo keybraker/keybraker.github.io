@@ -46,14 +46,19 @@ export default function YearMonthGallery({
               >
                 <h3 className="text-2xl text-tsiakkas-dark/80 dark:text-tsiakkas-light/80">
                   <div className="flex items-baseline gap-3 pb-3 border-b border-tsiakkas-dark/10 dark:border-tsiakkas-light/10">
-                  <span className="font-bold tracking-tight bg-gradient-to-r from-tsiakkas-dark to-tsiakkas-dark/60 dark:from-tsiakkas-light dark:to-tsiakkas-light/60 bg-clip-text text-transparent">
-                    {monthGroup.label}
-                  </span>
-                  {yearGroup.year !== 0 && (
-                    <span className="text-sm font-extrabold italic text-tsiakkas-dark/50 dark:text-tsiakkas-light/50 ml-auto">
-                    {yearGroup.year}
+                    <div className="flex flex-row gap-4 items-baseline">
+                      <span className="font-bold tracking-tight bg-gradient-to-r from-tsiakkas-dark to-tsiakkas-dark/60 dark:from-tsiakkas-light dark:to-tsiakkas-light/60 bg-clip-text text-transparent">
+                        {monthGroup.label}
+                      </span>
+                      {yearGroup.year !== 0 && (
+                        <span className="text-xs font-extrabold italic text-tsiakkas-dark/50 dark:text-tsiakkas-light/50">
+                          {yearGroup.year}
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-sm font-semibold text-tsiakkas-dark/60 dark:text-tsiakkas-light/60 ml-auto">
+                      {monthPhotos.length} {monthPhotos.length === 1 ? 'shot' : 'shots'}
                     </span>
-                  )}
                   </div>
                 </h3>
                 <PhotoMasonry
