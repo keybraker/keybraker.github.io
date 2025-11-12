@@ -43,9 +43,10 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
         >
           {iconWrapper("photography",
             <span className="
-            md:flex md:gap-2 md:border md:rounded-full md:border-tsiakkas-dark md:dark:border-tsiakkas-light
+            md:flex md:gap-2 md:border md:rounded-full
             md:px-3 md:py-[2px] md:items-center md:snap-center
-          md:hover:bg-tsiakkas-dark/20 md:hover:dark:bg-tsiakkas-light/20
+            md:border-tsiakkas-dark/40 md:dark:border-tsiakkas-light/40
+          md:hover:bg-tsiakkas-dark/10 md:hover:dark:bg-tsiakkas-light/10
             md:transition-all md:duration-300
           ">
               <span className="pb-[2px] font-extrabold hidden md:block italic">Photography</span>
@@ -60,9 +61,10 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
           className="focus:outline-none"
         >
           {iconWrapper("resume", <span className="
-            md:flex md:gap-2 md:border md:rounded-full md:border-tsiakkas-dark md:dark:border-tsiakkas-light
+            md:flex md:gap-2 md:border md:rounded-full
             md:px-3 md:py-[2px] md:items-center md:snap-center
-          md:hover:bg-tsiakkas-dark/20 md:hover:dark:bg-tsiakkas-light/20
+            md:border-tsiakkas-dark/40 md:dark:border-tsiakkas-light/40
+          md:hover:bg-tsiakkas-dark/10 md:hover:dark:bg-tsiakkas-light/10
             md:transition-all md:duration-300
           ">
             <span className="pb-[2px] font-extrabold hidden md:block italic">Resume</span>

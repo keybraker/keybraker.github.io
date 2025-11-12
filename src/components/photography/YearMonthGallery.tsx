@@ -26,7 +26,7 @@ export default function YearMonthGallery({
   return (
     <div className="flex flex-col w-full gap-12">
       {grouped.map(yearGroup => (
-        <div key={yearGroup.year} className="flex flex-col gap-8">
+        <div key={yearGroup.year} className="flex flex-col gap-24">
           {/* <h2 className="
             text-3xl font-extrabold italic tracking-wide text-center text-tsiakkas-dark dark:text-tsiakkas-light
           ">
@@ -36,14 +36,19 @@ export default function YearMonthGallery({
             const monthPhotos = monthGroup.photos.filter(p => visibleSet.has(p.id));
             if (monthPhotos.length === 0) return null; // not yet revealed
             return (
-              <div key={`${yearGroup.year}-${monthGroup.month}`} className="flex flex-col gap-4">
-                <h3 className="
-                    text-2xl font-bold text-tsiakkas-dark/80 dark:text-tsiakkas-light/80
-                ">
+              <div
+                key={`${yearGroup.year}-${monthGroup.month}`}
+                className="
+                  flex flex-col gap-4 px-4 pt-2 pb-6
+                  bg-tsiakkas-dark/5 dark:bg-tsiakkas-light/5
+                  rounded-2xl
+                "
+              >
+                <h3 className="text-2xl text-tsiakkas-dark/80 dark:text-tsiakkas-light/80">
                   <div className="flex items-baseline gap-3">
-                    <span>{monthGroup.label}</span>
+                    <span className="font-bold tracking-tight">{monthGroup.label}</span>
                     {yearGroup.year !== 0 && <span className="text-xs font-extrabold italic text-tsiakkas-dark/60 dark:text-tsiakkas-light/60">{yearGroup.year}</span>}
-                  </div>{yearGroup.year === 0 ? '' : ''}
+                  </div>
                 </h3>
                 <PhotoMasonry
                   photos={monthPhotos}
