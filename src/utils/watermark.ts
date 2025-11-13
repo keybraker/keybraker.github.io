@@ -1,7 +1,7 @@
 export const BLUR_DATA_URL =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=';
 
-export async function createWatermarkedImage(
+async function createWatermarkedImage(
   imageSrc: string,
   hiddenMessage: string,
   visibleText: string
@@ -32,31 +32,31 @@ export async function createWatermarkedImage(
   return canvas;
 }
 
-export function applyVisibleWatermark(
+function applyVisibleWatermark(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
   text: string,
   imgWidth: number
 ): void {
-  const fontSize = 96;
+  const fontSize = Math.round(Math.max(canvas.width, canvas.height) * 0.015);
   ctx.font = `italic ${fontSize}px "Cormorant Garamond", "Didot", "Times New Roman", serif`;
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'bottom';
 
-  const shadowBlur = Math.max(Math.round(fontSize * 0.33), 4);
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+  const shadowBlur = Math.max(Math.round(fontSize * 0.2), 1);
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
   ctx.shadowBlur = shadowBlur;
   ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = Math.max(Math.round(fontSize * 0.08), 2);
+  ctx.shadowOffsetY = Math.max(Math.round(fontSize * 0.04), 1);
 
   const x = canvas.width / 2;
-  const padding = Math.max(Math.round(fontSize * 0.6), 10);
+  const padding = Math.max(Math.round(fontSize * 0.3), 3);
   const y = canvas.height - padding;
   ctx.fillText(text, x, y);
 }
 
-export function applyLSBSteganography(imageData: ImageData, message: string): ImageData {
+function applyLSBSteganography(imageData: ImageData, message: string): ImageData {
   const data = imageData.data;
   const messageBinary = message
     .split('')
@@ -99,6 +99,69 @@ export async function downloadImageWithWatermark(photo: { caption: string; origi
     );
   } catch (err) {
     console.error('Failed to download image with watermark:', err);
+  }
+}
+
+export async function downloadImageCropped(photo: { caption: string; originalImage: string }, targetWidth: number, targetHeight: number) {
+  try {
+    const img = new window.Image();
+    img.crossOrigin = 'anonymous';
+
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = photo.originalImage;
+    });
+
+    const srcRatio = img.width / img.height;
+    const targetRatio = targetWidth / targetHeight;
+
+    let srcWidth = img.width;
+    let srcHeight = img.height;
+    let srcX = 0;
+    let srcY = 0;
+
+    // If source and target have different aspect ratios, crop to match target
+    if (srcRatio > targetRatio) {
+      // Source is wider; crop from sides
+      srcWidth = Math.round(img.height * targetRatio);
+      srcX = Math.round((img.width - srcWidth) / 2);
+    } else if (srcRatio < targetRatio) {
+      // Source is taller; crop from top/bottom
+      srcHeight = Math.round(img.width / targetRatio);
+      srcY = Math.round((img.height - srcHeight) / 2);
+    }
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Could not get canvas context');
+
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+
+    ctx.drawImage(img, srcX, srcY, srcWidth, srcHeight, 0, 0, targetWidth, targetHeight);
+
+    // Apply watermark to the cropped image
+    const visibleText = 'Ioannis Tsiakkas';
+    applyVisibleWatermark(ctx, canvas, visibleText, targetWidth);
+
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${photo.caption.replace(/\s+/g, '_')}-${targetWidth}x${targetHeight}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      },
+      'image/jpeg',
+      0.9
+    );
+  } catch (err) {
+    console.error('Failed to download cropped image:', err);
   }
 }
 

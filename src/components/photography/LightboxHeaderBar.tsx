@@ -1,12 +1,12 @@
+import type { PhotoWithCategory } from '@/types/photo';
+import { downloadImageAsPolaroid, downloadImageCropped, downloadImageWithWatermark } from "@/utils/watermark";
+import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
 import { MdInfo } from "@react-icons/all-files/md/MdInfo";
 import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
 import { MdPause } from "@react-icons/all-files/md/MdPause";
 import { MdPlayArrow } from "@react-icons/all-files/md/MdPlayArrow";
-import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
-import { downloadImageWithWatermark, downloadImageAsPolaroid } from "@/utils/watermark";
-import type { PhotoWithCategory } from '@/types/photo';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface LightboxHeaderBarProps {
   activeIndex: number;
@@ -36,6 +36,8 @@ export default function LightboxHeaderBar({
   active,
 }: LightboxHeaderBarProps) {
   const [showDownloadMenu, setShowDownloadMenu] = useState(false);
+  const [resWidth, setResWidth] = useState('');
+  const [resHeight, setResHeight] = useState('');
   const downloadMenuRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
@@ -132,6 +134,50 @@ export default function LightboxHeaderBar({
                 <p className="font-medium">Polaroid Style</p>
                 <p className="text-xs text-tsiakkas-light/50 mt-1">Elegant vintage frame</p>
               </button>
+
+              <div className="px-5 py-4 border-b border-tsiakkas-light/10 last:border-b-0">
+                <p className="font-medium text-sm text-tsiakkas-light mb-3">Custom Resolution</p>
+                <div className="flex gap-2 mb-3">
+                  <div className="flex-1">
+                    <input
+                      type="number"
+                      value={resWidth}
+                      onChange={(e) => setResWidth(e.target.value)}
+                      placeholder="width"
+                      className="w-full px-2 py-1 bg-white/10 border border-white/30 rounded text-tsiakkas-light text-sm placeholder-tsiakkas-light/50 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      style={{ MozAppearance: 'textfield' }}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <input
+                      type="number"
+                      value={resHeight}
+                      onChange={(e) => setResHeight(e.target.value)}
+                      placeholder="height"
+                      className="w-full px-2 py-1 bg-white/10 border border-white/30 rounded text-tsiakkas-light text-sm placeholder-tsiakkas-light/50 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      style={{ MozAppearance: 'textfield' }}
+                    />
+                  </div>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const w = parseInt(resWidth);
+                    const h = parseInt(resHeight);
+                    if (w > 0 && h > 0) {
+                      downloadImageCropped(active, w, h);
+                      setShowDownloadMenu(false);
+                    } else {
+                      alert('Please enter valid positive numbers');
+                    }
+                  }}
+                  className="w-full px-2 py-2 rounded bg-tsiakkas-light/20 hover:bg-tsiakkas-light/30 flex items-center justify-center gap-2 text-tsiakkas-light transition-all text-sm"
+                  title="Download at custom resolution"
+                >
+                  <HiDownload size={16} />
+                  <span>Download</span>
+                </button>
+              </div>
             </div>
           )}
         </div>
