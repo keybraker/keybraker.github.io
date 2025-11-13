@@ -1,5 +1,5 @@
 import type { PhotoWithCategory } from '@/types/photo';
-import { downloadImageAsPolaroid, downloadImageCropped, downloadImageWithWatermark } from "@/utils/watermark";
+import { imageDownloader } from "@/utils/imageDownloader";
 import { HiDownload } from "@react-icons/all-files/hi/HiDownload";
 import { MdClose } from "@react-icons/all-files/md/MdClose";
 import { MdInfo } from "@react-icons/all-files/md/MdInfo";
@@ -114,7 +114,7 @@ export default function LightboxHeaderBar({
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  downloadImageWithWatermark(active);
+                  imageDownloader.downloadImageWithWatermark(active);
                   setShowDownloadMenu(false);
                 }}
                 className="w-full px-5 py-4 text-left text-sm text-tsiakkas-light hover:bg-white/10 transition-all duration-200 border-b border-tsiakkas-light/10 last:border-b-0 group"
@@ -126,7 +126,7 @@ export default function LightboxHeaderBar({
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  downloadImageAsPolaroid(active);
+                  imageDownloader.downloadImageAsPolaroid(active);
                   setShowDownloadMenu(false);
                 }}
                 className="w-full px-5 py-4 text-left text-sm text-tsiakkas-light hover:bg-white/10 transition-all duration-200 border-b border-tsiakkas-light/10 last:border-b-0 group"
@@ -165,7 +165,7 @@ export default function LightboxHeaderBar({
                     const w = parseInt(resWidth);
                     const h = parseInt(resHeight);
                     if (w > 0 && h > 0) {
-                      downloadImageCropped(active, w, h);
+                      imageDownloader.downloadImageCropped(active, w, h);
                       setShowDownloadMenu(false);
                     } else {
                       alert('Please enter valid positive numbers');

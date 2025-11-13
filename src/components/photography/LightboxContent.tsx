@@ -1,15 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import { HiDownload } from '@react-icons/all-files/hi/HiDownload';
+import { PhotoWithCategory } from '@/types/photo';
+import { BLUR_DATA_URL } from '@/utils/watermark';
 import { IoIosArrowBack } from '@react-icons/all-files/io/IoIosArrowBack';
 import { IoIosArrowForward } from '@react-icons/all-files/io/IoIosArrowForward';
 import { MdClose } from '@react-icons/all-files/md/MdClose';
 import { MdInfo } from '@react-icons/all-files/md/MdInfo';
-import { MdInfoOutline } from '@react-icons/all-files/md/MdInfoOutline';
-import { MdPause } from '@react-icons/all-files/md/MdPause';
-import { MdPlayArrow } from '@react-icons/all-files/md/MdPlayArrow';
-import { BLUR_DATA_URL, downloadImageWithWatermark } from '@/utils/watermark';
-import { PhotoWithCategory } from '@/types/photo';
+import Image from 'next/image';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function LightboxContent({
   active,
