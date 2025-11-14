@@ -6,7 +6,7 @@ import { MdInfo } from "@react-icons/all-files/md/MdInfo";
 import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
 import { MdPause } from "@react-icons/all-files/md/MdPause";
 import { MdPlayArrow } from "@react-icons/all-files/md/MdPlayArrow";
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 interface LightboxHeaderBarProps {
   activeIndex: number;
@@ -20,6 +20,9 @@ interface LightboxHeaderBarProps {
   setIsCarouselMode: (v: boolean) => void;
   onClose: () => void;
   active: PhotoWithCategory;
+  showCropMode: boolean;
+  setShowCropMode: Dispatch<SetStateAction<boolean>>;
+  setCropModalData: Dispatch<SetStateAction<{ targetWidth: number; targetHeight: number } | null>>;
 }
 
 export default function LightboxHeaderBar({
@@ -34,10 +37,18 @@ export default function LightboxHeaderBar({
   setIsCarouselMode,
   onClose,
   active,
+  showCropMode,
+  setShowCropMode,
+  setCropModalData,
 }: LightboxHeaderBarProps) {
   const [showDownloadMenu, setShowDownloadMenu] = useState(false);
   const [resWidth, setResWidth] = useState('');
   const [resHeight, setResHeight] = useState('');
+  const [showCropModal, setShowCropModal] = useState(false);
+  const [imageNaturalDimensions, setImageNaturalDimensions] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
   const downloadMenuRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
@@ -53,6 +64,19 @@ export default function LightboxHeaderBar({
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
   }, [showDownloadMenu]);
+
+  // Load image natural dimensions for crop modal
+  useEffect(() => {
+    const img = new window.Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      setImageNaturalDimensions({
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+      });
+    };
+    img.src = active.originalImage;
+  }, [active.originalImage]);
   return (
     <div
       className="flex flex-row items-center justify-between p-4 gap-4"
@@ -165,8 +189,13 @@ export default function LightboxHeaderBar({
                     const w = parseInt(resWidth);
                     const h = parseInt(resHeight);
                     if (w > 0 && h > 0) {
-                      imageDownloader.downloadImageCropped(active, w, h);
-                      setShowDownloadMenu(false);
+                      if (imageNaturalDimensions) {
+                        setCropModalData({ targetWidth: w, targetHeight: h });
+                        setShowCropMode(true);
+                        setShowDownloadMenu(false);
+                      } else {
+                        alert('Loading image dimensions...');
+                      }
                     } else {
                       alert('Please enter valid positive numbers');
                     }

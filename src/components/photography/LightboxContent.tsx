@@ -1,11 +1,13 @@
+import CropOverlay from '@/components/photography/CropOverlay';
 import { PhotoWithCategory } from '@/types/photo';
+import { imageDownloader } from '@/utils/imageDownloader';
 import { BLUR_DATA_URL } from '@/utils/watermark';
 import { IoIosArrowBack } from '@react-icons/all-files/io/IoIosArrowBack';
 import { IoIosArrowForward } from '@react-icons/all-files/io/IoIosArrowForward';
 import { MdClose } from '@react-icons/all-files/md/MdClose';
 import { MdInfo } from '@react-icons/all-files/md/MdInfo';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 
 export default function LightboxContent({
   active,
@@ -22,6 +24,10 @@ export default function LightboxContent({
   setShowShortcuts,
   isMobile,
   isCarouselMode,
+  showCropMode,
+  setShowCropMode,
+  cropModalData,
+  setCropModalData,
 }: {
   active: PhotoWithCategory;
   prevPhoto: PhotoWithCategory | null;
@@ -37,6 +43,10 @@ export default function LightboxContent({
   setShowShortcuts: (v: boolean) => void;
   isMobile: boolean;
   isCarouselMode: boolean;
+  showCropMode: boolean;
+  setShowCropMode: Dispatch<SetStateAction<boolean>>;
+  cropModalData: { targetWidth: number; targetHeight: number } | null;
+  setCropModalData: Dispatch<SetStateAction<{ targetWidth: number; targetHeight: number } | null>>;
 }) {
   const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
   const [isImageLoading, setIsImageLoading] = useState(true);
@@ -261,6 +271,31 @@ export default function LightboxContent({
                     }}
                   />
                   <div className="absolute inset-0 bg-transparent" onContextMenu={(e) => e.preventDefault()} style={{ userSelect: 'none', WebkitUserSelect: 'none' }} />
+                  {showCropMode && cropModalData && imageDimensions && (
+                    <CropOverlay
+                      imageWidth={imageDimensions.width}
+                      imageHeight={imageDimensions.height}
+                      targetWidth={cropModalData.targetWidth}
+                      targetHeight={cropModalData.targetHeight}
+                      containerRef={imageContainerRef}
+                      onCancel={() => {
+                        setShowCropMode(false);
+                        setCropModalData(null);
+                      }}
+                      onConfirm={(cropData) => {
+                        if (cropModalData) {
+                          imageDownloader.downloadImageWithCustomCrop(
+                            active,
+                            cropModalData.targetWidth,
+                            cropModalData.targetHeight,
+                            cropData
+                          );
+                          setShowCropMode(false);
+                          setCropModalData(null);
+                        }
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             </div>

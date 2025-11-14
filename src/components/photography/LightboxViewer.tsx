@@ -1,6 +1,7 @@
 import LightboxContent from '@/components/photography/LightboxContent';
 import LightboxHeaderBar from '@/components/photography/LightboxHeaderBar';
 import type { PhotoWithCategory } from '@/types/photo';
+import { useState } from 'react';
 
 interface LightboxViewerProps {
   active: PhotoWithCategory;
@@ -45,6 +46,12 @@ export default function LightboxViewer({
   showSearchBox,
   setShowSearchBox,
 }: LightboxViewerProps) {
+  const [showCropMode, setShowCropMode] = useState(false);
+  const [cropModalData, setCropModalData] = useState<{
+    targetWidth: number;
+    targetHeight: number;
+  } | null>(null);
+
   return (
     <div
       role="dialog"
@@ -65,6 +72,9 @@ export default function LightboxViewer({
         setIsCarouselMode={setIsCarouselMode}
         onClose={close}
         active={active}
+        showCropMode={showCropMode}
+        setShowCropMode={setShowCropMode}
+        setCropModalData={setCropModalData}
       />
       <LightboxContent
         active={active}
@@ -79,6 +89,10 @@ export default function LightboxViewer({
         setShowInfo={setShowInfo}
         showShortcuts={showShortcuts}
         setShowShortcuts={setShowShortcuts}
+        showCropMode={showCropMode}
+        setShowCropMode={setShowCropMode}
+        cropModalData={cropModalData}
+        setCropModalData={setCropModalData}
         isMobile={isMobile}
         isCarouselMode={isCarouselMode}
       />

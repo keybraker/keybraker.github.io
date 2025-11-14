@@ -141,6 +141,59 @@ class ImageDownloader {
   }
 
   /**
+   * Download image with custom crop coordinates
+   */
+  async downloadImageWithCustomCrop(
+    photo: PhotoWithCaption,
+    targetWidth: number,
+    targetHeight: number,
+    cropData: { srcX: number; srcY: number; srcWidth: number; srcHeight: number }
+  ): Promise<void> {
+    try {
+      const img = await this.loadImage(photo.originalImage);
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Could not get canvas context');
+
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      ctx.drawImage(
+        img,
+        cropData.srcX,
+        cropData.srcY,
+        cropData.srcWidth,
+        cropData.srcHeight,
+        0,
+        0,
+        targetWidth,
+        targetHeight
+      );
+
+      applyVisibleWatermark(ctx, canvas, this.ARTIST_NAME);
+
+      return new Promise((resolve, reject) => {
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject(new Error('Failed to create blob'));
+              return;
+            }
+            const filename = `${photo.caption.replace(/\s+/g, '_')}-${targetWidth}x${targetHeight}.jpg`;
+            this.downloadBlob(blob, filename);
+            resolve();
+          },
+          'image/jpeg',
+          0.9
+        );
+      });
+    } catch (err) {
+      console.error('Failed to download image with custom crop:', err);
+      throw err;
+    }
+  }
+
+  /**
    * Download image as a Polaroid-style card with metadata
    */
   async downloadImageAsPolaroid(photo: PhotoWithMetadata): Promise<void> {
