@@ -175,7 +175,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         setIsCarouselMode
     } = useLightboxState(isMobile);
 
-    const { observerTargetRef } = useLazyLoading(orderedFiltered, displayCount, setDisplayCount);
+    const { observerTargetRef, isLoading } = useLazyLoading(orderedFiltered, displayCount, setDisplayCount);
 
     const close = () => {
         setActive(null);
@@ -219,6 +219,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                     onOpen={setActive}
                     sentinelRef={observerTargetRef}
                     isMobile={isMobile}
+                    isLoading={isLoading}
                 />
             </div>
 

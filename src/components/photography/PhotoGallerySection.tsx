@@ -14,6 +14,7 @@ interface PhotoGallerySectionProps {
   onOpen: (photo: PhotoWithCategory) => void;
   sentinelRef: React.RefObject<HTMLDivElement>;
   isMobile: boolean;
+  isLoading?: boolean;
 }
 
 export default function PhotoGallerySection({
@@ -27,6 +28,7 @@ export default function PhotoGallerySection({
   onOpen,
   sentinelRef,
   isMobile,
+  isLoading = false,
 }: PhotoGallerySectionProps) {
   return (
     <>
@@ -45,6 +47,7 @@ export default function PhotoGallerySection({
         onOpen={onOpen}
         sentinelRef={sentinelRef}
         isMobile={isMobile}
+        isLoading={isLoading}
       />
 
       <CopyrightNotice isMobile={isMobile} />

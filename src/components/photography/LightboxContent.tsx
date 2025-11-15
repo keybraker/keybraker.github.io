@@ -1,4 +1,5 @@
 import CropOverlay from '@/components/photography/CropOverlay';
+import { useImagePreloading } from '@/hooks/useImagePreloading';
 import { PhotoWithCategory } from '@/types/photo';
 import { imageDownloader } from '@/utils/imageDownloader';
 import { BLUR_DATA_URL } from '@/utils/watermark';
@@ -59,6 +60,8 @@ export default function LightboxContent({
   const viewportRef = useRef<HTMLDivElement>(null);
   const touchStartRef = useRef<number | null>(null);
   const carouselIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useImagePreloading(prevPhoto, nextPhoto);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartRef.current = e.touches[0].clientX;

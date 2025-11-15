@@ -9,6 +9,7 @@ interface YearMonthGalleryProps {
   onOpen: (p: PhotoWithCategory) => void;
   sentinelRef: React.RefObject<HTMLDivElement>;
   isMobile: boolean;
+  isLoading?: boolean;
 }
 
 export default function YearMonthGallery({
@@ -16,7 +17,8 @@ export default function YearMonthGallery({
   displayCount,
   onOpen,
   sentinelRef,
-  isMobile
+  isMobile,
+  isLoading = false
 }: YearMonthGalleryProps) {
   const grouped: YearGroup[] = groupPhotosByYearMonth(photos);
 
@@ -73,7 +75,20 @@ export default function YearMonthGallery({
           })}
         </div>
       ))}
-      {displayCount < photos.length && <div ref={sentinelRef} className="h-4 w-full" />}
+      {displayCount < photos.length && (
+        <div ref={sentinelRef} className="flex flex-col items-center gap-4 py-12">
+          {isLoading && (
+            <div className="flex items-center gap-3">
+              <div className="flex gap-1.5">
+                <div className="w-2 h-2 bg-tsiakkas-dark/60 dark:bg-tsiakkas-light/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="w-2 h-2 bg-tsiakkas-dark/60 dark:bg-tsiakkas-light/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="w-2 h-2 bg-tsiakkas-dark/60 dark:bg-tsiakkas-light/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+              </div>
+              <span className="text-sm font-medium text-tsiakkas-dark/60 dark:text-tsiakkas-light/60">Loading more photos...</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
