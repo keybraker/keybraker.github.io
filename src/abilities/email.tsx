@@ -1,9 +1,9 @@
-import { ImFilePdf } from "@react-icons/all-files/im/ImFilePdf";
-import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
+import { description } from "@/pages/resume";
 import { HiOutlineDownload } from "@react-icons/all-files/hi/HiOutlineDownload";
-import { useEffect, useState } from "react";
-import { description } from "@/pages";
+import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
+import { ImFilePdf } from "@react-icons/all-files/im/ImFilePdf";
 import Link from 'next/link';
+import { useEffect, useState } from "react";
 
 const mail = "iantsiakkas@gmail.com";
 const mailto = "mailto:" + mail;
