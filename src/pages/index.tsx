@@ -38,7 +38,7 @@ export default function Home() {
       <main className="flex flex-col md:flex-row gap-6 md:gap-8 w-full">
         <Link href="/resume" className="
           w-full rounded-2xl
-          border-4 border-verge-cyan/30 hover:border-tsiakkas-dark dark:hover:border-tsiakkas-light
+          border-4 border-verge-cyan/30 hover:border-tsiakkas-dark/40 dark:hover:border-tsiakkas-light
         ">
           <Card
             title="Resume"
@@ -49,7 +49,7 @@ export default function Home() {
 
         <Link href="/photography" className="
           w-full rounded-2xl
-          border-4 border-verge-yellow/30 hover:border-tsiakkas-dark dark:hover:border-tsiakkas-light
+          border-4 border-verge-yellow/30 hover:border-tsiakkas-dark/40 dark:hover:border-tsiakkas-light
         ">
           <Card
             title="Photography"
