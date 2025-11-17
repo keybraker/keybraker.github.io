@@ -190,14 +190,12 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                 <meta name="description" content="My photography portfolio." />
                 <meta name="robots" content="index,follow" />
                 {sections.length > 0 && sections[0].photos.length > 0 && (
-                    <>
-                        <link
-                            rel="preload"
-                            as="image"
-                            href={sections[0].photos[0].image}
-                            imageSrcSet={sections[0].photos[0].image}
-                        />
-                    </>
+                    <link
+                        rel="preload"
+                        as="image"
+                        href={sections[0].photos[0].image}
+                        imageSrcSet={sections[0].photos[0].image}
+                    />
                 )}
             </Head>
 

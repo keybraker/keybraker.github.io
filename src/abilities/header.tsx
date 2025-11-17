@@ -56,20 +56,22 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
       )}
       {showResumeIcon && (
         <Link
-          href="/"
+          href="/resume"
           aria-label="Go to resume (home) page"
           className="focus:outline-none"
         >
-          {iconWrapper("resume", <span className="
+          {iconWrapper("resume",
+            <span
+              className="
             md:flex md:gap-2 md:border md:rounded-full
             md:px-3 md:py-[2px] md:items-center md:snap-center
-            md:border-tsiakkas-dark/40 md:dark:border-tsiakkas-light/40
+          md:border-tsiakkas-dark/40 md:dark:border-tsiakkas-light/40
           md:hover:bg-tsiakkas-dark/10 md:hover:dark:bg-tsiakkas-light/10
             md:transition-all md:duration-300
           ">
-            <span className="pb-[2px] font-extrabold hidden md:block italic">Resume</span>
-            <span className=""><IoIosPaper className={baseIconClasses} size={"20px"} /></span>
-          </span>)}
+              <span className="pb-[2px] font-extrabold hidden md:block italic">Resume</span>
+              <span className=""><IoIosPaper className={baseIconClasses} size="20px" /></span>
+            </span>)}
         </Link>
       )}
       {(showPhotographyLink || showResumeIcon) && (
@@ -129,8 +131,11 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
 export default function Header() {
   const router = useRouter();
   const isPhotography = router.pathname.startsWith('/photography');
+  const isResume = router.pathname === '/resume';
   const isHome = router.pathname === '/';
 
+  // Show route label only on resume or photography pages
+  const showRouteLabel = isResume || isPhotography;
   const firstSegment = router.pathname.split('/').filter(Boolean)[0];
   const routeLabel = isHome
     ? 'resume'
@@ -163,7 +168,7 @@ export default function Header() {
               ">
               <span>Tsiakkas</span>
               <span>Ioannis</span>
-              {routeLabel && (
+              {showRouteLabel && routeLabel && (
                 <span className="
                   font-light italic tracking-wide flex flex-row gap-1
                   items-center justify-center leading-tight self-center
@@ -174,7 +179,7 @@ export default function Header() {
               )}
             </h1>
           </Link>
-          <AboutPageInner showPhotographyLink={!isPhotography && isHome} showResumeIcon={!isHome} />
+          <AboutPageInner showPhotographyLink={isResume} showResumeIcon={isPhotography} />
         </div>
       </div>
     </header>
