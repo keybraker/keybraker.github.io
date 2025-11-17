@@ -1,3 +1,4 @@
+import Card from "@/components/card";
 import Category from "@/components/category";
 import Head from "next/head";
 import Link from "next/link";
@@ -39,7 +40,7 @@ export default function Home() {
           w-full rounded-2xl
           border-4 border-verge-cyan/30 hover:border-tsiakkas-dark dark:hover:border-tsiakkas-light
         ">
-          <Category
+          <Card
             title="Resume"
             description="My work, in my own code"
             colour="bg-verge-cyan/80 dark:bg-verge-cyan/75 border-4 border-verge-cyan/30"
@@ -50,7 +51,7 @@ export default function Home() {
           w-full rounded-2xl
           border-4 border-verge-yellow/30 hover:border-tsiakkas-dark dark:hover:border-tsiakkas-light
         ">
-          <Category
+          <Card
             title="Photography"
             description="My work, in my own shots"
             colour="bg-verge-yellow/80 dark:bg-verge-yellow/75 border-4 border-verge-yellow/30"
