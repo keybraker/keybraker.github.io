@@ -57,7 +57,7 @@ export default function LightboxViewer({
       role="dialog"
       aria-modal="true"
       aria-label="Fullscreen image viewer"
-      className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-xl"
       onClick={close}
     >
       <LightboxHeaderBar

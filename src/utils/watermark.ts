@@ -31,9 +31,9 @@ export function applyVisibleWatermark(
   canvas: HTMLCanvasElement,
   text: string
 ): void {
-  const fontSize = Math.round(Math.max(canvas.width, canvas.height) * 0.015);
+  const fontSize = Math.round(Math.max(canvas.width, canvas.height) * 0.025);
   ctx.font = `italic ${fontSize}px "Cormorant Garamond", "Didot", "Times New Roman", serif`;
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'bottom';
 
