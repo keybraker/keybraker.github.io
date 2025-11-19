@@ -8,7 +8,11 @@ export default function Card(props: CategoryProps) {
   return (
     <section
       id={props.title.split(" ").join("-").toLowerCase()}
-      className={`flex flex-col w-full rounded-xl px-6 py-7 text-tsiakkas-dark gap-4 ${props.colour}`}
+      className={`
+        flex flex-col w-full rounded-xl px-6 py-7
+        text-tsiakkas-dark gap-4
+        ${props.colour}
+      `}
     >
       <div className="
         leading-100 brief-title
