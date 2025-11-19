@@ -184,6 +184,7 @@ export default function LightboxHeaderBar({
                   </div>
                 </div>
                 <button
+                  disabled={!(parseInt(resWidth) > 0 && parseInt(resHeight) > 0)}
                   onClick={(e) => {
                     e.stopPropagation();
                     const w = parseInt(resWidth);
@@ -196,11 +197,12 @@ export default function LightboxHeaderBar({
                       } else {
                         alert('Loading image dimensions...');
                       }
-                    } else {
-                      alert('Please enter valid positive numbers');
                     }
                   }}
-                  className="w-full px-2 py-2 rounded bg-tsiakkas-light/20 hover:bg-tsiakkas-light/30 flex items-center justify-center gap-2 text-tsiakkas-light transition-all text-sm"
+                  className={`w-full px-2 py-2 rounded flex items-center justify-center gap-2 transition-all text-sm ${parseInt(resWidth) > 0 && parseInt(resHeight) > 0
+                      ? 'bg-tsiakkas-light/20 hover:bg-tsiakkas-light/30 text-tsiakkas-light'
+                      : 'bg-white/5 text-white/20 cursor-not-allowed'
+                    }`}
                   title="Download at custom resolution"
                 >
                   <HiDownload size={16} />
