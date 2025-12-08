@@ -2,7 +2,7 @@ import { description } from "@/pages/resume";
 import { HiOutlineDownload } from "@react-icons/all-files/hi/HiOutlineDownload";
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
 import { ImFilePdf } from "@react-icons/all-files/im/ImFilePdf";
-import Link from 'next/link';
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const mail = "iantsiakkas@gmail.com";
@@ -34,14 +34,14 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mb-12 rounded-[10px] bg-verge-cyan/50 dark:bg-verge-cyan/75 text-tsiakkas-dark p-6 shadow-xl">
+    <section className="mb-12 rounded-[10px] bg-verge-cyan/50 p-6 text-tsiakkas-dark shadow-xl dark:bg-verge-cyan/75">
       {/* <HeadScene /> */}
-      <div className="flex flex-col-reverse sm:flex-row justify-between w-full gap-4">
-        <div className="flex flex-col w-full space-y-2">
+      <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row">
+        <div className="flex w-full flex-col space-y-2">
           <div className="flex flex-row gap-2">
             <span className="w-20">from:</span>
             <a
-              className="w-full text-end xs:text-start font-semibold hover:underline"
+              className="w-full text-end font-semibold hover:underline xs:text-start"
               href={`${mailto}${subject}`}
             >
               me@mail.com
@@ -56,7 +56,7 @@ export default function Email() {
             <span className="w-full text-end xs:text-start">My website</span>
           </div>
         </div>
-        <div className="flex flex-row justify-between sm:flex-col h-full w-full items-end gap-2">
+        <div className="flex h-full w-full flex-row items-end justify-between gap-2 sm:flex-col">
           {hasMounted && <span className="self-end">{formattedDate}</span>}
           <span className="italic text-gray-700">one attachment (1)</span>
         </div>
@@ -74,7 +74,7 @@ export default function Email() {
             href="https://github.com/keybraker"
             target="_blank"
             rel="noreferrer"
-            className="font-semibold hover:underline hover:text-blue-700 hover:shadow-2xl"
+            className="font-semibold hover:text-blue-700 hover:underline hover:shadow-2xl"
           >
             github.com/keybraker
           </a>
@@ -82,12 +82,12 @@ export default function Email() {
         </p>
 
         <p className="mt-2 whitespace-pre-line">
-          P.S: I am also very much into photography. You can check out some of my work at
-          {" "}
+          P.S: I am also very much into photography. You can check out some of
+          my work at{" "}
           <Link
             href="/photography"
             aria-label="Clicking here will take you to my photography portfolio"
-            className="font-semibold hover:underline hover:text-blue-700 hover:shadow-2xl"
+            className="font-semibold hover:text-blue-700 hover:underline hover:shadow-2xl"
           >
             here
           </Link>
@@ -97,9 +97,9 @@ export default function Email() {
         <p className="mt-4">Kindly, Ioannis</p>
       </div>
 
-      <div className="flex justify-between gap-1 mt-7 text-tsiakkas-dark dark:text-tsiakkas-light h-42">
+      <div className="h-42 mt-7 flex justify-between gap-1 text-tsiakkas-dark dark:text-tsiakkas-light">
         <a
-          className="flex h-full w-24 items-center justify-around gap-0 rounded-full py-1.5 px-2.5 shadow-md bg-tsiakkas-light dark:bg-tsiakkas-dark hover:bg-tsiakkas-light/75 hover:dark:bg-tsiakkas-dark/75"
+          className="flex h-full w-24 items-center justify-around gap-0 rounded-full bg-tsiakkas-light py-1.5 px-2.5 shadow-md hover:bg-tsiakkas-light/75 dark:bg-tsiakkas-dark hover:dark:bg-tsiakkas-dark/75"
           href={`${mailto}${subject}`}
         >
           <HiOutlineReply />
@@ -109,7 +109,7 @@ export default function Email() {
         <div className="group relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
           <a
-            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md bg-tsiakkas-light dark:bg-tsiakkas-dark shadow-md ring-1 ring-gray-900/5 hover:bg-tsiakkas-dark/10 hover:dark:bg-tsiakkas-dark/10"
+            className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md bg-tsiakkas-light shadow-md ring-1 ring-gray-900/5 hover:bg-tsiakkas-dark/10 dark:bg-tsiakkas-dark hover:dark:bg-tsiakkas-dark/10"
             href="/assets/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -119,9 +119,9 @@ export default function Email() {
               <ImFilePdf />
               <span>Resume</span>
             </span>
-            <span className="hidden group-hover:contents dark:text-tsiakkas-light text-tsiakkas-light">
+            <span className="hidden text-tsiakkas-light group-hover:contents dark:text-tsiakkas-light">
               <HiOutlineDownload />
-              <span>79.80 Kb</span>
+              <span>82.00 Kb</span>
             </span>
           </a>
         </div>
