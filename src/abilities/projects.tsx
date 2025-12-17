@@ -87,13 +87,13 @@ const projects: ShowcaseType[] = [
       "TypeScript"
     ),
     createLinkDiv("https://www.mongodb.com/", "MongoDB")],
-    description: [
-      createLinkDiv(
-        "https://portal-bot.xyz/",
-        "Documentation",
-        "hover:underline font-semibold"
-      ),
-    ],
+    // description: [
+    //   createLinkDiv(
+    //     "https://portal-bot.xyz/",
+    //     "Documentation",
+    //     "hover:underline font-semibold"
+    //   ),
+    // ],
   },
   {
     start: new Date("2023-09-01"),
