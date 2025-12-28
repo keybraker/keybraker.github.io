@@ -239,7 +239,7 @@ export default function LightboxContent({
                     </span>
                   )}
                 </div>
-                <div className="mt-1 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div>
+                {/* <div className="mt-1 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div> */}
               </aside>
             </div>
           )}
