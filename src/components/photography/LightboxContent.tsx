@@ -198,7 +198,7 @@ export default function LightboxContent({
       {isMobile ? (
         <div className="w-full flex flex-col items-center justify-center gap-4" onClick={(e) => e.stopPropagation()}>
           <div className="w-full flex items-center justify-center overflow-hidden">
-            <div className="flex items-center justify-center w-full max-h-[calc(70vh-8rem)]">
+            <div className={`flex items-center justify-center w-full ${showInfo ? 'max-h-[calc(70vh-8rem)]' : 'max-h-[85vh]'}`}>
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-lg" />}
               <Image
                 src={active.image}
@@ -207,7 +207,7 @@ export default function LightboxContent({
                 height={1200}
                 placeholder="blur"
                 blurDataURL={BLUR_DATA_URL}
-                className="max-h-[calc(70vh-8rem)] w-auto object-contain select-none border border-white/20 rounded-md"
+                className={`w-auto object-contain select-none border border-white/20 rounded-md transition-all duration-300 ${showInfo ? 'max-h-[calc(70vh-8rem)]' : 'max-h-[85vh]'}`}
                 sizes="(max-width: 768px) 100vw, 80vw"
                 priority
                 onContextMenu={(e) => e.preventDefault()}
@@ -247,7 +247,7 @@ export default function LightboxContent({
       ) : (
         <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-center md:items-center gap-8" onClick={(e) => e.stopPropagation()}>
           <div className="flex-1 flex items-center justify-center overflow-hidden">
-            <div ref={viewportRef} className="flex items-center justify-center w-full max-h-[calc(90vh-8rem)]" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} onWheel={handleWheel}>
+            <div ref={viewportRef} className={`flex items-center justify-center w-full transition-all duration-300 ${showInfo ? 'max-h-[calc(90vh-8rem)]' : 'max-h-[90vh]'}`} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} onWheel={handleWheel}>
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-lg " />}
               <div className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`} style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }} onMouseDown={handleMouseDown}>
                 <div
@@ -262,7 +262,7 @@ export default function LightboxContent({
                     height={1200}
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
-                    className="max-h-[calc(90vh-8rem)] w-auto object-contain select-none border border-white/20 rounded-md"
+                    className={`w-auto object-contain select-none border border-white/20 rounded-md transition-all duration-300 ${showInfo ? 'max-h-[calc(90vh-8rem)]' : 'max-h-[90vh]'}`}
                     sizes="(max-width: 768px) 100vw, 80vw"
                     priority
                     onContextMenu={(e) => e.preventDefault()}
