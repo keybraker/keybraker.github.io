@@ -198,7 +198,7 @@ export default function LightboxContent({
       {isMobile ? (
         <div className="w-full flex flex-col items-center justify-center gap-4" onClick={(e) => e.stopPropagation()}>
           <div className="w-full flex items-center justify-center overflow-hidden">
-            <div className="flex items-center justify-center w-full max-h-[calc(70vh-8rem)]" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+            <div className="flex items-center justify-center w-full max-h-[calc(70vh-8rem)]">
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-lg" />}
               <Image
                 src={active.image}
@@ -353,7 +353,6 @@ export default function LightboxContent({
                 </>
               ) : (
                 <>
-                  <div className="flex justify-between"><span>Swipe left/right</span><span className="text-xs opacity-70">Navigate images</span></div>
                   <div className="flex justify-between"><span>Tap info button</span><span className="text-xs opacity-70">Toggle photo info</span></div>
                   <div className="flex justify-between"><span>Show shortcuts</span><kbd className="px-2 py-1 bg-white/20 rounded text-xs">?</kbd></div>
                   <div className="flex justify-between"><span>Close</span><span className="text-xs opacity-70">Tap outside</span></div>
