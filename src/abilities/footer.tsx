@@ -15,7 +15,7 @@ export default function Footer() {
           className="subpixel-antialiased bg-tsiakkas-blueLight dark:bg-tsiakkas-electric-yellow transform rotate-3"
         />
         <a rel="noopener noreferrer" target="_blank" href={repo} className="hover:underline flex flex-wrap gap-1 text-md font-bold text-tsiakkas-dark dark:text-tsiakkas-light">
-          Designed and created by me<br></br><span className="font-extrabold">Keybraker</span>
+          Designed and created by me<br></br><span className="italic font-extrabold">Keybraker</span>
         </a>
       </div>
     </div>
