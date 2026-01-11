@@ -9,6 +9,38 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+export function RouteButton({
+  id,
+  href,
+  label,
+  iconNode,
+  iconWrapper,
+}: {
+  id: string;
+  href: string;
+  label: string;
+  iconNode: JSX.Element;
+  iconWrapper: (id: string, node: JSX.Element, props?: any) => JSX.Element;
+}) {
+  return (
+    <Link href={href} aria-label={`Go to ${label.toLowerCase()} page`} className="focus:outline-none">
+      {iconWrapper(
+        id,
+        <span className="
+            md:flex md:gap-2 md:border md:rounded-full
+            md:px-3 md:py-[2px] md:items-center md:snap-center
+            md:border-tsiakkas-dark/40 md:dark:border-tsiakkas-light/40
+            md:hover:bg-tsiakkas-dark/10 md:hover:dark:bg-tsiakkas-light/10
+            md:transition-all md:duration-300
+          ">
+          <span className="pb-[2px] font-extrabold hidden md:block italic">{label}</span>
+          <span className="">{iconNode}</span>
+        </span>
+      )}
+    </Link>
+  );
+}
+
 const mail = "mailto:" + "iantsiakkas@gmail.com";
 const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
 const github = "https://github.com/" + "Keybraker";
@@ -36,43 +68,22 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
   return (
     <div className="flex flex-row items-center justify-between xs:justify-around gap-4 align-baseline text-tsiakkas-dark dark:text-tsiakkas-light">
       {showPhotographyLink && !showResumeIcon && (
-        <Link
+        <RouteButton
+          id="photography"
           href="/photography"
-          aria-label="Go to photography page"
-          className="focus:outline-none"
-        >
-          {iconWrapper("photography",
-            <span className="
-            md:flex md:gap-2 md:border md:rounded-full
-            md:px-3 md:py-[2px] md:items-center md:snap-center
-            md:border-tsiakkas-dark/40 md:dark:border-tsiakkas-light/40
-          md:hover:bg-tsiakkas-dark/10 md:hover:dark:bg-tsiakkas-light/10
-            md:transition-all md:duration-300
-          ">
-              <span className="pb-[2px] font-extrabold hidden md:block italic">Photography</span>
-              <span className=""><MdPhotoCamera className={baseIconClasses} size={"20px"} /></span>
-            </span>)}
-        </Link>
+          label="Photography"
+          iconNode={<MdPhotoCamera className={baseIconClasses} size={"20px"} />}
+          iconWrapper={iconWrapper}
+        />
       )}
       {showResumeIcon && (
-        <Link
+        <RouteButton
+          id="resume"
           href="/resume"
-          aria-label="Go to resume (home) page"
-          className="focus:outline-none"
-        >
-          {iconWrapper("resume",
-            <span
-              className="
-            md:flex md:gap-2 md:border md:rounded-full
-            md:px-3 md:py-[2px] md:items-center md:snap-center
-          md:border-tsiakkas-dark/40 md:dark:border-tsiakkas-light/40
-          md:hover:bg-tsiakkas-dark/10 md:hover:dark:bg-tsiakkas-light/10
-            md:transition-all md:duration-300
-          ">
-              <span className="pb-[2px] font-extrabold hidden md:block italic">Resume</span>
-              <span className=""><IoIosPaper className={baseIconClasses} size="20px" /></span>
-            </span>)}
-        </Link>
+          label="Resume"
+          iconNode={<IoIosPaper className={baseIconClasses} size="20px" />}
+          iconWrapper={iconWrapper}
+        />
       )}
       {(showPhotographyLink || showResumeIcon) && (
         <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
