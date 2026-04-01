@@ -20,7 +20,7 @@ export default function Category(props: CategoryProps) {
       {/* <div className="absolute bottom-[-10px] right-0 h-full font-bold leading-100 eq:flex rotate-90 text-verge-cyan">{title}</div> */}
       <div className="
         leading-100 brief-title absolute -z-10
-        left-[-255px] top-[-180px]
+        left-[-215px] top-[-180px]
         hidden h-full w-full rotate-[270deg]
         text-xl font-extrabold text-tsiakkas-dark
         dark:text-tsiakkas-light eq:flex
