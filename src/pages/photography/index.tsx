@@ -1,6 +1,7 @@
 import HeroSection from '@/components/photography/HeroSection';
 import LightboxViewer from '@/components/photography/LightboxViewer';
 import PhotoGallerySection from '@/components/photography/PhotoGallerySection';
+import { ensurePhotoThumbnail } from '@/functions/ensurePhotoThumbnail';
 import { groupPhotosByYearMonth } from '@/functions/groupPhotosByYearMonth';
 import { useLazyLoading } from '@/hooks/useLazyLoading';
 import { useLightboxState } from '@/hooks/useLightboxState';
@@ -33,7 +34,7 @@ export async function getStaticProps() {
         );
     }
 
-    const processPhoto = (file: string, isCommissioned: boolean, dirPath: string, index: number) => {
+    const processPhoto = async (file: string, isCommissioned: boolean, dirPath: string, index: number) => {
         const name = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '');
         const parts = name.split('-');
         if (parts.length < 3) return null;
@@ -44,6 +45,7 @@ export async function getStaticProps() {
         const watermarkedFile = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '.png');
         const watermarkedPath = path.join(watermarkedDir, isCommissioned ? `commissioned/${watermarkedFile}` : `personal/${watermarkedFile}`);
         const useWatermarked = fs.existsSync(watermarkedPath);
+        const displaySourcePath = useWatermarked ? watermarkedPath : path.join(dirPath, file);
 
         const buffer = fs.readFileSync(path.join(dirPath, file));
         let settings = '';
@@ -90,6 +92,11 @@ export async function getStaticProps() {
 
         const photoPath = isCommissioned ? `/photos/commissioned/${file}` : `/photos/personal/${file}`;
         const watermarkedPhotoPath = isCommissioned ? `/photos-watermarked/commissioned/${watermarkedFile}` : `/photos-watermarked/personal/${watermarkedFile}`;
+        const thumbnailImage = await ensurePhotoThumbnail({
+            sourcePath: displaySourcePath,
+            fileName: useWatermarked ? watermarkedFile : file,
+            folder: isCommissioned ? 'commissioned' : 'personal'
+        }).catch(() => (useWatermarked ? watermarkedPhotoPath : photoPath));
 
         return {
             id: index + 1,
@@ -97,7 +104,7 @@ export async function getStaticProps() {
             settings,
             location,
             country,
-            image: useWatermarked ? watermarkedPhotoPath : photoPath,
+            image: thumbnailImage,
             originalImage: photoPath,
             isCommissioned,
             date,
@@ -107,10 +114,10 @@ export async function getStaticProps() {
         };
     };
 
-    const tempPhotos = [
+    const tempPhotos = (await Promise.all([
         ...files.map((file, index) => processPhoto(file, false, photosDir, index)),
         ...commissionedFiles.map((file, index) => processPhoto(file, true, commissionedDir, files.length + index))
-    ].filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string; width: number; height: number; }[];
+    ])).filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string; width: number; height: number; }[];
 
     const sectionMap = new Map<string, Photo[]>();
     tempPhotos.forEach(tp => {
@@ -151,10 +158,13 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
         setDisplayCount
     } = usePhotoFiltering(sections);
 
-    const orderedFiltered = useMemo(() => {
-        const grouped = groupPhotosByYearMonth(filtered);
-        return grouped.flatMap(g => g.months.flatMap(m => m.photos));
+    const groupedFiltered = useMemo(() => {
+        return groupPhotosByYearMonth(filtered);
     }, [filtered]);
+
+    const orderedFiltered = useMemo(() => {
+        return groupedFiltered.flatMap(g => g.months.flatMap(m => m.photos));
+    }, [groupedFiltered]);
 
     const {
         activeIndex,
@@ -213,6 +223,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                     showCommissioned={showCommissioned}
                     setShowCommissioned={setShowCommissioned}
                     filtered={orderedFiltered}
+                    groupedPhotos={groupedFiltered}
                     displayCount={displayCount}
                     onOpen={setActive}
                     sentinelRef={observerTargetRef}

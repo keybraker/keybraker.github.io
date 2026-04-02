@@ -201,7 +201,7 @@ export default function LightboxContent({
             <div className={`flex items-center justify-center w-full ${showInfo ? 'max-h-[calc(70vh-8rem)]' : 'max-h-[85vh]'}`}>
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-none" />}
               <Image
-                src={active.image}
+                src={active.originalImage}
                 alt={active.caption}
                 width={1600}
                 height={1200}
@@ -256,7 +256,7 @@ export default function LightboxContent({
                   style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%` }}
                 >
                   <Image
-                    src={active.image}
+                    src={active.originalImage}
                     alt={active.caption}
                     width={1600}
                     height={1200}

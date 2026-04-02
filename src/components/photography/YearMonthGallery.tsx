@@ -1,10 +1,11 @@
-import React from 'react';
-import { groupPhotosByYearMonth, YearGroup } from '@/functions/groupPhotosByYearMonth';
 import PhotoMasonry from '@/components/photography/PhotoMasonry';
+import { YearGroup } from '@/functions/groupPhotosByYearMonth';
 import type { PhotoWithCategory } from '@/types/photo';
+import React, { useMemo } from 'react';
 
 interface YearMonthGalleryProps {
-  photos: PhotoWithCategory[];
+  grouped: YearGroup[];
+  totalCount: number;
   displayCount: number;
   onOpen: (p: PhotoWithCategory) => void;
   sentinelRef: React.RefObject<HTMLDivElement>;
@@ -13,17 +14,21 @@ interface YearMonthGalleryProps {
 }
 
 export default function YearMonthGallery({
-  photos,
+  grouped,
+  totalCount,
   displayCount,
   onOpen,
   sentinelRef,
   isMobile,
   isLoading = false
 }: YearMonthGalleryProps) {
-  const grouped: YearGroup[] = groupPhotosByYearMonth(photos);
+  const visibleSet = useMemo(() => {
+    const flatOrdered: PhotoWithCategory[] = grouped.flatMap((yearGroup) =>
+      yearGroup.months.flatMap((monthGroup) => monthGroup.photos)
+    );
 
-  const flatOrdered: PhotoWithCategory[] = grouped.flatMap(g => g.months.flatMap(m => m.photos));
-  const visibleSet = new Set(flatOrdered.slice(0, displayCount).map(p => p.id));
+    return new Set(flatOrdered.slice(0, displayCount).map((photo) => photo.id));
+  }, [grouped, displayCount]);
 
   return (
     <div className="flex flex-col w-full gap-12">
@@ -75,7 +80,7 @@ export default function YearMonthGallery({
           })}
         </div>
       ))}
-      {displayCount < photos.length && (
+      {displayCount < totalCount && (
         <div ref={sentinelRef} className="flex flex-col items-center gap-4 py-12">
           {isLoading && (
             <div className="flex items-center gap-3">

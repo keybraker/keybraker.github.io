@@ -1,6 +1,7 @@
 import CopyrightNotice from '@/components/photography/CopyrightNotice';
 import FiltersBar from '@/components/photography/FiltersBar';
 import YearMonthGallery from '@/components/photography/YearMonthGallery';
+import type { YearGroup } from '@/functions/groupPhotosByYearMonth';
 import type { PhotoWithCategory, Section } from '@/types/photo';
 
 interface PhotoGallerySectionProps {
@@ -10,6 +11,7 @@ interface PhotoGallerySectionProps {
   showCommissioned: boolean;
   setShowCommissioned: (show: boolean) => void;
   filtered: PhotoWithCategory[];
+  groupedPhotos: YearGroup[];
   displayCount: number;
   onOpen: (photo: PhotoWithCategory) => void;
   sentinelRef: React.RefObject<HTMLDivElement>;
@@ -24,6 +26,7 @@ export default function PhotoGallerySection({
   showCommissioned,
   setShowCommissioned,
   filtered,
+  groupedPhotos,
   displayCount,
   onOpen,
   sentinelRef,
@@ -42,7 +45,8 @@ export default function PhotoGallerySection({
       />
 
       <YearMonthGallery
-        photos={filtered}
+        grouped={groupedPhotos}
+        totalCount={filtered.length}
         displayCount={displayCount}
         onOpen={onOpen}
         sentinelRef={sentinelRef}
