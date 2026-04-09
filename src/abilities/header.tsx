@@ -196,7 +196,7 @@ export default function Header() {
                   items-center justify-center leading-tight self-center
                 ">
                   <span className="opacity-60 text-3xl leading-none">×</span>
-                  <span className="leading-none">{routeLabel}</span>
+                  <span className="text-2xl leading-none">{routeLabel}</span>
                 </span>
               )}
             </h1>
