@@ -156,7 +156,7 @@ export default function Header() {
       : 'resume';
 
   return (
-    <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center max-w-[820px] eq:max-w-[1320px] w-full bg-tsiakkas-light dark:bg-tsiakkas-dark">
+    <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center w-full eq:max-w-[1320px] bg-tsiakkas-light dark:bg-tsiakkas-dark">
       <div className="text-tsiakkas-light dark:text-tsiakkas-dark w-full flex flex-row">
         <div className="w-1/2 text-start italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]">
         </div>

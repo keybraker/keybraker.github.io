@@ -10,8 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Header />
       <div className="flex flex-1 h-full w-full flex-col items-center justify-center">
         <div className="
-          flex h-full w-full
-          max-w-[820px] eq:max-w-[1320px]
+          flex h-full w-full eq:max-w-[1320px]
           flex-wrap justify-center gap-8
           px-4 sm:px-8 eq:px-2 my-8
           text-tsiakkas-dark dark:text-tsiakkas-light eq:mx-auto
