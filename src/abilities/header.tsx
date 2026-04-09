@@ -23,18 +23,29 @@ export function RouteButton({
   iconWrapper: (id: string, node: JSX.Element, props?: any) => JSX.Element;
 }) {
   return (
-    <Link href={href} aria-label={`Go to ${label.toLowerCase()} page`} className="focus:outline-none">
+    <Link href={href} aria-label={`Go to ${label.toLowerCase()} page`} className="group focus:outline-none">
       {iconWrapper(
         id,
         <span className="
-            md:flex md:gap-2 md:border md:rounded-full
-            md:px-3 md:py-[2px] md:items-center md:snap-center
-            md:border-tsiakkas-dark/40 md:dark:border-tsiakkas-light/40
-            md:hover:bg-tsiakkas-dark/10 md:hover:dark:bg-tsiakkas-light/10
-            md:transition-all md:duration-300
+            inline-flex items-center py-1
+            transition-all duration-200 ease-out
+            group-focus-visible:ring-2 group-focus-visible:ring-tsiakkas-dark/20 group-focus-visible:dark:ring-tsiakkas-light/30
+            group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-tsiakkas-light group-focus-visible:dark:ring-offset-tsiakkas-dark
+            rounded-full
           ">
-          <span className="pb-[2px] font-extrabold hidden md:block italic">{label}</span>
-          <span className="">{iconNode}</span>
+          <span className="
+            flex h-8 w-8 items-center justify-center rounded-full
+            border border-tsiakkas-dark/50 dark:border-tsiakkas-light/50
+            bg-tsiakkas-dark/[0.03] dark:bg-tsiakkas-light/[0.06]
+            text-tsiakkas-dark/80 dark:text-tsiakkas-light/80
+            transition-all duration-200 ease-out
+            group-hover:-translate-y-[1px]
+            group-hover:border-tsiakkas-dark/35
+            group-hover:dark:border-tsiakkas-light/35
+            group-hover:bg-tsiakkas-dark/[0.06]
+            group-hover:dark:bg-tsiakkas-light/[0.1]">
+            {iconNode}
+          </span>
         </span>
       )}
     </Link>
