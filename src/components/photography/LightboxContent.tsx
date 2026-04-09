@@ -193,6 +193,20 @@ export default function LightboxContent({
     setPanOffset((prev) => clampPan(prev));
   }, [zoomLevel, clampPan]);
 
+  const isLandscape = active.orientation === 'landscape';
+  const stackLandscapeInfo = showInfo && isLandscape;
+  const desktopLayoutClass = stackLandscapeInfo
+    ? 'flex-col xl:flex-row items-center xl:items-center'
+    : 'flex-col md:flex-row items-center md:items-center';
+  const desktopViewportHeightClass = stackLandscapeInfo
+    ? 'max-h-[calc(68vh-8rem)] xl:max-h-[calc(90vh-8rem)]'
+    : showInfo
+      ? 'max-h-[calc(90vh-8rem)]'
+      : 'max-h-[90vh]';
+  const desktopInfoClass = stackLandscapeInfo
+    ? 'w-full max-w-5xl xl:w-72 xl:max-w-none'
+    : 'w-full md:w-72';
+
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
       {isMobile ? (
@@ -207,7 +221,7 @@ export default function LightboxContent({
                 height={1200}
                 placeholder="blur"
                 blurDataURL={BLUR_DATA_URL}
-                className={`w-auto object-contain select-none border border-white/20 rounded-none transition-all duration-300 ${showInfo ? 'max-h-[calc(70vh-8rem)]' : 'max-h-[85vh]'}`}
+                className={`w-auto object-contain select-none border border-white/20 rounded-none ${showInfo ? 'max-h-[calc(70vh-8rem)]' : 'max-h-[85vh]'}`}
                 sizes="(max-width: 768px) 100vw, 80vw"
                 priority
                 onContextMenu={(e) => e.preventDefault()}
@@ -245,9 +259,9 @@ export default function LightboxContent({
           )}
         </div>
       ) : (
-        <div className="w-full max-w-[90vw] mx-auto flex flex-col md:flex-row items-center md:items-center gap-8" onClick={(e) => e.stopPropagation()}>
+        <div className={`w-full max-w-[90vw] mx-auto flex ${desktopLayoutClass} gap-8`} onClick={(e) => e.stopPropagation()}>
           <div className="flex-1 flex items-center justify-center overflow-hidden">
-            <div ref={viewportRef} className={`flex items-center justify-center w-full transition-all duration-300 ${showInfo ? 'max-h-[calc(90vh-8rem)]' : 'max-h-[90vh]'}`} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} onWheel={handleWheel}>
+            <div ref={viewportRef} className={`flex items-center justify-center w-full ${desktopViewportHeightClass}`} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} onWheel={handleWheel}>
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-none " />}
               <div className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`} style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }} onMouseDown={handleMouseDown}>
                 <div
@@ -262,7 +276,7 @@ export default function LightboxContent({
                     height={1200}
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
-                    className={`w-auto object-contain select-none border border-white/20 rounded-none transition-all duration-300 ${showInfo ? 'max-h-[calc(90vh-8rem)]' : 'max-h-[90vh]'}`}
+                    className={`w-auto object-contain select-none border border-white/20 rounded-none ${desktopViewportHeightClass}`}
                     sizes="(max-width: 768px) 100vw, 80vw"
                     priority
                     onContextMenu={(e) => e.preventDefault()}
@@ -305,7 +319,7 @@ export default function LightboxContent({
           </div>
 
           {showInfo && !isMobile && (
-            <aside className="w-full md:w-72 flex flex-col gap-4 text-tsiakkas-light">
+            <aside className={`${desktopInfoClass} flex flex-col gap-4 text-tsiakkas-light`}>
               <h3 className="text-xl font-semibold leading-relaxed italic">{"\""}{active.caption}{"\""}</h3>
               <div className="text-base opacity-90">{active.location}, {active.country}</div>
               <div className="h-px bg-white/20 my-2" />
