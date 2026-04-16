@@ -167,7 +167,7 @@ export default function Home() {
           <div className="
             flex w-full flex-col eq:flex-row eq:items-start items-center rounded-lg
             bg-tsiakkas-blueDark bg-opacity-5 dark:bg-tsiakkas-blueLight dark:bg-opacity-5
-            border-2 border-tsiakkas-dark p-8 dark:border-tsiakkas-light
+            border border-tsiakkas-dark/10 p-8 dark:border-tsiakkas-light/20
           ">
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <SkillPage />

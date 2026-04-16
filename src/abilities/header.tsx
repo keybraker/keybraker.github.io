@@ -39,7 +39,6 @@ export function RouteButton({
             bg-tsiakkas-dark/[0.03] dark:bg-tsiakkas-light/[0.06]
             text-tsiakkas-dark/80 dark:text-tsiakkas-light/80
             transition-all duration-200 ease-out
-            group-hover:-translate-y-[1px]
             group-hover:border-tsiakkas-dark/35
             group-hover:dark:border-tsiakkas-light/35
             group-hover:bg-tsiakkas-dark/[0.06]
