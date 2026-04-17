@@ -33,18 +33,7 @@ export function RouteButton({
             group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-tsiakkas-light group-focus-visible:dark:ring-offset-tsiakkas-dark
             rounded-full
           ">
-          <span className="
-            flex h-8 w-8 items-center justify-center rounded-full
-            border border-tsiakkas-dark/50 dark:border-tsiakkas-light/50
-            bg-tsiakkas-dark/[0.03] dark:bg-tsiakkas-light/[0.06]
-            text-tsiakkas-dark/80 dark:text-tsiakkas-light/80
-            transition-all duration-200 ease-out
-            group-hover:border-tsiakkas-dark/35
-            group-hover:dark:border-tsiakkas-light/35
-            group-hover:bg-tsiakkas-dark/[0.06]
-            group-hover:dark:bg-tsiakkas-light/[0.1]">
-            {iconNode}
-          </span>
+          {iconNode}
         </span>
       )}
     </Link>

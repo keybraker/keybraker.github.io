@@ -7,7 +7,7 @@ const description = 'Software engineer and part time photographer.';
 
 export default function Home() {
   return (
-    <div className="mx-auto w-full flex flex-col">
+    <div className="mx-auto w-full h-full flex flex-col">
       <Head>
         <title>{title}</title>
 
@@ -35,36 +35,26 @@ export default function Home() {
         />
       </Head>
 
-      <main className="flex flex-col md:flex-row gap-6 md:gap-8 w-full">
+      <main className="flex flex-col md:flex-row gap-6 md:gap-8 w-full h-full">
         <Link
           href="/resume"
-          className="
-            w-full rounded-2xl
-            border-4 border-verge-cyan/30
-            hover:border-tsiakkas-dark/40 dark:hover:border-tsiakkas-light
-            transition-colors duration-500
-          "
+          className="w-1/2 h-full"
         >
           <Card
             title="Resume"
             description="My work, in my own code"
-            colour="bg-verge-cyan/80 dark:bg-verge-cyan/75 border-4 border-verge-cyan/30"
+            colour="verge-cyan"
           />
         </Link>
 
         <Link
           href="/photography"
-          className="
-            w-full rounded-2xl
-            border-4 border-verge-yellow/30
-            hover:border-tsiakkas-dark/40 dark:hover:border-tsiakkas-light
-            transition-colors duration-500
-          "
+          className="w-1/2 h-full"
         >
           <Card
             title="Photography"
             description="My work, in my own shots"
-            colour="bg-verge-yellow/80 dark:bg-verge-yellow/75 border-4 border-verge-yellow/30"
+            colour="verge-yellow"
           />
         </Link>
       </main>
