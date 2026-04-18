@@ -43,7 +43,7 @@ export default function Home() {
           <Card
             title="Resume"
             description="My work, in my own code"
-            colour="verge-cyan"
+            colour="cyan"
           />
         </Link>
 
@@ -54,7 +54,7 @@ export default function Home() {
           <Card
             title="Photography"
             description="My work, in my own shots"
-            colour="verge-yellow"
+            colour="yellow"
           />
         </Link>
       </main>

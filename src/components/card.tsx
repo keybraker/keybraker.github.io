@@ -4,22 +4,30 @@ export type CategoryProps = {
   colour: string;
 };
 
+function getColourBg(colour: string) {
+  const commonClasses = `flex flex-col w-full px-8 py-10 text-tsiakkas-dark gap-4 rounded-lg`;
+
+  switch (colour) {
+    case "cyan":
+      return `${commonClasses} bg-verge-cyan dark:bg-verge-cyan`;
+    case "yellow":
+      return `${commonClasses} bg-verge-yellow dark:bg-verge-yellow`;
+  }
+}
+
 export default function Card(props: CategoryProps) {
   return (
     <section
       id={props.title.split(" ").join("-").toLowerCase()}
       className="
-        w-full rounded-lg
-        border-2 border-tsiakkas-light/20 dark:border-tsiakkas-dark/20
-        hover:border-tsiakkas-dark/20 hover:dark:border-tsiakkas-light
+        w-full rounded-xl
+        border-[3px] border-tsiakkas-light/20 dark:border-tsiakkas-dark/20
+        hover:border-tsiakkas-dark/20 hover:dark:border-tsiakkas-light/100
         transition-colors duration-500
       "
     >
       <div className={`
-        flex flex-col w-full rounded-md px-6 py-7
-        text-tsiakkas-dark gap-4
-        border-4 border-${props.colour}/30
-        bg-${props.colour}/80 dark:bg-${props.colour}/75
+        ${getColourBg(props.colour)}
       `}>
         <div className="
           leading-100 brief-title
