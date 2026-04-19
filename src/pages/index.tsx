@@ -35,10 +35,10 @@ export default function Home() {
         />
       </Head>
 
-      <main className="flex flex-col md:flex-row gap-6 md:gap-8 w-full h-full">
+      <main className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full h-full">
         <Link
           href="/resume"
-          className="w-1/2 h-full"
+          className="w-full h-full"
         >
           <Card
             title="Resume"
@@ -49,7 +49,7 @@ export default function Home() {
 
         <Link
           href="/photography"
-          className="w-1/2 h-full"
+          className="w-full h-full"
         >
           <Card
             title="Photography"
