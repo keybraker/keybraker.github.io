@@ -38,6 +38,12 @@ export async function getStaticProps() {
         const name = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '');
         const parts = name.split('-');
         if (parts.length < 3) return null;
+        let trip: string | undefined = undefined;
+        // if there's an extra segment after country, treat it as trip
+        if (parts.length >= 4) {
+            trip = parts[parts.length - 1].replace(/_/g, ' ');
+        }
+        if (trip) parts.pop();
         const country = parts.pop()!.replace(/_/g, ' ');
         const location = parts.pop()!.replace(/_/g, ' ');
         const title = parts.join('-').replace(/_/g, ' ');
@@ -104,6 +110,7 @@ export async function getStaticProps() {
             settings,
             location,
             country,
+            trip,
             image: thumbnailImage,
             originalImage: photoPath,
             isCommissioned,
@@ -117,7 +124,7 @@ export async function getStaticProps() {
     const tempPhotos = (await Promise.all([
         ...files.map((file, index) => processPhoto(file, false, photosDir, index)),
         ...commissionedFiles.map((file, index) => processPhoto(file, true, commissionedDir, files.length + index))
-    ])).filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string; width: number; height: number; }[];
+    ])).filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; trip?: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string; width: number; height: number; }[];
 
     const sectionMap = new Map<string, Photo[]>();
     tempPhotos.forEach(tp => {
@@ -128,6 +135,7 @@ export async function getStaticProps() {
             settings: tp.settings,
             location: tp.location,
             country: tp.country,
+            trip: tp.trip,
             image: tp.image,
             originalImage: tp.originalImage,
             isCommissioned: tp.isCommissioned,
@@ -137,14 +145,18 @@ export async function getStaticProps() {
         } satisfies Photo);
     });
     const sections = Array.from(sectionMap.entries()).map(([title, photos]) => ({ title, photos }));
+    const tripsSet = new Set<string>();
+    tempPhotos.forEach(tp => { if (tp.trip) tripsSet.add(tp.trip); });
+    const trips = Array.from(tripsSet.values());
     return {
         props: {
-            sections
+            sections,
+            trips
         }
     };
 }
 
-export default function PhotographyPage({ sections }: { sections: Section[] }) {
+export default function PhotographyPage({ sections, trips }: { sections: Section[]; trips: string[] }) {
     const { isMobile } = useMobileDetection();
     const [active, setActive] = useState<PhotoWithCategory | null>(null);
 
@@ -228,6 +240,7 @@ export default function PhotographyPage({ sections }: { sections: Section[] }) {
                     onOpen={setActive}
                     sentinelRef={observerTargetRef}
                     isMobile={isMobile}
+                    trips={trips}
                     isLoading={isLoading}
                 />
             </div>

@@ -1,6 +1,6 @@
-import { useMemo, useState, useEffect } from 'react';
-import type { PhotoWithCategory, Section } from '@/types/photo';
-import { usePhotoOrientation } from './usePhotoOrientation';
+import type { PhotoWithCategory, Section } from "@/types/photo";
+import { useEffect, useMemo, useState } from "react";
+import { usePhotoOrientation } from "./usePhotoOrientation";
 
 interface UsePhotoFilteringReturn {
   filtered: PhotoWithCategory[];
@@ -12,7 +12,9 @@ interface UsePhotoFilteringReturn {
   setDisplayCount: (count: number) => void;
 }
 
-export function usePhotoFiltering(sections: Section[]): UsePhotoFilteringReturn {
+export function usePhotoFiltering(
+  sections: Section[],
+): UsePhotoFilteringReturn {
   const [filter, setFilter] = useState<string>("All");
   const [showCommissioned, setShowCommissioned] = useState(false);
   const [displayCount, setDisplayCount] = useState(12);
@@ -21,10 +23,14 @@ export function usePhotoFiltering(sections: Section[]): UsePhotoFilteringReturn 
 
   const filtered = useMemo(() => {
     if (showCommissioned) {
-      return allPhotos.filter(p => p.isCommissioned);
+      return allPhotos.filter((p) => p.isCommissioned);
     }
-    const regularPhotos = allPhotos.filter(p => !p.isCommissioned);
-    return filter === "All" ? regularPhotos : regularPhotos.filter(p => p.category === filter);
+    const regularPhotos = allPhotos.filter((p) => !p.isCommissioned);
+    return filter === "All"
+      ? regularPhotos
+      : regularPhotos.filter(
+          (p) => p.category === filter || (p.trip && p.trip === filter),
+        );
   }, [allPhotos, filter, showCommissioned]);
 
   useEffect(() => {
@@ -38,6 +44,6 @@ export function usePhotoFiltering(sections: Section[]): UsePhotoFilteringReturn 
     showCommissioned,
     setShowCommissioned,
     displayCount,
-    setDisplayCount
+    setDisplayCount,
   };
 }

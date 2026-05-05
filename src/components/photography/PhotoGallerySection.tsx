@@ -6,6 +6,7 @@ import type { PhotoWithCategory, Section } from '@/types/photo';
 
 interface PhotoGallerySectionProps {
   sections: Section[];
+  trips?: string[];
   filter: string;
   setFilter: (filter: string) => void;
   showCommissioned: boolean;
@@ -21,6 +22,7 @@ interface PhotoGallerySectionProps {
 
 export default function PhotoGallerySection({
   sections,
+  trips = [],
   filter,
   setFilter,
   showCommissioned,
@@ -37,6 +39,7 @@ export default function PhotoGallerySection({
     <>
       <FiltersBar
         sections={sections}
+        trips={trips}
         filter={filter}
         setFilter={setFilter}
         showCommissioned={showCommissioned}

@@ -4,6 +4,7 @@ export type Photo = {
   settings: string;
   location: string;
   country: string;
+  trip?: string;
   image: string;
   originalImage: string;
   isCommissioned: boolean;
@@ -14,10 +15,10 @@ export type Photo = {
 
 export type Section = {
   title: string;
-   photos: Photo[]
+  photos: Photo[];
 };
 
 export type PhotoWithCategory = Photo & {
   category: string;
-  orientation: 'portrait' | 'landscape';
+  orientation: "portrait" | "landscape";
 };

@@ -239,7 +239,10 @@ export default function LightboxContent({
             <div className="w-full p-4" onClick={(e) => e.stopPropagation()}>
               <aside className="flex flex-col gap-3 text-tsiakkas-light max-w-full mx-auto">
                 <h3 className="text-base font-semibold leading-relaxed italic">{"\""}{active.caption}{"\""}</h3>
-                <div className="text-sm opacity-90">{active.location}, {active.country}</div>
+                <div className="flex flex-col gap-1">
+                  <div className="opacity-90 text-sm">{active.location}, {active.country}</div>
+                  {active.trip && (<div className="opacity-80 text-xs">{active.trip}</div>)}
+                </div>
                 <div className="h-px bg-white/20 my-2" />
                 <div className="flex flex-wrap gap-2">
                   {active.settings && active.settings.split(' · ').map((setting, index) => (
@@ -321,7 +324,10 @@ export default function LightboxContent({
           {showInfo && !isMobile && (
             <aside className={`${desktopInfoClass} flex flex-col gap-4 text-tsiakkas-light`}>
               <h3 className="text-xl font-semibold leading-relaxed italic">{"\""}{active.caption}{"\""}</h3>
-              <div className="text-base opacity-90">{active.location}, {active.country}</div>
+              <div className="flex flex-col gap-1">
+                <div className="opacity-90 text-sm">{active.location}, {active.country}</div>
+                {active.trip && (<div className="opacity-80 text-xs">{active.trip}</div>)}
+              </div>
               <div className="h-px bg-white/20 my-2" />
               <div className="flex flex-wrap gap-2">
                 {active.settings && active.settings.split(' · ').map((setting, index) => (
