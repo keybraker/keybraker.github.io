@@ -1,4 +1,5 @@
 import { DarkModeToggle } from "@/components/darkModeToggle";
+import SpinningAvatar from "@/components/SpinningAvatar";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
@@ -170,25 +171,35 @@ export default function Header() {
         border-b-2
         border-tsiakkas-dark dark:border-tsiakkas-light
       ">
-          <Link href="/">
-            <h1 className="font-serif
+          <div className="flex flex-row items-center gap-3">
+            <div className="hidden sm:block">
+              <SpinningAvatar
+                src="https://avatars.githubusercontent.com/u/23459466?v=4"
+                alt="Ioannis Tsiakkas"
+                size="w-7 h-7"
+                smSize="sm:w-7 sm:h-7"
+              />
+            </div>
+            <Link href="/" className="flex flex-row items-center gap-3">
+              <h1 className="font-serif
                 flex flex-col self-center tn:flex-row xs:gap-2 gap-1
                 text-center text-2xl font-extrabold leading-100
                 text-tsiakkas-dark dark:text-tsiakkas-light
               ">
-              <span>Tsiakkas</span>
-              <span>Ioannis</span>
-              {showRouteLabel && routeLabel && (
-                <span className="
+                <span>Tsiakkas</span>
+                <span>Ioannis</span>
+                {showRouteLabel && routeLabel && (
+                  <span className="
                   font-light italic tracking-wide flex flex-row gap-1
                   items-center justify-center leading-tight self-center
                 ">
-                  <span className="opacity-60 text-3xl leading-none">×</span>
-                  <span className="text-2xl leading-none">{routeLabel}</span>
-                </span>
-              )}
-            </h1>
-          </Link>
+                    <span className="opacity-60 text-3xl leading-none">×</span>
+                    <span className="text-2xl leading-none">{routeLabel}</span>
+                  </span>
+                )}
+              </h1>
+            </Link>
+          </div>
           <AboutPageInner showPhotographyLink={isResume} showResumeIcon={isPhotography} />
         </div>
       </div>

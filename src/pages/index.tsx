@@ -35,28 +35,30 @@ export default function Home() {
         />
       </Head>
 
-      <main className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full h-full">
-        <Link
-          href="/resume"
-          className="w-full h-full"
-        >
-          <Card
-            title="Resume"
-            description="My work, in my own code"
-            colour="cyan"
-          />
-        </Link>
+      <main className="flex flex-col gap-6 sm:gap-8 w-full h-full">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full">
+          <Link
+            href="/resume"
+            className="w-full h-full"
+          >
+            <Card
+              title="Resume"
+              description="My work, in my own code"
+              colour="cyan"
+            />
+          </Link>
 
-        <Link
-          href="/photography"
-          className="w-full h-full"
-        >
-          <Card
-            title="Photography"
-            description="My work, in my own shots"
-            colour="yellow"
-          />
-        </Link>
+          <Link
+            href="/photography"
+            className="w-full h-full"
+          >
+            <Card
+              title="Photography"
+              description="My work, in my own shots"
+              colour="yellow"
+            />
+          </Link>
+        </div>
       </main>
     </div>
   );
