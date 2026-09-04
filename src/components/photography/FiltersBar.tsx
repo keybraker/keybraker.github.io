@@ -66,7 +66,7 @@ export default function FiltersBar({
         </nav>
       </div>
 
-      <div className="h-full md:w-1/4 w-full flex justify-start md:justify-end mt-2 md:mt-0">
+      {/* <div className="h-full md:w-1/4 w-full flex justify-start md:justify-end mt-2 md:mt-0">
         <button
           aria-pressed={showCommissioned}
           onClick={() => setShowCommissioned(!showCommissioned)}
@@ -77,7 +77,7 @@ export default function FiltersBar({
         >
           Commissioned Work
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
