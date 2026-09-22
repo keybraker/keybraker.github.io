@@ -22,7 +22,7 @@ const experiences: ShowcaseType[] = [
     ],
     description: [
       {
-        title: "Mid-level backend engineer",
+        title: "Backend engineer",
         bullets: [
           "Owned core business processes end to end, collaborating closely with third-party providers.",
           "Reworked the transactional email pipeline, improving consistency, maintainability, and reliability.",
@@ -31,7 +31,7 @@ const experiences: ShowcaseType[] = [
         ],
       },
       {
-        title: "Senior backend engineer",
+        title: "A bit better backend engineer",
         bullets: [
           "Optimised a performance-critical calculation path, reducing processing time and cost while improving user and developer experience.",
           "Performed code reviews, maintained technical documentation, and mentored other developers.",
