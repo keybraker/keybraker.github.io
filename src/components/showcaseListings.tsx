@@ -1,7 +1,59 @@
 import { getDateFormatted } from "@/functions/getDateFormatted";
 import { getPeriodBetween } from "@/functions/getMonthsBetween";
-import { ShowcaseType } from "@/types/showcase";
+import { ShowcaseDescriptionGroup, ShowcaseType } from "@/types/showcase";
 import { useEffect, useState } from "react";
+
+function DescriptionGroup({
+  group,
+  isLast,
+}: {
+  group: ShowcaseDescriptionGroup;
+  isLast: boolean;
+}) {
+  return (
+    <div className={`relative pl-6 ${isLast ? "" : "pb-4"}`}>
+      {group.title && (
+        <div
+          className="content mb-0.5 text-md font-bold text-tsiakkas-dark dark:text-tsiakkas-light"
+          dangerouslySetInnerHTML={{ __html: group.title }}
+        ></div>
+      )}
+      {group.bullets.length > 0 && (
+        <ul
+          className="content list-disc pl-5 text-md italic text-gray-800 dark:text-gray-400"
+          dangerouslySetInnerHTML={{
+            __html: group.bullets.map((bullet) => `<li>${bullet}</li>`).join(""),
+          }}
+        ></ul>
+      )}
+    </div>
+  );
+}
+
+function ShowcaseDescription({ groups }: { groups: ShowcaseDescriptionGroup[] }) {
+  return (
+    <div className="relative ml-1">
+      {/* Side line running along every bubble and connecting them. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-y-0 left-[4px] w-px -translate-x-1/2 bg-tsiakkas-dark/20 dark:bg-tsiakkas-light/20"
+      ></span>
+      {groups.map((group, index) => (
+        <div key={index} className="relative">
+          {/* Round bubble, always rendered so every entry has a marker. */}
+          <span
+            aria-hidden="true"
+            className="absolute left-0 top-[8px] h-[8px] w-[8px] rounded-full border-2 border-tsiakkas-dark bg-tsiakkas-light dark:border-tsiakkas-light dark:bg-tsiakkas-dark"
+          ></span>
+          <DescriptionGroup
+            group={group}
+            isLast={index + 1 === groups.length}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function ShowcaseListing({
   showcase,
@@ -67,15 +119,10 @@ function ShowcaseListing({
         </div>
       </div>
 
-      {showcase?.description && (
+      {showcase?.description && showcase.description.length > 0 && (
         <>
           <div className="my-[12px] w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
-          <ul
-            className="content ml-4 list-disc text-md italic text-gray-800 dark:text-gray-400"
-            dangerouslySetInnerHTML={{
-              __html: `<li>${showcase.description.join("</li><li>")}</li>`,
-            }}
-          ></ul>
+          <ShowcaseDescription groups={showcase.description} />
         </>
       )}
       {!last ? (

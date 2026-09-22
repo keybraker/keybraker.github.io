@@ -17,9 +17,11 @@ const projects: ShowcaseType[] = [
     ),
     createLinkDiv("https://webpack.js.org/", "Wepback")],
     description: [
-      "Created and deployed an extension to both Chrome's and Firefox's store.",
-      "Used the latest technologies to make deployments fast and of the highest quality.",
-      `<table class="w-full border-collapse mt-2 mb-4">
+      {
+        bullets: [
+          "Created and deployed an extension to both Chrome's and Firefox's store.",
+          "Used the latest technologies to make deployments fast and of the highest quality.",
+          `<table class="w-full border-collapse mt-2 mb-4">
         <tr>
           <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/amo/users/reskroutzed" alt="Firefox Add-on Users"/></td>
           <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/chrome-web-store/users/amglnkndjeoojnjjeepeheobhneeogcl" alt="Chrome Web Store Users"/></td>
@@ -51,6 +53,8 @@ const projects: ShowcaseType[] = [
           </td>
         </tr>
       </table>`,
+        ],
+      },
     ],
   },
   {
@@ -65,11 +69,15 @@ const projects: ShowcaseType[] = [
       "Tailwind"
     )],
     description: [
-      `${createLinkDiv(
-        "https://github.com/sinemas/sinemas-info-adapters",
-        "ΣΙΝΕμας Community Adapters",
-        "hover:underline font-semibold"
-      )}, are available for everyone add their own city to the site.`,
+      {
+        bullets: [
+          `${createLinkDiv(
+            "https://github.com/sinemas/sinemas-info-adapters",
+            "ΣΙΝΕμας Community Adapters",
+            "hover:underline font-semibold"
+          )}, are available for everyone add their own city to the site.`,
+        ],
+      },
     ],
   },
   {
@@ -88,11 +96,15 @@ const projects: ShowcaseType[] = [
     ),
     createLinkDiv("https://www.mongodb.com/", "MongoDB")],
     // description: [
-    //   createLinkDiv(
-    //     "https://portal-bot.xyz/",
-    //     "Documentation",
-    //     "hover:underline font-semibold"
-    //   ),
+    //   {
+    //     bullets: [
+    //       createLinkDiv(
+    //         "https://portal-bot.xyz/",
+    //         "Documentation",
+    //         "hover:underline font-semibold"
+    //       ),
+    //     ],
+    //   },
     // ],
   },
   {
