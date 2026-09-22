@@ -33,14 +33,12 @@ function DescriptionGroup({
 function ShowcaseDescription({ groups }: { groups: ShowcaseDescriptionGroup[] }) {
   return (
     <div className="relative ml-1">
-      {/* Side line running along every bubble and connecting them. */}
       <span
         aria-hidden="true"
         className="absolute inset-y-0 left-[4px] w-px -translate-x-1/2 bg-tsiakkas-dark/20 dark:bg-tsiakkas-light/20"
       ></span>
       {groups.map((group, index) => (
         <div key={index} className="relative">
-          {/* Round bubble, always rendered so every entry has a marker. */}
           <span
             aria-hidden="true"
             className="absolute left-0 top-[8px] h-[8px] w-[8px] rounded-full border-2 border-tsiakkas-dark bg-tsiakkas-light dark:border-tsiakkas-light dark:bg-tsiakkas-dark"
