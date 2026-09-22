@@ -14,7 +14,7 @@ export default function SpinningAvatar({
   return (
     <div
       className={`relative ${size} ${smSize}`}
-      style={{ animation: "spin 12s linear infinite" }}
+    // style={{ animation: "spin 18s linear infinite" }}
     >
       <img
         loading="lazy"
