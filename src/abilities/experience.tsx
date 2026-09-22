@@ -22,13 +22,21 @@ const experiences: ShowcaseType[] = [
     ],
     description: [
       {
+        title: "Mid-level backend engineer",
         bullets: [
-          "Handling the dunning process of the company, with close collaboration with a third party provider.",
-          "Revamped the email sending process, made emails more coherent, easier to maintain and increased quality.",
-          "Updated the calculations on loan construction which decreased the amount of processing time needed and improved user experience, programmer experience and saved money.",
-          "Collaborating with other team members, including front-end developers, product managers, and designers, to develop and implement new features and enhancements.",
-          "Conducting code reviews, writing and updating technical documentation, and providing support to other developers/product when needed.",
-          "Implemented version 6 of BankID, a third party authentication system.",
+          "Owned core business processes end to end, collaborating closely with third-party providers.",
+          "Reworked the transactional email pipeline, improving consistency, maintainability, and reliability.",
+          "Integrated multiple third-party clients.",
+          "Collaborated with front-end developers, product managers, and designers to deliver new features and enhancements.",
+        ],
+      },
+      {
+        title: "Senior backend engineer",
+        bullets: [
+          "Optimised a performance-critical calculation path, reducing processing time and cost while improving user and developer experience.",
+          "Performed code reviews, maintained technical documentation, and mentored other developers.",
+          "Integrated a third-party authentication and identity provider.",
+          "Introduced a high efficiency monetary transaction processing system, improving reliability.",
         ],
       },
     ],
