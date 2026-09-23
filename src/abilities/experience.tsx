@@ -67,6 +67,7 @@ const experiences: ShowcaseType[] = [
     ],
     description: [
       {
+        title: "Frontend engineer",
         bullets: [
           "Worked on the core product of the company's travel platform, developing and improving its user interface, user experience, and performance.",
           "Worked on the transition to the new system design which decoupled the backend system and provided a more robust and scalable solution.",
@@ -88,6 +89,7 @@ const experiences: ShowcaseType[] = [
     ],
     description: [
       {
+        title: "Fullstack engineer",
         bullets: [
           'Design, build and maintain the company\'s website, including the front-end and back-end systems (<a href="https://www.medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">medwork.gr</a>).',
           "Created a new system to handle pharmaceutical products achieving a big increase in productivity compared to the previous solution.",
