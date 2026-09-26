@@ -32,7 +32,7 @@ function DescriptionGroup({
 
 function ShowcaseDescription({ groups }: { groups: ShowcaseDescriptionGroup[] }) {
   return (
-    <div className="relative ml-1">
+    <div className="relative ml-0">
       <span
         aria-hidden="true"
         className="absolute inset-y-0 left-[4px] w-px -translate-x-1/2 bg-tsiakkas-dark/20 dark:bg-tsiakkas-light/20"
@@ -119,12 +119,12 @@ function ShowcaseListing({
 
       {showcase?.description && showcase.description.length > 0 && (
         <>
-          <div className="my-[12px] w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
+          <div className="my-[20px] w-full"></div>
           <ShowcaseDescription groups={showcase.description} />
         </>
       )}
       {!last ? (
-        <div className="my-8 border-t border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
+        <div className="my-8 border-t border-tsiakkas-dark/5 dark:border-tsiakkas-light/5"></div>
       ) : (
         ""
       )}
