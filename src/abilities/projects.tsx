@@ -61,24 +61,25 @@ const projects: ShowcaseType[] = [
     start: new Date("2024-03-16"),
     end: null,
     title: createLinkDiv("https://sinemas.gr", "sinemas.gr"),
-    info: "A focused cinema website where you can see all movies in Heraklion.",
+    info: "A cinema aggregator website for all of Greece.",
     position: '',
     technologies: [createLinkDiv("https://nextjs.org/", "Next.js"),
     createLinkDiv(
       "https://tailwindcss.com",
       "Tailwind"
     )],
-    description: [
-      {
-        bullets: [
-          `${createLinkDiv(
-            "https://github.com/sinemas/sinemas-info-adapters",
-            "ΣΙΝΕμας Community Adapters",
-            "hover:underline font-semibold"
-          )}, are available for everyone add their own city to the site.`,
-        ],
-      },
-    ],
+  },
+  {
+    start: new Date("2025-11-20"),
+    end: null,
+    title: createLinkDiv("https://salaryzer.com", "salaryzer.com"),
+    info: "Most complete salary analysis website for Greece.",
+    position: '',
+    technologies: [createLinkDiv("https://nextjs.org/", "Next.js"),
+    createLinkDiv(
+      "https://tailwindcss.com",
+      "Tailwind"
+    )],
   },
   {
     start: new Date("2020-02-01"),
