@@ -132,6 +132,8 @@ export default function Home() {
             </div>
           </div>
 
+          <hr className="w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10" />
+
           <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <ProjectsPage />
@@ -155,6 +157,8 @@ export default function Home() {
             </div>
           </div>
 
+          <hr className="w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10" />
+
           <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
             <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
               <EducationPage />
@@ -163,6 +167,8 @@ export default function Home() {
               <Category {...categories[3]} />
             </div>
           </div>
+
+          <hr className="w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10" />
 
           <div className="
             flex w-full flex-col eq:flex-row eq:items-start items-center rounded-lg
