@@ -39,7 +39,7 @@ export default function Card(props: CategoryProps) {
         </div>
         <div className="
           mb-4
-          border-b-2 border-b-tsiakkas-dark/10
+          border-b-2 border-b-tsiakkas-dark/25
         ">
         </div>
         <div
