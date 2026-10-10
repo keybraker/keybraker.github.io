@@ -48,11 +48,11 @@ const experiences: ShowcaseType[] = [
         title:
           'jack of all trades (engineering manager) <span class="font-normal italic opacity-70">· Oct 2026</span>',
         bullets: [
-          "Leads the engineering function as tech lead, people manager, and hands-on software engineer, driving Fairlo to its next level.",
-          "Enables non-technical teams to ship their ideas faster.",
-          "Drives the transition from specialised backend/frontend silos to fullstack delivery.",
-          "Restructures the tech stack to be compatible with an AI-first future.",
-          "Hires and grows the engineering team.",
+          "Lead the engineering function as tech lead, people manager, and hands-on software engineer, driving Fairlo to its next level.",
+          "Enable non-technical teams to ship their ideas faster.",
+          "Drive the transition from specialised backend/frontend silos to fullstack delivery.",
+          "Restructure the tech stack to be compatible with an AI-first future.",
+          "Hire and grow the engineering team.",
         ],
       },
     ],
@@ -107,7 +107,7 @@ const experiences: ShowcaseType[] = [
       {
         title: "Fullstack engineer",
         bullets: [
-          'Design, build and maintain the company\'s website, including the front-end and back-end systems (<a href="https://www.medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">medwork.gr</a>).',
+          'Designed, built and maintained the company\'s website, including the front-end and back-end systems (<a href="https://www.medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">medwork.gr</a>).',
           "Created a new system to handle pharmaceutical products achieving a big increase in productivity compared to the previous solution.",
           "Digitalised the company's processes by creating a new system to handle the company's data.",
           "Achieved a big increase in productivity compared to the previous solution, by bring tailored made solutions to employees.",
