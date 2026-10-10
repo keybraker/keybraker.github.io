@@ -12,31 +12,47 @@ const experiences: ShowcaseType[] = [
       "text-tsiakkas-dark dark:text-tsiakkas-light hover:underline"
     ),
     info: "Financial Services",
-    position: "Backend",
+    position: "Fullstack",
     technologies: [
       createLinkDiv("https://www.typescriptlang.org/", "TypeScript"),
       createLinkDiv("https://www.postgresql.org/", "PostgreSQL"),
       createLinkDiv("https://sequelize.org/", "Sequelize"),
       createLinkDiv("https://aws.amazon.com/", "AWS"),
       createLinkDiv("https://about.gitlab.com/", "Gitlab"),
+      createLinkDiv("https://www.docker.com/", "Docker"),
+      createLinkDiv("https://aws.amazon.com/sqs/", "SQS"),
     ],
     description: [
       {
-        title: "Backend engineer",
+        title:
+          'good backend engineer (mid) <span class="font-normal italic opacity-70">· Feb 2022</span>',
         bullets: [
-          "Owned core business processes end to end, collaborating closely with third-party providers.",
+          "Focused on the backend, delivering product requirements in close collaboration with the team.",
+          "Designed and delivered solutions, contributing to large projects.",
+          "Took ownership of fundamental parts of the codebase.",
           "Reworked the transactional email pipeline, improving consistency, maintainability, and reliability.",
-          "Integrated multiple third-party clients.",
-          "Collaborated with front-end developers, product managers, and designers to deliver new features and enhancements.",
         ],
       },
       {
-        title: "A bit better backend engineer",
+        title:
+          'a bit better backend engineer (senior) <span class="font-normal italic opacity-70">· Mar 2023</span>',
         bullets: [
-          "Optimised a performance-critical calculation path, reducing processing time and cost while improving user and developer experience.",
-          "Performed code reviews, maintained technical documentation, and mentored other developers.",
-          "Integrated a third-party authentication and identity provider.",
-          "Introduced a high efficiency monetary transaction processing system, improving reliability.",
+          "Stepped into a senior role following an internal company reorganisation.",
+          "Delivered large projects end to end, from design through implementation, under tight time constraints.",
+          "Reorganised the backend, progressing from incremental cleanups to a large-scale rewrite of core systems.",
+          "Worked closely with CloudOps to deliver event-driven architectures.",
+          "Became the team's go-to engineer for guidance and technical direction as it grew, while continuing to deliver hands-on work.",
+        ],
+      },
+      {
+        title:
+          'jack of all trades (engineering manager) <span class="font-normal italic opacity-70">· Oct 2026</span>',
+        bullets: [
+          "Leads the engineering function as tech lead, people manager, and hands-on software engineer, driving Fairlo to its next level.",
+          "Enables non-technical teams to ship their ideas faster.",
+          "Drives the transition from specialised backend/frontend silos to fullstack delivery.",
+          "Restructures the tech stack to be compatible with an AI-first future.",
+          "Hires and grows the engineering team.",
         ],
       },
     ],
