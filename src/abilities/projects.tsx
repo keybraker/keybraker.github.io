@@ -15,7 +15,7 @@ const projects: ShowcaseType[] = [
       "https://www.typescriptlang.org/",
       "TypeScript"
     ),
-    createLinkDiv("https://webpack.js.org/", "Wepback")],
+    createLinkDiv("https://webpack.js.org/", "Webpack")],
     description: [
       {
         bullets: [

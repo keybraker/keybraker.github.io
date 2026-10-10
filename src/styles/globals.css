@@ -73,7 +73,7 @@ a {
   }
 }
 
-brief-title {
+.brief-title {
   writing-mode: vertical-rl;
   text-orientation: sideways;
 }

@@ -37,7 +37,7 @@ const categories: CategoryProps[] = [
     description:
       "I am continuously working on improving and bettering my software design skills. \
     I always focus on my work being well designed and structured as architecture is one of the, \
-    if not the most important think a software engineer has to do. \
+    if not the most important thing a software engineer has to do. \
     All of this effort is put in order for the systems I design and build to be performant, \
     extendable and easy to work with and contribute to.",
     colour: "bg-verge-blue/50 dark:bg-verge-blue/75",
@@ -45,7 +45,7 @@ const categories: CategoryProps[] = [
   {
     title: "Education",
     description:
-      "My education has provided me with a strong foundation in computer science, with a focus on software engineering ans sytem architecture. \
+      "My education has provided me with a strong foundation in computer science, with a focus on software engineering and system architecture. \
     In a demanding academic setting I have learned to work under pressure and to meet deadlines. \
     I have also learned to work in a team environment, and to communicate effectively with my peers.",
     colour: "bg-verge-orange/50 dark:bg-verge-orange/75",
@@ -55,7 +55,7 @@ const categories: CategoryProps[] = [
     description:
       'I am always working on side projects to improve my skills and learn new technologies. \
     I find it very important to keep up with the latest trends in technology, and to always be learning; \
-    it also does not hurt when you can have an impact on other people\'s lives alogside. \
+    it also does not hurt when you can have an impact on other people\'s lives alongside. \
     Some of my projects are available on my <a href="https://github.com/keybraker" rel="noopener noreferrer" target="_blank" class="hover:underline">github</a>, where I contribute to open source projects, while also creating my own.',
     colour: "bg-verge-blue/50 dark:bg-verge-blue/75",
   },
@@ -115,7 +115,7 @@ export default function Home() {
         <meta property="twitter:description" content='Software engineer and part time photographer.' />
         <meta
           property="twitter:image"
-          content="httpsT://avatars.githubusercontent.com/u/23459466?v=4"
+          content="https://avatars.githubusercontent.com/u/23459466?v=4"
         />
       </Head>
 

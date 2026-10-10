@@ -110,7 +110,7 @@ const experiences: ShowcaseType[] = [
           'Designed, built and maintained the company\'s website, including the front-end and back-end systems (<a href="https://www.medwork.gr" rel="noopener noreferrer" target="_blank" class="hover:underline">medwork.gr</a>).',
           "Created a new system to handle pharmaceutical products achieving a big increase in productivity compared to the previous solution.",
           "Digitalised the company's processes by creating a new system to handle the company's data.",
-          "Achieved a big increase in productivity compared to the previous solution, by bring tailored made solutions to employees.",
+          "Achieved a big increase in productivity compared to the previous solution, by bringing tailor-made solutions to employees.",
         ],
       },
     ],
