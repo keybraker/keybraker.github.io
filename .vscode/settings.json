@@ -1,7 +1,34 @@
 {
-    "git-blame.gitWebUrl": "",
-    "cSpell.words": [
-        "minimise",
-        "optimise"
-    ]
+  "git-blame.gitWebUrl": "",
+  "cSpell.words": ["minimise", "optimise"],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#a80021",
+    "activityBar.activeBorder": "#e7e7e7",
+    "activityBar.background": "#a80021",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#062000",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "activityBarTop.activeBackground": "#a80021",
+    "activityBarTop.activeBorder": "#e7e7e7",
+    "activityBarTop.background": "#a80021",
+    "activityBarTop.foreground": "#e7e7e7",
+    "activityBarTop.inactiveForeground": "#e7e7e799",
+    "commandCenter.border": "#e7e7e799",
+    "commandCenter.foreground": "#e7e7e7",
+    "sash.hoverBorder": "#a80021",
+    "statusBar.background": "#750017",
+    "statusBar.debuggingBackground": "#750017",
+    "statusBar.debuggingForeground": "#e7e7e7",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBar.inactiveBackground": "#750017",
+    "statusBarItem.hoverBackground": "#a80021",
+    "statusBarItem.remoteBackground": "#198000",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#750017",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#75001799",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#750017"
 }

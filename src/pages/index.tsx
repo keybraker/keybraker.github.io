@@ -1,4 +1,7 @@
 import Card from "@/components/card";
+import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
+import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
+import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -39,26 +42,40 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full">
           <Link
             href="/resume"
-            className="w-full h-full"
+            className="group w-full h-full"
           >
             <Card
               title="Resume"
               description="My work, in my own code"
               colour="cyan"
+              icon={<IoIosPaper size="26px" />}
             />
           </Link>
 
           <Link
             href="/photography"
-            className="w-full h-full"
+            className="group w-full h-full"
           >
             <Card
               title="Photography"
               description="My work, in my own shots"
               colour="yellow"
+              icon={<MdPhotoCamera size="26px" />}
             />
           </Link>
         </div>
+
+        <Link
+          href="/support"
+          className="group w-full h-full"
+        >
+          <Card
+            title="Support"
+            description="If anything I have made has helped you, consider supporting my endeavours"
+            colour="pink"
+            icon={<FaHeart size="26px" />}
+          />
+        </Link>
       </main>
     </div>
   );

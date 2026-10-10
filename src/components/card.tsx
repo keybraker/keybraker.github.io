@@ -1,7 +1,10 @@
+import type { ReactNode } from "react";
+
 export type CategoryProps = {
   title: string;
   description: string;
   colour: string;
+  icon?: ReactNode;
 };
 
 function getColourBg(colour: string) {
@@ -12,6 +15,8 @@ function getColourBg(colour: string) {
       return `${commonClasses} bg-verge-cyan dark:bg-verge-cyan`;
     case "yellow":
       return `${commonClasses} bg-verge-yellow dark:bg-verge-yellow`;
+    case "pink":
+      return `${commonClasses} bg-verge-pink/50 dark:bg-verge-pink/75`;
   }
 }
 
@@ -31,11 +36,19 @@ export default function Card(props: CategoryProps) {
       `}>
         <div className="
           leading-100 brief-title
-          block text-xl font-extrabold
+          flex flex-row items-center justify-between gap-4
+          text-xl font-extrabold
           text-tsiakkas-dark
-          text-center sm:text-start
         ">
-          {props.title}
+          <span className="text-center sm:text-start">{props.title}</span>
+          {props.icon && (
+            <span
+              aria-hidden="true"
+              className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-110"
+            >
+              {props.icon}
+            </span>
+          )}
         </div>
         <div className="
           mb-4
