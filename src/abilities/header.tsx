@@ -2,6 +2,7 @@ import { DarkModeToggle } from "@/components/darkModeToggle";
 import SpinningAvatar from "@/components/SpinningAvatar";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
+import { FiCoffee } from "@react-icons/all-files/fi/FiCoffee";
 import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
@@ -124,6 +125,13 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
       >
         {iconWrapper("linkedin", <FaLinkedin className={baseIconClasses} size={"20px"} />)}
       </a>
+      <RouteButton
+        id="support"
+        href="/support"
+        label="Support"
+        iconNode={<FiCoffee className={baseIconClasses} size={20} />}
+        iconWrapper={iconWrapper}
+      />
       <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
       {/* Dark mode toggle also participates */}
       <div
