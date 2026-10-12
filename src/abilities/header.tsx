@@ -1,8 +1,6 @@
-import { DarkModeToggle } from "@/components/darkModeToggle";
 import SpinningAvatar from "@/components/SpinningAvatar";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
-import { FiCoffee } from "@react-icons/all-files/fi/FiCoffee";
 import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
@@ -46,6 +44,27 @@ const mail = "mailto:" + "iantsiakkas@gmail.com";
 const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
 const github = "https://github.com/" + "Keybraker";
 const linkedin = "https://www.linkedin.com/in/" + "itsiakkas";
+
+function FilledCoffeeIcon({ className, size = 20 }: { className?: string; size?: number | string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      className={className}
+      aria-hidden="true"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M18 8h1a4 4 0 0 1 0 8h-1" fill="none" />
+      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+      <path d="M6 1v3M10 1v3M14 1v3" fill="none" />
+    </svg>
+  );
+}
 
 function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotographyLink: boolean, showResumeIcon: boolean }) {
   const [hovered, setHovered] = useState<string | null>(null);
@@ -125,23 +144,15 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
       >
         {iconWrapper("linkedin", <FaLinkedin className={baseIconClasses} size={"20px"} />)}
       </a>
-      <RouteButton
-        id="support"
-        href="/support"
-        label="Support"
-        iconNode={<FiCoffee className={baseIconClasses} size={20} />}
-        iconWrapper={iconWrapper}
-      />
-      <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
-      {/* Dark mode toggle also participates */}
-      <div
-        onMouseEnter={() => setHovered("darkmode")}
-        onMouseLeave={() => setHovered(null)}
-        onFocus={() => setHovered("darkmode")}
-        onBlur={() => setHovered(null)}
-        className={`transition-all duration-300 ease-out ${hovered && hovered !== "darkmode" ? dimmedClasses : ""}`}
-      >
-        <DarkModeToggle />
+      <div className="ml-auto flex items-center gap-3">
+        <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
+        <RouteButton
+          id="support"
+          href="/support"
+          label="Support"
+          iconNode={<FilledCoffeeIcon className={baseIconClasses} size={20} />}
+          iconWrapper={iconWrapper}
+        />
       </div>
     </div>
   );

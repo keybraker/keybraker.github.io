@@ -34,7 +34,7 @@ export function DarkModeToggle() {
         <button
             aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             onClick={toggleDarkMode}
-            className="flex items-center justify-center transition-colors duration-200"
+            className="flex items-center justify-center text-tsiakkas-dark dark:text-tsiakkas-light transition-colors duration-200"
         >
             {darkMode ? (
                 <HiSun className="antialiased" size={"20px"} />

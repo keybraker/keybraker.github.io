@@ -25,7 +25,7 @@ const experiences: ShowcaseType[] = [
     description: [
       {
         title:
-          'good backend engineer (mid) <span class="font-normal italic opacity-70">· Feb 2022</span>',
+          'backend engineer (mid) <span class="font-normal italic opacity-70">· Feb 2022</span>',
         bullets: [
           "Focused on the backend, delivering product requirements in close collaboration with the team.",
           "Designed and delivered solutions, contributing to large projects.",
