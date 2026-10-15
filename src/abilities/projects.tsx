@@ -73,7 +73,7 @@ const projects: ShowcaseType[] = [
     start: new Date("2025-11-20"),
     end: null,
     title: createLinkDiv("https://salaryzer.com", "salaryzer.com"),
-    info: "Most complete salary analysis website for Greece.",
+    info: "Most complete salary analysis website for Greece and Cyprus.",
     position: '',
     technologies: [createLinkDiv("https://nextjs.org/", "Next.js"),
     createLinkDiv(
