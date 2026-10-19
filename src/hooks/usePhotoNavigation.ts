@@ -1,4 +1,5 @@
 import type { PhotoWithCategory } from '@/types/photo';
+import { isEditableTarget } from '@/utils/isEditableTarget';
 import { useCallback, useEffect, useRef } from 'react';
 
 interface UsePhotoNavigationReturn {
@@ -15,34 +16,44 @@ export function usePhotoNavigation(
   active: PhotoWithCategory | null,
   setActive: (photo: PhotoWithCategory | null) => void,
   filtered: PhotoWithCategory[],
-  isMobile: boolean
+  isMobile: boolean,
+  isShortcutsOpen: boolean
 ): UsePhotoNavigationReturn {
   const initialHashHandledRef = useRef(false);
-  const requestedPhotoIdRef = useRef<number | null>(null);
+  const requestedPhotoIdRef = useRef<string | null>(null);
   const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
-  const hasPrev = activeIndex > 0;
-  const hasNext = activeIndex >= 0 && activeIndex < filtered.length - 1;
-  const prevPhoto: PhotoWithCategory | null = hasPrev ? filtered[activeIndex - 1] : null;
-  const nextPhoto: PhotoWithCategory | null = hasNext ? filtered[activeIndex + 1] : null;
+  const canNavigate = activeIndex >= 0 && filtered.length > 1;
+  const hasPrev = canNavigate;
+  const hasNext = canNavigate;
+  const prevPhoto: PhotoWithCategory | null = canNavigate
+    ? filtered[(activeIndex - 1 + filtered.length) % filtered.length]
+    : null;
+  const nextPhoto: PhotoWithCategory | null = canNavigate
+    ? filtered[(activeIndex + 1) % filtered.length]
+    : null;
 
   const goPrev = useCallback(() => {
-    if (hasPrev) {
-      setActive(filtered[activeIndex - 1]);
+    if (canNavigate) {
+      setActive(filtered[(activeIndex - 1 + filtered.length) % filtered.length]);
     }
-  }, [hasPrev, activeIndex, filtered, setActive]);
+  }, [canNavigate, activeIndex, filtered, setActive]);
 
   const goNext = useCallback(() => {
-    if (hasNext) {
-      setActive(filtered[activeIndex + 1]);
-    } else if (activeIndex >= 0 && filtered.length > 0) {
-      // Loop back to the start
-      setActive(filtered[0]);
+    if (canNavigate) {
+      setActive(filtered[(activeIndex + 1) % filtered.length]);
     }
-  }, [hasNext, activeIndex, filtered, setActive]);
+  }, [canNavigate, activeIndex, filtered, setActive]);
 
   // Handle keyboard navigation
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      // Never hijack keys while the user is typing or a modal layer is open.
+      if (
+        isEditableTarget(e.target) ||
+        isShortcutsOpen ||
+        document.querySelector('[data-photo-modal-open]')
+      ) return;
+
       if (e.key === "Escape") {
         setActive(null);
       }
@@ -61,7 +72,7 @@ export function usePhotoNavigation(
       document.removeEventListener("keydown", onKey);
       document.documentElement.classList.remove("overflow-hidden");
     };
-  }, [active, setActive, goPrev, goNext]);
+  }, [active, setActive, goPrev, goNext, isShortcutsOpen]);
 
   // Handle shared photo links before syncing the active photo back to the URL.
   useEffect(() => {
@@ -69,15 +80,20 @@ export function usePhotoNavigation(
 
     if (!initialHashHandledRef.current) {
       initialHashHandledRef.current = true;
-      const match = window.location.hash.match(/^#photo-(\d+)$/);
-      const found = match
-        ? filtered.find(photo => photo.id === Number(match[1]))
-        : undefined;
+      const match = window.location.hash.match(/^#photo-(.+)$/);
+      if (match) {
+        const key = decodeURIComponent(match[1]);
+        const found = filtered.find(photo => photo.id === key)
+          // Legacy numeric links pointed at readdir-order indices.
+          ?? (/^\d+$/.test(key)
+            ? filtered.find(photo => photo.legacyId === Number(key))
+            : undefined);
 
-      if (found) {
-        requestedPhotoIdRef.current = found.id;
-        setActive(found);
-        return;
+        if (found) {
+          requestedPhotoIdRef.current = found.id;
+          setActive(found);
+          return;
+        }
       }
     }
 
@@ -87,7 +103,7 @@ export function usePhotoNavigation(
     }
 
     if (active) {
-      const hash = `#photo-${active.id}`;
+      const hash = `#photo-${encodeURIComponent(active.id)}`;
       if (window.location.hash !== hash) history.replaceState(null, '', hash);
     } else if (window.location.hash.startsWith('#photo-')) {
       history.replaceState(null, '', window.location.pathname + window.location.search);

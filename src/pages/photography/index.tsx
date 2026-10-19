@@ -17,6 +17,16 @@ import { useMemo, useState } from "react";
 
 const exifParser = require('exif-parser');
 
+function slugifyPhotoName(file: string): string {
+    const name = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '');
+    return name
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'photo';
+}
+
 export async function getStaticProps() {
     const photosDir = path.join(process.cwd(), 'public', 'photos', 'personal');
     const commissionedDir = path.join(process.cwd(), 'public', 'photos', 'commissioned');
@@ -105,7 +115,8 @@ export async function getStaticProps() {
         }).catch(() => (useWatermarked ? watermarkedPhotoPath : photoPath));
 
         return {
-            id: index + 1,
+            id: slugifyPhotoName(file),
+            legacyId: index + 1,
             caption: title,
             settings,
             location,
@@ -124,13 +135,26 @@ export async function getStaticProps() {
     const tempPhotos = (await Promise.all([
         ...files.map((file, index) => processPhoto(file, false, photosDir, index)),
         ...commissionedFiles.map((file, index) => processPhoto(file, true, commissionedDir, files.length + index))
-    ])).filter(Boolean) as { id: number; caption: string; settings: string; location: string; country: string; trip?: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string; width: number; height: number; }[];
+    ])).filter(Boolean) as { id: string; legacyId: number; caption: string; settings: string; location: string; country: string; trip?: string; image: string; originalImage: string; isCommissioned: boolean; section: string; date?: string; width: number; height: number; }[];
+
+    const usedIds = new Set<string>();
+    tempPhotos.forEach(tp => {
+        if (!usedIds.has(tp.id)) {
+            usedIds.add(tp.id);
+            return;
+        }
+        let suffix = 2;
+        while (usedIds.has(`${tp.id}-${suffix}`)) suffix += 1;
+        tp.id = `${tp.id}-${suffix}`;
+        usedIds.add(tp.id);
+    });
 
     const sectionMap = new Map<string, Photo[]>();
     tempPhotos.forEach(tp => {
         if (!sectionMap.has(tp.section)) sectionMap.set(tp.section, []);
         sectionMap.get(tp.section)!.push({
             id: tp.id,
+            legacyId: tp.legacyId,
             caption: tp.caption,
             settings: tp.settings,
             location: tp.location,
@@ -179,16 +203,6 @@ export default function PhotographyPage({ sections, trips }: { sections: Section
     }, [groupedFiltered]);
 
     const {
-        activeIndex,
-        hasPrev,
-        hasNext,
-        prevPhoto,
-        nextPhoto,
-        goPrev,
-        goNext
-    } = usePhotoNavigation(active, setActive, orderedFiltered, isMobile);
-
-    const {
         showInfo,
         setShowInfo,
         showShortcuts,
@@ -196,6 +210,16 @@ export default function PhotographyPage({ sections, trips }: { sections: Section
         isCarouselMode,
         setIsCarouselMode
     } = useLightboxState(isMobile);
+
+    const {
+        activeIndex,
+        hasPrev,
+        hasNext,
+        prevPhoto,
+        nextPhoto,
+        goPrev,
+        goNext
+    } = usePhotoNavigation(active, setActive, orderedFiltered, isMobile, showShortcuts);
 
     const { observerTargetRef, isLoading } = useLazyLoading(orderedFiltered, displayCount, setDisplayCount);
 
@@ -211,12 +235,11 @@ export default function PhotographyPage({ sections, trips }: { sections: Section
                 <title>Ioannis Tsiakkas photography</title>
                 <meta name="description" content="My photography portfolio." />
                 <meta name="robots" content="index,follow" />
-                {sections.length > 0 && sections[0].photos.length > 0 && (
+                {orderedFiltered.length > 0 && (
                     <link
                         rel="preload"
                         as="image"
-                        href={sections[0].photos[0].image}
-                        imageSrcSet={sections[0].photos[0].image}
+                        href={orderedFiltered[0].image}
                     />
                 )}
             </Head>

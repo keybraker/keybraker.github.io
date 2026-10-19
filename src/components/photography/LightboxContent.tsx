@@ -2,6 +2,7 @@ import CropOverlay from '@/components/photography/CropOverlay';
 import { useImagePreloading } from '@/hooks/useImagePreloading';
 import { PhotoWithCategory } from '@/types/photo';
 import { imageDownloader } from '@/utils/imageDownloader';
+import { isEditableTarget } from '@/utils/isEditableTarget';
 import { BLUR_DATA_URL } from '@/utils/watermark';
 import { IoIosArrowBack } from '@react-icons/all-files/io/IoIosArrowBack';
 import { IoIosArrowForward } from '@react-icons/all-files/io/IoIosArrowForward';
@@ -25,6 +26,7 @@ export default function LightboxContent({
   setShowShortcuts,
   isMobile,
   isCarouselMode,
+  setIsCarouselMode,
   showCropMode,
   setShowCropMode,
   cropModalData,
@@ -44,6 +46,7 @@ export default function LightboxContent({
   setShowShortcuts: (v: boolean) => void;
   isMobile: boolean;
   isCarouselMode: boolean;
+  setIsCarouselMode: (v: boolean) => void;
   showCropMode: boolean;
   setShowCropMode: Dispatch<SetStateAction<boolean>>;
   cropModalData: { targetWidth: number; targetHeight: number } | null;
@@ -149,13 +152,22 @@ export default function LightboxContent({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key.toLowerCase() === 'i' && !showShortcuts) {
+      if (showShortcuts) {
+        if (e.key === '?' || e.key === 'Escape') {
+          e.preventDefault();
+          setShowShortcuts(false);
+        }
+        return;
+      }
+      if (isEditableTarget(e.target) || showCropMode) return;
+
+      if (e.key.toLowerCase() === 'i') {
         e.preventDefault();
         setShowInfo(!showInfo);
       }
       if (e.key.toLowerCase() === 'p' && !isMobile) {
         e.preventDefault();
-        // Handled at parent container via button; keep for parity if desired
+        setIsCarouselMode(!isCarouselMode);
       }
       if (e.key === '?') {
         e.preventDefault();
@@ -164,7 +176,7 @@ export default function LightboxContent({
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [showInfo, showShortcuts, setShowInfo, setShowShortcuts, isMobile]);
+  }, [showInfo, showShortcuts, showCropMode, setShowInfo, setShowShortcuts, isMobile, isCarouselMode, setIsCarouselMode]);
 
   useEffect(() => {
     if (isCarouselMode && !isMobile) {
@@ -348,7 +360,7 @@ export default function LightboxContent({
       )}
 
       {showShortcuts && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={(e) => {
+        <div data-photo-modal-open className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={(e) => {
           if (e.target === e.currentTarget) setShowShortcuts(false);
         }}>
           <div className="bg-tsiakkas-dark/95 border border-white/20 rounded-lg p-6 max-w-md w-full text-tsiakkas-light" onClick={(e) => e.stopPropagation()}>
@@ -384,10 +396,10 @@ export default function LightboxContent({
       )}
 
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 z-50" onClick={(e) => e.stopPropagation()}>
-        <button onClick={(e) => { e.stopPropagation(); goPrev(); }} disabled={!hasPrev} aria-label="Previous photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
+        <button onClick={(e) => { e.stopPropagation(); goPrev(); }} aria-label="Previous photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
           <IoIosArrowBack size={28} />
         </button>
-        <button onClick={(e) => { e.stopPropagation(); goNext(); }} disabled={!hasNext} aria-label="Next photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
+        <button onClick={(e) => { e.stopPropagation(); goNext(); }} aria-label="Next photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
           <IoIosArrowForward size={28} />
         </button>
       </div>

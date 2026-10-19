@@ -44,7 +44,7 @@ export function groupPhotosByYearMonth(photos: PhotoWithCategory[]): YearGroup[]
       const ta = a.date ? new Date(a.date).getTime() : 0;
       const tb = b.date ? new Date(b.date).getTime() : 0;
       if (tb !== ta) return tb - ta;
-      return (b.id || 0) - (a.id || 0);
+      return (b.legacyId || 0) - (a.legacyId || 0);
     });
 
   const result: YearGroup[] = Array.from(groups.entries())

@@ -276,6 +276,7 @@ export default function CropOverlay({
     <>
       <svg
         ref={svgRef}
+        data-photo-modal-open
         className="absolute inset-0 w-full h-full cursor-crosshair z-40"
         onMouseDown={handleMouseDown}
         style={{ pointerEvents: 'auto' }}

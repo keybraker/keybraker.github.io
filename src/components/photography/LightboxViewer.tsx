@@ -1,7 +1,16 @@
 import LightboxContent from '@/components/photography/LightboxContent';
 import LightboxHeaderBar from '@/components/photography/LightboxHeaderBar';
 import type { PhotoWithCategory } from '@/types/photo';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',');
 
 interface LightboxViewerProps {
   active: PhotoWithCategory;
@@ -51,13 +60,64 @@ export default function LightboxViewer({
     targetWidth: number;
     targetHeight: number;
   } | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    previouslyFocusedRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    dialogRef.current?.focus();
+
+    return () => {
+      const previous = previouslyFocusedRef.current;
+      if (previous && document.contains(previous)) previous.focus();
+    };
+  }, []);
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== 'Tab') return;
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+
+      if (focusable.length === 0) {
+        e.preventDefault();
+        dialog.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const current = document.activeElement as HTMLElement | null;
+
+      if (!current || !dialog.contains(current)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      } else if (e.shiftKey && (current === first || current === dialog)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && current === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, []);
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       role="dialog"
       aria-modal="true"
       aria-label="Fullscreen image viewer"
-      className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-xl"
+      className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-xl focus:outline-none"
       onClick={close}
     >
       <LightboxHeaderBar
@@ -95,6 +155,7 @@ export default function LightboxViewer({
         setCropModalData={setCropModalData}
         isMobile={isMobile}
         isCarouselMode={isCarouselMode}
+        setIsCarouselMode={setIsCarouselMode}
       />
     </div>
   );

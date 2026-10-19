@@ -13,9 +13,9 @@ export default function Footer() {
             <Image
               src={signature}
               alt=""
-              width={96}
-              height={64}
-              className="subpixel-antialiased bg-tsiakkas-blueLight dark:bg-tsiakkas-electric-yellow transform rotate-3"
+              width={1079}
+              height={403}
+              className="h-auto w-24 subpixel-antialiased bg-tsiakkas-blueLight dark:bg-tsiakkas-electric-yellow transform rotate-3"
             />
             <a rel="noopener noreferrer" target="_blank" href={repo} className="hover:underline flex flex-wrap gap-1 text-md font-bold text-tsiakkas-dark dark:text-tsiakkas-light">
               Designed and created by me<br></br><span className="italic font-extrabold">Keybraker</span>

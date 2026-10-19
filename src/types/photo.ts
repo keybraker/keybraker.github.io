@@ -1,5 +1,6 @@
 export type Photo = {
-  id: number;
+  id: string;
+  legacyId: number;
   caption: string;
   settings: string;
   location: string;
