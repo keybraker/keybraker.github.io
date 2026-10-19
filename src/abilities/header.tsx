@@ -66,7 +66,7 @@ function FilledCoffeeIcon({ className, size = 20 }: { className?: string; size?:
   );
 }
 
-function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotographyLink: boolean, showResumeIcon: boolean }) {
+function AboutPageInner({ showPhotographyLink, showResumeIcon, showSupportLink }: { showPhotographyLink: boolean, showResumeIcon: boolean, showSupportLink: boolean }) {
   const [hovered, setHovered] = useState<string | null>(null);
 
   const baseIconClasses = "antialiased transition-all duration-300 ease-out";
@@ -144,16 +144,18 @@ function AboutPageInner({ showPhotographyLink, showResumeIcon }: { showPhotograp
       >
         {iconWrapper("linkedin", <FaLinkedin className={baseIconClasses} size={"20px"} />)}
       </a>
-      <div className="ml-auto flex items-center gap-3">
-        <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
-        <RouteButton
-          id="support"
-          href="/support"
-          label="Support"
-          iconNode={<FilledCoffeeIcon className={baseIconClasses} size={20} />}
-          iconWrapper={iconWrapper}
-        />
-      </div>
+      {showSupportLink && (
+        <div className="ml-auto flex items-center gap-3">
+          <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
+          <RouteButton
+            id="support"
+            href="/support"
+            label="Support"
+            iconNode={<FilledCoffeeIcon className={baseIconClasses} size={20} />}
+            iconWrapper={iconWrapper}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -164,8 +166,8 @@ export default function Header() {
   const isResume = router.pathname === '/resume';
   const isHome = router.pathname === '/';
 
-  // Show route label only on resume or photography pages
-  const showRouteLabel = isResume || isPhotography;
+  // Show route label on every page except home
+  const showRouteLabel = !isHome;
   const firstSegment = router.pathname.split('/').filter(Boolean)[0];
   const routeLabel = isHome
     ? 'resume'
@@ -201,7 +203,7 @@ export default function Header() {
             </div>
             <Link href="/" className="flex flex-row items-center gap-3">
               <h1 className="font-serif
-                flex flex-col self-center tn:flex-row xs:gap-2 gap-1
+                flex flex-col self-center tn:flex-row tn:items-baseline xs:gap-2 gap-1
                 text-center text-2xl font-extrabold leading-none
                 text-tsiakkas-dark dark:text-tsiakkas-light
               ">
@@ -210,7 +212,7 @@ export default function Header() {
                 {showRouteLabel && routeLabel && (
                   <span className="
                   font-light italic tracking-wide flex flex-row gap-1
-                  items-center justify-center leading-tight self-center
+                  items-baseline justify-center leading-tight
                 ">
                     <span className="opacity-60 text-3xl leading-none">×</span>
                     <span className="text-2xl leading-none">{routeLabel}</span>
@@ -219,7 +221,7 @@ export default function Header() {
               </h1>
             </Link>
           </div>
-          <AboutPageInner showPhotographyLink={isResume} showResumeIcon={isPhotography} />
+          <AboutPageInner showPhotographyLink={isResume} showResumeIcon={isPhotography} showSupportLink={!isHome} />
         </div>
       </div>
     </header>
