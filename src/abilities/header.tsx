@@ -184,9 +184,9 @@ export default function Header() {
       </div>
       <div className="px-4 eq:px-0">
         <div className="
-        flex flex-col sm:flex-row items-center justify-around xs:justify-between
+        flex flex-col md:flex-row items-center justify-around xs:justify-between
         px-0 tn:px-4 pt-2 tn:pt-2 pb-4 tn:pb-4 gap-4
-        xs:py-4 sm:items-stretch
+        xs:py-4 md:items-stretch
         border-b-2
         border-tsiakkas-dark dark:border-tsiakkas-light
       ">
