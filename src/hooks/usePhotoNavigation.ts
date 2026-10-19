@@ -1,5 +1,5 @@
 import type { PhotoWithCategory } from '@/types/photo';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 interface UsePhotoNavigationReturn {
   activeIndex: number;
@@ -17,6 +17,8 @@ export function usePhotoNavigation(
   filtered: PhotoWithCategory[],
   isMobile: boolean
 ): UsePhotoNavigationReturn {
+  const initialHashHandledRef = useRef(false);
+  const requestedPhotoIdRef = useRef<number | null>(null);
   const activeIndex = active ? filtered.findIndex(p => p.id === active.id) : -1;
   const hasPrev = activeIndex > 0;
   const hasNext = activeIndex >= 0 && activeIndex < filtered.length - 1;
@@ -61,29 +63,36 @@ export function usePhotoNavigation(
     };
   }, [active, setActive, goPrev, goNext]);
 
-  // Handle hash-based photo linking
+  // Handle shared photo links before syncing the active photo back to the URL.
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    if (!initialHashHandledRef.current) {
+      initialHashHandledRef.current = true;
+      const match = window.location.hash.match(/^#photo-(\d+)$/);
+      const found = match
+        ? filtered.find(photo => photo.id === Number(match[1]))
+        : undefined;
+
+      if (found) {
+        requestedPhotoIdRef.current = found.id;
+        setActive(found);
+        return;
+      }
+    }
+
+    if (requestedPhotoIdRef.current !== null) {
+      if (active?.id !== requestedPhotoIdRef.current) return;
+      requestedPhotoIdRef.current = null;
+    }
+
     if (active) {
-      const h = `#photo-${active.id}`;
-      if (window.location.hash !== h) history.replaceState(null, '', h);
+      const hash = `#photo-${active.id}`;
+      if (window.location.hash !== hash) history.replaceState(null, '', hash);
     } else if (window.location.hash.startsWith('#photo-')) {
       history.replaceState(null, '', window.location.pathname + window.location.search);
     }
-  }, [active]);
-
-  // Handle opening photo from hash on initial load
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const hash = window.location.hash;
-    if (hash.startsWith('#photo-')) {
-      const id = parseInt(hash.replace('#photo-', ''), 10);
-      const found = filtered.find(p => p.id === id);
-      if (found) {
-        setActive(found);
-      }
-    }
-  }, [filtered, setActive]);
+  }, [active, filtered, setActive]);
 
   // Close photo if it gets filtered out
   useEffect(() => {
