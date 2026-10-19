@@ -6,9 +6,11 @@ import SkillPage from "@/abilities/skills";
 import SoftwareEngineeringPage from "@/abilities/softwareEngineering";
 import Category, { CategoryProps } from "@/components/category";
 import MyWords from "@/components/myWords";
-import Head from "next/head";
+import Seo, { PERSON_ID, SITE_URL } from "@/components/Seo";
 
-const title = "Ioannis Tsiakkas";
+const title = "Resume — Ioannis Tsiakkas";
+const seoDescription =
+  "The resume of Ioannis Tsiakkas, a software engineer focused on backend systems, infrastructure and system architecture.";
 export const description =
   "I'm a software engineer with professional experience in building web applications. \
   My main focus is on the backend client (where the logic is), infrastructure, and system architecture. \
@@ -92,32 +94,21 @@ const categories: CategoryProps[] = [
 export default function Home() {
   return (
     <div className="mx-auto w-full">
-      <Head>
-        <title>{title}</title>
-
-        <link rel="icon" href="/favicon.ico" />
-
-        <meta name="description" content='Software engineer and part time photographer.' />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://itsiakkas.com/" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content='Software engineer and part time photographer.' />
-        <meta
-          property="og:image"
-          content="https://avatars.githubusercontent.com/u/23459466?v=4"
-        />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://itsiakkas.com/" />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content='Software engineer and part time photographer.' />
-        <meta
-          property="twitter:image"
-          content="https://avatars.githubusercontent.com/u/23459466?v=4"
-        />
-      </Head>
+      <Seo
+        title={title}
+        description={seoDescription}
+        path="/resume"
+        type="profile"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          name: title,
+          description: seoDescription,
+          url: `${SITE_URL}/resume`,
+          mainEntity: { "@id": PERSON_ID },
+          about: { "@id": PERSON_ID },
+        }}
+      />
 
       <main>
         <Email />

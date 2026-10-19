@@ -1,8 +1,8 @@
 import { CardColour, getCardColourBg } from "@/enum/color";
 import MyWords from "@/components/myWords";
+import Seo from "@/components/Seo";
 import { FaHandHoldingHeart } from "@react-icons/all-files/fa/FaHandHoldingHeart";
 import { FaPaypal } from "@react-icons/all-files/fa/FaPaypal";
-import Head from "next/head";
 import type { ReactNode } from "react";
 
 const title = "Support — Ioannis Tsiakkas";
@@ -79,32 +79,7 @@ function SupportCard({ option }: { option: SupportOption }) {
 export default function Support() {
   return (
     <div className="mx-auto w-full">
-      <Head>
-        <title>{title}</title>
-
-        <link rel="icon" href="/favicon.ico" />
-
-        <meta name="description" content={description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://itsiakkas.com/support" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta
-          property="og:image"
-          content="https://avatars.githubusercontent.com/u/23459466?v=4"
-        />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://itsiakkas.com/support" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta
-          name="twitter:image"
-          content="https://avatars.githubusercontent.com/u/23459466?v=4"
-        />
-      </Head>
+      <Seo title={title} description={description} path="/support" />
 
       <main className="flex w-full flex-col items-center gap-12 sm:gap-16">
         <div className="flex w-full flex-col items-center gap-6 text-center">

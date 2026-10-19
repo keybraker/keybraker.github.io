@@ -1,42 +1,17 @@
 import Card from "@/components/card";
+import Seo from "@/components/Seo";
 import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
 import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
 import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
-import Head from "next/head";
 import Link from "next/link";
 
-const title = "Ioannis Tsiakkas";
-const description = 'Software engineer and part time photographer.';
+const title = "Ioannis Tsiakkas — Software Engineer & Hobby Photographer";
+const description = "Software engineer and part time photographer.";
 
 export default function Home() {
   return (
     <div className="mx-auto w-full h-full flex flex-col">
-      <Head>
-        <title>{title}</title>
-
-        <link rel="icon" href="/favicon.ico" />
-
-        <meta name="description" content={description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://itsiakkas.com/" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta
-          property="og:image"
-          content="https://avatars.githubusercontent.com/u/23459466?v=4"
-        />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://itsiakkas.com/" />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-        <meta
-          property="twitter:image"
-          content="https://avatars.githubusercontent.com/u/23459466?v=4"
-        />
-      </Head>
+      <Seo title={title} description={description} path="/" />
 
       <main className="flex flex-col gap-6 sm:gap-8 w-full h-full">
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full">

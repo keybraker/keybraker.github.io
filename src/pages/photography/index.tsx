@@ -9,13 +9,17 @@ import { useMobileDetection } from '@/hooks/useMobileDetection';
 import { usePhotoFiltering } from '@/hooks/usePhotoFiltering';
 import { usePhotoNavigation } from '@/hooks/usePhotoNavigation';
 import type { Photo, PhotoWithCategory, Section } from '@/types/photo';
+import Seo, { SITE_NAME, SITE_URL, toAbsoluteUrl } from '@/components/Seo';
 import fs from 'fs';
 import sizeOf from 'image-size';
-import Head from 'next/head';
 import path from 'path';
 import { useMemo, useState } from "react";
 
 const exifParser = require('exif-parser');
+
+const seoTitle = 'Photography — Ioannis Tsiakkas';
+const seoDescription =
+    'A personal photography portfolio by Ioannis Tsiakkas: landscapes, city strolls and travel photography from Greece, Portugal, Germany and beyond.';
 
 function slugifyPhotoName(file: string): string {
     const name = file.replace(/\.(jpg|JPG|jpeg|JPEG)$/, '');
@@ -202,6 +206,34 @@ export default function PhotographyPage({ sections, trips }: { sections: Section
         return groupedFiltered.flatMap(g => g.months.flatMap(m => m.photos));
     }, [groupedFiltered]);
 
+    const personalPhotos = useMemo(
+        () => sections.flatMap(section => section.photos).filter(photo => !photo.isCommissioned),
+        [sections]
+    );
+
+    const heroPhoto = orderedFiltered[0];
+    const heroImageAlt = heroPhoto
+        ? `${heroPhoto.caption} — ${heroPhoto.location}, ${heroPhoto.country}`
+        : 'Photography by Ioannis Tsiakkas';
+
+    const photographyJsonLd = useMemo(
+        () => ({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: seoTitle,
+            description: seoDescription,
+            url: `${SITE_URL}/photography`,
+            isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: `${SITE_URL}/` },
+            mainEntity: {
+                '@type': 'ImageGallery',
+                name: 'Photography portfolio',
+                url: `${SITE_URL}/photography`,
+                image: personalPhotos.map(photo => toAbsoluteUrl(photo.originalImage)),
+            },
+        }),
+        [personalPhotos]
+    );
+
     const {
         showInfo,
         setShowInfo,
@@ -231,18 +263,15 @@ export default function PhotographyPage({ sections, trips }: { sections: Section
 
     return (
         <main className="w-full h-full">
-            <Head>
-                <title>Ioannis Tsiakkas photography</title>
-                <meta name="description" content="My photography portfolio." />
-                <meta name="robots" content="index,follow" />
-                {orderedFiltered.length > 0 && (
-                    <link
-                        rel="preload"
-                        as="image"
-                        href={orderedFiltered[0].image}
-                    />
-                )}
-            </Head>
+            <Seo
+                title={seoTitle}
+                description={seoDescription}
+                path="/photography"
+                image={heroPhoto?.image}
+                imageAlt={heroImageAlt}
+                preloadImage={heroPhoto?.image}
+                jsonLd={photographyJsonLd}
+            />
 
             <div id="top" className="relative flex flex-col gap-8">
                 <HeroSection
