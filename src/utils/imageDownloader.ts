@@ -58,7 +58,7 @@ class ImageDownloader {
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
 
-      applyVisibleWatermark(ctx, canvas, this.ARTIST_NAME);
+      await applyVisibleWatermark(ctx, canvas, this.ARTIST_NAME);
 
       return new Promise((resolve, reject) => {
         canvas.toBlob(
@@ -117,7 +117,7 @@ class ImageDownloader {
       canvas.height = targetHeight;
       ctx.drawImage(img, srcX, srcY, srcWidth, srcHeight, 0, 0, targetWidth, targetHeight);
 
-      applyVisibleWatermark(ctx, canvas, this.ARTIST_NAME);
+      await applyVisibleWatermark(ctx, canvas, this.ARTIST_NAME);
 
       return new Promise((resolve, reject) => {
         canvas.toBlob(
@@ -170,7 +170,7 @@ class ImageDownloader {
         targetHeight
       );
 
-      applyVisibleWatermark(ctx, canvas, this.ARTIST_NAME);
+      await applyVisibleWatermark(ctx, canvas, this.ARTIST_NAME);
 
       return new Promise((resolve, reject) => {
         canvas.toBlob(

@@ -26,25 +26,25 @@ function applyLSBSteganography(imageData: ImageData, message: string): ImageData
 /**
  * Apply a visible watermark text to a canvas
  */
-export function applyVisibleWatermark(
+export async function applyVisibleWatermark(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
   text: string
-): void {
-  const fontSize = Math.round(Math.max(canvas.width, canvas.height) * 0.025);
-  ctx.font = `italic ${fontSize}px "Cormorant Garamond", "Didot", "Times New Roman", serif`;
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+): Promise<void> {
+  const fontSize = Math.max(10, Math.round(Math.max(canvas.width, canvas.height) * 0.012));
+  await document.fonts.load(`500 ${fontSize}px "Fraunces"`);
+  ctx.font = `500 ${fontSize}px "Fraunces", serif`;
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'bottom';
 
-  const shadowBlur = Math.max(Math.round(fontSize * 0.2), 1);
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
-  ctx.shadowBlur = shadowBlur;
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+  ctx.shadowBlur = Math.max(Math.round(fontSize * 0.15), 1);
   ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = Math.max(Math.round(fontSize * 0.04), 1);
+  ctx.shadowOffsetY = Math.max(Math.round(fontSize * 0.025), 1);
 
   const x = canvas.width / 2;
-  const padding = Math.max(Math.round(fontSize * 0.3), 3);
+  const padding = Math.max(Math.round(fontSize * 0.6), 6);
   const y = canvas.height - padding;
   ctx.fillText(text, x, y);
 }
@@ -78,7 +78,7 @@ export async function createWatermarkedImage(
   const watermarkedData = applyLSBSteganography(imageData, hiddenMessage);
   ctx.putImageData(watermarkedData, 0, 0);
 
-  applyVisibleWatermark(ctx, canvas, visibleText);
+  await applyVisibleWatermark(ctx, canvas, visibleText);
 
   return canvas;
 }

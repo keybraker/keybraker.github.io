@@ -103,6 +103,14 @@ brief-title {
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @layer utilities {
   .no-scrollbar {
     scrollbar-width: none;
