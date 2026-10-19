@@ -1,4 +1,8 @@
 
+// Commissioned work is intentionally hidden until more images are uploaded.
+// Flip this to true to restore the toggle and its gallery.
+const SHOW_COMMISSIONED = false;
+
 export default function FiltersBar({
   sections,
   trips = [],
@@ -64,18 +68,20 @@ export default function FiltersBar({
         </nav>
       </div>
 
-      <div className="h-full md:w-auto w-full flex justify-start md:justify-end mt-2 md:mt-0 shrink-0">
-        <button
-          aria-pressed={showCommissioned}
-          onClick={() => setShowCommissioned(!showCommissioned)}
-          className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 flex-shrink-0 ${showCommissioned
-            ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
-            : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'
-            } `}
-        >
-          Commissioned Work
-        </button>
-      </div>
+      {SHOW_COMMISSIONED && (
+        <div className="h-full md:w-auto w-full flex justify-start md:justify-end mt-2 md:mt-0 shrink-0">
+          <button
+            aria-pressed={showCommissioned}
+            onClick={() => setShowCommissioned(!showCommissioned)}
+            className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 flex-shrink-0 ${showCommissioned
+              ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
+              : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'
+              } `}
+          >
+            Commissioned Work
+          </button>
+        </div>
+      )}
     </div>
   );
 }
