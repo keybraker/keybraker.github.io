@@ -98,7 +98,7 @@ export default function Email() {
         <p className="mt-4">Kindly, Ioannis</p>
       </div>
 
-      <div className="h-42 mt-7 flex justify-between gap-1 text-tsiakkas-dark dark:text-tsiakkas-light">
+      <div className="mt-7 flex justify-between gap-1 text-tsiakkas-dark dark:text-tsiakkas-light">
         <a
           className="flex h-full w-24 items-center justify-around gap-0 rounded-full bg-tsiakkas-light py-1.5 px-2.5 shadow-md hover:bg-tsiakkas-light/75 dark:bg-tsiakkas-dark hover:dark:bg-tsiakkas-dark/75"
           href={`${mailto}${subject}`}

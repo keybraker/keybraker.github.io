@@ -6,7 +6,6 @@ export default function FiltersBar({
   setFilter,
   showCommissioned,
   setShowCommissioned,
-  isMobile,
 }: {
   sections: { title: string }[];
   trips?: string[];
@@ -14,7 +13,6 @@ export default function FiltersBar({
   setFilter: (f: string) => void;
   showCommissioned: boolean;
   setShowCommissioned: (v: boolean) => void;
-  isMobile: boolean;
 }) {
   return (
     <div className="sm:sticky sm:top-[70px] sm:z-30 bg-tsiakkas-light dark:bg-tsiakkas-dark py-4 px-4 -mx-4 flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">

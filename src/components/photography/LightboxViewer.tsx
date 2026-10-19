@@ -30,8 +30,6 @@ interface LightboxViewerProps {
   isMobile: boolean;
   isCarouselMode: boolean;
   setIsCarouselMode: (v: boolean) => void;
-  showSearchBox: boolean;
-  setShowSearchBox: (v: boolean) => void;
 }
 
 export default function LightboxViewer({
@@ -52,8 +50,6 @@ export default function LightboxViewer({
   isMobile,
   isCarouselMode,
   setIsCarouselMode,
-  showSearchBox,
-  setShowSearchBox,
 }: LightboxViewerProps) {
   const [showCropMode, setShowCropMode] = useState(false);
   const [cropModalData, setCropModalData] = useState<{

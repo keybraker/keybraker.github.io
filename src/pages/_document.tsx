@@ -18,10 +18,6 @@ export default function Document() {
           content="#131313"
           media="(prefers-color-scheme: dark)"
         />
-      </Head>
-      <body className="bg-tsiakkas-light dark:bg-tsiakkas-dark">
-        <Main />
-        <NextScript />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -36,6 +32,10 @@ export default function Document() {
             `,
           }}
         />
+      </Head>
+      <body className="bg-tsiakkas-light dark:bg-tsiakkas-dark">
+        <Main />
+        <NextScript />
       </body>
     </Html>
   );

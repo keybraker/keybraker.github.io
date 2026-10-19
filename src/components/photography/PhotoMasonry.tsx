@@ -22,7 +22,7 @@ export default function PhotoMasonry({
           <div
             key={p.id}
             style={{
-              gridColumn: p.orientation === 'landscape' ? 'span 2' : 'span 2',
+              gridColumn: 'span 2',
               gridRow: p.orientation === 'landscape' ? 'span 1' : 'span 2',
             }}
           >

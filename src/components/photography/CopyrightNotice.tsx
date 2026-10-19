@@ -1,6 +1,6 @@
-export default function CopyrightNotice({ isMobile }: { isMobile: boolean }) {
+export default function CopyrightNotice() {
   return (
-    <div className="text-left text-12 tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70 space-y-1">
+    <div className="text-left text-xs tracking-wide text-tsiakkas-dark dark:text-tsiakkas-light opacity-70 space-y-1">
       <p>
         All photographs on this page are original works created and owned exclusively by Ioannis Tsiakkas.
       </p>

@@ -19,7 +19,7 @@ export default function PhotoCard({
     <button
       type="button"
       onClick={() => onOpen(photo)}
-      aria-label="Open image fullscreen"
+      aria-label={photo.caption}
       className={`
           group relative w-full h-full
           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40
@@ -33,7 +33,7 @@ export default function PhotoCard({
       <div className="relative w-full h-full">
         <Image
           src={imgSrc}
-          alt=""
+          alt={photo.caption}
           fill
           placeholder={isMobile ? 'empty' : 'blur'}
           blurDataURL={isMobile ? undefined : BLUR_DATA_URL}

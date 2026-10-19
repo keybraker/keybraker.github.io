@@ -59,7 +59,7 @@ function SupportCard({ option }: { option: SupportOption }) {
     >
       <div className="flex w-full flex-col gap-4 px-8 py-10 text-tsiakkas-dark">
         <div className="flex flex-row items-center justify-between gap-4">
-          <span className="leading-100 brief-title break-all text-xl font-extrabold text-center sm:text-start">
+          <span className="leading-none brief-title break-all text-xl font-extrabold text-center sm:text-start">
             {option.label}
           </span>
           <span className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-110">

@@ -115,7 +115,7 @@ export default function Home() {
 
         <div className="mb-32 mt-32 flex flex-col gap-16 eq:gap-48">
           <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
-            <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
+            <div className="eq:mr-24 mx-auto flex w-full flex-1 flex-col">
               <ExperiencePage />
             </div>
             <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
@@ -126,7 +126,7 @@ export default function Home() {
           <hr className="w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10" />
 
           <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
-            <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
+            <div className="eq:mr-24 mx-auto flex w-full flex-1 flex-col">
               <ProjectsPage />
               {MyWords({ text: "My work, in my own code", className: "mt-12" })}
               <p className="w-full flex flex-col items-center mt-6 text-md font-semibold gap-[6px]">
@@ -151,7 +151,7 @@ export default function Home() {
           <hr className="w-full border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10" />
 
           <div className="flex w-full flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0">
-            <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
+            <div className="eq:mr-24 mx-auto flex w-full flex-1 flex-col">
               <EducationPage />
             </div>
             <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
@@ -166,25 +166,15 @@ export default function Home() {
             bg-tsiakkas-blueDark bg-opacity-5 dark:bg-tsiakkas-blueLight dark:bg-opacity-5
             border border-tsiakkas-dark/10 p-8 dark:border-tsiakkas-light/20
           ">
-            <div className="eq:mr-100 mx-auto flex w-full flex-1 flex-col">
+            <div className="eq:mr-24 mx-auto flex w-full flex-1 flex-col">
               <SkillPage />
             </div>
             <div className="my-12 w-full eq:w-0 border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
             <div className="mx-16 h-0 eq:h-full border-l border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
             <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
-              {/* <Category {...categories[1]} /> */}
               <SoftwareEngineeringPage />
             </div>
           </div>
-
-          {/* <div className="flex flex-col eq:flex-row items-center eq:items-start gap-16 eq:gap-0 w-full">
-            <div className="flex flex-1 flex-col eq:mr-100 mx-auto w-full">
-              <SoftwareEngineeringPage />
-            </div>
-            <div className="eq:self-stretch block z-0 eq:flex eq:flex-1 eq:flex-col w-full">
-              <Category {...categories[2]} />
-            </div>
-          </div> */}
         </div>
       </main>
     </div>

@@ -16,7 +16,6 @@ export function usePhotoNavigation(
   active: PhotoWithCategory | null,
   setActive: (photo: PhotoWithCategory | null) => void,
   filtered: PhotoWithCategory[],
-  isMobile: boolean,
   isShortcutsOpen: boolean
 ): UsePhotoNavigationReturn {
   const initialHashHandledRef = useRef(false);

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export interface SpinningAvatarProps {
   src: string;
   alt: string;
@@ -16,11 +18,10 @@ export default function SpinningAvatar({
       className={`relative ${size} ${smSize}`}
     // style={{ animation: "spin 18s linear infinite" }}
     >
-      <img
+      <Image
         loading="lazy"
-        decoding="async"
-        width="224"
-        height="224"
+        width={224}
+        height={224}
         src={src}
         alt={alt}
         className="

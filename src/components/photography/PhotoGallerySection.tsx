@@ -44,7 +44,6 @@ export default function PhotoGallerySection({
         setFilter={setFilter}
         showCommissioned={showCommissioned}
         setShowCommissioned={setShowCommissioned}
-        isMobile={isMobile}
       />
 
       <YearMonthGallery
@@ -57,7 +56,7 @@ export default function PhotoGallerySection({
         isLoading={isLoading}
       />
 
-      <CopyrightNotice isMobile={isMobile} />
+      <CopyrightNotice />
     </>
   );
 }

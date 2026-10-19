@@ -25,7 +25,7 @@ export default function Card(props: CategoryProps) {
         ${commonClasses} ${getCardColourBg(props.colour)}
       `}>
         <div className="
-          leading-100 brief-title
+          leading-none brief-title
           flex flex-row items-center justify-between gap-4
           text-xl font-extrabold
           text-tsiakkas-dark

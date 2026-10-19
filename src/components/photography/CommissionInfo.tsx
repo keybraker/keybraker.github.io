@@ -1,6 +1,6 @@
 import MyWords from '@/components/myWords';
 
-export default function CommissionInfo({ isMobile }: { isMobile: boolean }) {
+export default function CommissionInfo() {
   return (
     <section aria-labelledby="contact-heading" className="w-full text-start">
       <div className="flex flex-col gap-6">

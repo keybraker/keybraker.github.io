@@ -12,6 +12,7 @@
 /.next/
 /out/
 /public/photos-thumbs/
+/public/sitemap-0.xml
 
 # production
 /build

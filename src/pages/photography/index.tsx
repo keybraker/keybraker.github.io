@@ -251,7 +251,7 @@ export default function PhotographyPage({ sections, trips }: { sections: Section
         nextPhoto,
         goPrev,
         goNext
-    } = usePhotoNavigation(active, setActive, orderedFiltered, isMobile, showShortcuts);
+    } = usePhotoNavigation(active, setActive, orderedFiltered, showShortcuts);
 
     const { observerTargetRef, isLoading } = useLazyLoading(orderedFiltered, displayCount, setDisplayCount);
 
@@ -277,7 +277,6 @@ export default function PhotographyPage({ sections, trips }: { sections: Section
                 <HeroSection
                     sections={sections}
                     showCommissioned={showCommissioned}
-                    isMobile={isMobile}
                 />
 
                 <PhotoGallerySection
@@ -316,8 +315,6 @@ export default function PhotographyPage({ sections, trips }: { sections: Section
                     isMobile={isMobile}
                     isCarouselMode={isCarouselMode}
                     setIsCarouselMode={setIsCarouselMode}
-                    showSearchBox={false}
-                    setShowSearchBox={() => { }}
                 />
             )}
         </main>

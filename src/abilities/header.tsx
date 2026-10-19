@@ -202,7 +202,7 @@ export default function Header() {
             <Link href="/" className="flex flex-row items-center gap-3">
               <h1 className="font-serif
                 flex flex-col self-center tn:flex-row xs:gap-2 gap-1
-                text-center text-2xl font-extrabold leading-100
+                text-center text-2xl font-extrabold leading-none
                 text-tsiakkas-dark dark:text-tsiakkas-light
               ">
                 <span>Tsiakkas</span>

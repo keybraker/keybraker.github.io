@@ -49,4 +49,7 @@ To change the custom domain, edit the `CNAME` file in the root directory.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This is a personal website. The source code is provided for reference, but the
+content — including all photographs and written material — is © Ioannis
+Tsiakkas. All rights reserved. No part of the content may be reproduced,
+redistributed, or used without prior written permission.

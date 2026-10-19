@@ -2,4 +2,5 @@
 module.exports = {
   siteUrl: "https://itsiakkas.com",
   generateRobotsTxt: true,
+  outDir: "out",
 };

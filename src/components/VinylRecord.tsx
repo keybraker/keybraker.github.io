@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export interface VinylRecordProps {
   src: string;
   alt: string;
@@ -44,11 +46,10 @@ export default function VinylRecord({
           className="rounded-full overflow-hidden border-2 border-[#222]"
           style={{ width: labelPercent, height: labelPercent }}
         >
-          <img
+          <Image
             loading="lazy"
-            decoding="async"
-            width="224"
-            height="224"
+            width={224}
+            height={224}
             src={src}
             alt={alt}
             className="w-full h-full object-cover"

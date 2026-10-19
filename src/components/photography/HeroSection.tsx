@@ -5,18 +5,16 @@ import type { Section } from '@/types/photo';
 interface HeroSectionProps {
   sections: Section[];
   showCommissioned: boolean;
-  isMobile: boolean;
 }
 
 export default function HeroSection({
   sections,
   showCommissioned,
-  isMobile,
 }: HeroSectionProps) {
   return (
     <div className="mt-12 mb-8">
       {showCommissioned ? (
-        <CommissionInfo isMobile={isMobile} />
+        <CommissionInfo />
       ) : (
         MyWords({ text: "My work, in my own shots" })
       )}

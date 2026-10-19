@@ -6,7 +6,7 @@ import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className="flex flex-col items-center w-full min-h-screen">
+    <div className="flex flex-col items-center w-full min-h-screen">
       <Header />
       <div className="flex flex-1 h-full w-full flex-col items-center justify-center">
         <div className="
@@ -20,6 +20,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </div>
       <Footer />
       <ScrollToTopButton />
-    </main>
+    </div>
   );
 }
