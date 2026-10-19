@@ -18,8 +18,8 @@ export default function FiltersBar({
 }) {
   return (
     <div className="sm:sticky sm:top-[70px] sm:z-30 bg-tsiakkas-light dark:bg-tsiakkas-dark py-4 px-4 -mx-4 flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
-      <div className="md:w-3/4 w-full flex flex-col gap-6">
-        <nav className="flex flex-wrap gap-3 justify-start">
+      <div className="w-full min-w-0 flex flex-col gap-6">
+        <nav className="flex flex-nowrap gap-3 justify-start overflow-x-auto overflow-y-hidden no-scrollbar overscroll-x-contain -m-1.5 p-1.5" aria-label="Photo sections filter">
           {["All", ...sections.map((s) => s.title)].map((cat) => {
             const activeFilter = !showCommissioned && filter === cat;
             return (
@@ -30,7 +30,7 @@ export default function FiltersBar({
                   setShowCommissioned(false);
                   setFilter(cat);
                 }}
-                className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeFilter
+                className={`shrink-0 whitespace-nowrap text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeFilter
                   ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
                   : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'
                   } `}
@@ -43,7 +43,7 @@ export default function FiltersBar({
 
         {/* <div className="my-2 border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10" /> */}
 
-        <nav className="flex flex-wrap gap-3 justify-start">
+        <nav className="flex flex-nowrap gap-3 justify-start overflow-x-auto overflow-y-hidden no-scrollbar overscroll-x-contain -m-1.5 p-1.5" aria-label="Photo trips filter">
           {trips.map((trip: string) => {
             const activeTrip = !showCommissioned && filter === trip;
             return (
@@ -54,7 +54,7 @@ export default function FiltersBar({
                   setShowCommissioned(false);
                   setFilter(trip);
                 }}
-                className={`text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeTrip
+                className={`shrink-0 whitespace-nowrap text-[11px] uppercase tracking-wide px-4 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tsiakkas-dark/40 dark:focus:ring-tsiakkas-light/40 ${activeTrip
                   ? 'bg-tsiakkas-dark text-tsiakkas-light dark:bg-tsiakkas-light dark:text-tsiakkas-dark border-tsiakkas-dark dark:border-tsiakkas-light'
                   : 'border-tsiakkas-dark/30 dark:border-tsiakkas-light/30 text-tsiakkas-dark/70 dark:text-tsiakkas-light/70 hover:text-tsiakkas-dark dark:hover:text-tsiakkas-light hover:border-tsiakkas-dark/60 dark:hover:border-tsiakkas-light/60'
                   } `}

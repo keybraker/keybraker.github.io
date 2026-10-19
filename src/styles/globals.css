@@ -103,6 +103,17 @@ brief-title {
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* GitLab merge-button shimmer, ported from .mr-merge-button-shimmer */
 @media (prefers-reduced-motion: no-preference) {
   .merge-shimmer {
