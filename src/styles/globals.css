@@ -103,6 +103,89 @@ brief-title {
 @tailwind components;
 @tailwind utilities;
 
+/* GitLab merge-button shimmer, ported from .mr-merge-button-shimmer */
+@media (prefers-reduced-motion: no-preference) {
+  .merge-shimmer {
+    --shimmer-thickness: 1px;
+    --shimmer-offset: 1px;
+    --shimmer-highlight-color: #f7f7f5;
+    --shimmer-color-1: #7759c2;
+    --shimmer-color-2: #ffb9c9;
+    --shimmer-color-3: #fc6d26;
+    --shimmer-gradient: linear-gradient(
+      160deg,
+      transparent 0%,
+      var(--shimmer-highlight-color) 15%,
+      var(--shimmer-color-1) 20%,
+      var(--shimmer-color-2) 25%,
+      var(--shimmer-color-3) 30%,
+      transparent 36%,
+      transparent 40%,
+      var(--shimmer-highlight-color) 55%,
+      var(--shimmer-color-1) 60%,
+      var(--shimmer-color-2) 65%,
+      var(--shimmer-color-3) 70%,
+      transparent 76%,
+      transparent 80%,
+      var(--shimmer-highlight-color) 95%,
+      var(--shimmer-color-1) 100%
+    );
+    --shimmer-opacity: 0;
+    z-index: 1;
+    transform-style: preserve-3d;
+  }
+
+  .dark .merge-shimmer {
+    --shimmer-highlight-color: #fbfafd;
+    --shimmer-color-1: #a989f5;
+    --shimmer-color-3: #fca326;
+  }
+
+  .merge-shimmer::before,
+  .merge-shimmer::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    background: var(--shimmer-gradient) 15% 15% / 300% 300%;
+    opacity: var(--shimmer-opacity);
+    transition: opacity 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    animation: merge-shimmer 3s linear infinite;
+  }
+
+  /* Bloom: blurred copy pushed behind the button. */
+  .merge-shimmer::before {
+    inset: 0;
+    border-radius: 0.375rem;
+    filter: blur(12px);
+    transform: translateZ(-1px);
+    opacity: calc(var(--shimmer-opacity) * 0.9);
+  }
+
+  /* Ring: masking the content box paints only the outline. */
+  .merge-shimmer::after {
+    inset: calc(-1 * (var(--shimmer-offset) + var(--shimmer-thickness)) + 1px);
+    padding: var(--shimmer-thickness);
+    border-radius: calc(
+      0.375rem + var(--shimmer-offset) + var(--shimmer-thickness)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  .merge-shimmer:hover:not(:focus-within) {
+    --shimmer-opacity: 1;
+  }
+}
+
+@keyframes merge-shimmer {
+  to {
+    background-position: 75% 75%;
+  }
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Archivo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Helvetica&display=swap");

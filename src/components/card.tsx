@@ -1,24 +1,14 @@
+import { CardColour, getCardColourBg } from "@/enum/color";
 import type { ReactNode } from "react";
 
 export type CategoryProps = {
   title: string;
   description: string;
-  colour: string;
+  colour: CardColour;
   icon?: ReactNode;
 };
 
-function getColourBg(colour: string) {
-  const commonClasses = `flex flex-col w-full px-8 py-10 text-tsiakkas-dark gap-4 rounded-lg`;
-
-  switch (colour) {
-    case "cyan":
-      return `${commonClasses} bg-verge-cyan dark:bg-verge-cyan`;
-    case "yellow":
-      return `${commonClasses} bg-verge-yellow dark:bg-verge-yellow`;
-    case "pink":
-      return `${commonClasses} bg-verge-pink/50 dark:bg-verge-pink/75`;
-  }
-}
+const commonClasses = `flex flex-col w-full px-8 py-10 text-tsiakkas-dark gap-4 rounded-lg`;
 
 export default function Card(props: CategoryProps) {
   return (
@@ -32,7 +22,7 @@ export default function Card(props: CategoryProps) {
       "
     >
       <div className={`
-        ${getColourBg(props.colour)}
+        ${commonClasses} ${getCardColourBg(props.colour)}
       `}>
         <div className="
           leading-100 brief-title

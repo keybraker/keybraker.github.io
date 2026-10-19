@@ -1,3 +1,4 @@
+import { getCardColourBg } from "@/enum/color";
 import { description } from "@/pages/resume";
 import { HiOutlineDownload } from "@react-icons/all-files/hi/HiOutlineDownload";
 import { HiOutlineReply } from "@react-icons/all-files/hi/HiOutlineReply";
@@ -34,7 +35,7 @@ export default function Email() {
   const hasMounted = useHasMounted();
 
   return (
-    <section className="mb-12 rounded-[10px] bg-verge-cyan/50 p-6 text-tsiakkas-dark shadow-xl dark:bg-verge-cyan/75">
+    <section className={`mb-12 rounded-[10px] ${getCardColourBg("cyan")} p-6 text-tsiakkas-dark shadow-xl`}>
       {/* <HeadScene /> */}
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row">
         <div className="flex w-full flex-col space-y-2">
@@ -106,8 +107,7 @@ export default function Email() {
           <span>Reply</span>
         </a>
 
-        <div className="group relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 blur transition duration-500 group-hover:opacity-70 group-hover:duration-200"></div>
+        <div className="merge-shimmer group relative rounded-md">
           <a
             className="relative flex h-full w-28 items-center justify-around gap-0 rounded-md bg-tsiakkas-light shadow-md ring-1 ring-gray-900/5 hover:bg-tsiakkas-dark/10 dark:bg-tsiakkas-dark hover:dark:bg-tsiakkas-dark/10"
             href="/assets/resume.pdf"

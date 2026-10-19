@@ -1,3 +1,4 @@
+import { CardColour, getCardColourBg } from "@/enum/color";
 import MyWords from "@/components/myWords";
 import { FaHandHoldingHeart } from "@react-icons/all-files/fa/FaHandHoldingHeart";
 import { FaPaypal } from "@react-icons/all-files/fa/FaPaypal";
@@ -15,7 +16,7 @@ type SupportOption = {
   handle: string;
   blurb: string;
   icon: ReactNode;
-  colour: string;
+  colour: CardColour;
 };
 
 const supportOptions: SupportOption[] = [
@@ -27,7 +28,7 @@ const supportOptions: SupportOption[] = [
     blurb:
       "A one-off tip or a recurring contribution, whatever suits you. Ideal if you want to leave a note to go with it.",
     icon: <FaPaypal size="28px" />,
-    colour: "bg-verge-cyan/50 dark:bg-verge-cyan/75",
+    colour: "cyan",
   },
   {
     id: "revolut",
@@ -37,7 +38,7 @@ const supportOptions: SupportOption[] = [
     blurb:
       "Send an instant transfer straight from the Revolut app. Quick, fee-free and it lands almost immediately.",
     icon: <FaHandHoldingHeart size="28px" />,
-    colour: "bg-verge-pink/50 dark:bg-verge-pink/75",
+    colour: "pink",
   },
 ];
 
@@ -53,7 +54,7 @@ function SupportCard({ option }: { option: SupportOption }) {
         border-[3px] border-tsiakkas-light/20 dark:border-tsiakkas-dark/20
         hover:border-tsiakkas-dark/20 hover:dark:border-tsiakkas-light/100
         transition-colors duration-500
-        ${option.colour}
+        ${getCardColourBg(option.colour)}
       `}
     >
       <div className="flex w-full flex-col gap-4 px-8 py-10 text-tsiakkas-dark">
