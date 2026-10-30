@@ -1,4 +1,5 @@
 import Card from "@/components/card";
+import MyWords from "@/components/myWords";
 import Seo from "@/components/Seo";
 import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
 import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
@@ -14,6 +15,11 @@ export default function Home() {
       <Seo title={title} description={description} path="/" />
 
       <main className="flex flex-col gap-6 sm:gap-8 w-full h-full">
+        <MyWords
+          text="Procrastination is where ideas go to die"
+          className="mb-4 sm:mb-8"
+        />
+
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 w-full">
           <Link
             href="/resume"
