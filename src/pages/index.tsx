@@ -16,7 +16,7 @@ export default function Home() {
 
       <main className="flex flex-col gap-6 sm:gap-8 w-full h-full">
         <MyWords
-          text="Procrastination is where ideas go to die"
+          text='"Procrastination is where ideas go to die"'
           className="mb-4 sm:mb-8"
         />
 
