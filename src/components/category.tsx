@@ -20,11 +20,10 @@ export default function Category(props: CategoryProps) {
         dangerouslySetInnerHTML={{ __html: props.description }}
       ></div>
       <div className="
-        leading-none brief-title absolute -z-10
-        left-[-215px] top-[-180px]
-        hidden h-full w-full rotate-[270deg]
-        text-xl font-extrabold text-tsiakkas-dark
-        dark:text-tsiakkas-light eq:flex
+        absolute bottom-0 right-full mr-8 rotate-180
+        hidden whitespace-nowrap [writing-mode:vertical-rl]
+        leading-none text-xl font-extrabold text-tsiakkas-dark
+        dark:text-tsiakkas-light eq:block
       ">
         {props.title}
       </div>
