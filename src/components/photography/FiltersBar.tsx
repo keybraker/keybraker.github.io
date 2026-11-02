@@ -27,8 +27,8 @@ export default function FiltersBar({
   const isDisabled = filtered.length === 0;
 
   return (
-    <div className="sm:sticky sm:top-[70px] sm:z-30 bg-tsiakkas-light dark:bg-tsiakkas-dark py-4 px-4 -mx-4 flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
-      <div className="w-full min-w-0 flex flex-col gap-6">
+    <div className="sm:sticky sm:top-[128px] md:top-[82px] sm:z-30 bg-tsiakkas-light dark:bg-tsiakkas-dark py-4 px-4 -mx-4 flex flex-wrap md:flex-nowrap gap-3 justify-between items-start md:items-center" aria-label="Photo categories filter">
+      <div className="w-full min-w-0 flex flex-col gap-3">
         <div className="flex min-w-0 flex-col-reverse items-center gap-2 sm:flex-row sm:items-center">
           <div className="w-full min-w-0 flex-1">
             <ScrollablePills label="Photo sections filter">
