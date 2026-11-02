@@ -1,6 +1,6 @@
 # Ioannis Tsiakkas Online Resume
 
-[![GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-blue)](https://keybraker.github.io)
+[![GitHub Pages](https://badgen.net/badge/Deployed%20on/GitHub%20Pages/blue)](https://keybraker.github.io)
 
 A personal website showcasing Ioannis Tsiakkas' professional background, including experience, projects, and contact information. Also my photography portfolio.
 

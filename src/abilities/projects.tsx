@@ -23,15 +23,15 @@ const projects: ShowcaseType[] = [
           "Used the latest technologies to make deployments fast and of the highest quality.",
           `<table class="w-full border-collapse mt-2 mb-4">
         <tr>
-          <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/amo/users/reskroutzed" alt="Firefox Add-on Users"/></td>
+          <td class="pr-1 pb-1 text-start"><img src="https://badgen.net/amo/users/reskroutzed" alt="Firefox Add-on Users"/></td>
           <td class="pr-1 pb-1 text-start"><img src="https://badgen.net/chrome-web-store/users/amglnkndjeoojnjjeepeheobhneeogcl" alt="Chrome Web Store Users"/></td>
         </tr>
         <tr>
-          <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/amo/v/reskroutzed" alt="Firefox Version"/></td>
+          <td class="pr-1 pb-1 text-start"><img src="https://badgen.net/amo/v/reskroutzed" alt="Firefox Version"/></td>
           <td class="pr-1 pb-1 text-start"><img src="https://badgen.net/chrome-web-store/v/amglnkndjeoojnjjeepeheobhneeogcl" alt="Chrome Web Store Version"/></td>
         </tr>
         <tr>
-          <td class="pr-1 pb-1 text-start"><img src="https://img.shields.io/amo/stars/reskroutzed" alt="Firefox Rating"/></td>
+          <td class="pr-1 pb-1 text-start"><img src="https://badgen.net/amo/stars/reskroutzed" alt="Firefox Rating"/></td>
           <td class="pr-1 pb-1 text-start"><img src="https://badgen.net/chrome-web-store/rating/amglnkndjeoojnjjeepeheobhneeogcl" alt="Chrome Rating"/></td>
         </tr>
         <tr>
