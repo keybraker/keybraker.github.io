@@ -120,6 +120,10 @@ brief-title {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  .font-fraunces {
+    font-family: "Fraunces", serif;
+  }
 }
 
 /* GitLab merge-button shimmer, ported from .mr-merge-button-shimmer */
@@ -127,6 +131,7 @@ brief-title {
   .merge-shimmer {
     --shimmer-thickness: 1px;
     --shimmer-offset: 1px;
+    --shimmer-radius: 0.375rem;
     --shimmer-highlight-color: #f7f7f5;
     --shimmer-color-1: #7759c2;
     --shimmer-color-2: #ffb9c9;
@@ -174,7 +179,7 @@ brief-title {
   /* Bloom: blurred copy pushed behind the button. */
   .merge-shimmer::before {
     inset: 0;
-    border-radius: 0.375rem;
+    border-radius: var(--shimmer-radius);
     filter: blur(12px);
     transform: translateZ(-1px);
     opacity: calc(var(--shimmer-opacity) * 0.9);
@@ -185,7 +190,7 @@ brief-title {
     inset: calc(-1 * (var(--shimmer-offset) + var(--shimmer-thickness)) + 1px);
     padding: var(--shimmer-thickness);
     border-radius: calc(
-      0.375rem + var(--shimmer-offset) + var(--shimmer-thickness)
+      var(--shimmer-radius) + var(--shimmer-offset) + var(--shimmer-thickness)
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);

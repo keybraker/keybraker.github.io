@@ -44,6 +44,8 @@ export default function PhotoGallerySection({
         setFilter={setFilter}
         showCommissioned={showCommissioned}
         setShowCommissioned={setShowCommissioned}
+        filtered={filtered}
+        onOpen={onOpen}
       />
 
       <YearMonthGallery
