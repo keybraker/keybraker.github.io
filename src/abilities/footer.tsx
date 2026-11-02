@@ -1,14 +1,13 @@
-import { DarkModeToggle } from "@/components/darkModeToggle";
 import signature from "@assets/signature.png";
 import Image from "next/image";
 
-const repo = "https://github.com/keybraker/keybraker.github.io";
+const repo = "https://itsiakkas.com";
 
 export default function Footer() {
   return (
     <>
       <div className="z-10 px-4 eq:px-0 place-self-center w-full eq:max-w-[1320px] py-4 border-t-2 border-tsiakkas-dark dark:border-tsiakkas-light">
-        <div className="flex w-full flex-row items-center justify-between sm:grid sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-x-4">
+        <div className="flex w-full flex-row items-center justify-center sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-x-4">
           <div className="hidden sm:flex sm:col-start-1 sm:justify-start">
             <Image
               src={signature}
@@ -22,9 +21,6 @@ export default function Footer() {
             Designed and created by me{" "}
             <span className="italic font-extrabold">Keybraker</span>
           </a>
-          <div className="flex justify-end sm:col-start-3">
-            <DarkModeToggle />
-          </div>
         </div>
       </div>
       {/* Pinned to the bottom of the viewport so it stays visible at all times,

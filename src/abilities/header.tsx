@@ -5,6 +5,7 @@ import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
 import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
+import { DarkModeToggle } from "@/components/darkModeToggle";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -138,6 +139,16 @@ function AboutPageInner({ activePage }: { activePage: string | null }) {
         >
           <FaLinkedin className={baseIconClasses} size="20px" />
         </a>
+        <div
+          title="Toggle theme"
+          onMouseEnter={() => setHovered("theme")}
+          onMouseLeave={() => setHovered(null)}
+          onFocus={() => setHovered("theme")}
+          onBlur={() => setHovered(null)}
+          className={`${iconClasses("theme")} p-1.5`}
+        >
+          <DarkModeToggle />
+        </div>
       </div>
     </div>
   );
