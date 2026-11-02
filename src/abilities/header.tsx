@@ -173,12 +173,6 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-10 flex flex-col justify-center place-self-center w-full eq:max-w-[1320px] bg-tsiakkas-light dark:bg-tsiakkas-dark">
-      <div className="text-tsiakkas-light dark:text-tsiakkas-dark w-full flex flex-row">
-        <div className="w-1/2 text-start italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#000000_0,#000000_33%,#DD0000_33%,#DD0000_66%,#FFCC00_66%,#FFCC00_100%)_1]">
-        </div>
-        <div className="w-1/2 text-end italic text-[10px] border-b-4 [border-image:linear-gradient(90deg,#0D5EAF_0,#0D5EAF_33%,#FFFFFF_33%,#FFFFFF_66%,#0D5EAF_66%,#0D5EAF_100%)_1]">
-        </div>
-      </div>
       <div className="px-4 eq:px-0">
         <div className="
         grid grid-cols-1 justify-items-center gap-4

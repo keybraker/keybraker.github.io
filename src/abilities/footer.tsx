@@ -23,20 +23,6 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      {/* Pinned to the bottom of the viewport so it stays visible at all times,
-          mirroring the two-flag strip at the top of the header. */}
-      <div className="fixed inset-x-0 bottom-0 z-10 flex flex-row justify-center pointer-events-none">
-        <div className="w-full eq:max-w-[1320px] flex flex-row">
-          <div
-            aria-hidden="true"
-            className="w-1/2 border-b-4 [border-image:linear-gradient(90deg,#0055A4_0,#0055A4_33%,#FFFFFF_33%,#FFFFFF_66%,#EF4135_66%,#EF4135_100%)_1]"
-          />
-          <div
-            aria-hidden="true"
-            className="w-1/2 border-b-4 [border-image:linear-gradient(90deg,#FFFFFF_0,#FFFFFF_33%,#D57800_33%,#D57800_66%,#FFFFFF_66%,#FFFFFF_100%)_1]"
-          />
-        </div>
-      </div>
     </>
   );
 }
