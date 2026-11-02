@@ -221,7 +221,7 @@ export default function LightboxContent({
     : 'w-full md:w-72';
   const navigationButtons = (
     <div
-      className={`${isMobile ? 'fixed bottom-8 z-50' : 'shrink-0'} flex items-center justify-center gap-4`}
+      className={`${isMobile ? 'fixed bottom-8 z-50' : 'fixed bottom-8 left-1/2 z-50 -translate-x-1/2'} flex items-center justify-center gap-4`}
       onClick={(e) => e.stopPropagation()}
     >
       <button onClick={(e) => { e.stopPropagation(); goPrev(); }} aria-label="Previous photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
@@ -348,7 +348,6 @@ export default function LightboxContent({
                 </div>
               </div>
             </div>
-            {navigationButtons}
           </div>
 
           {showInfo && !isMobile && (
@@ -413,7 +412,7 @@ export default function LightboxContent({
         </div>
       )}
 
-      {isMobile && navigationButtons}
+      {navigationButtons}
     </div>
   );
 }
