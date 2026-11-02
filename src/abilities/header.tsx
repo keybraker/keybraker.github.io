@@ -9,37 +9,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export function RouteButton({
-  id,
-  href,
-  label,
-  iconNode,
-  iconWrapper,
-}: {
-  id: string;
-  href: string;
-  label: string;
-  iconNode: JSX.Element;
-  iconWrapper: (id: string, node: JSX.Element, props?: any) => JSX.Element;
-}) {
-  return (
-    <Link href={href} aria-label={`Go to ${label.toLowerCase()} page`} className="group focus:outline-none">
-      {iconWrapper(
-        id,
-        <span className="
-            inline-flex items-center py-1
-            transition-all duration-200 ease-out
-            group-focus-visible:ring-2 group-focus-visible:ring-tsiakkas-dark/20 group-focus-visible:dark:ring-tsiakkas-light/30
-            group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-tsiakkas-light group-focus-visible:dark:ring-offset-tsiakkas-dark
-            rounded-full
-          ">
-          {iconNode}
-        </span>
-      )}
-    </Link>
-  );
-}
-
 const mail = "mailto:" + "iantsiakkas@gmail.com";
 const address = "http://maps.google.com/?q=" + "Greece, Heraklion - 71305";
 const github = "https://github.com/" + "Keybraker";
@@ -66,111 +35,128 @@ function FilledCoffeeIcon({ className, size = 20 }: { className?: string; size?:
   );
 }
 
-function AboutPageInner({ showPhotographyLink, showResumeIcon, showSupportLink }: { showPhotographyLink: boolean, showResumeIcon: boolean, showSupportLink: boolean }) {
+function AboutPageInner({ activePage }: { activePage: string | null }) {
   const [hovered, setHovered] = useState<string | null>(null);
-
   const baseIconClasses = "antialiased transition-all duration-300 ease-out";
   const dimmedClasses = "opacity-30 grayscale";
+  const destinations = [
+    { id: "resume", href: "/resume", label: "Resume", icon: <IoIosPaper size={16} /> },
+    { id: "photography", href: "/photography", label: "Photography", icon: <MdPhotoCamera size={16} /> },
+    { id: "support", href: "/support", label: "Support", icon: <FilledCoffeeIcon size={16} /> },
+  ];
 
-  const iconWrapper = (id: string, node: JSX.Element, props?: any) => (
-    <span
-      onMouseEnter={() => setHovered(id)}
-      onMouseLeave={() => setHovered(null)}
-      onFocus={() => setHovered(id)}
-      onBlur={() => setHovered(null)}
-      className={`flex transition-all duration-300 ease-out ${hovered && hovered !== id ? dimmedClasses : ""}`}
-      {...props}
-    >
-      {node}
-    </span>
-  );
+  const iconClasses = (id: string) =>
+    `flex transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tsiakkas-dark/30 dark:focus-visible:ring-tsiakkas-light/40 ${
+      hovered && hovered !== id ? dimmedClasses : ""
+    }`;
 
   return (
-    <div className="flex flex-row items-center justify-between xs:justify-around gap-4 align-baseline text-tsiakkas-dark dark:text-tsiakkas-light">
-      {showPhotographyLink && !showResumeIcon && (
-        <RouteButton
-          id="photography"
-          href="/photography"
-          label="Photography"
-          iconNode={<MdPhotoCamera className={baseIconClasses} size={"20px"} />}
-          iconWrapper={iconWrapper}
-        />
-      )}
-      {showResumeIcon && (
-        <RouteButton
-          id="resume"
-          href="/resume"
-          label="Resume"
-          iconNode={<IoIosPaper className={baseIconClasses} size="20px" />}
-          iconWrapper={iconWrapper}
-        />
-      )}
-      {(showPhotographyLink || showResumeIcon) && (
-        <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
-      )}
-      <a
-        aria-label="By clicking you will be taken to Maps"
-        rel="noopener noreferrer"
-        target="_blank"
-        href={address}
-        className="focus:outline-none"
+    <div className="flex items-center justify-self-center gap-5 text-tsiakkas-dark dark:text-tsiakkas-light md:justify-self-end">
+      <nav
+        aria-label="Main pages"
+        className="flex items-center gap-0 rounded-xl bg-tsiakkas-dark/5 p-1.5 text-tsiakkas-dark dark:bg-tsiakkas-light/5 dark:text-tsiakkas-light"
       >
-        {iconWrapper("location", <MdLocationOn className={baseIconClasses} size={"20px"} />)}
-      </a>
-      <a
-        aria-label="By clicking you will be taken to Mail"
-        rel="noopener noreferrer"
-        target="_blank"
-        href={mail}
-        className="focus:outline-none"
-      >
-        {iconWrapper("mail", <MdEmail className={baseIconClasses} size={"20px"} />)}
-      </a>
-      <a
-        aria-label="By clicking you will be taken to Github"
-        rel="noopener noreferrer"
-        target="_blank"
-        href={github}
-        className="focus:outline-none"
-      >
-        {iconWrapper("github", <FaGithub className={baseIconClasses} size={"20px"} />)}
-      </a>
-      <a
-        aria-label="By clicking you will be taken to LinkedIn"
-        rel="noopener noreferrer"
-        target="_blank"
-        href={linkedin}
-        className="focus:outline-none"
-      >
-        {iconWrapper("linkedin", <FaLinkedin className={baseIconClasses} size={"20px"} />)}
-      </a>
-      {showSupportLink && (
-        <div className="ml-auto flex items-center gap-3">
-          <div className={`h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light mx-2 transition-all duration-300 ease-out ${hovered ? dimmedClasses : ""}`}></div>
-          <RouteButton
-            id="support"
-            href="/support"
-            label="Support"
-            iconNode={<FilledCoffeeIcon className={baseIconClasses} size={20} />}
-            iconWrapper={iconWrapper}
-          />
-        </div>
-      )}
+        {destinations.map(({ id, href, label, icon }) => {
+          const isActive = activePage === id;
+
+          return (
+            <Link
+              key={id}
+              href={href}
+              title={label}
+              aria-label={`Go to ${label.toLowerCase()} page`}
+              aria-current={isActive ? "page" : undefined}
+              className={`flex items-center justify-center rounded-lg p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tsiakkas-dark/30 dark:focus-visible:ring-tsiakkas-light/40 ${
+                isActive
+                  ? "bg-tsiakkas-dark text-tsiakkas-light shadow-sm dark:bg-tsiakkas-light dark:text-tsiakkas-dark"
+                  : "hover:bg-tsiakkas-dark/10 dark:hover:bg-tsiakkas-light/10"
+              }`}
+            >
+              <span className={baseIconClasses}>{icon}</span>
+            </Link>
+          );
+        })}
+      </nav>
+      <span
+        aria-hidden="true"
+        className="mx-2 h-5 w-[2px] bg-tsiakkas-dark dark:bg-tsiakkas-light"
+      />
+      <div className="flex items-center gap-0">
+        <a
+          title="Location"
+          aria-label="By clicking you will be taken to Maps"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={address}
+          onMouseEnter={() => setHovered("location")}
+          onMouseLeave={() => setHovered(null)}
+          onFocus={() => setHovered("location")}
+          onBlur={() => setHovered(null)}
+          className={`${iconClasses("location")} p-1.5`}
+        >
+          <MdLocationOn className={baseIconClasses} size="20px" />
+        </a>
+        <a
+          title="Email"
+          aria-label="By clicking you will be taken to Mail"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={mail}
+          onMouseEnter={() => setHovered("mail")}
+          onMouseLeave={() => setHovered(null)}
+          onFocus={() => setHovered("mail")}
+          onBlur={() => setHovered(null)}
+          className={`${iconClasses("mail")} p-1.5`}
+        >
+          <MdEmail className={baseIconClasses} size="20px" />
+        </a>
+        <a
+          title="GitHub"
+          aria-label="By clicking you will be taken to Github"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={github}
+          onMouseEnter={() => setHovered("github")}
+          onMouseLeave={() => setHovered(null)}
+          onFocus={() => setHovered("github")}
+          onBlur={() => setHovered(null)}
+          className={`${iconClasses("github")} p-1.5`}
+        >
+          <FaGithub className={baseIconClasses} size="20px" />
+        </a>
+        <a
+          title="LinkedIn"
+          aria-label="By clicking you will be taken to LinkedIn"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={linkedin}
+          onMouseEnter={() => setHovered("linkedin")}
+          onMouseLeave={() => setHovered(null)}
+          onFocus={() => setHovered("linkedin")}
+          onBlur={() => setHovered(null)}
+          className={`${iconClasses("linkedin")} p-1.5`}
+        >
+          <FaLinkedin className={baseIconClasses} size="20px" />
+        </a>
+      </div>
     </div>
   );
 }
 
 export default function Header() {
   const router = useRouter();
-  const isPhotography = router.pathname.startsWith('/photography');
-  const isResume = router.pathname === '/resume';
   const isHome = router.pathname === '/';
+  const activePage = router.pathname.startsWith("/photography")
+    ? "photography"
+    : router.pathname === "/resume"
+      ? "resume"
+      : router.pathname === "/support"
+        ? "support"
+        : null;
 
-  // Show route label on every page except home
-  const showRouteLabel = !isHome;
   const firstSegment = router.pathname.split('/').filter(Boolean)[0];
   const routeLabel = isHome
-    ? 'resume'
+    ? 'overview'
     : firstSegment
       ? firstSegment
         .replace(/-/g, ' ')
@@ -186,13 +172,14 @@ export default function Header() {
       </div>
       <div className="px-4 eq:px-0">
         <div className="
-        flex flex-col md:flex-row items-center justify-around xs:justify-between
-        px-0 tn:px-4 pt-2 tn:pt-2 pb-4 tn:pb-4 gap-4
-        xs:py-4 md:items-stretch
+        grid grid-cols-1 justify-items-center gap-4
+        md:grid-cols-[1fr_auto] md:items-center md:justify-items-stretch
+        px-0 tn:px-4 pt-2 tn:pt-2 pb-4 tn:pb-4
+        xs:py-4
         border-b-2
         border-tsiakkas-dark dark:border-tsiakkas-light
       ">
-          <div className="flex flex-row items-center gap-3">
+          <div className="flex flex-row items-center gap-3 md:justify-self-start">
             <div className="hidden sm:block">
               <SpinningAvatar
                 src="https://avatars.githubusercontent.com/u/23459466?v=4"
@@ -209,7 +196,7 @@ export default function Header() {
               ">
                 <span>Tsiakkas</span>
                 <span>Ioannis</span>
-                {showRouteLabel && routeLabel && (
+                {routeLabel && (
                   <span className="
                   font-light italic tracking-wide flex flex-row gap-1
                   items-baseline justify-center leading-tight
@@ -221,7 +208,7 @@ export default function Header() {
               </h1>
             </Link>
           </div>
-          <AboutPageInner showPhotographyLink={isResume} showResumeIcon={isPhotography} showSupportLink={!isHome} />
+          <AboutPageInner activePage={activePage} />
         </div>
       </div>
     </header>
