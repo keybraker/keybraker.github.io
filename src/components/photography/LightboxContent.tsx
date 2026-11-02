@@ -214,13 +214,26 @@ export default function LightboxContent({
     ? 'max-h-[calc(68vh-8rem)] xl:max-h-[calc(90vh-8rem)]'
     : showInfo
       ? 'max-h-[calc(90vh-8rem)]'
-      : 'max-h-[90vh]';
+      : 'max-h-[calc(90vh-8rem)]';
   const desktopInfoClass = stackLandscapeInfo
     ? 'w-full max-w-5xl xl:w-72 xl:max-w-none'
     : 'w-full md:w-72';
+  const navigationButtons = (
+    <div
+      className={`${isMobile ? 'fixed bottom-8 z-50' : 'shrink-0'} flex items-center justify-center gap-4`}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button onClick={(e) => { e.stopPropagation(); goPrev(); }} aria-label="Previous photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
+        <IoIosArrowBack size={28} />
+      </button>
+      <button onClick={(e) => { e.stopPropagation(); goNext(); }} aria-label="Next photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
+        <IoIosArrowForward size={28} />
+      </button>
+    </div>
+  );
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center px-2 md:px-6 pb-24 gap-6 select-none relative" onClick={close}>
+    <div className={`flex-1 flex flex-col items-center justify-center px-2 md:px-6 ${isMobile ? 'pb-24' : 'pb-4'} gap-6 select-none relative`} onClick={close}>
       {isMobile ? (
         <div className="w-full flex flex-col items-center justify-center gap-4" onClick={(e) => e.stopPropagation()}>
           <div className="w-full flex items-center justify-center overflow-hidden">
@@ -275,7 +288,7 @@ export default function LightboxContent({
         </div>
       ) : (
         <div className={`w-full max-w-[90vw] mx-auto flex ${desktopLayoutClass} gap-8`} onClick={(e) => e.stopPropagation()}>
-          <div className="flex-1 flex items-center justify-center overflow-hidden">
+          <div className="flex-1 min-h-0 flex flex-col items-center justify-center gap-3">
             <div ref={viewportRef} className={`flex items-center justify-center w-full ${desktopViewportHeightClass}`} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} onWheel={handleWheel}>
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-none " />}
               <div className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`} style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }} onMouseDown={handleMouseDown}>
@@ -331,6 +344,7 @@ export default function LightboxContent({
                 </div>
               </div>
             </div>
+            {navigationButtons}
           </div>
 
           {showInfo && !isMobile && (
@@ -395,14 +409,7 @@ export default function LightboxContent({
         </div>
       )}
 
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 z-50" onClick={(e) => e.stopPropagation()}>
-        <button onClick={(e) => { e.stopPropagation(); goPrev(); }} aria-label="Previous photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
-          <IoIosArrowBack size={28} />
-        </button>
-        <button onClick={(e) => { e.stopPropagation(); goNext(); }} aria-label="Next photo" className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-tsiakkas-light hover:bg-white/30 hover:border-white/60 focus:outline-none focus:ring-2 focus:ring-tsiakkas-light/40 transition-all">
-          <IoIosArrowForward size={28} />
-        </button>
-      </div>
+      {isMobile && navigationButtons}
     </div>
   );
 }
