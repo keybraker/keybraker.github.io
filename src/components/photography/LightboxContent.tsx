@@ -1,4 +1,5 @@
 import CropOverlay from '@/components/photography/CropOverlay';
+import ScrollablePills from '@/components/photography/ScrollablePills';
 import { useImagePreloading } from '@/hooks/useImagePreloading';
 import { PhotoWithCategory } from '@/types/photo';
 import { imageDownloader } from '@/utils/imageDownloader';
@@ -233,11 +234,14 @@ export default function LightboxContent({
   );
 
   return (
-    <div className={`flex-1 flex flex-col items-center justify-center px-2 md:px-6 ${isMobile ? 'pb-24' : 'pb-4'} gap-6 select-none relative`} onClick={close}>
+    <div className={`flex-1 min-h-0 flex flex-col items-center justify-center px-2 md:px-6 ${isMobile ? 'pb-24' : 'pb-4'} gap-6 select-none relative`} onClick={close}>
       {isMobile ? (
-        <div className="w-full flex flex-col items-center justify-center gap-4" onClick={(e) => e.stopPropagation()}>
-          <div className="w-full flex items-center justify-center overflow-hidden">
-            <div className={`flex items-center justify-center w-full ${showInfo ? 'max-h-[calc(70vh-8rem)]' : 'max-h-[85vh]'}`}>
+        <div
+          className={`w-full h-full min-h-0 ${showInfo ? 'grid grid-rows-[minmax(0,1fr)_auto]' : 'flex flex-col'}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="w-full min-h-0 flex-1 flex items-center justify-center overflow-hidden">
+            <div className="w-full h-full min-h-0 flex items-center justify-center">
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-none" />}
               <Image
                 src={active.originalImage}
@@ -246,7 +250,7 @@ export default function LightboxContent({
                 height={1200}
                 placeholder="blur"
                 blurDataURL={BLUR_DATA_URL}
-                className={`w-auto object-contain select-none border border-white/20 rounded-none ${showInfo ? 'max-h-[calc(70vh-8rem)]' : 'max-h-[85vh]'}`}
+                className="w-auto max-w-full max-h-full object-contain select-none border border-white/20 rounded-none"
                 sizes="(max-width: 768px) 100vw, 80vw"
                 priority
                 onContextMenu={(e) => e.preventDefault()}
@@ -261,26 +265,26 @@ export default function LightboxContent({
           </div>
 
           {showInfo && (
-            <div className="w-full p-4" onClick={(e) => e.stopPropagation()}>
-              <aside className="flex flex-col gap-3 text-tsiakkas-light max-w-full mx-auto">
+            <div className="w-full min-w-0 p-4" onClick={(e) => e.stopPropagation()}>
+              <aside className="flex w-full min-w-0 flex-col gap-3 text-tsiakkas-light max-w-full mx-auto">
                 <h3 className="text-base font-semibold leading-relaxed italic">{"\""}{active.caption}{"\""}</h3>
                 <div className="flex flex-col gap-1">
                   <div className="opacity-90 text-sm">{active.location}, {active.country}</div>
                   {active.trip && (<div className="opacity-80 text-xs">{active.trip}</div>)}
                 </div>
                 <div className="h-px bg-white/20 my-2" />
-                <div className="flex flex-wrap gap-2">
+                <ScrollablePills label="Photo settings" transparentEdges>
                   {active.settings && active.settings.split(' · ').map((setting, index) => (
-                    <span key={index} className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
+                    <span key={index} className="shrink-0 whitespace-nowrap text-[11px] uppercase tracking-wide px-3 py-1 rounded-full border border-tsiakkas-light/30 text-tsiakkas-light/70">
                       {setting}
                     </span>
                   ))}
                   {imageDimensions && (
-                    <span className="px-2 py-1 text-xs font-mono rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
+                    <span className="shrink-0 whitespace-nowrap text-[11px] uppercase tracking-wide px-3 py-1 rounded-full border border-tsiakkas-light/30 text-tsiakkas-light/70">
                       {imageDimensions.width} × {imageDimensions.height} px
                     </span>
                   )}
-                </div>
+                </ScrollablePills>
                 {/* <div className="mt-1 text-xs opacity-60">© {new Date().getFullYear()} Ioannis Tsiakkas – All rights reserved.</div> */}
               </aside>
             </div>

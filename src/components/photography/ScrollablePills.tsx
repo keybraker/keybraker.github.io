@@ -7,12 +7,20 @@ const EDGE_TOLERANCE_PX = 1;
 // Each edge overlay is a 28px arrow (w-7) plus a 1px divider.
 const ARROW_GUTTER_PX = 29;
 
-const edgeOverlayClass = 'absolute -inset-y-1.5 flex items-stretch bg-tsiakkas-light dark:bg-tsiakkas-dark';
+const edgeOverlayClass = 'absolute inset-y-0 flex items-stretch bg-tsiakkas-light dark:bg-tsiakkas-dark';
 const edgeButtonClass =
   'flex w-7 shrink-0 items-center justify-center text-tsiakkas-dark/70 transition hover:text-tsiakkas-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-tsiakkas-dark/40 dark:text-tsiakkas-light/70 dark:hover:text-tsiakkas-light dark:focus-visible:ring-tsiakkas-light/40';
 const dividerClass = 'w-px bg-tsiakkas-dark/20 dark:bg-tsiakkas-light/20';
 
-export default function ScrollablePills({ label, children }: { label: string; children: ReactNode }) {
+export default function ScrollablePills({
+  label,
+  children,
+  transparentEdges = false,
+}: {
+  label: string;
+  children: ReactNode;
+  transparentEdges?: boolean;
+}) {
   const navRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -63,9 +71,9 @@ export default function ScrollablePills({ label, children }: { label: string; ch
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full min-w-0">
       {canScrollLeft && (
-        <div className={`${edgeOverlayClass} -left-1.5`}>
+        <div className={`${edgeOverlayClass} ${transparentEdges ? 'bg-transparent' : ''} left-0`}>
           <button type="button" aria-label={`Scroll ${label.toLowerCase()} left`} onClick={() => scrollPills(-1)} className={edgeButtonClass}>
             <HiOutlineChevronLeft size={16} />
           </button>
@@ -77,7 +85,7 @@ export default function ScrollablePills({ label, children }: { label: string; ch
       <nav
         ref={navRef}
         aria-label={label}
-        className="-m-1.5 flex flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar overscroll-x-contain p-1.5"
+        className="flex w-full min-w-0 flex-nowrap overflow-x-auto overflow-y-hidden no-scrollbar overscroll-x-contain p-1.5"
       >
         <div ref={contentRef} className="flex shrink-0 gap-3">
           {children}
@@ -85,7 +93,7 @@ export default function ScrollablePills({ label, children }: { label: string; ch
       </nav>
 
       {canScrollRight && (
-        <div className={`${edgeOverlayClass} -right-1.5`}>
+        <div className={`${edgeOverlayClass} ${transparentEdges ? 'bg-transparent' : ''} right-0`}>
           <span aria-hidden="true" className={dividerClass} />
           <button type="button" aria-label={`Scroll ${label.toLowerCase()} right`} onClick={() => scrollPills(1)} className={edgeButtonClass}>
             <HiOutlineChevronRight size={16} />

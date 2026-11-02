@@ -10,12 +10,12 @@ interface UseLightboxStateReturn {
 }
 
 export function useLightboxState(isMobile: boolean): UseLightboxStateReturn {
-  const [showInfo, setShowInfo] = useState(!isMobile);
+  const [showInfo, setShowInfo] = useState(true);
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [isCarouselMode, setIsCarouselMode] = useState(false);
 
   useEffect(() => {
-    setShowInfo(!isMobile);
+    setShowInfo(true);
   }, [isMobile]);
 
   return {
