@@ -209,7 +209,7 @@ export default function LightboxContent({
   const isLandscape = active.orientation === 'landscape';
   const stackLandscapeInfo = showInfo && isLandscape;
   const desktopLayoutClass = stackLandscapeInfo
-    ? 'flex-col xl:flex-row items-center xl:items-center'
+    ? 'flex-1 min-h-0 grid grid-rows-[minmax(0,1fr)_auto] xl:flex xl:flex-row items-center xl:items-center'
     : 'flex-col md:flex-row items-center md:items-center';
   const desktopViewportHeightClass = stackLandscapeInfo
     ? 'max-h-[calc(68vh-8rem)] xl:max-h-[calc(90vh-8rem)]'
@@ -234,7 +234,7 @@ export default function LightboxContent({
   );
 
   return (
-    <div className={`flex-1 min-h-0 flex flex-col items-center justify-center px-2 md:px-6 ${isMobile ? 'pb-24' : 'pb-4'} gap-6 select-none relative`} onClick={close}>
+    <div className={`flex-1 min-h-0 flex flex-col items-center justify-center px-2 md:px-6 ${isMobile || showInfo ? 'pb-24' : 'pb-4'} gap-6 select-none relative`} onClick={close}>
       {isMobile ? (
         <div
           className={`w-full h-full min-h-0 ${showInfo ? 'grid grid-rows-[minmax(0,1fr)_auto]' : 'flex flex-col'}`}
