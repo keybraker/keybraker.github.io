@@ -1,3 +1,4 @@
+import { DarkModeToggle } from "@/components/darkModeToggle";
 import SpinningAvatar from "@/components/SpinningAvatar";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
@@ -5,7 +6,6 @@ import { IoIosPaper } from "@react-icons/all-files/io/IoIosPaper";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { MdLocationOn } from "@react-icons/all-files/md/MdLocationOn";
 import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
-import { DarkModeToggle } from "@/components/darkModeToggle";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -47,15 +47,14 @@ function AboutPageInner({ activePage }: { activePage: string | null }) {
   ];
 
   const iconClasses = (id: string) =>
-    `flex transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tsiakkas-dark/30 dark:focus-visible:ring-tsiakkas-light/40 ${
-      hovered && hovered !== id ? dimmedClasses : ""
+    `flex transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tsiakkas-dark/30 dark:focus-visible:ring-tsiakkas-light/40 ${hovered && hovered !== id ? dimmedClasses : ""
     }`;
 
   return (
     <div className="flex items-center justify-self-center gap-2 text-tsiakkas-dark dark:text-tsiakkas-light md:justify-self-end">
       <nav
         aria-label="Main pages"
-        className="flex items-center gap-0 rounded-xl bg-tsiakkas-dark/5 p-1.5 text-tsiakkas-dark dark:bg-tsiakkas-light/5 dark:text-tsiakkas-light"
+        className="flex items-center gap-[3px] rounded-xl bg-tsiakkas-dark/5 p-1.5 text-tsiakkas-dark dark:bg-tsiakkas-light/5 dark:text-tsiakkas-light"
       >
         {destinations.map(({ id, href, label, icon }) => {
           const isActive = activePage === id;
@@ -67,11 +66,10 @@ function AboutPageInner({ activePage }: { activePage: string | null }) {
               title={label}
               aria-label={`Go to ${label.toLowerCase()} page`}
               aria-current={isActive ? "page" : undefined}
-              className={`flex items-center justify-center rounded-lg p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tsiakkas-dark/30 dark:focus-visible:ring-tsiakkas-light/40 ${
-                isActive
-                  ? "bg-tsiakkas-dark text-tsiakkas-light shadow-sm dark:bg-tsiakkas-light dark:text-tsiakkas-dark"
-                  : "hover:bg-tsiakkas-dark/10 dark:hover:bg-tsiakkas-light/10"
-              }`}
+              className={`flex items-center justify-center rounded-lg p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tsiakkas-dark/30 dark:focus-visible:ring-tsiakkas-light/40 ${isActive
+                ? "bg-tsiakkas-dark text-tsiakkas-light shadow-sm dark:bg-tsiakkas-light dark:text-tsiakkas-dark"
+                : "hover:bg-tsiakkas-dark/10 dark:hover:bg-tsiakkas-light/10"
+                }`}
             >
               <span className={baseIconClasses}>{icon}</span>
             </Link>
