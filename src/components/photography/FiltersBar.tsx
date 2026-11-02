@@ -62,7 +62,7 @@ export default function FiltersBar({
                 if (!filtered.length) return;
                 onOpen(filtered[Math.floor(Math.random() * filtered.length)]);
               }}
-              className="relative flex items-center whitespace-nowrap rounded-md bg-tsiakkas-light px-3 py-1.5 font-fraunces text-sm text-tsiakkas-dark ring-1 ring-gray-900/5 hover:bg-tsiakkas-dark/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-tsiakkas-dark/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-tsiakkas-light dark:bg-tsiakkas-dark dark:text-tsiakkas-light hover:dark:bg-tsiakkas-dark/10 dark:focus-visible:ring-tsiakkas-light/40 dark:disabled:hover:bg-tsiakkas-dark"
+              className="relative flex items-center whitespace-nowrap rounded-md border border-tsiakkas-dark/30 bg-tsiakkas-light px-3 py-1.5 font-fraunces text-sm text-tsiakkas-dark/70 transition hover:border-tsiakkas-dark/60 hover:bg-tsiakkas-dark/10 hover:text-tsiakkas-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-tsiakkas-dark/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-tsiakkas-dark/30 disabled:hover:bg-tsiakkas-light dark:border-tsiakkas-light/30 dark:bg-tsiakkas-dark dark:text-tsiakkas-light/70 dark:hover:border-tsiakkas-light/60 hover:dark:bg-tsiakkas-dark/10 dark:hover:text-tsiakkas-light dark:focus-visible:ring-tsiakkas-light/40 dark:disabled:hover:border-tsiakkas-light/30 dark:disabled:hover:bg-tsiakkas-dark"
             >
               I am feeling lucky
             </button>
