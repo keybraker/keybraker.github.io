@@ -295,7 +295,7 @@ export default function LightboxContent({
           <div className="flex-1 min-h-0 flex flex-col items-center justify-center gap-3">
             <div ref={viewportRef} className={`flex items-center justify-center w-full ${desktopViewportHeightClass}`} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} onWheel={handleWheel}>
               {isImageLoading && <div className="absolute inset-0 bg-white/10 animate-pulse rounded-none " />}
-              <div className={`relative ${zoomLevel > 100 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`} style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }} onMouseDown={handleMouseDown}>
+              <div className={`relative ${zoomLevel > 100 ? 'z-[60] cursor-grab active:cursor-grabbing' : 'cursor-default'}`} style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }} onMouseDown={handleMouseDown}>
                 <div
                   ref={imageContainerRef}
                   className="relative"
