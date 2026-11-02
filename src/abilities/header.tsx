@@ -51,7 +51,7 @@ function AboutPageInner({ activePage }: { activePage: string | null }) {
     }`;
 
   return (
-    <div className="flex items-center justify-self-center gap-5 text-tsiakkas-dark dark:text-tsiakkas-light md:justify-self-end">
+    <div className="flex items-center justify-self-center gap-2 text-tsiakkas-dark dark:text-tsiakkas-light md:justify-self-end">
       <nav
         aria-label="Main pages"
         className="flex items-center gap-0 rounded-xl bg-tsiakkas-dark/5 p-1.5 text-tsiakkas-dark dark:bg-tsiakkas-light/5 dark:text-tsiakkas-light"
@@ -92,7 +92,7 @@ function AboutPageInner({ activePage }: { activePage: string | null }) {
           onMouseLeave={() => setHovered(null)}
           onFocus={() => setHovered("location")}
           onBlur={() => setHovered(null)}
-          className={`${iconClasses("location")} p-1.5`}
+          className={`${iconClasses("location")} py-1.5 pr-1.5 pl-0`}
         >
           <MdLocationOn className={baseIconClasses} size="20px" />
         </a>
