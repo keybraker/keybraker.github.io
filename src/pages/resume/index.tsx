@@ -166,11 +166,11 @@ export default function Home() {
             bg-tsiakkas-blueDark bg-opacity-5 dark:bg-tsiakkas-blueLight dark:bg-opacity-5
             border border-tsiakkas-dark/10 p-8 dark:border-tsiakkas-light/20
           ">
-            <div className="eq:mr-24 mx-auto flex w-full flex-1 flex-col">
+            <div className="flex w-full flex-1 flex-col">
               <SkillPage />
             </div>
-            <div className="my-12 w-full eq:w-0 border-t border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
-            <div className="mx-16 h-0 eq:h-full border-l border-dashed border-tsiakkas-dark/10 dark:border-tsiakkas-light/10"></div>
+            <div className="my-12 w-full eq:w-0 border-t border-dashed border-tsiakkas-dark/25 dark:border-tsiakkas-light/25"></div>
+            <div className="mx-16 h-0 eq:h-auto eq:self-stretch border-l border-dashed border-tsiakkas-dark/25 dark:border-tsiakkas-light/25"></div>
             <div className="z-0 block w-full eq:flex eq:flex-1 eq:flex-col eq:self-stretch">
               <SoftwareEngineeringPage />
             </div>
