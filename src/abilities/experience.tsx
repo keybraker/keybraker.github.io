@@ -25,7 +25,7 @@ const experiences: ShowcaseType[] = [
     description: [
       {
         title:
-          'backend engineer (mid) <span class="font-normal italic opacity-70">· Feb 2022</span>',
+          'Backend engineer (mid) <span class="font-normal italic opacity-70">· Feb 2022</span>',
         bullets: [
           "Focused on the backend, delivering product requirements in close collaboration with the team.",
           "Designed and delivered solutions, contributing to large projects.",
@@ -35,7 +35,7 @@ const experiences: ShowcaseType[] = [
       },
       {
         title:
-          'a bit better backend engineer (senior) <span class="font-normal italic opacity-70">· Mar 2023</span>',
+          'A bit better backend engineer (senior) <span class="font-normal italic opacity-70">· Mar 2023</span>',
         bullets: [
           "Stepped into a senior role following an internal company reorganisation.",
           "Delivered large projects end to end, from design through implementation, under tight time constraints.",
@@ -46,7 +46,7 @@ const experiences: ShowcaseType[] = [
       },
       {
         title:
-          'jack of all trades (engineering manager) <span class="font-normal italic opacity-70">· Oct 2026</span>',
+          'Jack of all trades (engineering manager) <span class="font-normal italic opacity-70">· Oct 2026</span>',
         bullets: [
           "Lead the engineering function as tech lead, people manager, and hands-on software engineer, driving Fairlo to its next level.",
           "Enable non-technical teams to ship their ideas faster.",
