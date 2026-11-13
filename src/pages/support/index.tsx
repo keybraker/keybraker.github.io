@@ -1,6 +1,7 @@
-import { CardColour, getCardColourBg } from "@/enum/color";
 import MyWords from "@/components/myWords";
 import Seo from "@/components/Seo";
+import { CardColour, getCardColourBg } from "@/enum/color";
+import { FaCoffee } from "@react-icons/all-files/fa/FaCoffee";
 import { FaHandHoldingHeart } from "@react-icons/all-files/fa/FaHandHoldingHeart";
 import { FaPaypal } from "@react-icons/all-files/fa/FaPaypal";
 import type { ReactNode } from "react";
@@ -20,6 +21,16 @@ type SupportOption = {
 };
 
 const supportOptions: SupportOption[] = [
+  {
+    id: "buy-me-a-coffee",
+    label: "Buy Me a Coffee",
+    href: "https://buymeacoffee.com/keybraker",
+    handle: "buymeacoffee.com/keybraker",
+    blurb:
+      "Buy me a coffee to support my open source work and help keep me building and sharing.",
+    icon: <FaCoffee size="28px" />,
+    colour: "yellow",
+  },
   {
     id: "paypal",
     label: "PayPal",
