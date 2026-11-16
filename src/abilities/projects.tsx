@@ -82,6 +82,18 @@ const projects: ShowcaseType[] = [
     )],
   },
   {
+    start: new Date("2026-11-14"),
+    end: null,
+    title: createLinkDiv("https://anamnesis.page", "anamnesis.page"),
+    info: "Checklists, so you never forget a step.",
+    position: '',
+    technologies: [createLinkDiv("https://nextjs.org/", "Next.js"),
+    createLinkDiv(
+      "https://tailwindcss.com",
+      "Tailwind"
+    )],
+  },
+  {
     start: new Date("2020-02-01"),
     end: new Date("2023-05-01"),
     title: createLinkDiv(
