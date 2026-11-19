@@ -1,28 +1,30 @@
 import signature from "@assets/signature.png";
 import Image from "next/image";
 
-const repo = "https://itsiakkas.com";
+const site = "https://itsiakkas.com";
 
 export default function Footer() {
   return (
-    <>
-      <div className="z-10 px-4 eq:px-0 place-self-center w-full eq:max-w-[1320px] py-4 border-t-2 border-tsiakkas-dark dark:border-tsiakkas-light">
-        <div className="flex w-full flex-row items-center justify-center sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-x-4">
-          <div className="hidden sm:flex sm:col-start-1 sm:justify-start">
-            <Image
-              src={signature}
-              alt=""
-              width={1079}
-              height={403}
-              className="h-auto w-24 subpixel-antialiased bg-tsiakkas-blueLight dark:bg-tsiakkas-electric-yellow"
-            />
-          </div>
-          <a rel="noopener noreferrer" target="_blank" href={repo} className="hover:underline whitespace-nowrap text-sm sm:text-md font-bold text-tsiakkas-dark dark:text-tsiakkas-light sm:col-start-2 sm:justify-self-center">
-            Designed and created by me{" "}
-            <span className="italic font-extrabold">Keybraker</span>
+    <footer className="relative z-10 w-full overflow-hidden">
+      <div className="relative mx-auto flex w-full max-w-[1320px] items-center justify-center px-4 py-16">
+        <Image
+          src={signature}
+          alt=""
+          aria-hidden="true"
+          width={1079}
+          height={403}
+          className="pointer-events-none absolute left-1/2 top-1/2 w-[200px] max-w-none -translate-x-1/2 -translate-y-1/2 select-none opacity-[0.16] dark:invert dark:opacity-[0.18]"
+        />
+        <p className="relative text-center text-[13px] leading-none text-tsiakkas-dark/[0.65] dark:text-white/[0.55]">
+          Designed and created by me, {" "}
+          <a
+            href={site}
+            className="transition-colors hover:text-tsiakkas-dark dark:hover:text-white focus-visible:text-tsiakkas-dark dark:focus-visible:text-white focus-visible:underline focus-visible:underline-offset-2 focus-visible:outline-none"
+          >
+            Keybraker
           </a>
-        </div>
+        </p>
       </div>
-    </>
+    </footer>
   );
 }
